@@ -1,5 +1,3 @@
-<!-- REPLACE YOUR OLD traits.html WITH THIS FIXED CODE -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -90,10 +88,8 @@
         </div>
     </div>
 
-    <!-- Load the dictionary FIRST -->
     <script src="translation.js"></script>
 
-    <!-- This page's script runs SECOND -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const lang = localStorage.getItem('gamicon_lang') || 'en';
@@ -144,7 +140,6 @@
                     if (isActive) {
                         tag.classList.remove(activeClass);
                     } else {
-                        // FIX: Use translated error messages
                         if (category === 'vibe' && getActiveCount('vibe') >= 2) { vibeError.textContent = translations.errorMax2[lang]; vibeError.classList.remove('hidden'); vibeError.classList.add('blinking'); return; }
                         if (category === 'hours' && getActiveCount('hours') >= 2) { hoursError.textContent = translations.errorMax2[lang]; hoursError.classList.remove('hidden'); hoursError.classList.add('blinking'); return; }
                         if (category === 'comm') { document.querySelectorAll('.trait-tag[data-category="comm"]').forEach(t => t.classList.remove('active-comm')); }
@@ -176,7 +171,6 @@
                 };
 
                 let timeline = 100;
-                // FIX: Use translated animation text
                 showLine(translations.animProcessing[lang], timeline);
                 timeline += 1500;
                 showLine(translations.animCompleting[lang], timeline);
@@ -188,12 +182,31 @@
 
             finishBtn.addEventListener('click', (event) => {
                 event.preventDefault(); resetErrors(); let isFormValid = true;
-                // FIX: Use translated error messages
                 if (getActiveCount('games') === 0) { gamesError.textContent = translations.errorPickAtLeast1[lang]; gamesError.classList.remove('hidden'); gamesError.classList.add('blinking'); isFormValid = false; }
                 if (getActiveCount('vibe') === 0) { vibeError.textContent = translations.errorPickAtLeast1[lang]; vibeError.classList.remove('hidden'); vibeError.classList.add('blinking'); isFormValid = false; }
                 if (getActiveCount('hours') === 0) { hoursError.textContent = translations.errorPickAtLeast1[lang]; hoursError.classList.remove('hidden'); hoursError.classList.add('blinking'); isFormValid = false; }
                 if (getActiveCount('comm') === 0) { commError.textContent = translations.errorPick1[lang]; commError.classList.remove('hidden'); commError.classList.add('blinking'); isFormValid = false; }
-                if (isFormValid) { runProcessingAnimation(); }
+                
+                if (isFormValid) {
+                    // *** MODIFICATION START ***
+                    let profile = JSON.parse(localStorage.getItem('userProfile')) || {};
+                    
+                    profile.traits = { games: [], vibe: [], hours: [], comm: [] };
+                    
+                    const activeTags = document.querySelectorAll('.trait-tag[class*="active-"]');
+                    activeTags.forEach(tag => {
+                        const category = tag.dataset.category;
+                        const traitText = tag.textContent; 
+                        if (profile.traits[category]) {
+                            profile.traits[category].push(traitText);
+                        }
+                    });
+                    
+                    localStorage.setItem('userProfile', JSON.stringify(profile));
+                    // *** MODIFICATION END ***
+
+                    runProcessingAnimation(); 
+                }
             });
 
             updateSummary();
