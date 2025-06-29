@@ -1,3 +1,5 @@
+<!-- REPLACE YOUR OLD index3.html WITH THIS FIXED CODE -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,66 +9,51 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <!-- === FONT FIX: ADD POPPINS & KEEP 8-BIT FONT === -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
   
   <style>
-    /* === FONT FIX: APPLY FONTS STRATEGICALLY === */
-    body { 
-        font-family: 'Poppins', sans-serif; /* Readable font for all body text */
-    }
-    h1, h2, h3, h4, h5, h6, .font-8bit {
-        font-family: 'Press Start 2P', cursive; /* 8-bit font for headings */
-    }
-
+    body { font-family: 'Poppins', sans-serif; }
+    h1, h2, h3, h4, h5, h6, .font-8bit { font-family: 'Press Start 2P', cursive; }
     .btn-8bit { border: 4px solid #000; }
     .btn-8bit:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
-    .connect-btn { 
-        display: flex; 
-        align-items: center; 
-        justify-content: center; 
-        width: 100%; 
-        color: white; 
-        font-size: 1rem; /* Increased font size for Poppins */
-        font-weight: 600;
-        line-height: 1.25rem; 
-        padding: 1rem 1.25rem; /* Increased padding */
-        transition: all 0.2s; 
-        cursor: pointer;
-    }
+    .connect-btn { display: flex; align-items: center; justify-content: center; width: 100%; color: white; font-size: 1rem; font-weight: 600; line-height: 1.25rem; padding: 1rem 1.25rem; transition: all 0.2s; cursor: pointer; }
   </style>
 </head>
 <body class="bg-black text-white flex items-center justify-center min-h-screen p-4 antialiased">
 
   <div class="bg-gray-800 border-4 border-gray-700 max-w-sm w-full p-8 rounded-lg">
     <header class="flex justify-between items-center mb-8">
-      <a href="index2.html" class="text-gray-400 hover:text-white transition font-semibold">BACK</a>
-      <a href="traits.html" class="text-sm text-blue-400 hover:underline font-semibold">SKIP >></a>
+      <!-- Text is now empty, will be filled by translator -->
+      <a href="index2.html" class="text-gray-400 hover:text-white transition font-semibold" data-translate-key="back"></a>
+      <a href="traits.html" class="text-sm text-blue-400 hover:underline font-semibold" data-translate-key="skip"></a>
     </header>
 
     <div class="mb-8 text-center">
-      <h1 class="text-2xl font-bold mb-2">LINK START!</h1>
-      <p class="text-sm text-gray-400">Link your profiles to find better matches.</p>
+      <!-- Text is now empty, will be filled by translator -->
+      <h1 class="text-2xl font-bold mb-2" data-translate-key="linkStart"></h1>
+      <p class="text-sm text-gray-400" data-translate-key="linkSubtitle"></p>
     </div>
 
     <div class="space-y-4">
       <div id="steam-btn" class="connect-btn bg-gray-900 hover:bg-gray-700 btn-8bit rounded-md">
         <div class="w-8 h-8 mr-4 flex justify-center items-center"><img src="index3images/Steam_icon_logo.svg.png" alt="Steam Logo" class="max-w-full max-h-full object-contain"></div>
-        Continue with Steam
+        <!-- Text is now in a span, will be filled by translator -->
+        <span data-translate-key="connectSteam"></span>
       </div>
       
       <div id="riot-btn" class="connect-btn bg-red-600 hover:bg-red-500 btn-8bit rounded-md">
         <div class="w-8 h-8 mr-4 flex justify-center items-center"><img src="index3images/download.png" alt="Riot Games Logo" class="max-w-full max-h-full object-contain"></div>
-        Continue with Riot
+        <span data-translate-key="connectRiot"></span>
       </div>
 
       <div id="discord-btn" class="connect-btn bg-blue-600 hover:bg-blue-500 btn-8bit rounded-md">
         <div class="w-8 h-8 mr-4 flex justify-center items-center"><img src="index3images/discord-logo.png" alt="Discord Logo" class="max-w-full max-h-full object-contain"></div>
-        Continue with Discord
+        <span data-translate-key="connectDiscord"></span>
       </div>
     </div>
   </div>
 
+  <!-- This page's original script logic remains unchanged -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const steamBtn = document.getElementById('steam-btn');
@@ -87,6 +74,9 @@
         discordBtn.addEventListener('click', () => handleLinkAndLoad(discordUrl));
     });
   </script>
+
+  <!-- The magic happens here: this connects the page to the translation dictionary -->
+  <script src="translation.js"></script>
 
 </body>
 </html>
