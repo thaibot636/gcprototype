@@ -19,9 +19,23 @@
     .animation-delay-300 { animation-delay: 300ms; }
     .animation-delay-500 { animation-delay: 500ms; }
     .btn-8bit:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
-    .pixel-underline { position: relative; display: inline-block; padding-bottom: 5px; }
-    .pixel-underline::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: repeating-linear-gradient(90deg, #fff, #fff 3px, transparent 3px, transparent 6px); transform: scaleX(0); transform-origin: center; transition: transform 0.2s ease-out; }
-    .pixel-underline:hover::after { transform: scaleX(1); }
+    
+    /* === MODIFIED: Standard Underline Hover Effect === */
+    .hover-underline { position: relative; display: inline-block; padding-bottom: 5px; }
+    .hover-underline::after { 
+      content: ''; 
+      position: absolute; 
+      left: 0; 
+      bottom: 0; 
+      width: 100%; 
+      height: 2px; /* Standard underline thickness */
+      background-color: white; /* Solid white line */
+      transform: scaleX(0); 
+      transform-origin: center; 
+      transition: transform 0.2s ease-out; 
+    }
+    .hover-underline:hover::after { transform: scaleX(1); }
+
     .feature-card { transition: border-color 0.2s ease-in-out; }
     .feature-card h3 { transition: color 0.2s ease-in-out; }
     .feature-card img { transition: transform 0.2s ease-in-out; }
@@ -37,7 +51,6 @@
         border-top: 2px solid #06b6d4;
         border-bottom: 2px solid #06b6d4;
     }
-    /* Background Layers */
     #signup::before {
         content: '';
         position: absolute; top: 0; left: 0; width: 100%; height: 100%;
@@ -54,7 +67,6 @@
     }
     @keyframes move-grid-fast { from { background-position: 0 0; } to { background-position: 30px 30px; } }
 
-    /* HUD Corner Brackets */
     .hud-corner::before, .hud-corner::after {
         content: '';
         position: absolute;
@@ -70,14 +82,12 @@
 
     @keyframes glitch-corners { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 
-    /* Pulsing, Glitching Title */
     @keyframes critical-alert {
         0%, 100% { color: white; text-shadow: none; }
         50% { color: #22d3ee; text-shadow: 0 0 10px #06b6d4, 0 0 20px #06b6d4; }
     }
     #signup h2 { animation: critical-alert 1.5s infinite; }
     
-    /* Neon Button */
     #signup .final-cta {
         background-color: transparent;
         color: #22d3ee;
@@ -93,20 +103,16 @@
         box-shadow: 0 0 20px #06b6d4, 0 0 30px #06b6d4;
     }
     
-    /* === SPACESHIP ANIMATION === */
     .spaceship {
         position: absolute;
         width: 40px;
         height: 20px;
-        /* Embedded SVG for a sharp, scalable pixel-art ship */
         background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAxMiI+PHBhdGggZmlsbD0iIzIyZDNlZSIgZD0iTTAgNCAyNCAwIDE4IDYgMjQgMTIgMCA4eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik00IDVsNi0xIDYgMSA0IDItMjAgMHoiLz48L3N2Zz4=");
         background-size: contain;
         background-repeat: no-repeat;
         image-rendering: pixelated;
-        z-index: 5; /* Behind content, in front of bg */
+        z-index: 5;
     }
-    
-    /* Fighter ship animation (top, faster) */
     .spaceship.fighter {
         top: 20%;
         animation: fly-by-ltr 8s linear infinite;
@@ -114,19 +120,16 @@
     }
     @keyframes fly-by-ltr { from { left: -10%; } to { left: 110%; } }
     
-    /* Larger ship animation (bottom, slower, different angle) */
     .spaceship.cruiser {
-        width: 60px; /* larger ship */
+        width: 60px;
         height: 30px;
         bottom: 25%;
-        transform: scaleX(-1); /* Flips it to fly right-to-left */
+        transform: scaleX(-1);
         animation: fly-by-rtl 14s linear infinite;
         animation-delay: 5s;
-        opacity: 0.7; /* Further in the background */
+        opacity: 0.7;
     }
     @keyframes fly-by-rtl { from { right: -10%; } to { right: 110%; } }
-
-
   </style>
 </head>
 <body class="bg-black text-white antialiased">
@@ -137,8 +140,8 @@
         <div class="flex items-center space-x-8">
           <a href="index.html" class="flex items-center"><img src="logo/logo1.png" alt="GamiCon Logo" class="h-8 mr-2"><span class="text-xl font-bold text-white brand-logo">GamiCon</span></a>
           <div class="hidden md:flex items-center space-x-8">
-            <a href="index.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors pixel-underline" data-translate-key="navHome">Home</a>
-            <a href="products.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors pixel-underline" data-translate-key="navProducts">Products</a>
+            <a href="index.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors hover-underline" data-translate-key="navHome">Home</a>
+            <a href="products.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors hover-underline" data-translate-key="navProducts">Products</a>
           </div>
         </div>
         <div class="flex items-center">
@@ -189,7 +192,6 @@
     </div>
   </section>
 
-  <!-- === GAMER TRIGGER SIGN UP SECTION w/ SPACESHIPS === -->
   <section class="py-20 text-center" id="signup">
       <div class="hud-corner"></div>
       <div class="hud-corner"></div>
