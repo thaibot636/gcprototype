@@ -14,16 +14,25 @@
       --ui-bg: #111827; --accent: #4ade80; /* Neon Green */ --legendary: #f59e0b;
     }
     /* --- FONT STRATEGY --- */
-    /* 1. Default to Poppins for readability */
     body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
-    /* 2. Use Pixel font for specific high-impact elements */
     .font-8bit, h1, .data-pack h3, .pack-price, .value-tag, .btn-purchase { font-family: 'Press Start 2P', cursive; }
-    /* 3. Keep Header consistent with index.html */
     header, header a, header button { font-family: 'Poppins', sans-serif; }
-    .brand-logo { font-family: 'Press Start 2P', cursive; } /* Exception for the logo text */
+    .brand-logo { font-family: 'Press Start 2P', cursive; }
     
+    /* === MODIFIED: Standard Underline Effect === */
     .pixel-underline { position: relative; display: inline-block; padding-bottom: 5px; }
-    .pixel-underline::after { content: ''; position: absolute; left: 0; bottom: 0; width: 100%; height: 3px; background: repeating-linear-gradient(90deg, #fff, #fff 3px, transparent 3px, transparent 6px); transform: scaleX(0); transform-origin: center; transition: transform 0.2s ease-out; }
+    .pixel-underline::after { 
+        content: ''; 
+        position: absolute; 
+        left: 0; 
+        bottom: 0; 
+        width: 100%; 
+        height: 2px; /* Standard underline thickness */
+        background-color: white; /* Solid white color */
+        transform: scaleX(0); 
+        transform-origin: center; 
+        transition: transform 0.2s ease-out; 
+    }
     .pixel-underline:hover::after { transform: scaleX(1); }
 
     .bg-grid {
@@ -163,7 +172,6 @@
     </section>
   </main>
 
-  <!-- Footer text will now correctly use Poppins -->
   <footer class="bg-black py-6 text-center text-gray-500 text-sm">
       <p data-translate-key="footer"></p>
   </footer>
