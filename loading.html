@@ -1,3 +1,5 @@
+<!-- REPLACE YOUR OLD loading.html WITH THIS ENTIRE CODE BLOCK -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,13 +22,13 @@
 </head>
 <body>
     <div class="loading-container">
-        <h1 id="timer-text">LOADING...</h1>
+        <!-- The h1 tag now has the data-translate-key -->
+        <h1 id="timer-text" data-translate-key="loading">LOADING...</h1>
         <div class="loading-bar-container">
             <span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span>
         </div>
     </div>
     
-    <!-- === SCRIPT LOGIC IS NOW FIXED === -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loadingDuration = 4000;
@@ -36,18 +38,22 @@
             const interval = loadingDuration / blockCount;
             const urlParams = new URLSearchParams(window.location.search);
 
-            const nextPage = urlParams.get('next'); // Check for 'next' param first
-            const action = urlParams.get('action');
+            // === TRANSLATION LOGIC ===
+            // 1. Get the saved language from the browser
+            const lang = localStorage.getItem('gamicon_lang') || 'en';
+            
+            // 2. Define the text based on the language
+            const loadingString = lang === 'th' ? 'กำลังโหลด...' : 'LOADING...';
+            const completeString = lang === 'th' ? 'เสร็จสิ้น!' : 'COMPLETE!';
+            // === END TRANSLATION LOGIC ===
 
             let destinationUrl;
+            const nextPage = urlParams.get('next');
+            const action = urlParams.get('action');
 
-            // --- THIS IS THE FIX ---
-            // Priority 1: If 'next' exists, use it.
             if (nextPage) {
                 destinationUrl = nextPage;
-            } 
-            // Priority 2: Otherwise, use the 'action' logic.
-            else {
+            } else {
                 destinationUrl = `index2.html?action=${action || 'signup'}`;
             }
             
@@ -56,16 +62,23 @@
             });
 
             let timeLeft = loadingDuration / 1000;
-            timerText.textContent = `LOADING... ${timeLeft}`;
+            // 3. Use the correct language string in the countdown
+            timerText.textContent = `${loadingString} ${timeLeft}`;
             const countdownInterval = setInterval(() => {
                 timeLeft--;
-                if (timeLeft > 0) { timerText.textContent = `LOADING... ${timeLeft}`; } 
-                else { timerText.textContent = `COMPLETE!`; clearInterval(countdownInterval); }
+                if (timeLeft > 0) {
+                    timerText.textContent = `${loadingString} ${timeLeft}`;
+                } else {
+                    timerText.textContent = completeString;
+                    clearInterval(countdownInterval);
+                }
             }, 1000);
 
             setTimeout(() => { window.location.href = destinationUrl; }, loadingDuration);
         });
     </script>
+    
+    <!-- We don't need translation.js here because the logic is built-in above -->
 
 </body>
 </html>
