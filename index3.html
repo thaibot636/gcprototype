@@ -1,5 +1,3 @@
-<!-- REPLACE YOUR OLD index3.html WITH THIS FIXED CODE -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,13 +21,11 @@
 
   <div class="bg-gray-800 border-4 border-gray-700 max-w-sm w-full p-8 rounded-lg">
     <header class="flex justify-between items-center mb-8">
-      <!-- Text is now empty, will be filled by translator -->
       <a href="index2.html" class="text-gray-400 hover:text-white transition font-semibold" data-translate-key="back"></a>
       <a href="traits.html" class="text-sm text-blue-400 hover:underline font-semibold" data-translate-key="skip"></a>
     </header>
 
     <div class="mb-8 text-center">
-      <!-- Text is now empty, will be filled by translator -->
       <h1 class="text-2xl font-bold mb-2" data-translate-key="linkStart"></h1>
       <p class="text-sm text-gray-400" data-translate-key="linkSubtitle"></p>
     </div>
@@ -37,7 +33,6 @@
     <div class="space-y-4">
       <div id="steam-btn" class="connect-btn bg-gray-900 hover:bg-gray-700 btn-8bit rounded-md">
         <div class="w-8 h-8 mr-4 flex justify-center items-center"><img src="index3images/Steam_icon_logo.svg.png" alt="Steam Logo" class="max-w-full max-h-full object-contain"></div>
-        <!-- Text is now in a span, will be filled by translator -->
         <span data-translate-key="connectSteam"></span>
       </div>
       
@@ -53,29 +48,51 @@
     </div>
   </div>
 
-  <!-- This page's original script logic remains unchanged -->
+  <!-- *** MODIFICATION START *** -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
         const steamBtn = document.getElementById('steam-btn');
         const riotBtn = document.getElementById('riot-btn');
         const discordBtn = document.getElementById('discord-btn');
+        const skipLink = document.querySelector('a[data-translate-key="skip"]');
 
         const steamUrl = 'https://steamcommunity.com/login/home/';
         const riotUrl = 'https://authenticate.riotgames.com/';
         const discordUrl = 'https://discord.com/login';
         
-        function handleLinkAndLoad(platformUrl) {
-            window.open(platformUrl, '_blank');
-            window.location.href = 'loading.html?next=traits.html';
+        function handleLinkAndLoad(platformUrl, platformName) {
+            let profile = JSON.parse(localStorage.getItem('userProfile')) || {};
+            
+            if (!profile.connectedAccounts) {
+                profile.connectedAccounts = {};
+            }
+
+            if (platformName) {
+                profile.connectedAccounts[platformName] = true;
+            }
+
+            localStorage.setItem('userProfile', JSON.stringify(profile));
+            
+            if (platformUrl) {
+                window.open(platformUrl, '_blank');
+                window.location.href = 'loading.html?next=traits.html';
+            } else {
+                window.location.href = 'traits.html';
+            }
         }
 
-        steamBtn.addEventListener('click', () => handleLinkAndLoad(steamUrl));
-        riotBtn.addEventListener('click', () => handleLinkAndLoad(riotUrl));
-        discordBtn.addEventListener('click', () => handleLinkAndLoad(discordUrl));
+        steamBtn.addEventListener('click', () => handleLinkAndLoad(steamUrl, 'steam'));
+        riotBtn.addEventListener('click', () => handleLinkAndLoad(riotUrl, 'riot'));
+        discordBtn.addEventListener('click', () => handleLinkAndLoad(discordUrl, 'discord'));
+        
+        skipLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            handleLinkAndLoad(null, null); 
+        });
     });
   </script>
+  <!-- *** MODIFICATION END *** -->
 
-  <!-- The magic happens here: this connects the page to the translation dictionary -->
   <script src="translation.js"></script>
 
 </body>
