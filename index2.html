@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
   <style>
     body { font-family: 'Poppins', sans-serif; }
     h1, h2, h3, h4, h5, h6, .font-8bit { font-family: 'Press Start 2P', cursive; }
@@ -20,13 +21,14 @@
     ::placeholder { color: #6b7280; opacity: 1; }
     select, input { font-family: 'Poppins', sans-serif; }
     select:invalid { color: #6b7280; }
-    option { color: #111827; }
+    
+    /* FIX: Removed the problematic 'option { color: ... }' style that was here */
+    
   </style>
 </head>
 <body class="bg-black text-white antialiased">
   <section class="min-h-screen flex flex-col items-center justify-center p-4">
     <div class="text-center mb-6">
-      <!-- These elements will be filled by the script -->
       <h1 id="main-header" class="text-3xl font-bold mb-2"></h1>
       <p id="subtitle-text" class="text-base text-gray-400"></p>
     </div>
@@ -75,15 +77,13 @@
     </section>
   </section>
 
-  <!-- FIX: Load the dictionary FIRST, so its `translations` object is available to the script below -->
   <script src="translation.js"></script>
 
   <script>
-    // This script now works WITH the translation script
     document.addEventListener('DOMContentLoaded', () => {
       const urlParams = new URLSearchParams(window.location.search);
       const action = urlParams.get('action');
-      const lang = localStorage.getItem('gamicon_lang') || 'en'; // Get current language
+      const lang = localStorage.getItem('gamicon_lang') || 'en';
       
       const mainHeader = document.getElementById('main-header');
       const actionButton = document.getElementById('form-action-button');
@@ -108,7 +108,6 @@
       });
 
       if (action === 'login') {
-        // FIX: Instead of setting text, we set the KEY for the translator
         mainHeader.dataset.translateKey = 'loginHeader';
         subtitle.dataset.translateKey = 'loginSubtitle';
         emailLabel.dataset.translateKey = 'loginEmailLabel';
@@ -122,19 +121,17 @@
             let isLoginValid = true;
             emailInput.classList.remove('input-error');
             passwordInput.classList.remove('input-error');
-            emailInput.placeholder = translations.loginEmailPlaceholder[lang]; // Restore translated placeholder
+            emailInput.placeholder = translations.loginEmailPlaceholder[lang];
             passwordInput.placeholder = translations.passwordPlaceholder[lang];
 
             if (emailInput.value.trim() === '') {
                 isLoginValid = false;
                 emailInput.classList.add('input-error');
-                // FIX: Use the translated error message
                 emailInput.placeholder = translations.errorRequired[lang];
             }
             if (passwordInput.value === '') {
                 isLoginValid = false;
                 passwordInput.classList.add('input-error');
-                // FIX: Use the translated error message
                 passwordInput.placeholder = translations.errorRequired[lang];
             }
             if (isLoginValid) {
@@ -142,8 +139,7 @@
             }
         });
 
-      } else { // This is the 'signup' action
-        // FIX: Set keys for the signup page
+      } else {
         mainHeader.dataset.translateKey = 'joinHeader';
         subtitle.dataset.translateKey = 'joinSubtitle';
         emailLabel.dataset.translateKey = 'emailLabel';
@@ -161,14 +157,12 @@
 
           [emailInput, usernameInput, birthdayInput, genderSelect, passwordInput, confirmPasswordInput].forEach(input => input.classList.remove('input-error'));
           
-          // Restore translated placeholders
           emailInput.placeholder = translations.emailPlaceholder[lang];
           usernameInput.placeholder = translations.usernamePlaceholder[lang];
           passwordInput.placeholder = translations.passwordPlaceholder[lang];
           confirmPasswordInput.placeholder = translations.passwordPlaceholder[lang];
           birthdayInput.type = 'date';
 
-          // FIX: Use translated error messages for validation
           if (emailInput.value.trim() === '') { isValid = false; emailInput.classList.add('input-error'); emailInput.placeholder = translations.errorEmailRequired[lang]; }
           if (usernameInput.value.trim() === '') { isValid = false; usernameInput.classList.add('input-error'); usernameInput.placeholder = translations.errorUsernameRequired[lang]; }
           if (genderSelect.value === '') { isValid = false; genderSelect.classList.add('input-error'); }
@@ -207,7 +201,6 @@
         });
       }
       
-      // Manually trigger the translation again to apply the keys we just set
       const setLanguage = (lang) => {
           document.querySelectorAll('[data-translate-key]').forEach(el => {
               const key = el.dataset.translateKey;
