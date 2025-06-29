@@ -1,3 +1,5 @@
+<!-- REPLACE YOUR OLD traits.html WITH THIS FIXED CODE -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,87 +9,29 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- === FONT FIX: ADD POPPINS & KEEP 8-BIT FONT === -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    
     <style>
-        /* === FONT FIX: APPLY FONTS STRATEGICALLY === */
-        body { 
-            font-family: 'Poppins', sans-serif; /* Readable font for all body text */
-        }
-        h1, h3 {
-            font-family: 'Press Start 2P', cursive; /* 8-bit font for headings */
-        }
-        .trait-tag, .btn-8bit {
-            font-family: 'Poppins', sans-serif; /* Readable font for buttons and tags */
-            font-weight: 600;
-        }
-
+        body { font-family: 'Poppins', sans-serif; }
+        h1, h3 { font-family: 'Press Start 2P', cursive; }
+        .trait-tag, .btn-8bit { font-family: 'Poppins', sans-serif; font-weight: 600; }
         .btn-8bit { border: 4px solid #000; }
         .btn-8bit:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
-        
-        .text-games { color: #3b82f6; } .text-vibe { color: #22c55e; }
-        .text-hours { color: #f59e0b; } .text-comm { color: #ef4444; }
-
-        .trait-tag {
-            display: inline-block; background-color: #1f2937; border: 2px solid #4b5563;
-            padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer;
-            transition: all 0.2s ease-in-out; user-select: none; border-radius: 6px;
-        }
-
+        .text-games { color: #3b82f6; } .text-vibe { color: #22c55e; } .text-hours { color: #f59e0b; } .text-comm { color: #ef4444; }
+        .trait-tag { display: inline-block; background-color: #1f2937; border: 2px solid #4b5563; padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; transition: all 0.2s ease-in-out; user-select: none; border-radius: 6px; }
         .trait-tag.active-games { background-color: #3b82f6; color: white; border-color: #93c5fd; }
         .trait-tag.active-vibe { background-color: #22c55e; color: white; border-color: #86efac; }
         .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
-
-        .summary-bar {
-            background-color: #111827; border: 2px solid #4b5563;
-            padding: 1rem; min-height: 80px; font-size: 0.9rem;
-            display: flex; flex-wrap: wrap; justify-content: center; align-items: center;
-            transition: all 0.3s ease-in-out; border-radius: 8px;
-        }
-
+        .summary-bar { background-color: #111827; border: 2px solid #4b5563; padding: 1rem; min-height: 80px; font-size: 0.9rem; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; transition: all 0.3s ease-in-out; border-radius: 8px; }
         @keyframes blink-error { 50% { opacity: 0.2; } }
-        .error-message { 
-            color: #ff5555; font-size: 0.8rem; text-transform: uppercase;
-            text-shadow: 0 0 5px #ef4444; font-weight: 700;
-        }
+        .error-message { color: #ff5555; font-size: 0.8rem; text-transform: uppercase; text-shadow: 0 0 5px #ef4444; font-weight: 700; }
         .error-message.blinking { animation: blink-error 1.2s step-end infinite; }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes borderGlow {
-            0%, 100% { border-color: #f59e0b; box-shadow: 0 0 5px #f59e0b, inset 0 0 5px #f59e0b; }
-            50% { border-color: #fcd34d; box-shadow: 0 0 15px #fcd34d, inset 0 0 10px #fcd34d; }
-        }
-
-        .summary-bar.processing-active {
-            border-style: solid; animation: borderGlow 2s infinite linear;
-            flex-direction: column; font-family: 'Press Start 2P', cursive;
-        }
-        
-        .summary-bar.fusion-active {
-            background-color: #1a4d1a; border-color: #32cd32;
-            box-shadow: 0 0 10px #32cd32, 0 0 20px #32cd32, inset 0 0 10px #1a4d1a;
-            animation: none; font-family: 'Press Start 2P', cursive;
-        }
-        
-        .processing-line {
-            width: 100%; text-align: center; font-size: 1rem;
-            color: #fcd34d; opacity: 0;
-            animation: fadeIn 0.5s forwards;
-        }
-        
-        .fusion-text {
-            color: #adff2f; font-size: 1.5rem;
-            text-shadow: 0 0 10px #32cd32, 0 0 20px #32cd32;
-            opacity: 0; transform: scale(0.8);
-            animation: fadeIn 0.5s forwards ease-out, grow 0.3s 0.1s forwards;
-        }
-
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes borderGlow { 0%, 100% { border-color: #f59e0b; box-shadow: 0 0 5px #f59e0b, inset 0 0 5px #f59e0b; } 50% { border-color: #fcd34d; box-shadow: 0 0 15px #fcd34d, inset 0 0 10px #fcd34d; } }
+        .summary-bar.processing-active { border-style: solid; animation: borderGlow 2s infinite linear; flex-direction: column; font-family: 'Press Start 2P', cursive; }
+        .summary-bar.fusion-active { background-color: #1a4d1a; border-color: #32cd32; box-shadow: 0 0 10px #32cd32, 0 0 20px #32cd32, inset 0 0 10px #1a4d1a; animation: none; font-family: 'Press Start 2P', cursive; }
+        .processing-line { width: 100%; text-align: center; font-size: 1rem; color: #fcd34d; opacity: 0; animation: fadeIn 0.5s forwards; }
+        .fusion-text { color: #adff2f; font-size: 1.5rem; text-shadow: 0 0 10px #32cd32, 0 0 20px #32cd32; opacity: 0; transform: scale(0.8); animation: fadeIn 0.5s forwards ease-out, grow 0.3s 0.1s forwards; }
         @keyframes grow { to { transform: scale(1); } }
     </style>
 </head>
@@ -96,59 +40,64 @@
         <div class="max-w-2xl w-full bg-gray-800 p-8 border-4 border-gray-700 rounded-lg">
             
             <header class="flex justify-between items-center mb-8">
-                <a href="index3.html" class="text-gray-400 hover:text-white transition font-semibold">BACK</a>
-                <a href="main1.html" class="text-sm text-blue-400 hover:underline font-semibold">SKIP >></a>
+                <a href="index3.html" class="text-gray-400 hover:text-white transition font-semibold" data-translate-key="back"></a>
+                <a href="main1.html" class="text-sm text-blue-400 hover:underline font-semibold" data-translate-key="skip"></a>
             </header>
 
             <div class="text-center mb-10">
-                <h1 class="text-2xl">SELECT YOUR TRAITS</h1>
-                <p class="text-sm text-gray-400 mt-2">This helps us find your perfect squad.</p>
+                <h1 class="text-2xl" data-translate-key="traitsTitle"></h1>
+                <p class="text-sm text-gray-400 mt-2" data-translate-key="traitsSubtitle"></p>
             </div>
 
             <div class="space-y-8">
                  <div>
-                    <h3 class="text-base mb-4"><span class="text-games">GAMES</span> (Select any) <span id="games-error" class="error-message ml-2 hidden"></span></h3>
+                    <h3 class="text-base mb-4"><span class="text-games" data-translate-key="gamesHeader"></span> <span data-translate-key="gamesSubheader"></span> <span id="games-error" class="error-message ml-2 hidden"></span></h3>
                     <div class="flex flex-wrap gap-3">
-                        <div class="trait-tag" data-category="games">MOBA</div><div class="trait-tag" data-category="games">FPS</div><div class="trait-tag" data-category="games">RPG</div>
-                        <div class="trait-tag" data-category="games">Strategy</div><div class="trait-tag" data-category="games">Sandbox</div><div class="trait-tag" data-category="games">Horror</div>
+                        <div class="trait-tag" data-category="games" data-translate-key="traitTagMoba"></div><div class="trait-tag" data-category="games" data-translate-key="traitTagFps"></div><div class="trait-tag" data-category="games" data-translate-key="traitTagRpg"></div>
+                        <div class="trait-tag" data-category="games" data-translate-key="traitTagStrategy"></div><div class="trait-tag" data-category="games" data-translate-key="traitTagSandbox"></div><div class="trait-tag" data-category="games" data-translate-key="traitTagHorror"></div>
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-base mb-4"><span class="text-vibe">VIBE</span> (Pick up to 2) <span id="vibe-error" class="error-message ml-2 hidden"></span></h3>
+                    <h3 class="text-base mb-4"><span class="text-vibe" data-translate-key="vibeHeader"></span> <span data-translate-key="vibeSubheader"></span> <span id="vibe-error" class="error-message ml-2 hidden"></span></h3>
                     <div class="flex flex-wrap gap-3">
-                        <div class="trait-tag" data-category="vibe">Casual</div><div class="trait-tag" data-category="vibe">Competitive</div><div class="trait-tag" data-category="vibe">Try-hard</div>
-                        <div class="trait-tag" data-category="vibe">Chill</div><div class="trait-tag" data-category="vibe">Funny</div><div class="trait-tag" data-category="vibe">Focused</div>
+                        <div class="trait-tag" data-category="vibe" data-translate-key="traitTagCasual"></div><div class="trait-tag" data-category="vibe" data-translate-key="traitTagCompetitive"></div><div class="trait-tag" data-category="vibe" data-translate-key="traitTagTryhard"></div>
+                        <div class="trait-tag" data-category="vibe" data-translate-key="traitTagChill"></div><div class="trait-tag" data-category="vibe" data-translate-key="traitTagFunny"></div><div class="trait-tag" data-category="vibe" data-translate-key="traitTagFocused"></div>
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-base mb-4"><span class="text-hours">PLAY HOURS</span> (Up to 2) <span id="hours-error" class="error-message ml-2 hidden"></span></h3>
+                    <h3 class="text-base mb-4"><span class="text-hours" data-translate-key="hoursHeader"></span> <span data-translate-key="hoursSubheader"></span> <span id="hours-error" class="error-message ml-2 hidden"></span></h3>
                     <div class="flex flex-wrap gap-3">
-                        <div class="trait-tag" data-category="hours">Weekdays</div><div class="trait-tag" data-category="hours">Weekends</div><div class="trait-tag" data-category="hours">Late Night</div>
-                        <div class="trait-tag" data-category="hours">Mornings</div><div class="trait-tag" data-category="hours">Anytime</div>
+                        <div class="trait-tag" data-category="hours" data-translate-key="traitTagWeekdays"></div><div class="trait-tag" data-category="hours" data-translate-key="traitTagWeekends"></div><div class="trait-tag" data-category="hours" data-translate-key="traitTagLateNight"></div>
+                        <div class="trait-tag" data-category="hours" data-translate-key="traitTagMornings"></div><div class="trait-tag" data-category="hours" data-translate-key="traitTagAnytime"></div>
                     </div>
                 </div>
                 <div>
-                    <h3 class="text-base mb-4"><span class="text-comm">COMMUNICATION</span> (Pick one) <span id="comm-error" class="error-message ml-2 hidden"></span></h3>
+                    <h3 class="text-base mb-4"><span class="text-comm" data-translate-key="commHeader"></span> <span data-translate-key="commSubheader"></span> <span id="comm-error" class="error-message ml-2 hidden"></span></h3>
                     <div class="flex flex-wrap gap-3">
-                        <div class="trait-tag" data-category="comm">Voice Chat</div><div class="trait-tag" data-category="comm">Pings Only</div><div class="trait-tag" data-category="comm">Text Chat</div><div class="trait-tag" data-category="comm">Quiet</div>
+                        <div class="trait-tag" data-category="comm" data-translate-key="traitTagVoice"></div><div class="trait-tag" data-category="comm" data-translate-key="traitTagPings"></div><div class="trait-tag" data-category="comm" data-translate-key="traitTagText"></div><div class="trait-tag" data-category="comm" data-translate-key="traitTagQuiet"></div>
                     </div>
                 </div>
             </div>
             
             <div class="mt-10">
-                <h3 class="text-base text-center mb-3">YOUR TRAITS</h3>
+                <h3 class="text-base text-center mb-3" data-translate-key="yourTraits"></h3>
                 <div id="summary-container" class="summary-bar gap-3">
-                    <p id="empty-summary-text" class="text-gray-500">No traits selected</p>
+                    <p id="empty-summary-text" class="text-gray-500" data-translate-key="noTraits"></p>
                 </div>
             </div>
 
-            <a id="finish-btn" href="main1.html" class="block w-full bg-blue-600 text-white font-bold py-3 text-center transition-all btn-8bit mt-8 rounded-md text-lg">FINISH SETUP</a>
+            <a id="finish-btn" href="main1.html" class="block w-full bg-blue-600 text-white font-bold py-3 text-center transition-all btn-8bit mt-8 rounded-md text-lg" data-translate-key="finishSetup"></a>
         </div>
     </div>
 
+    <!-- Load the dictionary FIRST -->
+    <script src="translation.js"></script>
+
+    <!-- This page's script runs SECOND -->
     <script>
-        // JS logic remains the same
         document.addEventListener('DOMContentLoaded', () => {
+            const lang = localStorage.getItem('gamicon_lang') || 'en';
+            
             const allTags = document.querySelectorAll('.trait-tag');
             const summaryContainer = document.getElementById('summary-container');
             const emptySummaryText = document.getElementById('empty-summary-text');
@@ -161,11 +110,12 @@
             const allErrors = [gamesError, vibeError, hoursError, commError];
 
             function updateSummary() {
-                summaryContainer.innerHTML = '';
                 const activeTags = document.querySelectorAll('.trait-tag[class*="active-"]');
                 if (activeTags.length === 0) {
+                    summaryContainer.innerHTML = '';
                     summaryContainer.appendChild(emptySummaryText);
                 } else {
+                    summaryContainer.innerHTML = '';
                     activeTags.forEach((tag, index) => {
                         const traitSpan = document.createElement('span');
                         traitSpan.textContent = tag.textContent;
@@ -182,13 +132,7 @@
             }
             
             const getActiveCount = (category) => document.querySelectorAll(`.trait-tag[data-category="${category}"].active-${category}`).length;
-
-            function resetErrors() {
-                allErrors.forEach(error => {
-                    error.classList.add('hidden');
-                    error.classList.remove('blinking');
-                });
-            }
+            function resetErrors() { allErrors.forEach(error => { error.classList.add('hidden'); error.classList.remove('blinking'); }); }
 
             allTags.forEach(tag => {
                 tag.addEventListener('click', () => {
@@ -200,8 +144,9 @@
                     if (isActive) {
                         tag.classList.remove(activeClass);
                     } else {
-                        if (category === 'vibe' && getActiveCount('vibe') >= 2) { vibeError.textContent = 'MAX 2!'; vibeError.classList.remove('hidden'); vibeError.classList.add('blinking'); return; }
-                        if (category === 'hours' && getActiveCount('hours') >= 2) { hoursError.textContent = 'MAX 2!'; hoursError.classList.remove('hidden'); hoursError.classList.add('blinking'); return; }
+                        // FIX: Use translated error messages
+                        if (category === 'vibe' && getActiveCount('vibe') >= 2) { vibeError.textContent = translations.errorMax2[lang]; vibeError.classList.remove('hidden'); vibeError.classList.add('blinking'); return; }
+                        if (category === 'hours' && getActiveCount('hours') >= 2) { hoursError.textContent = translations.errorMax2[lang]; hoursError.classList.remove('hidden'); hoursError.classList.add('blinking'); return; }
                         if (category === 'comm') { document.querySelectorAll('.trait-tag[data-category="comm"]').forEach(t => t.classList.remove('active-comm')); }
                         tag.classList.add(activeClass);
                     }
@@ -217,51 +162,38 @@
 
                 const showLine = (text, delay) => {
                     setTimeout(() => {
-                        const p = document.createElement('p');
-                        p.textContent = text;
-                        p.className = 'processing-line';
-                        summaryContainer.innerHTML = '';
-                        summaryContainer.appendChild(p);
+                        const p = document.createElement('p'); p.textContent = text; p.className = 'processing-line';
+                        summaryContainer.innerHTML = ''; summaryContainer.appendChild(p);
                     }, delay);
                 };
 
                 const showFusion = (delay) => {
                     setTimeout(() => {
-                        summaryContainer.classList.remove('processing-active');
-                        summaryContainer.classList.add('fusion-active');
-                        summaryContainer.innerHTML = '';
-                        const p = document.createElement('p');
-                        p.textContent = 'FUSION!';
-                        p.className = 'fusion-text';
+                        summaryContainer.classList.remove('processing-active'); summaryContainer.classList.add('fusion-active');
+                        summaryContainer.innerHTML = ''; const p = document.createElement('p'); p.textContent = translations.animFusion[lang]; p.className = 'fusion-text';
                         summaryContainer.appendChild(p);
                     }, delay);
                 };
 
                 let timeline = 100;
-                showLine("WE'RE PROCESSING . . .", timeline);
+                // FIX: Use translated animation text
+                showLine(translations.animProcessing[lang], timeline);
                 timeline += 1500;
-                showLine("COMPLETING YOUR PROFILE . . .", timeline);
+                showLine(translations.animCompleting[lang], timeline);
                 timeline += 1500;
                 showFusion(timeline);
                 timeline += 1500;
-                setTimeout(() => {
-                    window.location.href = finishBtn.href;
-                }, timeline);
+                setTimeout(() => { window.location.href = finishBtn.href; }, timeline);
             }
 
             finishBtn.addEventListener('click', (event) => {
-                event.preventDefault();
-                resetErrors();
-                let isFormValid = true;
-
-                if (getActiveCount('games') === 0) { gamesError.textContent = 'PICK AT LEAST 1'; gamesError.classList.remove('hidden'); gamesError.classList.add('blinking'); isFormValid = false; }
-                if (getActiveCount('vibe') === 0) { vibeError.textContent = 'PICK AT LEAST 1'; vibeError.classList.remove('hidden'); vibeError.classList.add('blinking'); isFormValid = false; }
-                if (getActiveCount('hours') === 0) { hoursError.textContent = 'PICK AT LEAST 1'; hoursError.classList.remove('hidden'); hoursError.classList.add('blinking'); isFormValid = false; }
-                if (getActiveCount('comm') === 0) { commError.textContent = 'PICK 1'; commError.classList.remove('hidden'); commError.classList.add('blinking'); isFormValid = false; }
-
-                if (isFormValid) {
-                    runProcessingAnimation();
-                }
+                event.preventDefault(); resetErrors(); let isFormValid = true;
+                // FIX: Use translated error messages
+                if (getActiveCount('games') === 0) { gamesError.textContent = translations.errorPickAtLeast1[lang]; gamesError.classList.remove('hidden'); gamesError.classList.add('blinking'); isFormValid = false; }
+                if (getActiveCount('vibe') === 0) { vibeError.textContent = translations.errorPickAtLeast1[lang]; vibeError.classList.remove('hidden'); vibeError.classList.add('blinking'); isFormValid = false; }
+                if (getActiveCount('hours') === 0) { hoursError.textContent = translations.errorPickAtLeast1[lang]; hoursError.classList.remove('hidden'); hoursError.classList.add('blinking'); isFormValid = false; }
+                if (getActiveCount('comm') === 0) { commError.textContent = translations.errorPick1[lang]; commError.classList.remove('hidden'); commError.classList.add('blinking'); isFormValid = false; }
+                if (isFormValid) { runProcessingAnimation(); }
             });
 
             updateSummary();
