@@ -1,84 +1,192 @@
-<!-- REPLACE YOUR OLD loading.html WITH THIS ENTIRE CODE BLOCK -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading...</title>
+    <title>GamiCon – Loading...</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Press Start 2P', cursive; background-color: #000; overflow: hidden; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; color: white; }
-        body::after { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0.75) 100%), repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.15), rgba(0, 0, 0, 0.15) 1px, transparent 1px, transparent 3px); animation: flicker 0.05s infinite; z-index: 10; }
-        .loading-container { width: 80%; max-width: 400px; text-align: center; position: relative; z-index: 1; }
-        #timer-text { font-size: 1.5rem; margin-bottom: 2rem; height: 3rem; text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #32cd32, 0 0 20px #32cd32; }
-        .loading-bar-container { width: 100%; height: 40px; border: 4px solid #fff; background-color: transparent; padding: 4px; display: flex; gap: 4px; }
-        .loading-block { flex: 1; height: 100%; background-color: #1a4d1a; opacity: 0.3; transition: all 0.2s ease-in-out; }
-        .loading-block.active { background-color: #32cd32; opacity: 1; box-shadow: 0 0 10px #32cd32, 0 0 15px #32cd32; }
-        @keyframes flicker { 0% { opacity: 0.98; } 50% { opacity: 1; } 100% { opacity: 0.98; } }
+        :root {
+            --glow-color: #00ffae;
+            --primary-text: #ffffff;
+            --bg-color: #0d0d1a;
+        }
+
+        body {
+            font-family: 'Press Start 2P', cursive;
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        
+        .loading-scene {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Scrolling starry background */
+        .sky {
+            position: absolute;
+            top: 0; left: 0;
+            width: 200%; height: 100%;
+            background-image: 
+                radial-gradient(circle at 10% 20%, white 1px, transparent 1px),
+                radial-gradient(circle at 50% 80%, white 1px, transparent 1px),
+                radial-gradient(circle at 80% 30%, white 2px, transparent 2px),
+                radial-gradient(circle at 35% 55%, white 1px, transparent 1px);
+            background-size: 50% 100%;
+            animation: scroll-bg 10s linear infinite;
+        }
+        
+        .runner {
+            width: 32px; height: 32px;
+            background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAAAgCAYAAABv6sJGAAAAAXNSR0IArs4c6QAAAE9JREFUeJztwQEBAAAAgiD/r25IQAEAAP8L0CpArQDUClArQK0C1ApQK0CtAtQKUOtAtQJQKUANAa0A1ApQK0CtAtQKUANAawE92gAFTbkZkQAAAABJRU5ErkJggg==');
+            position: absolute;
+            bottom: 65px; /* Raised to be above new status area */
+            left: 50%;
+            transform: translateX(-50%) scale(3);
+            image-rendering: pixelated;
+            animation: run-cycle 0.6s steps(6) infinite;
+        }
+
+        .ground {
+            position: absolute;
+            bottom: 70px; /* Raised */
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: #484860;
+        }
+
+        /* Container for all text elements */
+        .text-container {
+            position: absolute;
+            top: 45%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 5;
+            width: 90%;
+        }
+        
+        /* The ASCII ART LOGO */
+        #logo {
+            font-size: clamp(10px, 4vw, 16px);
+            color: var(--glow-color);
+            text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color);
+            white-space: pre;
+            margin-bottom: 2.5rem;
+            animation: text-flicker 3s infinite alternate;
+        }
+
+        #percentage-text {
+            font-size: 3rem;
+            color: var(--primary-text);
+            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+            margin: 0;
+        }
+        
+        #status-text {
+            height: 1.5rem;
+            font-size: 1rem;
+            margin-top: 1rem;
+            color: #ccc;
+            letter-spacing: 2px;
+        }
+        
+        @keyframes run-cycle {
+            from { background-position-x: 0; }
+            to { background-position-x: -192px; }
+        }
+        
+        @keyframes scroll-bg {
+            from { transform: translateX(0); }
+            to { transform: translateX(-50%); }
+        }
+        
+        @keyframes text-flicker {
+            from { text-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--glow-color); }
+            to { text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color); }
+        }
     </style>
 </head>
 <body>
-    <div class="loading-container">
-        <!-- The h1 tag now has the data-translate-key -->
-        <h1 id="timer-text" data-translate-key="loading">LOADING...</h1>
-        <div class="loading-bar-container">
-            <span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span><span class="loading-block"></span>
+
+    <div class="loading-scene">
+        <div class="sky"></div>
+        <div class="text-container">
+             <pre id="logo">
+  ______          _           _       
+ / ____/___ _____(_)___ _____(_)__  __
+/ / __/ __ `/ ___/ / __ `/ ___/ / / / /
+/ /_/ / /_/ / /  / / /_/ / /  / / /_/ / 
+\____/\__,_/_/  /_/\__,_/_/  /_/\__,_/  
+        </pre>
+            <h1 id="percentage-text">0%</h1>
+            <p id="status-text"></p>
         </div>
+        <div class="ground"></div>
+        <div class="runner"></div>
     </div>
     
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const loadingDuration = 4000;
-            const timerText = document.getElementById('timer-text');
-            const blocks = document.querySelectorAll('.loading-block');
-            const blockCount = blocks.length;
-            const interval = loadingDuration / blockCount;
+            const percentageText = document.getElementById('percentage-text');
+            const statusText = document.getElementById('status-text');
             const urlParams = new URLSearchParams(window.location.search);
-
-            // === TRANSLATION LOGIC ===
-            // 1. Get the saved language from the browser
             const lang = localStorage.getItem('gamicon_lang') || 'en';
+
+            const translations = {
+                msg_power: { en: "LOADING ASSETS", th: "กำลังโหลดไฟล์" },
+                msg_splines: { en: "RENDERING PIXELS", th: "เรนเดอร์พิกเซล" },
+                msg_matrix: { en: "BUILDING WORLD", th: "สร้างโลกของเกม" },
+                msg_pixels: { en: "STARTING GAME...", th: "กำลังเริ่มเกม..." },
+                complete: { en: "READY!", th: "พร้อมแล้ว!" }
+            };
+            const messageKeys = ['msg_power', 'msg_splines', 'msg_matrix', 'msg_pixels'];
+            let messageIndex = 0;
             
-            // 2. Define the text based on the language
-            const loadingString = lang === 'th' ? 'กำลังโหลด...' : 'LOADING...';
-            const completeString = lang === 'th' ? 'เสร็จสิ้น!' : 'COMPLETE!';
-            // === END TRANSLATION LOGIC ===
+            const messageInterval = setInterval(() => {
+                statusText.textContent = translations[messageKeys[messageIndex % messageKeys.length]][lang];
+                messageIndex++;
+            }, loadingDuration / messageKeys.length);
+            
+            let currentPercent = 0;
+            const updateInterval = 40;
+            const increment = 100 / (loadingDuration / updateInterval);
+            
+            const progressInterval = setInterval(() => {
+                currentPercent += increment;
+                if (currentPercent >= 100) {
+                    currentPercent = 100;
+                    clearInterval(progressInterval);
+                }
+                percentageText.textContent = `${Math.floor(currentPercent)}%`;
+            }, updateInterval);
 
-            let destinationUrl;
-            const nextPage = urlParams.get('next');
-            const action = urlParams.get('action');
-
-            if (nextPage) {
-                destinationUrl = nextPage;
-            } else {
-                destinationUrl = `index2.html?action=${action || 'signup'}`;
+            let destinationUrl = `index2.html?action=${urlParams.get('action') || 'signup'}`;
+            if (urlParams.has('next')) {
+                destinationUrl = urlParams.get('next');
             }
             
-            blocks.forEach((block, index) => {
-                setTimeout(() => { block.classList.add('active'); }, (index + 1) * interval);
-            });
-
-            let timeLeft = loadingDuration / 1000;
-            // 3. Use the correct language string in the countdown
-            timerText.textContent = `${loadingString} ${timeLeft}`;
-            const countdownInterval = setInterval(() => {
-                timeLeft--;
-                if (timeLeft > 0) {
-                    timerText.textContent = `${loadingString} ${timeLeft}`;
-                } else {
-                    timerText.textContent = completeString;
-                    clearInterval(countdownInterval);
-                }
-            }, 1000);
-
-            setTimeout(() => { window.location.href = destinationUrl; }, loadingDuration);
+            setTimeout(() => {
+                clearInterval(messageInterval);
+                statusText.textContent = translations.complete[lang];
+                setTimeout(() => {
+                    window.location.href = destinationUrl;
+                }, 500);
+            }, loadingDuration);
         });
     </script>
-    
-    <!-- We don't need translation.js here because the logic is built-in above -->
-
 </body>
 </html>
