@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Settings – GamiCon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+
+    <style>
+        /* Base and Font Styles */
+        body { font-family: 'Poppins', sans-serif; transition: background-color 0.3s, color 0.3s; }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Press Start 2P', cursive; }
+        
+        .settings-panel { border: 4px solid; transition: all 0.3s; border-radius: 8px; }
+        .close-button-esc {
+            position: fixed; top: 2rem; right: 2.5rem; display: flex;
+            flex-direction: column; align-items: center;
+            transition: all 0.2s ease-in-out; z-index: 100;
+        }
+        .close-button-esc:hover { transform: scale(1.1); }
+        .close-button-esc span { margin-top: 0.5rem; font-size: 0.8rem; letter-spacing: 0.1em; font-family: 'Poppins', sans-serif;}
+        
+        .section-separator { transition: border-color 0.3s; }
+
+        .theme-card {
+            border: 4px solid; padding: 1.5rem; text-align: center;
+            cursor: pointer; transition: all 0.2s ease-in-out; border-radius: 6px;
+        }
+        .theme-card.selected { transform: scale(1.05); }
+        
+        .theme-preview {
+            display: flex; width: 100%; height: 80px; margin-bottom: 1rem; 
+            border: 2px solid; border-radius: 4px; padding: 0.5rem; gap: 0.5rem;
+        }
+        .preview-sidebar { width: 30%; border-radius: 2px; }
+        .preview-content { flex: 1; border-radius: 2px; }
+
+        /* --- CONSTANT VISUAL CUES FOR PREVIEWS --- */
+        .preview-light-gray { border-color: #d1d5db !important; }
+        .preview-light-gray .preview-sidebar { background-color: #e5e7eb !important; }
+        .preview-light-gray .preview-content { background-color: #f9fafb !important; }
+        
+        .preview-default { border-color: #6b7280 !important; }
+        .preview-default .preview-sidebar { background-color: #111827 !important; }
+        .preview-default .preview-content { background-color: #374151 !important; }
+        
+        .preview-true-dark { border-color: #555 !important; }
+        .preview-true-dark .preview-sidebar { background-color: #000 !important; }
+        .preview-true-dark .preview-content { background-color: #181818 !important; }
+
+
+        /* --- THEME DEFINITIONS --- */
+        
+        /* 1. DEFAULT */
+        body.theme-default { background-color: #000; color: white; }
+        .theme-default .settings-panel { background-color: #1f2937; border-color: #4b5563; }
+        .theme-default .close-button-esc { color: #6b7280; }
+        .theme-default .close-button-esc:hover { color: white; }
+        .theme-default .theme-card { border-color: #4b5563; }
+        .theme-default .theme-card.selected { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.7); }
+        .theme-default .section-separator { border-color: #374151; }
+        
+        /* 2. LIGHT GRAY */
+        body.theme-light-gray { background-color: #f4f4f5; color: #334155; }
+        .theme-light-gray .settings-panel { background-color: #ffffff; border-color: #e5e7eb; }
+        .theme-light-gray header p { color: #64748b; }
+        .theme-light-gray .close-button-esc { color: #9ca3af; }
+        .theme-light-gray .close-button-esc:hover { color: #1f2937; }
+        .theme-light-gray .theme-card { background-color: #f9fafb; border-color: #e5e7eb; }
+        .theme-light-gray .theme-card.selected { border-color: #3b82f6; box-shadow: 0 0 20px rgba(59, 130, 246, 0.7); }
+        .theme-light-gray .section-separator { border-color: #e5e7eb; }
+
+        /* 3. TRUE DARK */
+        body.theme-true-dark { background-color: #000; color: #fff; }
+        .theme-true-dark .settings-panel { background-color: #101010; border-color: #333; }
+        .theme-true-dark header p { color: #aaa; }
+        .theme-true-dark .close-button-esc { color: #888; }
+        .theme-true-dark .close-button-esc:hover { color: #fff; }
+        .theme-true-dark .theme-card { background-color: #181818; border-color: #333; }
+        .theme-true-dark .theme-card.selected { border-color: #fff; box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); }
+        .theme-true-dark .section-separator { border-color: #333; }
+    </style>
+</head>
+<body class="theme-default">
+    
+    <a href="main1.html" class="close-button-esc">
+        <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+        <span>ESC</span>
+    </a>
+
+    <div class="min-h-screen flex items-center justify-center p-4">
+        <div class="settings-panel w-full max-w-4xl p-6 md:p-10">
+            <header class="mb-10 text-center">
+                <h1 class="text-2xl md:text-3xl">SETTINGS</h1>
+                <p class="text-base mt-3">Customize your experience.</p>
+            </header>
+            
+            <div class="space-y-10">
+                <section>
+                    <h2 class="text-xl mb-6 text-center md:text-left">Appearance</h2>
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+                        <div id="theme-light-gray" class="theme-card">
+                            <div class="theme-preview preview-light-gray"><div class="preview-sidebar"></div><div class="preview-content"></div></div>
+                            <h3 class="text-base mt-4">Light</h3>
+                        </div>
+                        <div id="theme-default" class="theme-card">
+                            <div class="theme-preview preview-default"><div class="preview-sidebar"></div><div class="preview-content"></div></div>
+                            <h3 class="text-base mt-4">Default</h3>
+                        </div>
+                        <div id="theme-true-dark" class="theme-card">
+                            <div class="theme-preview preview-true-dark"><div class="preview-sidebar"></div><div class="preview-content"></div></div>
+                            <h3 class="text-base mt-4">Dark</h3>
+                        </div>
+                    </div>
+                </section>
+                <hr class="section-separator">
+                <section><h2 class="text-xl mb-4">Account</h2><p class="text-sm text-gray-400">Coming Soon...</p></section>
+                <hr class="section-separator">
+                <section><h2 class="text-xl mb-4">Privacy & Safety</h2><p class="text-sm text-gray-400">Coming Soon...</p></section>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const themeButtons = document.querySelectorAll('.theme-card[id]');
+            const themeClasses = ['theme-default', 'theme-light-gray', 'theme-true-dark'];
+
+            const applyTheme = (theme) => {
+                body.className = body.className.replace(/theme-\S+/g, '').trim();
+                body.classList.add(theme);
+
+                themeButtons.forEach(btn => {
+                    btn.classList.toggle('selected', btn.id === theme);
+                });
+                
+                localStorage.setItem('gamicon_theme', theme);
+            };
+
+            themeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    applyTheme(button.id);
+                });
+            });
+
+            const savedTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
+            applyTheme(savedTheme);
+        });
+    </script>
+</body>
+</html>
