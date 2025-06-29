@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>GamiCon – Player Select</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- === FONT FIX: ADD POPPINS & KEEP 8-BIT FONT === -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+  
+  <style>
+    /* === FONT FIX: APPLY FONTS STRATEGICALLY === */
+    body { 
+        font-family: 'Poppins', sans-serif; /* Readable font for all body text */
+    }
+    h1, h2, h3, h4, h5, h6, .font-8bit {
+        font-family: 'Press Start 2P', cursive; /* 8-bit font for headings */
+    }
+
+    .btn-8bit { border: 4px solid #000; }
+    .btn-8bit:hover { transform: translate(-2px, -2px); box-shadow: 6px 6px 0px #000; }
+    .input-error { border-color: #ef4444 !important; }
+    
+    .input-error::placeholder { 
+        color: #fca5a5;
+        font-family: 'Poppins', sans-serif; /* Ensure error text is also readable */
+        font-size: 0.8rem;
+    }
+
+    ::placeholder { color: #6b7280; opacity: 1; }
+    
+    select, input { font-family: 'Poppins', sans-serif; }
+    select:invalid { color: #6b7280; }
+    option { color: #111827; } /* Dark text for options on light dropdown */
+    
+  </style>
+</head>
+<body class="bg-black text-white antialiased">
+  <section class="min-h-screen flex flex-col items-center justify-center p-4">
+    <div class="text-center mb-6">
+      <h1 id="main-header" class="text-3xl font-bold mb-2">Join GamiCon</h1>
+      <p id="subtitle-text" class="text-base text-gray-400">Create your account to start</p>
+    </div>
+    <section class="max-w-md w-full mx-auto bg-gray-800 p-8 border-4 border-gray-700 rounded-lg">
+      <div class="text-center mb-6">
+          <img src="logo/logo1.png" alt="GamiCon Logo" class="mx-auto h-24 w-24">
+      </div>
+      <form id="auth-form" class="space-y-4">
+        <div>
+          <label id="email-label" class="block mb-2 text-sm font-semibold">Email</label>
+          <input id="email-input" type="email" placeholder="player@email.com" required class="w-full p-3 bg-black text-white border-2 border-gray-600 focus:outline-none focus:border-blue-500 rounded-md">
+        </div>
+        <div id="username-field">
+          <label class="block mb-2 text-sm font-semibold">Username</label>
+          <input id="username-input" type="text" placeholder="PlayerOne" required class="w-full p-3 bg-black text-white border-2 border-gray-600 focus:outline-none focus:border-blue-500 rounded-md">
+        </div>
+        <div id="birthday-field">
+          <label class="block mb-2 text-sm font-semibold">Birthday</label>
+          <input id="birthday-input" type="date" required class="w-full p-3 bg-black text-white border-2 border-gray-600 focus:outline-none focus:border-blue-500 rounded-md" style="color-scheme: dark;">
+        </div>
+        <div id="gender-field">
+            <label class="block mb-2 text-sm font-semibold">Gender</label>
+            <select id="gender-select" required class="w-full p-3 bg-black text-white border-2 border-gray-600 focus:outline-none focus:border-blue-500 rounded-md">
+                <option value="" selected disabled hidden>Select your gender...</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="non-binary">Non-binary</option>
+            </select>
+        </div>
+        <div>
+            <label class="block mb-2 text-sm font-semibold">Password</label>
+            <input id="password" type="password" placeholder="********" required class="w-full p-3 bg-black text-white border-2 border-gray-600 focus:outline-none focus:border-blue-500 rounded-md">
+        </div>
+        <div id="confirm-password-field">
+            <label class="block mb-2 text-sm font-semibold">Confirm Password</label>
+            <input id="confirm-password" type="password" placeholder="********" required class="w-full p-3 bg-black text-white border-2 border-gray-600 focus:outline-none focus:border-blue-500 rounded-md">
+            <p class="text-xs text-gray-500 mt-2">*must match password*</p>
+        </div>
+        
+        <div id="show-password-container" class="flex items-center space-x-3 pt-2">
+            <input id="show-password-checkbox" type="checkbox" class="h-4 w-4 bg-gray-900 border-gray-600 rounded-sm">
+            <label for="show-password-checkbox" class="text-sm text-gray-300 cursor-pointer">Show Password</label>
+        </div>
+
+        <a id="form-action-button" href="#" class="block w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 text-center transition-all btn-8bit !mt-8 rounded-md text-lg">Sign Up</a>
+      </form>
+      <div class="text-center mt-6">
+        <a href="index.html" class="text-sm text-blue-400 hover:underline">.. Back to Home</a>
+      </div>
+    </section>
+  </section>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const urlParams = new URLSearchParams(window.location.search);
+      const action = urlParams.get('action');
+      
+      const mainHeader = document.getElementById('main-header');
+      const actionButton = document.getElementById('form-action-button');
+      const subtitle = document.getElementById('subtitle-text');
+      const emailLabel = document.getElementById('email-label');
+      const emailInput = document.getElementById('email-input');
+      const usernameField = document.getElementById('username-field');
+      const usernameInput = document.getElementById('username-input');
+      const birthdayField = document.getElementById('birthday-field');
+      const birthdayInput = document.getElementById('birthday-input');
+      const genderField = document.getElementById('gender-field');
+      const genderSelect = document.getElementById('gender-select');
+      const passwordInput = document.getElementById('password');
+      const confirmPasswordField = document.getElementById('confirm-password-field');
+      const confirmPasswordInput = document.getElementById('confirm-password');
+      const showPasswordCheckbox = document.getElementById('show-password-checkbox');
+
+      showPasswordCheckbox.addEventListener('change', () => {
+          const isChecked = showPasswordCheckbox.checked;
+          passwordInput.type = isChecked ? 'text' : 'password';
+          if (confirmPasswordInput) { confirmPasswordInput.type = isChecked ? 'text' : 'password'; }
+      });
+
+      if (action === 'login') {
+        mainHeader.textContent = 'Welcome Back';
+        subtitle.textContent = 'Log in to continue';
+        emailLabel.textContent = 'Email / Username';
+        emailInput.placeholder = 'your_email / username';
+        actionButton.textContent = 'Log In';
+        
+        [usernameField, birthdayField, genderField, confirmPasswordField].forEach(field => field.style.display = 'none');
+
+        const originalLoginPlaceholder = emailInput.placeholder;
+        const originalPasswordPlaceholder = passwordInput.placeholder;
+
+        actionButton.addEventListener('click', (event) => {
+            event.preventDefault();
+            let isLoginValid = true;
+
+            emailInput.classList.remove('input-error');
+            passwordInput.classList.remove('input-error');
+            emailInput.placeholder = originalLoginPlaceholder;
+            passwordInput.placeholder = originalPasswordPlaceholder;
+
+            if (emailInput.value.trim() === '') {
+                isLoginValid = false;
+                emailInput.classList.add('input-error');
+                emailInput.placeholder = '* This field is required *';
+            }
+            if (passwordInput.value === '') {
+                isLoginValid = false;
+                passwordInput.classList.add('input-error');
+                passwordInput.placeholder = '* This field is required *';
+            }
+            if (isLoginValid) {
+                window.location.href = 'main1.html';
+            }
+        });
+
+      } else {
+        actionButton.href = 'tos.html';
+        localStorage.removeItem('gamicon_username');
+        
+        const originalPlaceholders = {
+            email: emailInput.placeholder,
+            username: usernameInput.placeholder,
+            password: passwordInput.placeholder,
+            confirmPassword: confirmPasswordInput.placeholder,
+        };
+
+        birthdayInput.addEventListener('focus', () => { birthdayInput.type = 'date'; });
+
+        actionButton.addEventListener('click', (event) => {
+          event.preventDefault(); 
+          let isValid = true, isAgeValid = true;
+
+          [emailInput, usernameInput, birthdayInput, genderSelect, passwordInput, confirmPasswordInput].forEach(input => input.classList.remove('input-error'));
+          emailInput.placeholder = originalPlaceholders.email;
+          usernameInput.placeholder = originalPlaceholders.username;
+          passwordInput.placeholder = originalPlaceholders.password;
+          confirmPasswordInput.placeholder = originalPlaceholders.confirmPassword;
+          birthdayInput.type = 'date';
+
+          if (emailInput.value.trim() === '') { isValid = false; emailInput.classList.add('input-error'); emailInput.placeholder = '* Email is required *'; }
+          if (usernameInput.value.trim() === '') { isValid = false; usernameInput.classList.add('input-error'); usernameInput.placeholder = '* Username is required *'; }
+          if (genderSelect.value === '') { isValid = false; genderSelect.classList.add('input-error'); }
+          if (passwordInput.value === '' || passwordInput.value !== confirmPasswordInput.value) {
+            isValid = false;
+            passwordInput.classList.add('input-error'); confirmPasswordInput.classList.add('input-error');
+            passwordInput.value = ''; confirmPasswordInput.value = '';
+            passwordInput.placeholder = '* Passwords do not match *'; confirmPasswordInput.placeholder = '* Passwords do not match *';
+          }
+          
+          if (birthdayInput.value === '') {
+            isAgeValid = false;
+          } else {
+            const today = new Date();
+            const birthDate = new Date(birthdayInput.value);
+            today.setHours(0, 0, 0, 0);
+            let age = today.getFullYear() - birthDate.getFullYear();
+            const m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+            if (birthDate.getTime() > today.getTime() || age < 18) { isAgeValid = false; }
+          }
+          
+          if (!isAgeValid) {
+            isValid = false;
+            birthdayInput.classList.add('input-error');
+            birthdayInput.type = 'text';
+            birthdayInput.value = '';
+            birthdayInput.placeholder = '* Must be 18 or older *';
+          }
+
+          if (isValid) {
+            localStorage.setItem('gamicon_username', usernameInput.value);
+            window.location.href = actionButton.href; 
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
