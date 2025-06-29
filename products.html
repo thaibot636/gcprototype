@@ -1,186 +1,186 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Supplies – GamiCon</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg-color: #0a0a1a; --text-color: #e2e8f0; --border-color: #4b5563; 
-      --ui-bg: #111827; --accent: #4ade80; /* Neon Green */ --legendary: #f59e0b;
-    }
-    /* --- FONT STRATEGY --- */
-    body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
-    .font-8bit, h1, .data-pack h3, .pack-price, .value-tag, .btn-purchase { font-family: 'Press Start 2P', cursive; }
-    header, header a, header button { font-family: 'Poppins', sans-serif; }
-    .brand-logo { font-family: 'Press Start 2P', cursive; }
-    
-    /* === MODIFIED: Standard Underline Effect === */
-    .pixel-underline { position: relative; display: inline-block; padding-bottom: 5px; }
-    .pixel-underline::after { 
-        content: ''; 
-        position: absolute; 
-        left: 0; 
-        bottom: 0; 
-        width: 100%; 
-        height: 2px; /* Standard underline thickness */
-        background-color: white; /* Solid white color */
-        transform: scaleX(0); 
-        transform-origin: center; 
-        transition: transform 0.2s ease-out; 
-    }
-    .pixel-underline:hover::after { transform: scaleX(1); }
-
-    .bg-grid {
-      position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
-      background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-      background-size: 35px 35px; animation: move-grid 2s linear infinite;
-    }
-    @keyframes move-grid { from { background-position: 0 0; } to { background-position: 35px 35px; } }
-    
-    .data-pack {
-        background-color: var(--ui-bg);
-        border: 2px solid var(--border-color);
-        display: flex; flex-direction: column; justify-content: space-between;
-        padding: 1.5rem;
-        transition: all 0.2s ease-out;
-    }
-    .data-pack:hover {
-        transform: translateY(-8px);
-        border-color: var(--accent);
-        box-shadow: 0 0 15px var(--accent);
-    }
-    .pack-price {
-        font-size: 2.5rem;
-        color: var(--accent);
-        text-shadow: 0 0 10px var(--accent);
-    }
-    
-    .legendary-pack {
-        border-color: var(--legendary);
-        transform: scale(1.05);
-        box-shadow: 0 0 20px var(--legendary);
-        animation: pulse-legendary 2.5s infinite;
-    }
-    .legendary-pack:hover {
-        border-color: var(--legendary);
-        box-shadow: 0 0 25px var(--legendary), 0 0 35px var(--legendary);
-    }
-    .legendary-pack .pack-price { color: var(--legendary); text-shadow: 0 0 10px var(--legendary); }
-    @keyframes pulse-legendary { 0%, 100% { box-shadow: 0 0 15px var(--legendary); } 50% { box-shadow: 0 0 25px var(--legendary); } }
-
-    .value-tag {
-        color: var(--legendary);
-        margin-bottom: 1.5rem;
-        animation: blink-value 1s infinite;
-        font-size: 0.8rem;
-    }
-    @keyframes blink-value { 50% { opacity: 0.6; } }
-
-    .btn-purchase {
-        background: var(--accent);
-        color: var(--bg-color);
-        padding: 0.75rem; text-align: center;
-        margin-top: 1.5rem; text-transform: uppercase;
-        transition: all 0.2s;
-    }
-    .btn-purchase:hover { filter: brightness(1.2); }
-    .legendary-pack .btn-purchase { background: var(--legendary); }
-
-  </style>
-</head>
-<body class="antialiased">
-    <div class="bg-grid"></div>
-  <header class="fixed top-0 left-0 w-full z-50">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center space-x-8">
-          <a href="index.html" class="flex items-center"><img src="logo/logo1.png" alt="GamiCon Logo" class="h-8 mr-2"><span class="text-xl font-bold text-white brand-logo">GamiCon</span></a>
-          <div class="hidden md:flex items-center space-x-8">
-            <a href="index.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors pixel-underline" data-translate-key="navHome">Home</a>
-            <a href="products.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors pixel-underline" data-translate-key="navProducts">Products</a>
-          </div>
-        </div>
-        <div class="flex items-center">
-          <div class="hidden md:flex items-center space-x-2">
-            <button class="lang-toggle text-sm font-semibold text-gray-400 hover:text-white px-3 py-2 transition-colors">ไทย</button>
-            <a href="loading.html?action=login" class="text-sm font-semibold text-gray-300 hover:text-white px-3 py-2 transition-colors" data-translate-key="login">Log In</a>
-            <a href="loading.html?action=signup" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 transition-colors rounded-md" data-translate-key="signup">Sign Up</a>
-          </div>
-          <div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-gray-400 hover:text-white" data-translate-key="menu">MENU</button></div>
-        </div>
-      </div>
-    </div>
-    <div id="mobile-menu" class="md:hidden hidden bg-black border-t-2 border-gray-800">
-      <div class="p-4 space-y-4">
-        <a href="index.html" class="block text-base text-gray-300" data-translate-key="navHome">Home</a>
-        <a href="products.html" class="block text-base text-gray-300" data-translate-key="navProducts">Products</a>
-        <a href="loading.html?action=login" class="block text-base text-gray-300" data-translate-key="login">Log In</a>
-        <a href="loading.html?action=signup" class="block text-base text-gray-300" data-translate-key="signup">Sign Up</a>
-        <a href="#" class="lang-toggle block text-base text-blue-400">ไทย</a>
-      </div>
-    </div>
-  </header>
-
-  <main class="pt-24 pb-12">
-    <section class="max-w-6xl mx-auto text-center px-4">
-      <h1 class="text-2xl md:text-3xl mb-4" data-translate-key="productsTitle"></h1>
-      <p class="text-lg max-w-3xl mx-auto leading-relaxed text-gray-400 mb-16" data-translate-key="productsSubtitle"></p>
+  <!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Supplies – GamiCon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+      :root {
+        --bg-color: #0a0a1a; --text-color: #e2e8f0; --border-color: #4b5563; 
+        --ui-bg: #111827; --accent: #4ade80; /* Neon Green */ --legendary: #f59e0b;
+      }
+      /* --- FONT STRATEGY --- */
+      body { font-family: 'Poppins', sans-serif; background-color: var(--bg-color); color: var(--text-color); }
+      .font-8bit, h1, .data-pack h3, .pack-price, .value-tag, .btn-purchase { font-family: 'Press Start 2P', cursive; }
+      header, header a, header button { font-family: 'Poppins', sans-serif; }
+      .brand-logo { font-family: 'Press Start 2P', cursive; }
       
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 items-stretch">
-        <div class="data-pack">
-            <div>
-              <h3 class="text-sm mb-6" data-translate-key="planFortnight"></h3>
-              <p class="pack-price mb-2">25</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span> <span class="hidden" data-translate-key="perMonth"></span><span data-translate-key="week"></span></p>
+      /* === MODIFIED: Standard Underline Effect === */
+      .pixel-underline { position: relative; display: inline-block; padding-bottom: 5px; }
+      .pixel-underline::after { 
+          content: ''; 
+          position: absolute; 
+          left: 0; 
+          bottom: 0; 
+          width: 100%; 
+          height: 2px; /* Standard underline thickness */
+          background-color: white; /* Solid white color */
+          transform: scaleX(0); 
+          transform-origin: center; 
+          transition: transform 0.2s ease-out; 
+      }
+      .pixel-underline:hover::after { transform: scaleX(1); }
+
+      .bg-grid {
+        position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+        background-image: linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+        background-size: 35px 35px; animation: move-grid 2s linear infinite;
+      }
+      @keyframes move-grid { from { background-position: 0 0; } to { background-position: 35px 35px; } }
+      
+      .data-pack {
+          background-color: var(--ui-bg);
+          border: 2px solid var(--border-color);
+          display: flex; flex-direction: column; justify-content: space-between;
+          padding: 1.5rem;
+          transition: all 0.2s ease-out;
+      }
+      .data-pack:hover {
+          transform: translateY(-8px);
+          border-color: var(--accent);
+          box-shadow: 0 0 15px var(--accent);
+      }
+      .pack-price {
+          font-size: 2.5rem;
+          color: var(--accent);
+          text-shadow: 0 0 10px var(--accent);
+      }
+      
+      .legendary-pack {
+          border-color: var(--legendary);
+          transform: scale(1.05);
+          box-shadow: 0 0 20px var(--legendary);
+          animation: pulse-legendary 2.5s infinite;
+      }
+      .legendary-pack:hover {
+          border-color: var(--legendary);
+          box-shadow: 0 0 25px var(--legendary), 0 0 35px var(--legendary);
+      }
+      .legendary-pack .pack-price { color: var(--legendary); text-shadow: 0 0 10px var(--legendary); }
+      @keyframes pulse-legendary { 0%, 100% { box-shadow: 0 0 15px var(--legendary); } 50% { box-shadow: 0 0 25px var(--legendary); } }
+
+      .value-tag {
+          color: var(--legendary);
+          margin-bottom: 1.5rem;
+          animation: blink-value 1s infinite;
+          font-size: 0.8rem;
+      }
+      @keyframes blink-value { 50% { opacity: 0.6; } }
+
+      .btn-purchase {
+          background: var(--accent);
+          color: var(--bg-color);
+          padding: 0.75rem; text-align: center;
+          margin-top: 1.5rem; text-transform: uppercase;
+          transition: all 0.2s;
+      }
+      .btn-purchase:hover { filter: brightness(1.2); }
+      .legendary-pack .btn-purchase { background: var(--legendary); }
+
+    </style>
+  </head>
+  <body class="antialiased">
+      <div class="bg-grid"></div>
+    <header class="fixed top-0 left-0 w-full z-50">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-between h-16">
+          <div class="flex items-center space-x-8">
+            <a href="index.html" class="flex items-center"><img src="logo/logo1.png" alt="GamiCon Logo" class="h-8 mr-2"><span class="text-xl font-bold text-white brand-logo">GamiCon</span></a>
+            <div class="hidden md:flex items-center space-x-8">
+              <a href="index.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors pixel-underline" data-translate-key="navHome">Home</a>
+              <a href="products.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors pixel-underline" data-translate-key="navProducts">Products</a>
             </div>
-            <a href="#" class="btn-purchase" data-translate-key="select"></a>
-        </div>
-        <div class="data-pack">
-            <div>
-              <h3 class="text-sm mb-6" data-translate-key="plan1Month"></h3>
-              <p class="pack-price mb-2">39</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span><span data-translate-key="perMonth"></span></p>
+          </div>
+          <div class="flex items-center">
+            <div class="hidden md:flex items-center space-x-2">
+              <button class="lang-toggle text-sm font-semibold text-gray-400 hover:text-white px-3 py-2 transition-colors">ไทย</button>
+              <a href="loading.html?action=login" class="text-sm font-semibold text-gray-300 hover:text-white px-3 py-2 transition-colors" data-translate-key="login">Log In</a>
+              <a href="loading.html?action=signup" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 transition-colors rounded-md" data-translate-key="signup">Sign Up</a>
             </div>
-            <a href="#" class="btn-purchase" data-translate-key="select"></a>
-        </div>
-        <div class="data-pack">
-            <div>
-              <h3 class="text-sm mb-6" data-translate-key="plan3Months"></h3>
-              <p class="pack-price mb-2">99</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span><span data-translate-key="perMonth"></span></p>
-            </div>
-            <a href="#" class="btn-purchase" data-translate-key="select"></a>
-        </div>
-        <div class="data-pack">
-            <div>
-              <h3 class="text-sm mb-6" data-translate-key="plan6Months"></h3>
-              <p class="pack-price mb-2">169</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span><span data-translate-key="perMonth"></span></p>
-            </div>
-            <a href="#" class="btn-purchase" data-translate-key="select"></a>
-        </div>
-        <div class="data-pack legendary-pack lg:col-span-1 sm:col-span-2">
-            <div>
-              <p class="value-tag" data-translate-key="bestValue"></p>
-              <h3 class="text-sm mb-6" data-translate-key="plan12Months"></h3>
-              <p class="pack-price mb-2">240</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span><span data-translate-key="perMonth"></span></p>
-            </div>
-            <a href="#" class="btn-purchase" data-translate-key="select"></a>
+            <div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-gray-400 hover:text-white" data-translate-key="menu">MENU</button></div>
+          </div>
         </div>
       </div>
-    </section>
-  </main>
+      <div id="mobile-menu" class="md:hidden hidden bg-black border-t-2 border-gray-800">
+        <div class="p-4 space-y-4">
+          <a href="index.html" class="block text-base text-gray-300" data-translate-key="navHome">Home</a>
+          <a href="products.html" class="block text-base text-gray-300" data-translate-key="navProducts">Products</a>
+          <a href="loading.html?action=login" class="block text-base text-gray-300" data-translate-key="login">Log In</a>
+          <a href="loading.html?action=signup" class="block text-base text-gray-300" data-translate-key="signup">Sign Up</a>
+          <a href="#" class="lang-toggle block text-base text-blue-400">ไทย</a>
+        </div>
+      </div>
+    </header>
 
-  <footer class="bg-black py-6 text-center text-gray-500 text-sm">
-      <p data-translate-key="footer"></p>
-  </footer>
-  
-  <script>
-    document.getElementById('mobile-menu-button').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
-  </script>
-  <script src="translation.js"></script>
-</body>
-</html>
+    <main class="pt-24 pb-12">
+      <section class="max-w-6xl mx-auto text-center px-4">
+        <h1 class="text-2xl md:text-3xl mb-4" data-translate-key="productsTitle"></h1>
+        <p class="text-lg max-w-3xl mx-auto leading-relaxed text-gray-400 mb-16" data-translate-key="productsSubtitle"></p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 items-stretch">
+          <div class="data-pack">
+              <div>
+                <h3 class="text-sm mb-6" data-translate-key="planFortnight"></h3>
+                <p class="pack-price mb-2">25</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span> <span class="hidden" data-translate-key="perMonth"></span><span data-translate-key="week"></span></p>
+              </div>
+              <a href="#" class="btn-purchase" data-translate-key="select"></a>
+          </div>
+          <div class="data-pack">
+              <div>
+                <h3 class="text-sm mb-6" data-translate-key="plan1Month"></h3>
+                <p class="pack-price mb-2">39</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span><span data-translate-key="perMonth"></span></p>
+              </div>
+              <a href="#" class="btn-purchase" data-translate-key="select"></a>
+          </div>
+          <div class="data-pack">
+              <div>
+                <h3 class="text-sm mb-6" data-translate-key="plan3Months"></h3>
+                <p class="pack-price mb-2">99</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span><span data-translate-key="perMonth"></span></p>
+              </div>
+              <a href="#" class="btn-purchase" data-translate-key="select"></a>
+          </div>
+          <div class="data-pack">
+              <div>
+                <h3 class="text-sm mb-6" data-translate-key="plan6Months"></h3>
+                <p class="pack-price mb-2">169</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span><span data-translate-key="perMonth"></span></p>
+              </div>
+              <a href="#" class="btn-purchase" data-translate-key="select"></a>
+          </div>
+          <div class="data-pack legendary-pack lg:col-span-1 sm:col-span-2">
+              <div>
+                <p class="value-tag" data-translate-key="bestValue"></p>
+                <h3 class="text-sm mb-6" data-translate-key="plan12Months"></h3>
+                <p class="pack-price mb-2">240</p><p class="text-xs text-gray-400"><span data-translate-key="baht"></span><span data-translate-key="perMonth"></span></p>
+              </div>
+              <a href="#" class="btn-purchase" data-translate-key="select"></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-black py-6 text-center text-gray-500 text-sm">
+        <p data-translate-key="footer"></p>
+    </footer>
+    
+    <script>
+      document.getElementById('mobile-menu-button').addEventListener('click', () => {
+        document.getElementById('mobile-menu').classList.toggle('hidden');
+      });
+    </script>
+    <script src="translation.js"></script>
+  </body>
+  </html>
