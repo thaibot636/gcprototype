@@ -28,6 +28,105 @@
     .feature-card:hover { border-color: #3b82f6; }
     .feature-card:hover h3 { color: #3b82f6; }
     .feature-card:hover img { transform: scale(1.05); }
+
+    /* === GAMER TRIGGER SIGN-UP SECTION === */
+    #signup {
+        background: #0a0a1a;
+        position: relative;
+        overflow: hidden;
+        border-top: 2px solid #06b6d4;
+        border-bottom: 2px solid #06b6d4;
+    }
+    /* Background Layers */
+    #signup::before {
+        content: '';
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background-image: linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+        background-size: 30px 30px;
+        animation: move-grid-fast 1s linear infinite;
+        z-index: 0;
+    }
+    #signup::after {
+        content: '';
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(180deg, transparent, #0a0a1a 90%);
+        z-index: 1;
+    }
+    @keyframes move-grid-fast { from { background-position: 0 0; } to { background-position: 30px 30px; } }
+
+    /* HUD Corner Brackets */
+    .hud-corner::before, .hud-corner::after {
+        content: '';
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        border: 3px solid #06b6d4;
+        animation: glitch-corners 2s infinite alternate;
+    }
+    .hud-corner:nth-of-type(1)::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+    .hud-corner:nth-of-type(1)::after { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+    .hud-corner:nth-of-type(2)::before { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+    .hud-corner:nth-of-type(2)::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+    @keyframes glitch-corners { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+
+    /* Pulsing, Glitching Title */
+    @keyframes critical-alert {
+        0%, 100% { color: white; text-shadow: none; }
+        50% { color: #22d3ee; text-shadow: 0 0 10px #06b6d4, 0 0 20px #06b6d4; }
+    }
+    #signup h2 { animation: critical-alert 1.5s infinite; }
+    
+    /* Neon Button */
+    #signup .final-cta {
+        background-color: transparent;
+        color: #22d3ee;
+        border: 2px solid #06b6d4;
+        border-radius: 0;
+        transition: all 0.2s ease-out;
+        box-shadow: 0 0 10px rgba(6, 182, 212, 0.5);
+    }
+    #signup .final-cta:hover {
+        background: #06b6d4;
+        color: #0a0a1a;
+        transform: translate(0, -5px) scale(1.05);
+        box-shadow: 0 0 20px #06b6d4, 0 0 30px #06b6d4;
+    }
+    
+    /* === SPACESHIP ANIMATION === */
+    .spaceship {
+        position: absolute;
+        width: 40px;
+        height: 20px;
+        /* Embedded SVG for a sharp, scalable pixel-art ship */
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAxMiI+PHBhdGggZmlsbD0iIzIyZDNlZSIgZD0iTTAgNCAyNCAwIDE4IDYgMjQgMTIgMCA4eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik00IDVsNi0xIDYgMSA0IDItMjAgMHoiLz48L3N2Zz4=");
+        background-size: contain;
+        background-repeat: no-repeat;
+        image-rendering: pixelated;
+        z-index: 5; /* Behind content, in front of bg */
+    }
+    
+    /* Fighter ship animation (top, faster) */
+    .spaceship.fighter {
+        top: 20%;
+        animation: fly-by-ltr 8s linear infinite;
+        animation-delay: 1s;
+    }
+    @keyframes fly-by-ltr { from { left: -10%; } to { left: 110%; } }
+    
+    /* Larger ship animation (bottom, slower, different angle) */
+    .spaceship.cruiser {
+        width: 60px; /* larger ship */
+        height: 30px;
+        bottom: 25%;
+        transform: scaleX(-1); /* Flips it to fly right-to-left */
+        animation: fly-by-rtl 14s linear infinite;
+        animation-delay: 5s;
+        opacity: 0.7; /* Further in the background */
+    }
+    @keyframes fly-by-rtl { from { right: -10%; } to { right: 110%; } }
+
+
   </style>
 </head>
 <body class="bg-black text-white antialiased">
@@ -90,10 +189,17 @@
     </div>
   </section>
 
-  <section class="py-20 bg-blue-800 text-center border-t-4 border-blue-900" id="signup">
-    <h2 class="text-3xl font-bold mb-4" data-translate-key="ctaTitle">Ready to find your buddy?</h2>
-    <p class="text-lg mb-8" data-translate-key="ctaSubtitle">Sign up for early access!</p>
-    <a href="loading.html?action=signup" class="inline-block bg-white text-blue-800 px-10 py-4 font-bold transition-all btn-8bit border-black text-xl font-8bit" data-translate-key="signup">Sign Up</a>
+  <!-- === GAMER TRIGGER SIGN UP SECTION w/ SPACESHIPS === -->
+  <section class="py-20 text-center" id="signup">
+      <div class="hud-corner"></div>
+      <div class="hud-corner"></div>
+      <div class="spaceship fighter"></div>
+      <div class="spaceship cruiser"></div>
+      <div class="relative z-10">
+          <h2 class="text-3xl font-8bit mb-4" data-translate-key="ctaTitle">Ready to find your buddy?</h2>
+          <p class="text-lg mb-8 text-gray-400" data-translate-key="ctaSubtitle">Sign up for early access!</p>
+          <a href="loading.html?action=signup" class="inline-block px-10 py-4 font-bold text-xl font-8bit final-cta" data-translate-key="signup">Sign Up</a>
+      </div>
   </section>
       
   <footer class="bg-gray-900 py-6 text-center text-gray-500 text-sm" data-translate-key="footer">© 2025 GamiCon. All rights reserved.</footer>
