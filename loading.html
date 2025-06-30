@@ -8,10 +8,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        /* === MODIFIED: Colors updated to match website theme === */
         :root {
-            --glow-color: #00ffae;
-            --primary-text: #ffffff;
-            --bg-color: #0d0d1a;
+            --glow-color: #3b82f6;      /* Neon Blue */
+            --primary-text: #ffffff;    /* White */
+            --bg-color: #111827;        /* Darkest Background */
+            --ground-color: #374151;    /* Border Color */
+            --subtle-text: #9ca3af;     /* Subtle Text Color */
         }
 
         body {
@@ -51,7 +54,7 @@
             width: 32px; height: 32px;
             background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMAAAAAgCAYAAABv6sJGAAAAAXNSR0IArs4c6QAAAE9JREFUeJztwQEBAAAAgiD/r25IQAEAAP8L0CpArQDUClArQK0C1ApQK0CtAtQKUOtAtQJQKUANAa0A1ApQK0CtAtQKUANAawE92gAFTbkZkQAAAABJRU5ErkJggg==');
             position: absolute;
-            bottom: 65px; /* Raised to be above new status area */
+            bottom: 65px; 
             left: 50%;
             transform: translateX(-50%) scale(3);
             image-rendering: pixelated;
@@ -60,14 +63,13 @@
 
         .ground {
             position: absolute;
-            bottom: 70px; /* Raised */
+            bottom: 70px;
             left: 0;
             width: 100%;
             height: 5px;
-            background: #484860;
+            background: var(--ground-color);
         }
 
-        /* Container for all text elements */
         .text-container {
             position: absolute;
             top: 45%;
@@ -78,11 +80,10 @@
             width: 90%;
         }
         
-        /* The ASCII ART LOGO */
         #logo {
             font-size: clamp(10px, 4vw, 16px);
             color: var(--glow-color);
-            text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color);
+            text-shadow: 0 0 5px var(--glow-color), 0 0 10px rgba(59, 130, 246, 0.5); /* Glow matches neon blue */
             white-space: pre;
             margin-bottom: 2.5rem;
             animation: text-flicker 3s infinite alternate;
@@ -91,7 +92,7 @@
         #percentage-text {
             font-size: 3rem;
             color: var(--primary-text);
-            text-shadow: 0 0 10px var(--glow-color), 0 0 20px var(--glow-color);
+            text-shadow: 0 0 10px var(--glow-color), 0 0 20px rgba(59, 130, 246, 0.5);
             margin: 0;
         }
         
@@ -99,7 +100,7 @@
             height: 1.5rem;
             font-size: 1rem;
             margin-top: 1rem;
-            color: #ccc;
+            color: var(--subtle-text);
             letter-spacing: 2px;
         }
         
@@ -114,8 +115,12 @@
         }
         
         @keyframes text-flicker {
-            from { text-shadow: 0 0 8px var(--glow-color), 0 0 15px var(--glow-color); }
-            to { text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color); }
+             from {
+                text-shadow: 0 0 8px var(--glow-color), 0 0 15px rgba(59, 130, 246, 0.6);
+            }
+            to {
+                text-shadow: 0 0 5px var(--glow-color), 0 0 10px rgba(59, 130, 246, 0.4);
+            }
         }
     </style>
 </head>
@@ -175,9 +180,12 @@
                 percentageText.textContent = `${Math.floor(currentPercent)}%`;
             }, updateInterval);
 
-            let destinationUrl = `index2.html?action=${urlParams.get('action') || 'signup'}`;
+            // Default to main1.html if no other destination is provided
+            let destinationUrl = "main1.html";
             if (urlParams.has('next')) {
                 destinationUrl = urlParams.get('next');
+            } else if (urlParams.has('action')) {
+                destinationUrl = `index2.html?action=${urlParams.get('action')}`;
             }
             
             setTimeout(() => {
