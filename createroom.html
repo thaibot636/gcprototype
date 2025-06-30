@@ -1,260 +1,257 @@
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Create Room - GamiCon</title>
-        <script src="https://cdn.tailwindcss.com"></script>
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-        <style>
-            :root, body.theme-default {
-                --bg-body: #000; --text-color: white; --text-subtle: #9ca3af; --sidebar-bg: #111827; --sidebar-border: #374151; --main-bg: #1f2937; --link-color: #9ca3af; --link-hover-bg: #374151; --link-hover-text: white; --link-active-bg: #3b82f6; --link-active-text: white; --form-bg: #111827; --neon-blue: #3b82f6; --neon-blue-glow: rgba(59, 130, 246, 0.5); --btn-secondary-bg: #4b5563; --btn-secondary-hover-bg: #6b7280; --room-card-bg: #273344; --room-card-hover-bg: #324053; --popup-bg: #111827; --popup-border: #4b5563; --popup-separator: #374151; --popup-hover-bg: #3b82f6; --popup-hover-text: white;
-            }
-            body.theme-light-gray {
-                --bg-body: #f4f4f5; --text-color: #334155; --text-subtle: #64748b; --sidebar-bg: #ffffff; --sidebar-border: #e5e7eb; --main-bg: #f4f4f5; --link-color: #475569; --link-hover-bg: #f3f4f6; --link-hover-text: #1e293b; --link-active-bg: #2563eb; --link-active-text: white; --form-bg: #ffffff; --neon-blue: #2563eb; --neon-blue-glow: rgba(37, 99, 235, 0.4); --btn-secondary-bg: #e5e7eb; --btn-secondary-hover-bg: #d1d5db; --room-card-bg: #ffffff; --room-card-hover-bg: #f9fafb; --popup-bg: #ffffff; --popup-border: #e5e7eb; --popup-separator: #f3f4f6; --popup-hover-text: white;
-            }
-            body.theme-true-dark {
-                --bg-body: #000; --text-color: #fff; --text-subtle: #aaa; --sidebar-bg: #101010; --sidebar-border: #333; --main-bg: #000; --link-color: #aaa; --link-hover-bg: #222; --link-hover-text: #fff; --link-active-bg: #fff; --link-active-text: #000; --form-bg: #181818; --neon-blue: #fff; --neon-blue-glow: rgba(255, 255, 255, 0.5); --btn-secondary-bg: #333; --btn-secondary-hover-bg: #444; --room-card-bg: #181818; --room-card-hover-bg: #222; --popup-bg: #181818; --popup-border: #333; --popup-separator: #333; --popup-hover-bg: #fff; --popup-hover-text: #000;
-            }
-            body { font-family: 'Poppins', sans-serif; background-color: var(--bg-body); color: var(--text-color); }
-            h1, h2, h3, h4, h5, h6, .form-label { font-family: 'Press Start 2P', cursive; }
-            aside { background-color: var(--sidebar-bg); } main { background-color: var(--main-bg); }
-            .nav-link { display: flex; align-items: center; padding: 0.75rem 0.5rem; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; border-radius: 4px; color: var(--link-color); }
-            .nav-link:hover { background-color: var(--link-hover-bg); color: var(--link-hover-text); }
-            .nav-link.active { background-color: var(--link-active-bg); color: var(--link-active-text); }
-            .nav-menu-trigger { justify-content: space-between; }
-            .nav-menu-trigger .chevron { transition: transform 0.2s ease-in-out; }
-            .nav-menu.is-open > .nav-menu-trigger .chevron { transform: rotate(180deg); }
-            .nav-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
-            .nav-menu.is-open .nav-submenu { max-height: 200px; }
-            .nav-submenu-link { padding-left: 2rem !important; font-size: 0.8rem !important; }
-            .nav-submenu-link .w-5 { width: 1.1rem; height: 1.1rem; }
-            .form-section { background-color: var(--form-bg); border: 1px solid var(--sidebar-border); padding: 1.5rem; border-radius: 8px; }
-            .form-label { font-size: 0.75rem; color: var(--text-subtle); letter-spacing: 1px; margin-bottom: 1rem; display: block;}
-            .custom-select { background-color: var(--sidebar-bg); border: 1px solid var(--sidebar-border); color: var(--text-color); border-radius: 6px; padding: 0.5rem 0.75rem; }
-            .radio-option input[type="radio"] { opacity: 0; width: 0; height: 0; position: absolute; }
-            .radio-option span { display: block; padding: 0.5rem 1rem; border: 2px solid var(--sidebar-border); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; text-align: center; }
-            .radio-option input[type="radio"]:checked + span { border-color: var(--neon-blue); background-color: var(--neon-blue); color: var(--link-active-text); box-shadow: 0 0 10px var(--neon-blue-glow); }
-            .btn { padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; text-align: center; transition: all 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;}
-            .btn-primary { background-color: var(--link-active-bg); color: var(--link-active-text); }
-            .btn-secondary { background-color: var(--btn-secondary-bg); color: var(--text-color); }
-            .btn-danger { background-color: #ef4444; color: white; }
-            #profile-trigger { cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
-            #profile-trigger:hover { background-color: var(--link-hover-bg); }
-            .status-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0; border: 3px solid var(--sidebar-bg); }
-            .status-online { background-color: #22c55e; } .status-idle { background-color: #f59e0b; } .status-dnd { background-color: #ef4444; } .status-invisible { background-color: #6b7280; }
-            #status-popup { position: fixed; border-radius: 8px; width: 240px; padding: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 50; background-color: var(--popup-bg); border: 1px solid var(--popup-border); color: var(--text-color); }
-            .popup-header { padding: 0.75rem; } .popup-username { font-size: 1rem; font-weight: 700; } .popup-status-text { font-size: 0.8rem; color: var(--text-subtle); } .popup-separator { margin: 0.5rem 0; border-color: var(--popup-separator); }
-            .popup-option { display: flex; align-items: center; padding: 0.75rem; border-radius: 4px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-            .popup-option .status-dot { position: static; border: none; margin-right: 0.75rem; }
-            .popup-option:hover { background-color: var(--popup-hover-bg); color: var(--popup-hover-text); }
-        </style>
-    </head>
-    <body class="theme-default">
-        <div class="flex min-h-screen">
-            <!-- Sidebar -->
-            <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
-                <nav class="space-y-2">
-                    <div class="nav-menu is-open" id="dashboard-menu">
-                        <a href="main1.html" class="nav-link nav-menu-trigger w-full">
-                            <div class="flex items-center">
-                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                                <span data-translate-key="dashDashboard">Dashboard</span>
-                            </div>
-                            <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </a>
-                        <div class="nav-submenu">
-                            <a href="playnow.html" class="nav-link nav-submenu-link active">
-                                <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                                <span data-translate-key="dashPlayNow">Play Now</span>
-                            </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Room - GamiCon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        :root, body.theme-default {
+            --bg-body: #000; --text-color: white; --text-subtle: #9ca3af; --sidebar-bg: #111827; --sidebar-border: #374151; --main-bg: #1f2937; --link-color: #9ca3af; --link-hover-bg: #374151; --link-hover-text: white; --link-active-bg: #3b82f6; --link-active-text: white; --form-bg: #111827; --neon-blue: #3b82f6; --neon-blue-glow: rgba(59, 130, 246, 0.5); --btn-secondary-bg: #4b5563; --btn-secondary-hover-bg: #6b7280; --room-card-bg: #273344; --room-card-hover-bg: #324053; --popup-bg: #111827; --popup-border: #4b5563; --popup-separator: #374151; --popup-hover-bg: #3b82f6; --popup-hover-text: white;
+        }
+        body.theme-light-gray {
+            --bg-body: #f4f4f5; --text-color: #334155; --text-subtle: #64748b; --sidebar-bg: #ffffff; --sidebar-border: #e5e7eb; --main-bg: #f4f4f5; --link-color: #475569; --link-hover-bg: #f3f4f6; --link-hover-text: #1e293b; --link-active-bg: #2563eb; --link-active-text: white; --form-bg: #ffffff; --neon-blue: #2563eb; --neon-blue-glow: rgba(37, 99, 235, 0.4); --btn-secondary-bg: #e5e7eb; --btn-secondary-hover-bg: #d1d5db; --room-card-bg: #ffffff; --room-card-hover-bg: #f9fafb; --popup-bg: #ffffff; --popup-border: #e5e7eb; --popup-separator: #f3f4f6; --popup-hover-text: white;
+        }
+        body.theme-true-dark {
+            --bg-body: #000; --text-color: #fff; --text-subtle: #aaa; --sidebar-bg: #101010; --sidebar-border: #333; --main-bg: #000; --link-color: #aaa; --link-hover-bg: #222; --link-hover-text: #fff; --link-active-bg: #fff; --link-active-text: #000; --form-bg: #181818; --neon-blue: #fff; --neon-blue-glow: rgba(255, 255, 255, 0.5); --btn-secondary-bg: #333; --btn-secondary-hover-bg: #444; --room-card-bg: #181818; --room-card-hover-bg: #222; --popup-bg: #181818; --popup-border: #333; --popup-separator: #333; --popup-hover-bg: #fff; --popup-hover-text: #000;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-body); color: var(--text-color); }
+        h1, h2, h3, h4, h5, h6, .form-label { font-family: 'Press Start 2P', cursive; }
+        aside { background-color: var(--sidebar-bg); } main { background-color: var(--main-bg); }
+        .nav-link { display: flex; align-items: center; padding: 0.75rem 0.5rem; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; border-radius: 4px; color: var(--link-color); }
+        .nav-link:hover { background-color: var(--link-hover-bg); color: var(--link-hover-text); }
+        .nav-link.active { background-color: var(--link-active-bg); color: var(--link-active-text); }
+        .nav-menu-trigger { justify-content: space-between; }
+        .nav-menu-trigger .chevron { transition: transform 0.2s ease-in-out; }
+        .nav-menu.is-open > .nav-menu-trigger .chevron { transform: rotate(180deg); }
+        .nav-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
+        .nav-menu.is-open .nav-submenu { max-height: 200px; }
+        .nav-submenu-link { padding-left: 2rem !important; font-size: 0.8rem !important; }
+        .nav-submenu-link .w-5 { width: 1.1rem; height: 1.1rem; }
+        .form-section { background-color: var(--form-bg); border: 1px solid var(--sidebar-border); padding: 1.5rem; border-radius: 8px; }
+        .form-label { font-size: 0.75rem; color: var(--text-subtle); letter-spacing: 1px; margin-bottom: 1rem; display: block;}
+        .custom-select, .text-input { background-color: var(--sidebar-bg); border: 1px solid var(--sidebar-border); color: var(--text-color); border-radius: 6px; padding: 0.5rem 0.75rem; width: 100%;}
+        .radio-option input[type="radio"] { opacity: 0; width: 0; height: 0; position: absolute; }
+        .radio-option span { display: block; padding: 0.5rem 1rem; border: 2px solid var(--sidebar-border); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; text-align: center; font-family: 'Poppins', sans-serif; font-weight: 600;}
+        .radio-option input[type="radio"]:checked + span { border-color: var(--neon-blue); background-color: var(--neon-blue); color: var(--link-active-text); box-shadow: 0 0 10px var(--neon-blue-glow); }
+        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; text-align: center; transition: all 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;}
+        .btn-primary { background-color: var(--link-active-bg); color: var(--link-active-text); }
+        .btn-secondary { background-color: var(--btn-secondary-bg); color: var(--text-color); }
+        .btn-danger { background-color: #ef4444; color: white; }
+        #profile-trigger { cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
+        #profile-trigger:hover { background-color: var(--link-hover-bg); }
+        .status-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0; border: 3px solid var(--sidebar-bg); }
+        .status-online { background-color: #22c55e; } .status-idle { background-color: #f59e0b; } .status-dnd { background-color: #ef4444; } .status-invisible { background-color: #6b7280; }
+        #status-popup { position: fixed; border-radius: 8px; width: 240px; padding: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 50; background-color: var(--popup-bg); border: 1px solid var(--popup-border); color: var(--text-color); }
+        .popup-header { padding: 0.75rem; } .popup-username { font-size: 1rem; font-weight: 700; } .popup-status-text { font-size: 0.8rem; color: var(--text-subtle); } .popup-separator { margin: 0.5rem 0; border-color: var(--popup-separator); }
+        .popup-option { display: flex; align-items: center; padding: 0.75rem; border-radius: 4px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .popup-option .status-dot { position: static; border: none; margin-right: 0.75rem; }
+        .popup-option:hover { background-color: var(--popup-hover-bg); color: var(--popup-hover-text); }
+    </style>
+</head>
+<body class="theme-default">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
+            <nav class="space-y-2">
+                <div class="nav-menu is-open" id="dashboard-menu">
+                    <a href="main1.html" class="nav-link nav-menu-trigger w-full">
+                        <div class="flex items-center">
+                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                            <span class="ml-3" data-translate-key="dashDashboard">Dashboard</span>
                         </div>
-                    </div>
-                    <a href="#" class="nav-link"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span data-translate-key="dashChat">Chat</span></a>
-                </nav>
-                <div id="profile-trigger" class="flex items-center space-x-3 cursor-pointer">
-                    <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
-                    <div><h3 id="sidebar-username" class="text-sm font-bold">PlayerOne</h3></div>
-                </div>
-            </aside>
-
-            <!-- Main content area -->
-            <main class="flex-1 p-4 md:p-8">
-                <header class="mb-8">
-                    <h1 class="text-2xl md:text-3xl" data-translate-key="playnowCreateTitle">Create a Room</h1>
-                    <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="playnowCreateSubtitle">Can't find the perfect squad? Set the rules yourself.</p>
-                </header>
-                
-                <div>
-                    <a href="playnow.html" class="btn !p-0 !bg-transparent !text-sm !font-semibold mb-6 hover:text-white transition" style="color: var(--text-subtle);">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                        <span data-translate-key="backToLobbies">Back to Lobbies</span>
+                        <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-2 space-y-6">
-                            <div class="form-section">
-                                <label for="game-select" class="form-label" data-translate-key="playnowStep1">Step 1: Select Your Game</label>
-                                <select id="game-select" class="custom-select w-full p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                    <option value="" data-translate-key="playnowChooseGame">-- Choose a Game --</option>
-                                    <option value="lol" data-genre="moba" data-translate-key="gameLeagueOfLegends">League of Legends</option>
-                                    <option value="dota2" data-genre="moba" data-translate-key="gameDota2">Dota 2</option>
-                                    <option value="valorant" data-genre="fps" data-translate-key="gameValorant">Valorant</option>
-                                    <option value="cs2" data-genre="fps" data-translate-key="gameCS2">Counter-Strike 2</option>
-                                    <option value="fallguys" data-genre="party" data-translate-key="gameFallGuys">Fall Guys</option>
-                                    <option value="amongus" data-genre="party" data-translate-key="gameAmongUs">Among Us</option>
-                                </select>
-                            </div>
-                            <div id="dynamic-options-wrapper" class="hidden space-y-6"></div>
-                        </div>
-                        <div class="space-y-6">
-                            <div id="status-panel" class="form-section space-y-4 hidden">
-                                <div class="flex justify-between items-center">
-                                    <label class="form-label !mb-0" data-translate-key="playnowRoomStatus">Room Status</label>
-                                    <a href="playnow.html" class="btn btn-danger btn-sm text-xs" data-translate-key="playnowCancel">Cancel</a>
-                                </div>
-                                
-                                <hr class="border-t" style="border-color:var(--popup-separator);" />
-
-                                <div class="flex items-center justify-between py-2">
-                                    <label for="enable-timer-toggle" class="font-poppins text-sm font-semibold" style="color:var(--text-color); cursor: pointer;" data-translate-key="enableTimer">Enable Expiry Timer</label>
-                                    <input type="checkbox" id="enable-timer-toggle" checked class="h-4 w-4 rounded" style="accent-color: var(--neon-blue); cursor: pointer;">
-                                </div>
-
-                                <div id="timer-controls-wrapper" class="space-y-4">
-                                    <div class="text-center p-4 border-2 border-dashed rounded-lg" style="border-color:var(--sidebar-border);">
-                                        <p class="text-sm" style="color:var(--text-subtle);"><span data-translate-key="playnowRoomExpires">This room will expire in</span> <strong id="countdown-timer" class="text-lg text-amber-400">3:00</strong></p>
-                                    </div>
-                                    <label class="form-label !mb-2" data-translate-key="playnowCreatorControls">Creator Controls</label>
-                                    <div class="grid grid-cols-1 gap-3">
-                                        <button class="btn btn-secondary" data-translate-key="playnowExtend">Extend by 2 mins</button>
-                                    </div>
-                                </div>
-                                
-                                <hr class="border-t !my-4" style="border-color:var(--popup-separator);" />
-
-                                <div class="mt-4">
-                                    <button id="mock-create-btn" type="button" class="btn btn-primary text-center w-full" data-translate-key="playnowFinalizeCreate">Create</button>
-                                </div>
-                            </div>
-                        </div>
+                    <div class="nav-submenu">
+                        <a href="playnow.html" class="nav-link nav-submenu-link active">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span class="ml-3" data-translate-key="dashPlayNow">Play Now</span>
+                        </a>
                     </div>
                 </div>
-            </main>
-        </div>
+                <a href="#" class="nav-link"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span data-translate-key="dashChat">Chat</span></a>
+                <a href="#" class="nav-link"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M12 14a4 4 0 100-8 4 4 0 000 8z"></path></svg><span data-translate-key="dashFriends">Friends</span></a>
+                <a href="#" class="nav-link"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg><span data-translate-key="dashNotifications">Notifications</span></a>
+            </nav>
+            <div id="profile-trigger" class="flex items-center space-x-3">
+                 <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
+                 <div><h3 id="sidebar-username" class="text-sm font-bold">PlayerOne</h3></div>
+            </div>
+        </aside>
 
-        <!-- Popup & Templates -->
-        <div id="status-popup" class="hidden">
-            <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
-            <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline">Online</span></div>
-            <div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span data-translate-key="statusIdle">Idle</span></div>
-            <div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd">Do Not Disturb</span></div>
-            <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible">Invisible</span></div>
-            <hr class="popup-separator">
-            <!-- MODIFIED: "from" parameter points to this page -->
-            <a href="profiles.html?from=createroom.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></svg><span data-translate-key="popupEditProfile">Edit Profile</span></a>
-            <a href="settings.html?from=createroom.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings">Settings</span></a>
-            <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout">Logout</span></a>
-        </div>
-
-        <template id="template-fps">
-            <div class="form-section genre-options">
-                <label class="form-label" data-translate-key="playnowStep2FPS">Step 2: FPS Settings</label>
-                <div class="space-y-4">
-                    <label class="form-label !text-sm !mb-2" data-translate-key="playnowRolePref">PREFERRED ROLE</label>
-                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                        <label class="radio-option"><input type="radio" name="fps-role" value="entry"><span data-translate-key="playnowRoleEntry">Entry</span></label>
-                        <label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span data-translate-key="playnowRoleSniper">Sniper</span></label>
-                        <label class="radio-option"><input type="radio" name="fps-role" value="igl"><span data-translate-key="playnowRoleIGL">IGL</span></label>
-                        <label class="radio-option"><input type="radio" name="fps-role" value="flex"><span data-translate-key="playnowRoleFlex">Flex</span></label>
+        <!-- Main content area -->
+        <main class="flex-1 p-4 md:p-8">
+            <header class="mb-8">
+                <a href="playnow.html" class="btn btn-secondary mb-6 text-sm">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                    <span data-translate-key="backToLobbies">Back to Lobbies</span>
+                </a>
+                <h1 class="text-2xl md:text-3xl" data-translate-key="playnowCreateTitle">Create a Room</h1>
+                <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="playnowCreateSubtitle">Can't find the perfect squad? Set the rules yourself.</p>
+            </header>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2 space-y-6">
+                    <div class="form-section">
+                        <label for="game-select" class="form-label" data-translate-key="playnowStep1">Step 1: Select Your Game</label>
+                        <select id="game-select" class="custom-select w-full p-3">
+                            <option value="" data-translate-key="playnowChooseGame">-- Choose a Game --</option>
+                            <option value="lol" data-genre="moba" data-translate-key="gameLeagueOfLegends">League of Legends</option>
+                            <option value="valorant" data-genre="fps" data-translate-key="gameValorant">Valorant</option>
+                            <option value="cs2" data-genre="fps" data-translate-key="gameCS2">Counter-Strike 2</option>
+                            <option value="amongus" data-genre="party" data-translate-key="gameAmongUs">Among Us</option>
+                        </select>
+                    </div>
+                    <div id="dynamic-options-wrapper" class="hidden space-y-6"></div>
+                </div>
+                <div class="space-y-6">
+                    <div id="status-panel" class="form-section space-y-4 hidden">
+                        <div class="flex justify-between items-center">
+                            <label class="form-label !mb-0" data-translate-key="playnowRoomStatus">Room Status</label>
+                            <button id="cancel-creation-btn" class="btn btn-danger btn-sm text-xs" data-translate-key="playnowCancel">Cancel</button>
+                        </div>
+                        <hr class="border-t" style="border-color:var(--popup-separator);">
+                        <div class="flex items-center justify-between py-2">
+                            <label for="enable-timer-toggle" class="font-semibold" style="cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.9rem;" data-translate-key="enableTimer">Expiry Timer</label>
+                            <input type="checkbox" id="enable-timer-toggle" checked class="h-4 w-4 rounded" style="accent-color: var(--neon-blue); cursor: pointer;">
+                        </div>
+                        <div id="timer-controls-wrapper" class="space-y-4">
+                            <div class="text-center p-4 border-2 border-dashed rounded-lg" style="border-color:var(--sidebar-border);">
+                                <p class="text-sm" style="color:var(--text-subtle);"><span data-translate-key="playnowRoomExpires">Expires in</span> <strong id="countdown-timer" class="text-lg text-amber-400">3:00</strong></p>
+                            </div>
+                        </div>
+                        <div class="mt-4">
+                            <button id="create-room-btn" type="button" class="btn btn-primary text-center w-full" data-translate-key="playnowFinalizeCreate">Create Room</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </template>
-        
-        <script src="translation.js"></script>
-        <script>
+        </main>
+    </div>
+
+    <!-- Popup & Templates -->
+    <div id="status-popup" class="hidden">
+        <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
+        <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline"></span></div>
+        <div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span data-translate-key="statusIdle"></span></div>
+        <div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd"></span></div>
+        <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible"></span></div>
+        <hr class="popup-separator">
+        <a href="profiles.html?from=createroom.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></svg><span data-translate-key="popupEditProfile"></span></a>
+        <a href="settings.html?from=createroom.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings"></span></a>
+        <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout"></span></a>
+    </div>
+
+    <template id="template-fps">
+        <div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep2FPS">Step 2: FPS Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRolePref">PREFERRED ROLE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="fps-role" value="entry" checked><span>Entry</span></label><label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span>Sniper</span></label><label class="radio-option"><input type="radio" name="fps-role" value="igl"><span>IGL</span></label><label class="radio-option"><input type="radio" name="fps-role" value="flex"><span>Flex</span></label></div></div></div>
+    </template>
+    <template id="template-moba">
+        <div class="form-section genre-options"><label class="form-label" data-translate-key="playnowMobaSettings">Step 2: MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRole">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top" checked><span>Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span>Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span>Jungle</span></label><label class="radio-option"><input type="radio" name="moba-role" value="adc"><span>ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span>Support</span></label></div></div></div>
+    </template>
+    <template id="template-party">
+        <div class="form-section genre-options"><label class="form-label" data-translate-key="playnowPartySettings">Step 2: Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowVibe">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny" checked><span>Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span>Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span>Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span>No Mic</span></label></div></div></div>
+    </template>
+    
+    <script src="translation.js"></script>
+    <script>
         (() => {
             document.addEventListener('DOMContentLoaded', () => {
+                // --- Standard Shared Logic (from main1.html and playnow.html) ---
+                if (typeof translations === 'undefined') { window.translations = { dashHome: { en: 'Home' }, dashWelcome: { en: 'Welcome back,' }, dashFriends: { en: 'Friends' }, dashNotifications: { en: 'Notifications' }, statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' }, }; console.warn("translation.js not found. Using mock data."); }
+                const statusConfig = { online: { className: 'status-online', langKey: 'statusOnline' }, idle: { className: 'status-idle', langKey: 'statusIdle' }, dnd: { className: 'status-dnd', langKey: 'statusDnd' }, invisible: { className: 'status-invisible', langKey: 'statusInvisible' }, };
                 const body = document.body;
-                const savedTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
-                body.className = ''; body.classList.add(savedTheme);
+                const welcomeHeader = document.getElementById('welcome-header');
+                const sidebarUsername = document.getElementById('sidebar-username');
+                const popupUsername = document.getElementById('popup-username');
+                const profileTrigger = document.getElementById('profile-trigger');
+                const statusPopup = document.getElementById('status-popup');
+                const statusDot = document.getElementById('status-dot');
+                const popupStatusText = document.getElementById('popup-status-text');
+                const statusOptions = document.querySelectorAll('.popup-option[data-status]');
+                const lang = localStorage.getItem('gamicon_lang') || 'en';
+                const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
+                const currentStatus = localStorage.getItem('gamicon_status') || 'online';
+                const username = localStorage.getItem('gamicon_username') || 'Player';
+                const applyTheme = (theme) => { body.className = ''; body.classList.add(theme); localStorage.setItem('gamicon_theme', theme); };
+                const setStatus = (status) => { const config = statusConfig[status] || statusConfig.online; statusDot.className = `status-dot ${config.className}`; popupStatusText.textContent = translations[config.langKey]?.[lang] || config.langKey; localStorage.setItem('gamicon_status', status); statusPopup.classList.add('hidden'); };
+                const applyUsername = (name) => { if (welcomeHeader) { welcomeHeader.textContent = `${(translations.dashWelcome[lang] || "Welcome,")} ${name}!`; } sidebarUsername.textContent = name; popupUsername.textContent = name; };
+                
+                applyTheme(currentTheme);
+                applyUsername(username);
+                setStatus(currentStatus);
+                
+                profileTrigger.addEventListener('click', (event) => { event.stopPropagation(); const rect = profileTrigger.getBoundingClientRect(); statusPopup.style.left = `${rect.left}px`; statusPopup.style.bottom = `${window.innerHeight - rect.top}px`; statusPopup.classList.toggle('hidden'); });
+                statusOptions.forEach(option => { option.addEventListener('click', (event) => { event.stopPropagation(); const newStatus = event.currentTarget.dataset.status; setStatus(newStatus); }); });
+                window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) { statusPopup.classList.add('hidden'); } });
+                
+                const dashboardMenu = document.getElementById('dashboard-menu');
+                const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
+                dashboardTrigger.addEventListener('click', (event) => { if (!dashboardMenu.classList.contains('is-open')) { event.preventDefault(); } dashboardMenu.classList.toggle('is-open'); });
+                // --- End of Standard Shared Logic ---
 
+
+                // --- Page-Specific Logic for createroom.html ---
                 const gameSelect = document.getElementById('game-select');
                 const dynamicOptionsWrapper = document.getElementById('dynamic-options-wrapper');
                 const statusPanel = document.getElementById('status-panel');
-
                 const enableTimerToggle = document.getElementById('enable-timer-toggle');
                 const timerControlsWrapper = document.getElementById('timer-controls-wrapper');
-                const mockCreateBtn = document.getElementById('mock-create-btn');
-
-                if(mockCreateBtn) {
-                    mockCreateBtn.addEventListener('click', () => {
-                        alert('Room creation successful! (Mock action)');
-                        window.location.href = 'playnow.html';
-                    });
-                }
+                const createRoomBtn = document.getElementById('create-room-btn');
+                const cancelCreationBtn = document.getElementById('cancel-creation-btn');
                 
+                const templates = {
+                    fps: document.getElementById('template-fps').innerHTML,
+                    moba: document.getElementById('template-moba').innerHTML,
+                    party: document.getElementById('template-party').innerHTML
+                };
+                
+                const resetForm = () => {
+                    gameSelect.value = '';
+                    dynamicOptionsWrapper.innerHTML = '';
+                    dynamicOptionsWrapper.classList.add('hidden');
+                    statusPanel.classList.add('hidden');
+                };
+
+                createRoomBtn.addEventListener('click', () => {
+                    alert('Room creation successful! (Mock action)');
+                    window.location.href = 'playnow.html';
+                });
+
+                cancelCreationBtn.addEventListener('click', resetForm);
+
                 enableTimerToggle.addEventListener('change', () => {
                     timerControlsWrapper.classList.toggle('hidden', !enableTimerToggle.checked);
                 });
-                
-                const templates = {
-                    moba: `<div class="form-section genre-options"><label class="form-label" data-translate-key="playnowMobaSettings">MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRole">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top"><span data-translate-key="playnowRoleTop">Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span data-translate-key="playnowRoleMid">Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span data-translate-key="playnowRoleJungle">Jungle</span></label><label class="radio-option"><input type="radio" name="mota-role" value="adc"><span data-translate-key="playnowRoleADC">ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span data-translate-key="playnowRoleSupport">Support</span></label></div></div></div>`,
-                    fps: document.getElementById('template-fps').innerHTML,
-                    party: `<div class="form-section genre-options"><label class="form-label" data-translate-key="playnowPartySettings">Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowVibe">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny"><span data-translate-key="playnowVibeFunny">Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span data-translate-key="playnowVibeCasual">Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span data-translate-key="playnowVibeTalkative">Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span data-translate-key="playnowVibeNoMic">No Mic</span></label></div></div></div>`
-                };
 
                 gameSelect.addEventListener('change', (e) => {
                     const selectedOption = e.target.selectedOptions[0];
                     const genre = selectedOption ? selectedOption.dataset.genre : null;
+                    
                     dynamicOptionsWrapper.innerHTML = '';
                     dynamicOptionsWrapper.classList.add('hidden');
                     statusPanel.classList.add('hidden');
+
                     if (genre && templates[genre]) {
                         dynamicOptionsWrapper.innerHTML = templates[genre];
                         dynamicOptionsWrapper.classList.remove('hidden');
                         statusPanel.classList.remove('hidden');
                         
-                        enableTimerToggle.checked = true;
-                        timerControlsWrapper.classList.remove('hidden');
-                        
-                        const currentLang = localStorage.getItem('gamicon_lang') || 'en';
-                        if(typeof setLanguage === 'function') {
-                            setLanguage(currentLang);
+                        // Re-apply translations for new content
+                        if (typeof setLanguage === 'function') {
+                           setLanguage(localStorage.getItem('gamicon_lang') || 'en');
                         }
                     }
                 });
 
-                const dashboardMenu = document.getElementById('dashboard-menu');
-                const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
-                dashboardTrigger.addEventListener('click', (event) => { if (!dashboardMenu.classList.contains('is-open')) { event.preventDefault(); } dashboardMenu.classList.toggle('is-open'); });
-                const profileTrigger = document.getElementById('profile-trigger');
-                const statusPopup = document.getElementById('status-popup');
-                const statusDot = document.getElementById('status-dot');
-                const sidebarUsername = document.getElementById('sidebar-username');
-                const popupUsername = document.getElementById('popup-username');
-                const popupStatusText = document.getElementById('popup-status-text');
-                const statusOptions = statusPopup.querySelectorAll('.popup-option[data-status]');
-                const statusMap = { online: { key: 'statusOnline', className: 'status-online' }, idle: { key: 'statusIdle', className: 'status-idle' }, dnd: { key: 'statusDnd', className: 'status-dnd' }, invisible: { key: 'statusInvisible', className: 'status-invisible' }};
-                const updateStatus = (newStatus) => { const lang = localStorage.getItem('gamicon_lang') || 'en'; const statusInfo = statusMap[newStatus] || statusMap.online; statusDot.className = `status-dot ${statusInfo.className}`; localStorage.setItem('gamicon_status', newStatus); if(typeof setLanguage === 'function') { setLanguage(lang); } };
-                const currentUsername = localStorage.getItem('gamicon_username') || 'PlayerOne';
-                sidebarUsername.textContent = currentUsername;
-                popupUsername.textContent = currentUsername;
-                const currentStatus = localStorage.getItem('gamicon_status') || 'online';
-                updateStatus(currentStatus);
-                profileTrigger.addEventListener('click', (event) => { event.stopPropagation(); const rect = profileTrigger.getBoundingClientRect(); statusPopup.style.left = `${rect.left}px`; statusPopup.style.bottom = `${window.innerHeight - rect.top}px`; statusPopup.classList.toggle('hidden'); });
-                statusOptions.forEach(option => { option.addEventListener('click', (event) => { event.stopPropagation(); const newStatus = option.dataset.status; updateStatus(newStatus); statusPopup.classList.add('hidden'); }); });
-                statusPopup.addEventListener('click', (event) => { event.stopPropagation(); });
-                window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) { statusPopup.classList.add('hidden'); } });
-            
-                const initialLang = localStorage.getItem('gamicon_lang') || 'en';
+                // Initial translation call for static content
                 if (typeof setLanguage === 'function') {
-                    setLanguage(initialLang);
+                    setLanguage(lang);
                 }
             });
         })();
-        </script>
-    </body>
-    </html>
+    </script>
+</body>
+</html>
