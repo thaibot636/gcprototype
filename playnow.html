@@ -44,7 +44,6 @@
         .btn-primary { background-color: var(--link-active-bg); color: var(--link-active-text); }
         .btn-secondary { background-color: var(--btn-secondary-bg); color: var(--text-color); }
         .btn-danger { background-color: #ef4444; color: white; }
-        /* ADDED: Styles for the popup menu, copied from main1.html */
         #profile-trigger { cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
         #profile-trigger:hover { background-color: var(--link-hover-bg); }
         .status-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0; border: 3px solid var(--sidebar-bg); }
@@ -64,18 +63,18 @@
                     <a href="main1.html" class="nav-link nav-menu-trigger w-full">
                         <div class="flex items-center">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                            <span>Dashboard</span>
+                            <span data-translate-key="dashDashboard">Dashboard</span>
                         </div>
                         <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
                     <div class="nav-submenu">
                         <a href="playnow.html" class="nav-link nav-submenu-link active">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            <span>Play Now</span>
+                            <span data-translate-key="dashPlayNow">Play Now</span>
                         </a>
                     </div>
                 </div>
-                <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span>Chat</span></a>
+                <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span data-translate-key="dashChat">Chat</span></a>
             </nav>
             <div id="profile-trigger" class="flex items-center space-x-3 cursor-pointer">
                 <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
@@ -85,19 +84,41 @@
 
         <main class="flex-1 p-4 md:p-8">
             <header class="mb-8">
-                <h1 class="text-2xl md:text-3xl">Find a Match</h1>
-                <p class="text-base mt-2" style="color: var(--text-subtle);">Jump into a game right away or create your own.</p>
+                <h1 class="text-2xl md:text-3xl" data-translate-key="playnowTitle">Find a Match</h1>
+                <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="playnowSubtitle">Jump into a game right away or create your own.</p>
             </header>
             
             <div id="room-list-section">
                 <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl">Game Lobbies</h2>
-                    <button class="btn btn-secondary flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h5M20 20v-5h-5M4 4l16 16"></path></svg>Refresh</button>
+                    <h2 class="text-xl" data-translate-key="playnowLobbies">Game Lobbies</h2>
+                    <button class="btn btn-secondary flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h5M20 20v-5h-5M4 4l16 16"></path></svg><span data-translate-key="playnowRefresh">Refresh</span></button>
                 </div>
                 <div class="space-y-4">
+                    <!-- Example Room 1: FPS -->
                     <div class="room-card">
-                        <div><h3 class="text-lg font-bold">Pro FFA Arena</h3><div class="flex items-center space-x-4 mt-2 text-sm"><div class="flex items-center"><svg class="room-details-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 15 7.014 15 9c1 1 2.657 1.343 2.657 1.343a8 8 0 010 8.314z"></path></svg><span>Free-For-All</span></div><div class="flex items-center"><svg class="room-details-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span>8/10 Players</span></div></div></div>
-                        <button class="btn btn-primary w-28">Join</button>
+                        <div>
+                            <h3 class="text-lg font-bold">🕹️ Valorant Comp Climb</h3>
+                            <div class="grid grid-cols-2 gap-x-6 gap-y-2 mt-3 text-sm" style="color: var(--text-subtle);">
+                                <div class="flex items-center"><span>🎮 <span data-translate-key="playnowGenreFPS">FPS</span></span></div>
+                                <div class="flex items-center"><span>🔄 <span data-translate-key="playnowTypeRanked">Ranked</span></span></div>
+                                <div class="flex items-center"><span>👥 4/5 - <span data-translate-key="playnowNeed">Need</span> Sentinel</span></div>
+                                <div class="flex items-center font-semibold text-amber-400"><span>🕒 <span data-translate-key="playnowUrgencyExpires">Expires in</span> 2:15</span></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-28" data-translate-key="playnowJoin">Join</button>
+                    </div>
+                    <!-- Example Room 2: MOBA -->
+                    <div class="room-card">
+                        <div>
+                            <h3 class="text-lg font-bold">🕹️ League of Legends ARAMs</h3>
+                            <div class="grid grid-cols-2 gap-x-6 gap-y-2 mt-3 text-sm" style="color: var(--text-subtle);">
+                                <div class="flex items-center"><span>🎮 <span data-translate-key="playnowGenreMOBA">MOBA</span></span></div>
+                                <div class="flex items-center"><span>🔄 <span data-translate-key="playnowTypeChill">Chill & Chat</span></span></div>
+                                <div class="flex items-center"><span>👥 8/10 <span data-translate-key="playnowPlayers">Players</span></span></div>
+                                <div class="flex items-center font-semibold text-green-400"><span data-translate-key="playnowUrgencyLooking">🕒 Looking Now</span></div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary w-28" data-translate-key="playnowJoin">Join</button>
                     </div>
                 </div>
             </div>
@@ -105,32 +126,38 @@
             <hr class="border-t-2 border-dashed my-10" style="border-color: var(--sidebar-border);">
             
             <div id="room-creator-cta" class="text-center">
-                <h2 class="text-xl">Or Create Your Own</h2>
-                <p class="mt-2 mb-6" style="color: var(--text-subtle);">Can't find the perfect squad? Set the rules yourself.</p>
-                <button id="show-creator-btn" class="btn btn-primary px-8 py-3 text-base">Create a Room</button>
+                <h2 class="text-xl" data-translate-key="playnowCreateTitle">Or Create Your Own</h2>
+                <p class="mt-2 mb-6" style="color: var(--text-subtle);" data-translate-key="playnowCreateSubtitle">Can't find the perfect squad? Set the rules yourself.</p>
+                <button id="show-creator-btn" class="btn btn-primary px-8 py-3 text-base" data-translate-key="playnowCreateBtn">Create a Room</button>
             </div>
             
             <div id="room-creator-panel" class="hidden">
                  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                      <div class="lg:col-span-2 space-y-6">
                         <div class="form-section">
-                             <label for="game-select" class="form-label">Step 1: Select Your Game</label>
+                             <label for="game-select" class="form-label" data-translate-key="playnowStep1">Step 1: Select Your Game</label>
                              <select id="game-select" class="custom-select w-full p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <option value="">-- Choose a Game --</option><option value="lol" data-genre="moba">League of Legends</option><option value="dota2" data-genre="moba">Dota 2</option><option value="valorant" data-genre="fps">Valorant</option><option value="cs2" data-genre="fps">Counter-Strike 2</option><option value="fallguys" data-genre="party">Fall Guys</option><option value="amongus" data-genre="party">Among Us</option>
+                                <option value="" data-translate-key="playnowChooseGame">-- Choose a Game --</option>
+                                <option value="lol" data-genre="moba">League of Legends</option>
+                                <option value="dota2" data-genre="moba">Dota 2</option>
+                                <option value="valorant" data-genre="fps">Valorant</option>
+                                <option value="cs2" data-genre="fps">Counter-Strike 2</option>
+                                <option value="fallguys" data-genre="party">Fall Guys</option>
+                                <option value="amongus" data-genre="party">Among Us</option>
                              </select>
                         </div>
                         <div id="dynamic-options-wrapper" class="hidden space-y-6"></div>
                      </div>
                      <div class="space-y-6">
                         <div id="status-panel" class="form-section space-y-4 hidden">
-                            <label class="form-label">Room Status</label>
+                            <label class="form-label" data-translate-key="playnowRoomStatus">Room Status</label>
                             <div class="text-center p-4 border-2 border-dashed rounded-lg" style="border-color:var(--sidebar-border);">
-                                <p class="text-sm" style="color:var(--text-subtle);">This room will expire in <strong id="countdown-timer" class="text-lg text-amber-400">3:00</strong></p>
+                                <p class="text-sm" style="color:var(--text-subtle);"><span data-translate-key="playnowRoomExpires">This room will expire in</span> <strong id="countdown-timer" class="text-lg text-amber-400">3:00</strong></p>
                             </div>
-                            <label class="form-label">Creator Controls</label>
+                            <label class="form-label" data-translate-key="playnowCreatorControls">Creator Controls</label>
                             <div class="grid grid-cols-1 gap-3">
-                                <button class="btn btn-secondary">Extend by 2 mins</button>
-                                <button id="cancel-creator-btn" type="button" class="btn btn-danger text-center">Cancel Creation</button>
+                                <button class="btn btn-secondary" data-translate-key="playnowExtend">Extend by 2 mins</button>
+                                <button id="cancel-creator-btn" type="button" class="btn btn-danger text-center" data-translate-key="playnowCancel">Cancel Creation</button>
                             </div>
                         </div>
                      </div>
@@ -139,19 +166,34 @@
         </main>
     </div>
 
-    <!-- ADDED: Status popup HTML (hidden by default) -->
-    <!-- MODIFIED: Links now include '?from=playnow.html' -->
     <div id="status-popup" class="hidden">
-         <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator"><div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span>Online</span></div><div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span>Idle</span></div><div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span>Do Not Disturb</span></div><div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span>Invisible</span></div><hr class="popup-separator">
-         <a href="profiles.html?from=playnow.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></svg><span>Edit Profile</span></a>
-         <a href="settings.html?from=playnow.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span>Settings</span></a>
-         <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span>Logout</span></a>
+         <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
+         <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline">Online</span></div>
+         <div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span data-translate-key="statusIdle">Idle</span></div>
+         <div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd">Do Not Disturb</span></div>
+         <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible">Invisible</span></div>
+         <hr class="popup-separator">
+         <a href="profiles.html?from=playnow.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></svg><span data-translate-key="popupEditProfile">Edit Profile</span></a>
+         <a href="settings.html?from=playnow.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings">Settings</span></a>
+         <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout">Logout</span></a>
     </div>
 
     <template id="template-fps">
-        <div class="form-section genre-options"><label class="form-label">Step 2: FPS Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2">PREFERRED ROLE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="fps-role" value="entry"><span>Entry</span></label><label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span>Sniper</span></label><label class="radio-option"><input type="radio" name="fps-role" value="igl"><span>IGL</span></label><label class="radio-option"><input type="radio" name="fps-role" value="flex"><span>Flex</span></label></div></div></div>
+        <div class="form-section genre-options">
+            <label class="form-label" data-translate-key="playnowStep2FPS">Step 2: FPS Settings</label>
+            <div class="space-y-4">
+                <label class="form-label !text-sm !mb-2" data-translate-key="playnowRolePref">PREFERRED ROLE</label>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    <label class="radio-option"><input type="radio" name="fps-role" value="entry"><span data-translate-key="playnowRoleEntry">Entry</span></label>
+                    <label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span data-translate-key="playnowRoleSniper">Sniper</span></label>
+                    <label class="radio-option"><input type="radio" name="fps-role" value="igl"><span data-translate-key="playnowRoleIGL">IGL</span></label>
+                    <label class="radio-option"><input type="radio" name="fps-role" value="flex"><span data-translate-key="playnowRoleFlex">Flex</span></label>
+                </div>
+            </div>
+        </div>
     </template>
 
+    <script src="translation.js"></script> <!-- ADDED SCRIPT TAG -->
     <script>
     (() => {
         document.addEventListener('DOMContentLoaded', () => {
@@ -180,9 +222,9 @@
             });
             
             const templates = {
-                moba: `<div class="form-section genre-options"><label class="form-label">MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top"><span>Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span>Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span>Jungle</span></label><label class="radio-option"><input type="radio" name="mota-role" value="adc"><span>ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span>Support</span></label></div></div></div>`,
+                moba: `<div class="form-section genre-options"><label class="form-label" data-translate-key="playnowMobaSettings">MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRole">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top"><span data-translate-key="playnowRoleTop">Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span data-translate-key="playnowRoleMid">Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span data-translate-key="playnowRoleJungle">Jungle</span></label><label class="radio-option"><input type="radio" name="mota-role" value="adc"><span data-translate-key="playnowRoleADC">ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span data-translate-key="playnowRoleSupport">Support</span></label></div></div></div>`,
                 fps: document.getElementById('template-fps').innerHTML,
-                party: `<div class="form-section genre-options"><label class="form-label">Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny"><span>Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span>Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span>Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span>No Mic</span></label></div></div></div>`
+                party: `<div class="form-section genre-options"><label class="form-label" data-translate-key="playnowPartySettings">Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowVibe">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny"><span data-translate-key="playnowVibeFunny">Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span data-translate-key="playnowVibeCasual">Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span data-translate-key="playnowVibeTalkative">Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span data-translate-key="playnowVibeNoMic">No Mic</span></label></div></div></div>`
             };
 
             gameSelect.addEventListener('change', (e) => {
@@ -195,6 +237,10 @@
                     dynamicOptionsWrapper.innerHTML = templates[genre];
                     dynamicOptionsWrapper.classList.remove('hidden');
                     statusPanel.classList.remove('hidden');
+                    
+                    // Re-apply language after new content is added
+                    const currentLang = localStorage.getItem('gamicon_lang') || 'en';
+                    setLanguage(currentLang);
                 }
             });
 
@@ -205,7 +251,7 @@
                 dashboardMenu.classList.toggle('is-open');
             });
 
-            // --- MODIFIED: Profile Popup Logic ---
+            // --- Profile Popup Logic ---
             const profileTrigger = document.getElementById('profile-trigger');
             const statusPopup = document.getElementById('status-popup');
             const statusDot = document.getElementById('status-dot');
@@ -215,23 +261,24 @@
             const statusOptions = statusPopup.querySelectorAll('.popup-option[data-status]');
 
             const statusMap = {
-                online: { text: 'Online', className: 'status-online' },
-                idle: { text: 'Idle', className: 'status-idle' },
-                dnd: { text: 'Do Not Disturb', className: 'status-dnd' },
-                invisible: { text: 'Invisible', className: 'status-invisible' }
+                online: { key: 'statusOnline', className: 'status-online' },
+                idle: { key: 'statusIdle', className: 'status-idle' },
+                dnd: { key: 'statusDnd', className: 'status-dnd' },
+                invisible: { key: 'statusInvisible', className: 'status-invisible' }
             };
 
             const updateStatus = (newStatus) => {
+                const lang = localStorage.getItem('gamicon_lang') || 'en';
                 const statusInfo = statusMap[newStatus] || statusMap.online;
+                
                 statusDot.className = `status-dot ${statusInfo.className}`;
-                popupStatusText.textContent = statusInfo.text;
+                popupStatusText.textContent = translations[statusInfo.key][lang];
                 localStorage.setItem('gamicon_status', newStatus);
             };
             
             const currentUsername = localStorage.getItem('gamicon_username') || 'PlayerOne';
             sidebarUsername.textContent = currentUsername;
             popupUsername.textContent = currentUsername;
-
             const currentStatus = localStorage.getItem('gamicon_status') || 'online';
             updateStatus(currentStatus);
 
