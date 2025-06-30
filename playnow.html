@@ -158,7 +158,6 @@
             const body = document.body;
             const savedTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
             body.className = ''; body.classList.add(savedTheme);
-            document.getElementById('sidebar-username').textContent = localStorage.getItem('gamicon_username') || 'Player';
 
             const showCreatorBtn = document.getElementById('show-creator-btn');
             const roomCreatorCta = document.getElementById('room-creator-cta');
@@ -206,9 +205,36 @@
                 dashboardMenu.classList.toggle('is-open');
             });
 
-            // --- ADDED: Profile Popup Logic ---
+            // --- MODIFIED: Profile Popup Logic ---
             const profileTrigger = document.getElementById('profile-trigger');
             const statusPopup = document.getElementById('status-popup');
+            const statusDot = document.getElementById('status-dot');
+            const sidebarUsername = document.getElementById('sidebar-username');
+            const popupUsername = document.getElementById('popup-username');
+            const popupStatusText = document.getElementById('popup-status-text');
+            const statusOptions = statusPopup.querySelectorAll('.popup-option[data-status]');
+
+            const statusMap = {
+                online: { text: 'Online', className: 'status-online' },
+                idle: { text: 'Idle', className: 'status-idle' },
+                dnd: { text: 'Do Not Disturb', className: 'status-dnd' },
+                invisible: { text: 'Invisible', className: 'status-invisible' }
+            };
+
+            const updateStatus = (newStatus) => {
+                const statusInfo = statusMap[newStatus] || statusMap.online;
+                statusDot.className = `status-dot ${statusInfo.className}`;
+                popupStatusText.textContent = statusInfo.text;
+                localStorage.setItem('gamicon_status', newStatus);
+            };
+            
+            const currentUsername = localStorage.getItem('gamicon_username') || 'PlayerOne';
+            sidebarUsername.textContent = currentUsername;
+            popupUsername.textContent = currentUsername;
+
+            const currentStatus = localStorage.getItem('gamicon_status') || 'online';
+            updateStatus(currentStatus);
+
             profileTrigger.addEventListener('click', (event) => {
                 event.stopPropagation();
                 const rect = profileTrigger.getBoundingClientRect();
@@ -216,6 +242,20 @@
                 statusPopup.style.bottom = `${window.innerHeight - rect.top}px`;
                 statusPopup.classList.toggle('hidden');
             });
+
+            statusOptions.forEach(option => {
+                option.addEventListener('click', (event) => {
+                    event.stopPropagation();
+                    const newStatus = option.dataset.status;
+                    updateStatus(newStatus);
+                    statusPopup.classList.add('hidden');
+                });
+            });
+
+            statusPopup.addEventListener('click', (event) => {
+                event.stopPropagation();
+            });
+
             window.addEventListener('click', () => {
                 if (!statusPopup.classList.contains('hidden')) {
                     statusPopup.classList.add('hidden');
