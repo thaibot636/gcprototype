@@ -11,13 +11,13 @@
     <style>
         /* CSS variables are merged to support all components on one page */
         :root, body.theme-default {
-            --bg-body: #000; --text-color: white; --text-subtle: #9ca3af; --sidebar-bg: #111827; --sidebar-border: #374151; --main-bg: #1f2937; --link-color: #9ca3af; --link-hover-bg: #374151; --link-hover-text: white; --link-active-bg: #3b82f6; --link-active-text: white; --form-bg: #111827; --neon-blue: #3b82f6; --neon-blue-glow: rgba(59, 130, 246, 0.5); --btn-secondary-bg: #4b5563; --btn-secondary-hover-bg: #6b7280; --room-card-bg: #273344; --room-card-hover-bg: #324053;
+            --bg-body: #000; --text-color: white; --text-subtle: #9ca3af; --sidebar-bg: #111827; --sidebar-border: #374151; --main-bg: #1f2937; --link-color: #9ca3af; --link-hover-bg: #374151; --link-hover-text: white; --link-active-bg: #3b82f6; --link-active-text: white; --form-bg: #111827; --neon-blue: #3b82f6; --neon-blue-glow: rgba(59, 130, 246, 0.5); --btn-secondary-bg: #4b5563; --btn-secondary-hover-bg: #6b7280; --room-card-bg: #273344; --room-card-hover-bg: #324053; --popup-bg: #111827; --popup-border: #4b5563; --popup-separator: #374151; --popup-hover-bg: #3b82f6; --popup-hover-text: white;
         }
         body.theme-light-gray {
-            --bg-body: #f4f4f5; --text-color: #334155; --text-subtle: #64748b; --sidebar-bg: #ffffff; --sidebar-border: #e5e7eb; --main-bg: #f4f4f5; --link-color: #475569; --link-hover-bg: #f3f4f6; --link-hover-text: #1e293b; --link-active-bg: #2563eb; --link-active-text: white; --form-bg: #ffffff; --neon-blue: #2563eb; --neon-blue-glow: rgba(37, 99, 235, 0.4); --btn-secondary-bg: #e5e7eb; --btn-secondary-hover-bg: #d1d5db; --room-card-bg: #ffffff; --room-card-hover-bg: #f9fafb;
+            --bg-body: #f4f4f5; --text-color: #334155; --text-subtle: #64748b; --sidebar-bg: #ffffff; --sidebar-border: #e5e7eb; --main-bg: #f4f4f5; --link-color: #475569; --link-hover-bg: #f3f4f6; --link-hover-text: #1e293b; --link-active-bg: #2563eb; --link-active-text: white; --form-bg: #ffffff; --neon-blue: #2563eb; --neon-blue-glow: rgba(37, 99, 235, 0.4); --btn-secondary-bg: #e5e7eb; --btn-secondary-hover-bg: #d1d5db; --room-card-bg: #ffffff; --room-card-hover-bg: #f9fafb; --popup-bg: #ffffff; --popup-border: #e5e7eb; --popup-separator: #f3f4f6; --popup-hover-text: white;
         }
         body.theme-true-dark {
-            --bg-body: #000; --text-color: #fff; --text-subtle: #aaa; --sidebar-bg: #101010; --sidebar-border: #333; --main-bg: #000; --link-color: #aaa; --link-hover-bg: #222; --link-hover-text: #fff; --link-active-bg: #fff; --link-active-text: #000; --form-bg: #181818; --neon-blue: #fff; --neon-blue-glow: rgba(255, 255, 255, 0.5); --btn-secondary-bg: #333; --btn-secondary-hover-bg: #444; --room-card-bg: #181818; --room-card-hover-bg: #222;
+            --bg-body: #000; --text-color: #fff; --text-subtle: #aaa; --sidebar-bg: #101010; --sidebar-border: #333; --main-bg: #000; --link-color: #aaa; --link-hover-bg: #222; --link-hover-text: #fff; --link-active-bg: #fff; --link-active-text: #000; --form-bg: #181818; --neon-blue: #fff; --neon-blue-glow: rgba(255, 255, 255, 0.5); --btn-secondary-bg: #333; --btn-secondary-hover-bg: #444; --room-card-bg: #181818; --room-card-hover-bg: #222; --popup-bg: #181818; --popup-border: #333; --popup-separator: #333; --popup-hover-bg: #fff; --popup-hover-text: #000;
         }
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg-body); color: var(--text-color); }
         h1, h2, h3, h4, h5, h6, .form-label { font-family: 'Press Start 2P', cursive; }
@@ -25,13 +25,25 @@
         .nav-link { display: flex; align-items: center; padding: 0.75rem 0.5rem; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; border-radius: 4px; color: var(--link-color); }
         .nav-link:hover { background-color: var(--link-hover-bg); color: var(--link-hover-text); }
         .nav-link.active { background-color: var(--link-active-bg); color: var(--link-active-text); }
-        
-        /* Styles for Room List */
+        .nav-menu-trigger { justify-content: space-between; }
+        .nav-menu-trigger .chevron { transition: transform 0.2s ease-in-out; }
+        .nav-menu.is-open > .nav-menu-trigger .chevron { transform: rotate(180deg); }
+        .nav-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
+        .nav-menu.is-open .nav-submenu { max-height: 200px; }
+        .nav-submenu-link { padding-left: 2rem !important; font-size: 0.8rem !important; }
+        .nav-submenu-link .w-5 { width: 1.1rem; height: 1.1rem; }
+        #profile-trigger { cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
+        #profile-trigger:hover { background-color: var(--link-hover-bg); }
+        .status-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0; border: 3px solid var(--sidebar-bg); }
+        .status-online { background-color: #22c55e; } .status-idle { background-color: #f59e0b; } .status-dnd { background-color: #ef4444; } .status-invisible { background-color: #6b7280; }
+        #status-popup { position: fixed; border-radius: 8px; width: 240px; padding: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 50; background-color: var(--popup-bg); border: 1px solid var(--popup-border); color: var(--text-color); }
+        .popup-header { padding: 0.75rem; } .popup-username { font-size: 1rem; font-weight: 700; } .popup-status-text { font-size: 0.8rem; color: var(--text-subtle); } .popup-separator { margin: 0.5rem 0; border-color: var(--popup-separator); }
+        .popup-option { display: flex; align-items: center; padding: 0.75rem; border-radius: 4px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .popup-option .status-dot { position: static; border: none; margin-right: 0.75rem; }
+        .popup-option:hover { background-color: var(--popup-hover-bg); color: var(--popup-hover-text); }
         .room-card { background-color: var(--room-card-bg); padding: 1.5rem; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; transition: background-color 0.2s ease-in-out; border: 1px solid var(--sidebar-border); }
         .room-card:hover { background-color: var(--room-card-hover-bg); }
         .room-details-icon { width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--text-subtle); }
-        
-        /* Styles for Room Creator */
         .form-section { background-color: var(--form-bg); border: 1px solid var(--sidebar-border); padding: 1.5rem; border-radius: 8px; }
         .form-label { font-size: 0.75rem; color: var(--text-subtle); letter-spacing: 1px; margin-bottom: 1rem; display: block;}
         .custom-select { background-color: var(--sidebar-bg); border: 1px solid var(--sidebar-border); color: var(--text-color); }
@@ -48,11 +60,24 @@
     <div class="flex min-h-screen">
         <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
              <nav class="space-y-2">
-                <a href="main1.html" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"/></svg><span>Dashboard</span></a>
-                <a href="playnow.html" class="nav-link active"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg><span>Play Now</span></a>
-                 <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span>Chat</span></a>
+                <div class="nav-menu is-open" id="dashboard-menu">
+                    <a href="main1.html" class="nav-link nav-menu-trigger w-full">
+                        <div class="flex items-center">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></svg>
+                            <span>Dashboard</span>
+                        </div>
+                        <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </a>
+                    <div class="nav-submenu">
+                        <a href="playnow.html" class="nav-link nav-submenu-link active">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span>Play Now</span>
+                        </a>
+                    </div>
+                </div>
+                <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg><span>Chat</span></a>
             </nav>
-            <div id="profile-trigger" class="flex items-center space-x-3 cursor-pointer">
+            <div id="profile-trigger" class="flex items-center space-x-3">
                 <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
                 <div><h3 id="sidebar-username" class="text-sm font-bold">PlayerOne</h3></div>
             </div>
@@ -64,15 +89,14 @@
                 <p class="text-base mt-2" style="color: var(--text-subtle);">Jump into a game right away or create your own.</p>
             </header>
             
-            <!-- SECTION 1: Room List (Visible by default) -->
             <div id="room-list-section">
                 <div class="flex justify-between items-center mb-6">
                     <h2 class="text-xl">Game Lobbies</h2>
-                    <button class="btn btn-secondary flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h5M20 20v-5h-5M4 4l16 16"/></svg>Refresh</button>
+                    <button class="btn btn-secondary flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h5M20 20v-5h-5M4 4l16 16"></path></svg>Refresh</button>
                 </div>
                 <div class="space-y-4">
                     <div class="room-card">
-                        <div><h3 class="text-lg font-bold">Pro FFA Arena</h3><div class="flex items-center space-x-4 mt-2 text-sm"><div class="flex items-center"><svg class="room-details-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 15 7.014 15 9c1 1 2.657 1.343 2.657 1.343a8 8 0 010 8.314z"/></svg><span>Free-For-All</span></div><div class="flex items-center"><svg class="room-details-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span>8/10 Players</span></div></div></div>
+                        <div><h3 class="text-lg font-bold">Pro FFA Arena</h3><div class="flex items-center space-x-4 mt-2 text-sm"><div class="flex items-center"><svg class="room-details-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17.657 18.657A8 8 0 016.343 7.343S7 9 9 10c0-2 .5-5 2.986-7C14 5 15 7.014 15 9c1 1 2.657 1.343 2.657 1.343a8 8 0 010 8.314z"></path></svg><span>Free-For-All</span></div><div class="flex items-center"><svg class="room-details-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span>8/10 Players</span></div></div></div>
                         <button class="btn btn-primary w-28">Join</button>
                     </div>
                 </div>
@@ -80,14 +104,12 @@
             
             <hr class="border-t-2 border-dashed my-10" style="border-color: var(--sidebar-border);">
             
-            <!-- SECTION 2: Create Room CTA (Visible by default) -->
             <div id="room-creator-cta" class="text-center">
                 <h2 class="text-xl">Or Create Your Own</h2>
                 <p class="mt-2 mb-6" style="color: var(--text-subtle);">Can't find the perfect squad? Set the rules yourself.</p>
                 <button id="show-creator-btn" class="btn btn-primary px-8 py-3 text-base">Create a Room</button>
             </div>
             
-            <!-- SECTION 3: Room Creator Panel (Initially Hidden) -->
             <div id="room-creator-panel" class="hidden">
                  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                      <div class="lg:col-span-2 space-y-6">
@@ -97,9 +119,7 @@
                                 <option value="">-- Choose a Game --</option><option value="lol" data-genre="moba">League of Legends</option><option value="dota2" data-genre="moba">Dota 2</option><option value="valorant" data-genre="fps">Valorant</option><option value="cs2" data-genre="fps">Counter-Strike 2</option><option value="fallguys" data-genre="party">Fall Guys</option><option value="amongus" data-genre="party">Among Us</option>
                              </select>
                         </div>
-                        <div id="dynamic-options-wrapper" class="hidden space-y-6">
-                            <!-- JS will inject genre-specific templates here -->
-                        </div>
+                        <div id="dynamic-options-wrapper" class="hidden space-y-6"></div>
                      </div>
                      <div class="space-y-6">
                         <div id="status-panel" class="form-section space-y-4 hidden">
@@ -119,50 +139,68 @@
         </main>
     </div>
 
-    <!-- Template for FPS options -->
+    <!-- ADDED: Status popup HTML block from main1.html -->
+    <div id="status-popup" class="hidden">
+         <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator"><div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span>Online</span></div><div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span>Idle</span></div><div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span>Do Not Disturb</span></div><div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span>Invisible</span></div><hr class="popup-separator"><a href="profiles.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></svg><span>Edit Profile</span></a><a href="settings.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span>Settings</span></a><hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span>Logout</span></a>
+    </div>
+
     <template id="template-fps">
         <div class="form-section genre-options"><label class="form-label">Step 2: FPS Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2">PREFERRED ROLE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="fps-role" value="entry"><span>Entry</span></label><label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span>Sniper</span></label><label class="radio-option"><input type="radio" name="fps-role" value="igl"><span>IGL</span></label><label class="radio-option"><input type="radio" name="fps-role" value="flex"><span>Flex</span></label></div></div></div>
     </template>
-    <!-- NOTE: Other templates for MOBA and Party would be here too -->
 
+    <script src="translation.js"></script> <!-- Assuming translation.js exists and is correct -->
     <script>
     (() => {
         document.addEventListener('DOMContentLoaded', () => {
-            // --- Standard Setup (Theme, Username) ---
+            // --- ADDED/MERGED: Core script for theme, status, and profile popup ---
+            if (typeof translations === 'undefined') { window.translations = { statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' }, }; console.warn("translation.js not found. Using mock data."); }
+            const statusConfig = { online: { className: 'status-online', langKey: 'statusOnline' }, idle: { className: 'status-idle', langKey: 'statusIdle' }, dnd: { className: 'status-dnd', langKey: 'statusDnd' }, invisible: { className: 'status-invisible', langKey: 'statusInvisible' }, };
             const body = document.body;
-            const savedTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
-            body.className = ''; body.classList.add(savedTheme);
-            document.getElementById('sidebar-username').textContent = localStorage.getItem('gamicon_username') || 'Player';
+            const sidebarUsername = document.getElementById('sidebar-username');
+            const popupUsername = document.getElementById('popup-username');
+            const profileTrigger = document.getElementById('profile-trigger');
+            const statusPopup = document.getElementById('status-popup');
+            const statusDot = document.getElementById('status-dot');
+            const popupStatusText = document.getElementById('popup-status-text');
+            const statusOptions = document.querySelectorAll('.popup-option[data-status]');
+            const lang = localStorage.getItem('gamicon_lang') || 'en';
+            const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
+            const currentStatus = localStorage.getItem('gamicon_status') || 'online';
+            const username = localStorage.getItem('gamicon_username') || 'Player';
+            const applyTheme = (theme) => { body.className = ''; body.classList.add(theme); localStorage.setItem('gamicon_theme', theme); };
+            const setStatus = (status) => { const config = statusConfig[status] || statusConfig.online; statusDot.className = `status-dot ${config.className}`; if(popupStatusText && translations[config.langKey]) { popupStatusText.textContent = translations[config.langKey]?.[lang] || config.langKey; } localStorage.setItem('gamicon_status', status); statusPopup.classList.add('hidden'); };
+            const applyUsername = (name) => { sidebarUsername.textContent = name; if(popupUsername) {popupUsername.textContent = name;} };
+            applyTheme(currentTheme);
+            applyUsername(username);
+            setStatus(currentStatus);
+            profileTrigger.addEventListener('click', (event) => { event.stopPropagation(); const rect = profileTrigger.getBoundingClientRect(); statusPopup.style.left = `${rect.left}px`; statusPopup.style.bottom = `${window.innerHeight - rect.top}px`; statusPopup.classList.toggle('hidden'); });
+            statusOptions.forEach(option => { option.addEventListener('click', (event) => { event.stopPropagation(); const newStatus = event.currentTarget.dataset.status; setStatus(newStatus); }); });
+            window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) { statusPopup.classList.add('hidden'); } });
 
-            // --- UI Element References ---
+
+            // --- PAGE-SPECIFIC SCRIPT for Room Creator ---
             const showCreatorBtn = document.getElementById('show-creator-btn');
             const roomCreatorCta = document.getElementById('room-creator-cta');
             const roomCreatorPanel = document.getElementById('room-creator-panel');
             const cancelCreatorBtn = document.getElementById('cancel-creator-btn');
-            
-            // --- Room Creator Form Elements ---
             const gameSelect = document.getElementById('game-select');
             const dynamicOptionsWrapper = document.getElementById('dynamic-options-wrapper');
             const statusPanel = document.getElementById('status-panel');
-            let countdownInterval;
 
-            // --- Toggle Room Creator Visibility ---
             showCreatorBtn.addEventListener('click', () => {
-                roomCreatorCta.classList.add('hidden'); // Hide the button's section
-                roomCreatorPanel.classList.remove('hidden'); // Show the creator form
+                roomCreatorCta.classList.add('hidden');
+                roomCreatorPanel.classList.remove('hidden');
             });
             
             cancelCreatorBtn.addEventListener('click', () => {
-                roomCreatorPanel.classList.add('hidden'); // Hide the creator form
-                roomCreatorCta.classList.remove('hidden'); // Show the button again
-                gameSelect.value = ""; // Reset dropdown
-                gameSelect.dispatchEvent(new Event('change')); // Trigger change to hide dynamic options
+                roomCreatorPanel.classList.add('hidden');
+                roomCreatorCta.classList.remove('hidden');
+                gameSelect.value = "";
+                gameSelect.dispatchEvent(new Event('change'));
             });
             
-            // --- Logic for Dynamic Form ---
             const templates = {
-                // For a real app, these templates would be more complete
-                moba: `<div class="form-section genre-options"><label class="form-label">MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top"><span>Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span>Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span>Jungle</span></label><label class="radio-option"><input type="radio" name="moba-role" value="adc"><span>ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span>Support</span></label></div></div></div>`,
+                moba: `<div class="form-section genre-options"><label class="form-label">MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top"><span>Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span>Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span>Jungle</span></label><label class="radio-option"><input type="radio" name="mota-role" value="adc"><span>ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span>Support</span></label></div></div></div>`,
                 fps: document.getElementById('template-fps').innerHTML,
                 party: `<div class="form-section genre-options"><label class="form-label">Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny"><span>Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span>Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span>Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span>No Mic</span></label></div></div></div>`
             };
@@ -180,6 +218,17 @@
                     dynamicOptionsWrapper.classList.remove('hidden');
                     statusPanel.classList.remove('hidden');
                 }
+            });
+
+            // --- PAGE-SPECIFIC SCRIPT for Dropdown Menu ---
+            const dashboardMenu = document.getElementById('dashboard-menu');
+            const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
+            
+            dashboardTrigger.addEventListener('click', (event) => {
+                if (!dashboardMenu.classList.contains('is-open')) {
+                    event.preventDefault(); 
+                }
+                dashboardMenu.classList.toggle('is-open');
             });
         });
     })();
