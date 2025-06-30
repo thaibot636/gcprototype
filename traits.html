@@ -39,7 +39,8 @@
             
             <header class="flex justify-between items-center mb-8">
                 <a href="index3.html" class="text-gray-400 hover:text-white transition font-semibold" data-translate-key="back"></a>
-                <a href="main1.html" class="text-sm text-blue-400 hover:underline font-semibold" data-translate-key="skip"></a>
+                <!-- MODIFIED: "skip" link now points to home1.html -->
+                <a href="home1.html" class="text-sm text-blue-400 hover:underline font-semibold" data-translate-key="skip"></a>
             </header>
 
             <div class="text-center mb-10">
@@ -48,7 +49,7 @@
             </div>
 
             <div class="space-y-8">
-                 <div>
+                <div>
                     <h3 class="text-base mb-4"><span class="text-games" data-translate-key="gamesHeader"></span> <span data-translate-key="gamesSubheader"></span> <span id="games-error" class="error-message ml-2 hidden"></span></h3>
                     <div class="flex flex-wrap gap-3">
                         <div class="trait-tag" data-category="games" data-translate-key="traitTagMoba"></div><div class="trait-tag" data-category="games" data-translate-key="traitTagFps"></div><div class="trait-tag" data-category="games" data-translate-key="traitTagRpg"></div>
@@ -83,8 +84,8 @@
                     <p id="empty-summary-text" class="text-gray-500" data-translate-key="noTraits"></p>
                 </div>
             </div>
-
-            <a id="finish-btn" href="main1.html" class="block w-full bg-blue-600 text-white font-bold py-3 text-center transition-all btn-8bit mt-8 rounded-md text-lg" data-translate-key="finishSetup"></a>
+            <!-- MODIFIED: "finish" button now points to home1.html -->
+            <a id="finish-btn" href="home1.html" class="block w-full bg-blue-600 text-white font-bold py-3 text-center transition-all btn-8bit mt-8 rounded-md text-lg" data-translate-key="finishSetup"></a>
         </div>
     </div>
 
@@ -188,7 +189,6 @@
                 if (getActiveCount('comm') === 0) { commError.textContent = translations.errorPick1[lang]; commError.classList.remove('hidden'); commError.classList.add('blinking'); isFormValid = false; }
                 
                 if (isFormValid) {
-                    // *** MODIFICATION START ***
                     let profile = JSON.parse(localStorage.getItem('userProfile')) || {};
                     
                     profile.traits = { games: [], vibe: [], hours: [], comm: [] };
@@ -203,7 +203,6 @@
                     });
                     
                     localStorage.setItem('userProfile', JSON.stringify(profile));
-                    // *** MODIFICATION END ***
 
                     runProcessingAnimation(); 
                 }
