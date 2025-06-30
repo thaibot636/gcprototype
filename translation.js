@@ -139,9 +139,12 @@ document.addEventListener('DOMContentLoaded', () => {
         animCompleting: { en: "COMPLETING YOUR PROFILE . . .", th: "กำลังสร้างโปรไฟล์ . . ." },
         animFusion: { en: 'FUSION!', th: 'รวมร่าง!' },
 
-        // --- main1.html (Dashboard) ---
+        // --- main.html / main1.html (Dashboard) ---
+        dashHome: { en: 'Home', th: 'หน้าหลัก' },
         dashDashboard: { en: 'Dashboard', th: 'แดชบอร์ด' },
         dashChat: { en: 'Chat', th: 'แชท' },
+        dashFriends: { en: 'Friends', th: 'เพื่อน' },
+        dashNotifications: { en: 'Notifications', th: 'การแจ้งเตือน' },
         dashWelcome: { en: 'CHOOSE YOUR MISSION,', th: 'เลือกภารกิจของคุณ,' },
         dashSubtitle: { en: 'What are you looking for today?', th: 'วันนี้คุณมองหาอะไรอยู่?' },
         dashLongTerm: { en: 'Find a Long-Term Buddy', th: 'หาเพื่อนเล่นระยะยาว' },
@@ -150,6 +153,18 @@ document.addEventListener('DOMContentLoaded', () => {
         dashPlayNow: { en: 'Play Now', th: 'เล่นทันที' },
         dashPlayNowDesc: { en: 'Jump into the action immediately. Browse or create a room.', th: 'เข้าสู่การต่อสู้ทันที ค้นหาหรือสร้างห้อง' },
         dashJoinRoom: { en: 'JOIN A ROOM', th: 'เข้าร่วมห้อง' },
+
+        // --- home1.html (Welcome Page Content) ---
+        pageTitleHome: { en: 'Welcome to GamiCon', th: 'ยินดีต้อนรับสู่ GamiCon' },
+        homeWelcomeTitle: { en: 'Welcome to GamiCon!', th: 'ยินดีต้อนรับสู่ GamiCon!' },
+        homeWelcomeSub: { en: "We're thrilled to have you, {{username}}. Here's a quick guide to get you started.", th: "เราดีใจที่คุณมาเข้าร่วม, {{username}} นี่คือคู่มือฉบับย่อเพื่อช่วยคุณเริ่มต้น" },
+        homeStep1Title: { en: 'Step 1: Set Up Your Profile', th: 'ขั้นตอนที่ 1: ตั้งค่าโปรไฟล์ของคุณ' },
+        homeStep1Desc: { en: 'Your journey begins with you! Click on your avatar in the bottom-left corner to open the profile menu. From there you can Edit Profile or change your Settings.', th: 'การเดินทางของคุณเริ่มต้นที่นี่! คลิกที่อวตารของคุณที่มุมล่างซ้ายเพื่อเปิดเมนูโปรไฟล์ จากตรงนั้นคุณสามารถแก้ไขโปรไฟล์หรือเปลี่ยนการตั้งค่าของคุณได้' },
+        homeStep2Title: { en: 'Step 2: Jump Into a Game', th: 'ขั้นตอนที่ 2: กระโดดเข้าสู่เกม' },
+        homeStep2Desc: { en: 'Ready for action? The Dashboard menu on the left has a Play Now button. This is your gateway to finding and joining game rooms.', th: 'พร้อมลุยหรือยัง? เมนูแดชบอร์ดทางด้านซ้ายมีปุ่ม เล่นทันที ซึ่งเป็นประตูสู่การค้นหาและเข้าร่วมห้องเกม' },
+        homeStep3Title: { en: 'Step 3: Connect With Friends', th: 'ขั้นตอนที่ 3: เชื่อมต่อกับเพื่อน' },
+        homeStep3Desc: { en: 'Gaming is better together. Use the Friends and Chat links in the sidebar to add new friends, manage your friend list, and start conversations.', th: 'เล่นเกมกับเพื่อนสนุกกว่าเสมอ ใช้ลิงก์เพื่อนและแชทในแถบด้านข้างเพื่อเพิ่มเพื่อนใหม่ จัดการรายชื่อเพื่อน และเริ่มการสนทนา' },
+        homeCtaButton: { en: 'Find Your Buddy Now!', th: 'ค้นหาเพื่อนซี้ของคุณเลย!' },
         
         // --- Status Popup (Shared) ---
         statusOnline: { en: 'Online', th: 'ออนไลน์' },
@@ -236,6 +251,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('[data-translate-key]').forEach(el => {
             const key = el.dataset.translateKey;
             const translation = translations[key]?.[lang];
+            
+            // Special handling for dynamic content like the welcome message
+            if (key === 'homeWelcomeSub' && translation) {
+                const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
+                el.textContent = translation.replace('{{username}}', username);
+                return; // Skip to the next element
+            }
+
             if (translation) {
                 // Handle different element types
                 if (el.dataset.translateTarget === 'placeholder' && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
