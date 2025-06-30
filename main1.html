@@ -9,180 +9,40 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* =================================================================
-           1. CSS Variables for Theming
-           - We define CSS variables for all colors.
-           - Each theme class just updates these variables.
-           - This eliminates code repetition and makes themes
-             much easier to manage.
-           ================================================================= */
         :root, body.theme-default {
-            --bg-body: #000;
-            --text-color: white;
-            --text-subtle: #9ca3af;
-            --sidebar-bg: #111827;
-            --sidebar-border: #374151;
-            --main-bg: #1f2937;
-            --link-color: #9ca3af;
-            --link-hover-bg: #374151;
-            --link-hover-text: white;
-            --link-active-bg: #3b82f6;
-            --link-active-text: white;
-            --card-bg: #1f2937;
-            --card-border: #4b5563;
-            --card-border-hover: #3b82f6;
-            --card-icon: #6b7280;
-            --popup-bg: #111827;
-            --popup-border: #4b5563;
-            --popup-separator: #374151;
-            --popup-hover-bg: #3b82f6;
-            --popup-hover-text: white;
+            --bg-body: #000; --text-color: white; --text-subtle: #9ca3af; --sidebar-bg: #111827; --sidebar-border: #374151; --main-bg: #1f2937; --link-color: #9ca3af; --link-hover-bg: #374151; --link-hover-text: white; --link-active-bg: #3b82f6; --link-active-text: white; --card-bg: #1f2937; --card-border: #4b5563; --card-border-hover: #3b82f6; --card-icon: #6b7280; --popup-bg: #111827; --popup-border: #4b5563; --popup-separator: #374151; --popup-hover-bg: #3b82f6; --popup-hover-text: white;
         }
-
         body.theme-light-gray {
-            --bg-body: #f4f4f5;
-            --text-color: #334155;
-            --text-subtle: #64748b;
-            --sidebar-bg: #ffffff;
-            --sidebar-border: #e5e7eb;
-            --main-bg: #f4f4f5;
-            --link-color: #475569;
-            --link-hover-bg: #f3f4f6;
-            --link-hover-text: #1e293b;
-            --link-active-bg: #2563eb;
-            --link-active-text: white;
-            --card-bg: #ffffff;
-            --card-border: #e5e7eb;
-            --popup-bg: #ffffff;
-            --popup-border: #e5e7eb;
-            --popup-separator: #f3f4f6;
-            --popup-hover-text: white;
+            --bg-body: #f4f4f5; --text-color: #334155; --text-subtle: #64748b; --sidebar-bg: #ffffff; --sidebar-border: #e5e7eb; --main-bg: #f4f4f5; --link-color: #475569; --link-hover-bg: #f3f4f6; --link-hover-text: #1e293b; --link-active-bg: #2563eb; --link-active-text: white; --card-bg: #ffffff; --card-border: #e5e7eb; --popup-bg: #ffffff; --popup-border: #e5e7eb; --popup-separator: #f3f4f6; --popup-hover-text: white;
         }
-
         body.theme-true-dark {
-            --bg-body: #000;
-            --text-color: #fff;
-            --text-subtle: #aaa;
-            --sidebar-bg: #101010;
-            --sidebar-border: #333;
-            --main-bg: #000;
-            --link-color: #aaa;
-            --link-hover-bg: #222;
-            --link-hover-text: #fff;
-            --link-active-bg: #fff;
-            --link-active-text: #000;
-            --card-bg: #181818;
-            --card-border: #333;
-            --card-border-hover: #fff;
-            --card-icon: #aaa;
-            --popup-bg: #181818;
-            --popup-border: #333;
-            --popup-separator: #333;
-            --popup-hover-bg: #fff;
-            --popup-hover-text: #000;
+            --bg-body: #000; --text-color: #fff; --text-subtle: #aaa; --sidebar-bg: #101010; --sidebar-border: #333; --main-bg: #000; --link-color: #aaa; --link-hover-bg: #222; --link-hover-text: #fff; --link-active-bg: #fff; --link-active-text: #000; --card-bg: #181818; --card-border: #333; --card-border-hover: #fff; --card-icon: #aaa; --popup-bg: #181818; --popup-border: #333; --popup-separator: #333; --popup-hover-bg: #fff; --popup-hover-text: #000;
         }
-
-        /* =================================================================
-           2. Base Component Styles
-           - Styles are defined once and use the CSS variables.
-           - This makes the code cleaner and more efficient.
-           ================================================================= */
-        body {
-            font-family: 'Poppins', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-color);
-        }
-        h1, h2, h3, h4, h5, h6 {
-            font-family: 'Press Start 2P', cursive;
-        }
-        aside {
-            background-color: var(--sidebar-bg);
-            border-color: var(--sidebar-border);
-        }
-        main {
-            background-color: var(--main-bg);
-        }
-        header p {
-            color: var(--text-subtle);
-        }
-
-        /* Navigation & Profile */
-        .nav-link {
-            display: flex; align-items: center; padding: 0.75rem 0.5rem; font-size: 0.9rem; font-weight: 600;
-            transition: all 0.2s; border-radius: 4px; color: var(--link-color);
-        }
-        .nav-link:hover {
-            background-color: var(--link-hover-bg);
-            color: var(--link-hover-text);
-        }
-        .nav-link.active {
-            background-color: var(--link-active-bg);
-            color: var(--link-active-text);
-        }
-        .nav-link > span {
-            margin-left: 0.75rem;
-        }
-        #profile-trigger {
-            cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s;
-        }
-        #profile-trigger:hover {
-             background-color: var(--link-hover-bg);
-        }
-
-        /* Main Cards */
-        .main-card {
-            transition: all 0.2s ease-in-out; cursor: pointer; border-radius: 8px;
-            background-color: var(--card-bg);
-            border: 4px solid var(--card-border);
-        }
-        .main-card:hover {
-            border-color: var(--card-border-hover);
-            transform: translateY(-4px);
-        }
-        .main-card-icon {
-            width: 4rem; height: 4rem; margin-bottom: 1rem; transition: color 0.2s ease-in-out;
-            color: var(--card-icon);
-        }
-        .main-card:hover .main-card-icon {
-            color: var(--card-border-hover);
-        }
-
-        /* Status Dot */
-        .status-dot {
-            width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0;
-            border: 3px solid var(--sidebar-bg);
-        }
-        .status-online    { background-color: #22c55e; }
-        .status-idle      { background-color: #f59e0b; }
-        .status-dnd       { background-color: #ef4444; }
-        .status-invisible { background-color: #6b7280; }
-        
-        /* Status Popup */
-        #status-popup {
-            position: fixed; border-radius: 8px; width: 240px; padding: 0.5rem;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 50;
-            background-color: var(--popup-bg);
-            border: 1px solid var(--popup-border);
-            color: var(--text-color);
-        }
-        .popup-header         { padding: 0.75rem; }
-        .popup-username       { font-size: 1rem; font-weight: 700; }
-        .popup-status-text    { font-size: 0.8rem; color: var(--text-subtle); }
-        .popup-separator      { margin: 0.5rem 0; border-color: var(--popup-separator); }
-        .popup-option {
-            display: flex; align-items: center; padding: 0.75rem; border-radius: 4px;
-            font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-        }
-        .popup-option .status-dot {
-            position: static; border: none; margin-right: 0.75rem;
-        }
-        .popup-option:hover {
-            background-color: var(--popup-hover-bg);
-            color: var(--popup-hover-text);
-        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-body); color: var(--text-color); }
+        h1, h2, h3, h4, h5, h6 { font-family: 'Press Start 2P', cursive; }
+        aside { background-color: var(--sidebar-bg); border-color: var(--sidebar-border); }
+        main { background-color: var(--main-bg); }
+        header p { color: var(--text-subtle); }
+        .nav-link { display: flex; align-items: center; padding: 0.75rem 0.5rem; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; border-radius: 4px; color: var(--link-color); }
+        .nav-link:hover { background-color: var(--link-hover-bg); color: var(--link-hover-text); }
+        .nav-link.active { background-color: var(--link-active-bg); color: var(--link-active-text); }
+        .nav-link > span { margin-left: 0.75rem; }
+        #profile-trigger { cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
+        #profile-trigger:hover { background-color: var(--link-hover-bg); }
+        .main-card { transition: all 0.2s ease-in-out; cursor: pointer; border-radius: 8px; background-color: var(--card-bg); border: 4px solid var(--card-border); }
+        .main-card:hover { border-color: var(--card-border-hover); transform: translateY(-4px); }
+        .main-card-icon { width: 4rem; height: 4rem; margin-bottom: 1rem; transition: color 0.2s ease-in-out; color: var(--card-icon); }
+        .main-card:hover .main-card-icon { color: var(--card-border-hover); }
+        .status-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0; border: 3px solid var(--sidebar-bg); }
+        .status-online { background-color: #22c55e; } .status-idle { background-color: #f59e0b; } .status-dnd { background-color: #ef4444; } .status-invisible { background-color: #6b7280; }
+        #status-popup { position: fixed; border-radius: 8px; width: 240px; padding: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 50; background-color: var(--popup-bg); border: 1px solid var(--popup-border); color: var(--text-color); }
+        .popup-header { padding: 0.75rem; } .popup-username { font-size: 1rem; font-weight: 700; } .popup-status-text { font-size: 0.8rem; color: var(--text-subtle); } .popup-separator { margin: 0.5rem 0; border-color: var(--popup-separator); }
+        .popup-option { display: flex; align-items: center; padding: 0.75rem; border-radius: 4px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .popup-option .status-dot { position: static; border: none; margin-right: 0.75rem; }
+        .popup-option:hover { background-color: var(--popup-hover-bg); color: var(--popup-hover-text); }
     </style>
 </head>
-<body> <!-- The 'theme-default' class can be added here or dynamically via JS -->
+<body>
     <div class="flex min-h-screen">
         <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
             <nav class="space-y-2">
@@ -194,12 +54,15 @@
                 <div><h3 id="sidebar-username" class="text-sm font-bold">PlayerOne</h3></div>
             </div>
         </aside>
-
         <main class="flex-1 p-6 md:p-10">
             <header class="mb-8"><h1 id="welcome-header" class="text-2xl md:text-3xl"></h1><p class="text-base mt-2" data-translate-key="dashSubtitle"></p></header>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <a href="#" class="main-card p-8 text-center block"><svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197M15 12a4 4 0 110-8 4 4 0 010 8z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashLongTerm"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashLongTermDesc"></p><div class="inline-block bg-blue-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashStartSwiping"></div></a>
-                <a href="#" class="main-card p-8 text-center block"><svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashPlayNow"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashPlayNowDesc"></p><div class="inline-block bg-green-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashJoinRoom"></div></a>
+                
+                <!-- *** MODIFICATION HERE: The link now points to playnow.html *** -->
+                <a href="playnow.html" class="main-card p-8 text-center block">
+                    <svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashPlayNow"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashPlayNowDesc"></p><div class="inline-block bg-green-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashJoinRoom"></div>
+                </a>
             </div>
         </main>
     </div>
@@ -216,38 +79,13 @@
         <a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg><span data-translate-key="popupLogout"></span></a>
     </div>
 
-    <!-- The 'translation.js' file should be loaded before this script -->
+    <!-- The script is identical and does not need changes -->
     <script src="translation.js"></script>
     <script>
-        /*
-           Wait for the DOM to be fully loaded before running the script.
-           Wrapped in an IIFE to prevent polluting the global scope.
-        */
         (() => {
             document.addEventListener('DOMContentLoaded', () => {
-
-                // --- 1. CONFIGURATION AND DOM ELEMENTS ---
-
-                // Mock translations object in case translation.js is missing
-                if (typeof translations === 'undefined') {
-                    window.translations = {
-                        dashWelcome: { en: 'Welcome back,' },
-                        statusOnline: { en: 'Online' },
-                        statusIdle: { en: 'Idle' },
-                        statusDnd: { en: 'Do Not Disturb' },
-                        statusInvisible: { en: 'Invisible' },
-                    };
-                    console.warn("translation.js not found. Using mock data.");
-                }
-
-                const statusConfig = {
-                    online:    { className: 'status-online',    langKey: 'statusOnline' },
-                    idle:      { className: 'status-idle',      langKey: 'statusIdle' },
-                    dnd:       { className: 'status-dnd',       langKey: 'statusDnd' },
-                    invisible: { className: 'status-invisible', langKey: 'statusInvisible' },
-                };
-
-                // DOM Elements
+                if (typeof translations === 'undefined') { window.translations = { dashWelcome: { en: 'Welcome back,' }, statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' }, }; console.warn("translation.js not found. Using mock data."); }
+                const statusConfig = { online: { className: 'status-online', langKey: 'statusOnline' }, idle: { className: 'status-idle', langKey: 'statusIdle' }, dnd: { className: 'status-dnd', langKey: 'statusDnd' }, invisible: { className: 'status-invisible', langKey: 'statusInvisible' }, };
                 const body = document.body;
                 const welcomeHeader = document.getElementById('welcome-header');
                 const sidebarUsername = document.getElementById('sidebar-username');
@@ -257,72 +95,19 @@
                 const statusDot = document.getElementById('status-dot');
                 const popupStatusText = document.getElementById('popup-status-text');
                 const statusOptions = document.querySelectorAll('.popup-option[data-status]');
-
-                // Initial State from Local Storage
                 const lang = localStorage.getItem('gamicon_lang') || 'en';
                 const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
                 const currentStatus = localStorage.getItem('gamicon_status') || 'online';
                 const username = localStorage.getItem('gamicon_username') || 'Player';
-
-
-                // --- 2. FUNCTIONS ---
-
-                /** Applies a theme class to the body element. */
-                const applyTheme = (theme) => {
-                    body.className = ''; // Clear existing theme classes
-                    body.classList.add(theme);
-                    localStorage.setItem('gamicon_theme', theme);
-                };
-
-                /** Updates user's status across the UI. */
-                const setStatus = (status) => {
-                    const config = statusConfig[status] || statusConfig.online;
-                    statusDot.className = `status-dot ${config.className}`; // Sets base class and status-specific class
-                    popupStatusText.textContent = translations[config.langKey]?.[lang] || config.langKey;
-                    localStorage.setItem('gamicon_status', status);
-                    statusPopup.classList.add('hidden');
-                };
-                
-                /** Populates username in the UI. */
-                const applyUsername = (name) => {
-                    const welcomeText = translations.dashWelcome[lang] || "Welcome,";
-                    welcomeHeader.textContent = `${welcomeText} ${name}!`;
-                    sidebarUsername.textContent = name;
-                    popupUsername.textContent = name;
-                };
-
-                
-                // --- 3. INITIALIZATION & EVENT LISTENERS ---
-                
+                const applyTheme = (theme) => { body.className = ''; body.classList.add(theme); localStorage.setItem('gamicon_theme', theme); };
+                const setStatus = (status) => { const config = statusConfig[status] || statusConfig.online; statusDot.className = `status-dot ${config.className}`; popupStatusText.textContent = translations[config.langKey]?.[lang] || config.langKey; localStorage.setItem('gamicon_status', status); statusPopup.classList.add('hidden'); };
+                const applyUsername = (name) => { const welcomeText = translations.dashWelcome[lang] || "Welcome,"; welcomeHeader.textContent = `${welcomeText} ${name}!`; sidebarUsername.textContent = name; popupUsername.textContent = name; };
                 applyTheme(currentTheme);
                 applyUsername(username);
                 setStatus(currentStatus);
-                // The translation.js file is now expected to handle its own DOM scan and text replacement.
-                
-                // Show/hide status popup
-                profileTrigger.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    const rect = profileTrigger.getBoundingClientRect();
-                    statusPopup.style.left = `${rect.left}px`;
-                    statusPopup.style.bottom = `${window.innerHeight - rect.top}px`;
-                    statusPopup.classList.toggle('hidden');
-                });
-
-                // Set status when an option is clicked
-                statusOptions.forEach(option => {
-                    option.addEventListener('click', (event) => {
-                        event.stopPropagation();
-                        const newStatus = event.currentTarget.dataset.status;
-                        setStatus(newStatus);
-                    });
-                });
-
-                // Hide popup if clicking outside of it
-                window.addEventListener('click', () => {
-                    if (!statusPopup.classList.contains('hidden')) {
-                        statusPopup.classList.add('hidden');
-                    }
-                });
+                profileTrigger.addEventListener('click', (event) => { event.stopPropagation(); const rect = profileTrigger.getBoundingClientRect(); statusPopup.style.left = `${rect.left}px`; statusPopup.style.bottom = `${window.innerHeight - rect.top}px`; statusPopup.classList.toggle('hidden'); });
+                statusOptions.forEach(option => { option.addEventListener('click', (event) => { event.stopPropagation(); const newStatus = event.currentTarget.dataset.status; setStatus(newStatus); }); });
+                window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) { statusPopup.classList.add('hidden'); } });
             });
         })();
     </script>
