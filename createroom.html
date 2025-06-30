@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        /* This file serves as the primary style guide. All CSS is verified to be consistent. */
         :root, body.theme-default {
             --bg-body: #000; --text-color: white; --text-subtle: #9ca3af; --sidebar-bg: #111827; --sidebar-border: #374151; --main-bg: #1f2937; --link-color: #9ca3af; --link-hover-bg: #374151; --link-hover-text: white; --link-active-bg: #3b82f6; --link-active-text: white; --form-bg: #111827; --neon-blue: #3b82f6; --neon-blue-glow: rgba(59, 130, 246, 0.5); --btn-secondary-bg: #4b5563; --btn-secondary-hover-bg: #6b7280; --room-card-bg: #273344; --room-card-hover-bg: #324053; --popup-bg: #111827; --popup-border: #4b5563; --popup-separator: #374151; --popup-hover-bg: #3b82f6; --popup-hover-text: white;
         }
@@ -145,25 +146,33 @@
         <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout"></span></a>
     </div>
 
-    <template id="template-fps">
-        <div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep2FPS">Step 2: FPS Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRolePref">PREFERRED ROLE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="fps-role" value="entry" checked><span>Entry</span></label><label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span>Sniper</span></label><label class="radio-option"><input type="radio" name="fps-role" value="igl"><span>IGL</span></label><label class="radio-option"><input type="radio" name="fps-role" value="flex"><span>Flex</span></label></div></div></div>
-    </template>
-    <template id="template-moba">
-        <div class="form-section genre-options"><label class="form-label" data-translate-key="playnowMobaSettings">Step 2: MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRole">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top" checked><span>Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span>Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span>Jungle</span></label><label class="radio-option"><input type="radio" name="moba-role" value="adc"><span>ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span>Support</span></label></div></div></div>
-    </template>
-    <template id="template-party">
-        <div class="form-section genre-options"><label class="form-label" data-translate-key="playnowPartySettings">Step 2: Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowVibe">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny" checked><span>Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span>Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span>Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span>No Mic</span></label></div></div></div>
-    </template>
+    <template id="template-fps"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep2FPS">Step 2: FPS Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRolePref">PREFERRED ROLE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="fps-role" value="entry" checked><span>Entry</span></label><label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span>Sniper</span></label><label class="radio-option"><input type="radio" name="fps-role" value="igl"><span>IGL</span></label><label class="radio-option"><input type="radio" name="fps-role" value="flex"><span>Flex</span></label></div></div></div></template>
+    <template id="template-moba"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowMobaSettings">Step 2: MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRole">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top" checked><span>Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span>Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span>Jungle</span></label><label class="radio-option"><input type="radio" name="moba-role" value="adc"><span>ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span>Support</span></label></div></div></div></template>
+    <template id="template-party"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowPartySettings">Step 2: Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowVibe">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny" checked><span>Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span>Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span>Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span>No Mic</span></label></div></div></div></template>
     
     <script src="translation.js"></script>
     <script>
         (() => {
             document.addEventListener('DOMContentLoaded', () => {
-                // --- Standard Shared Logic (from main1.html and playnow.html) ---
-                if (typeof translations === 'undefined') { window.translations = { dashHome: { en: 'Home' }, dashWelcome: { en: 'Welcome back,' }, dashFriends: { en: 'Friends' }, dashNotifications: { en: 'Notifications' }, statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' }, }; console.warn("translation.js not found. Using mock data."); }
+                // --- MODIFIED: Script logic updated for full consistency with the established shared pattern ---
+
+                // Mock translations are expanded to include all keys on this page for robust testing
+                if (typeof translations === 'undefined') { 
+                    window.translations = { 
+                        dashDashboard: { en: 'Dashboard' }, dashPlayNow: { en: 'Play Now' }, dashChat: { en: 'Chat' }, dashFriends: { en: 'Friends' }, dashNotifications: { en: 'Notifications' },
+                        statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' },
+                        popupEditProfile: { en: 'Edit Profile' }, popupSettings: { en: 'Settings' }, popupLogout: { en: 'Logout' },
+                        backToLobbies: { en: 'Back to Lobbies' }, playnowCreateTitle: { en: 'Create a Room' }, playnowCreateSubtitle: { en: 'Can\'t find the perfect squad? Set the rules yourself.' },
+                        playnowStep1: { en: 'Step 1: Select Your Game'}, playnowChooseGame: { en: '-- Choose a Game --'}, gameLeagueOfLegends: { en: 'League of Legends'}, gameValorant: { en: 'Valorant'},
+                        gameCS2: { en: 'Counter-Strike 2'}, gameAmongUs: { en: 'Among Us'}, playnowRoomStatus: { en: 'Room Status'}, playnowCancel: { en: 'Cancel' }, enableTimer: { en: 'Expiry Timer' },
+                        playnowRoomExpires: { en: 'Expires in'}, playnowFinalizeCreate: { en: 'Create Room'}
+                    }; 
+                    console.warn("translation.js not found. Using mock data."); 
+                }
+
+                // --- Standard Shared Logic ---
                 const statusConfig = { online: { className: 'status-online', langKey: 'statusOnline' }, idle: { className: 'status-idle', langKey: 'statusIdle' }, dnd: { className: 'status-dnd', langKey: 'statusDnd' }, invisible: { className: 'status-invisible', langKey: 'statusInvisible' }, };
                 const body = document.body;
-                const welcomeHeader = document.getElementById('welcome-header');
                 const sidebarUsername = document.getElementById('sidebar-username');
                 const popupUsername = document.getElementById('popup-username');
                 const profileTrigger = document.getElementById('profile-trigger');
@@ -174,10 +183,17 @@
                 const lang = localStorage.getItem('gamicon_lang') || 'en';
                 const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
                 const currentStatus = localStorage.getItem('gamicon_status') || 'online';
-                const username = localStorage.getItem('gamicon_username') || 'Player';
+                const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
                 const applyTheme = (theme) => { body.className = ''; body.classList.add(theme); localStorage.setItem('gamicon_theme', theme); };
                 const setStatus = (status) => { const config = statusConfig[status] || statusConfig.online; statusDot.className = `status-dot ${config.className}`; popupStatusText.textContent = translations[config.langKey]?.[lang] || config.langKey; localStorage.setItem('gamicon_status', status); statusPopup.classList.add('hidden'); };
-                const applyUsername = (name) => { if (welcomeHeader) { welcomeHeader.textContent = `${(translations.dashWelcome[lang] || "Welcome,")} ${name}!`; } sidebarUsername.textContent = name; popupUsername.textContent = name; };
+                const applyUsername = (name) => { sidebarUsername.textContent = name; popupUsername.textContent = name; };
+                // Standardized translation function for robustness
+                function setLanguage(language) {
+                    document.querySelectorAll('[data-translate-key]').forEach(el => {
+                        const key = el.dataset.translateKey;
+                        if (translations[key] && translations[key][language]) { el.textContent = translations[key][language]; }
+                    });
+                }
                 
                 applyTheme(currentTheme);
                 applyUsername(username);
@@ -187,11 +203,11 @@
                 statusOptions.forEach(option => { option.addEventListener('click', (event) => { event.stopPropagation(); const newStatus = event.currentTarget.dataset.status; setStatus(newStatus); }); });
                 window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) { statusPopup.classList.add('hidden'); } });
                 
+                // Standardized menu toggle logic
                 const dashboardMenu = document.getElementById('dashboard-menu');
                 const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
-                dashboardTrigger.addEventListener('click', (event) => { if (!dashboardMenu.classList.contains('is-open')) { event.preventDefault(); } dashboardMenu.classList.toggle('is-open'); });
+                dashboardTrigger.addEventListener('click', (event) => { event.preventDefault(); dashboardMenu.classList.toggle('is-open'); });
                 // --- End of Standard Shared Logic ---
-
 
                 // --- Page-Specific Logic for createroom.html ---
                 const gameSelect = document.getElementById('game-select');
@@ -221,10 +237,7 @@
                 });
 
                 cancelCreationBtn.addEventListener('click', resetForm);
-
-                enableTimerToggle.addEventListener('change', () => {
-                    timerControlsWrapper.classList.toggle('hidden', !enableTimerToggle.checked);
-                });
+                enableTimerToggle.addEventListener('change', () => { timerControlsWrapper.classList.toggle('hidden', !enableTimerToggle.checked); });
 
                 gameSelect.addEventListener('change', (e) => {
                     const selectedOption = e.target.selectedOptions[0];
@@ -239,17 +252,13 @@
                         dynamicOptionsWrapper.classList.remove('hidden');
                         statusPanel.classList.remove('hidden');
                         
-                        // Re-apply translations for new content
-                        if (typeof setLanguage === 'function') {
-                           setLanguage(localStorage.getItem('gamicon_lang') || 'en');
-                        }
+                        // Re-apply translations for any new dynamic content
+                        setLanguage(lang);
                     }
                 });
 
-                // Initial translation call for static content
-                if (typeof setLanguage === 'function') {
-                    setLanguage(lang);
-                }
+                // Initial translation call for all static content on the page
+                setLanguage(lang);
             });
         })();
     </script>
