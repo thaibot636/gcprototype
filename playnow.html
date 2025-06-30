@@ -37,13 +37,9 @@
         .form-section { background-color: var(--form-bg); border: 1px solid var(--sidebar-border); padding: 1.5rem; border-radius: 8px; }
         .form-label { font-size: 0.75rem; color: var(--text-subtle); letter-spacing: 1px; margin-bottom: 1rem; display: block;}
         .custom-select, .filter-select { background-color: var(--sidebar-bg); border: 1px solid var(--sidebar-border); color: var(--text-color); border-radius: 6px; padding: 0.5rem 0.75rem; }
-        .radio-option input[type="radio"] { opacity: 0; width: 0; height: 0; position: absolute; }
-        .radio-option span { display: block; padding: 0.5rem 1rem; border: 2px solid var(--sidebar-border); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; text-align: center; }
-        .radio-option input[type="radio"]:checked + span { border-color: var(--neon-blue); background-color: var(--neon-blue); color: var(--link-active-text); box-shadow: 0 0 10px var(--neon-blue-glow); }
         .btn { padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; text-align: center; transition: all 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;}
         .btn-primary { background-color: var(--link-active-bg); color: var(--link-active-text); }
         .btn-secondary { background-color: var(--btn-secondary-bg); color: var(--text-color); }
-        .btn-danger { background-color: #ef4444; color: white; }
         #profile-trigger { cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
         #profile-trigger:hover { background-color: var(--link-hover-bg); }
         .status-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0; border: 3px solid var(--sidebar-bg); }
@@ -90,7 +86,7 @@
                 <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="playnowSubtitle">Jump into a game right away or create your own.</p>
             </header>
             
-            <div id="play-now-content">
+            <div>
                 <!-- Quick Join Panel -->
                 <div class="form-section mb-8">
                     <h2 class="form-label" data-translate-key="quickJoinTitle">Quick Join</h2>
@@ -122,15 +118,15 @@
                                 <option value="ranked" data-translate-key="playnowTypeRanked">Ranked</option>
                                 <option value="chill" data-translate-key="playnowTypeChill">Chill</option>
                             </select>
-                            <button id="show-creator-btn" class="btn btn-secondary !px-3">
+                            <!-- MODIFIED: Button is now a link to the new page -->
+                            <a href="createroom.html" class="btn btn-secondary !px-3">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
                                 <span class="hidden sm:inline ml-2" data-translate-key="playnowCreateBtn">Create Room</span>
-                            </button>
+                            </a>
                         </div>
                     </div>
                     
-                    <div class="space-y-4">
-                        <!-- === MODIFIED: Replaced broken URL with reliable SVG Data URI === -->
+                    <div id="lobbies-list" class="space-y-4">
                         <div class="room-card">
                             <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3e%3crect width='80' height='80' fill='%23FF4655'/%3e%3c/svg%3e" alt="Valorant" class="room-card-img"/>
                             <div class="flex-grow">
@@ -145,7 +141,6 @@
                             </div>
                             <button class="btn btn-primary w-24 flex-shrink-0" data-translate-key="playnowJoin">Join</button>
                         </div>
-                        <!-- === MODIFIED: Replaced broken URL with reliable SVG Data URI === -->
                         <div class="room-card">
                             <img src="data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3e%3crect width='80' height='80' fill='%23005A82'/%3e%3c/svg%3e" alt="League of Legends" class="room-card-img"/>
                             <div class="flex-grow">
@@ -163,55 +158,6 @@
                     </div>
                 </div>
             </div>
-            
-            <hr class="border-t-2 border-dashed my-10" style="border-color: var(--sidebar-border);">
-            
-            <div id="room-creator-panel" class="hidden">
-                 <button id="back-to-lobbies-btn" class="btn !p-0 !bg-transparent !text-sm !font-semibold mb-6 hover:text-white transition" style="color: var(--text-subtle);">
-                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
-                    <span data-translate-key="backToLobbies">Back to Lobbies</span>
-                 </button>
-                 <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                     <div class="lg:col-span-2 space-y-6">
-                        <div class="form-section">
-                             <label for="game-select" class="form-label" data-translate-key="playnowStep1">Step 1: Select Your Game</label>
-                             <select id="game-select" class="custom-select w-full p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
-                                <option value="" data-translate-key="playnowChooseGame">-- Choose a Game --</option>
-                                <option value="lol" data-genre="moba" data-translate-key="gameLeagueOfLegends">League of Legends</option>
-                                <option value="dota2" data-genre="moba" data-translate-key="gameDota2">Dota 2</option>
-                                <option value="valorant" data-genre="fps" data-translate-key="gameValorant">Valorant</option>
-                                <option value="cs2" data-genre="fps" data-translate-key="gameCS2">Counter-Strike 2</option>
-                                <option value="fallguys" data-genre="party" data-translate-key="gameFallGuys">Fall Guys</option>
-                                <option value="amongus" data-genre="party" data-translate-key="gameAmongUs">Among Us</option>
-                             </select>
-                        </div>
-                        <div id="dynamic-options-wrapper" class="hidden space-y-6"></div>
-                     </div>
-                     <div class="space-y-6">
-                        <div id="status-panel" class="form-section space-y-4 hidden">
-                            <label class="form-label" data-translate-key="playnowRoomStatus">Room Status</label>
-                            
-                            <div class="flex items-center justify-between py-2">
-                                <label for="enable-timer-toggle" class="font-poppins text-sm font-semibold" style="color:var(--text-color); cursor: pointer;" data-translate-key="enableTimer">Enable Expiry Timer</label>
-                                <input type="checkbox" id="enable-timer-toggle" checked class="h-4 w-4 rounded" style="accent-color: var(--neon-blue); cursor: pointer;">
-                            </div>
-
-                            <div id="timer-controls-wrapper" class="space-y-4">
-                                <div class="text-center p-4 border-2 border-dashed rounded-lg" style="border-color:var(--sidebar-border);">
-                                    <p class="text-sm" style="color:var(--text-subtle);"><span data-translate-key="playnowRoomExpires">This room will expire in</span> <strong id="countdown-timer" class="text-lg text-amber-400">3:00</strong></p>
-                                </div>
-                                <label class="form-label !mb-2" data-translate-key="playnowCreatorControls">Creator Controls</label>
-                                <div class="grid grid-cols-1 gap-3">
-                                    <button class="btn btn-secondary" data-translate-key="playnowExtend">Extend by 2 mins</button>
-                                </div>
-                            </div>
-                            
-                            <hr class="border-t !my-4" style="border-color:var(--popup-separator);" />
-                            <button id="cancel-creator-btn" type="button" class="btn btn-danger w-full text-center" data-translate-key="playnowCancel">Cancel Creation</button>
-                        </div>
-                     </div>
-                </div>
-            </div>
         </main>
     </div>
 
@@ -222,91 +168,20 @@
          <div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd">Do Not Disturb</span></div>
          <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible">Invisible</span></div>
          <hr class="popup-separator">
+         <!-- MODIFIED: "from" parameter points to this page -->
          <a href="profiles.html?from=playnow.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></svg><span data-translate-key="popupEditProfile">Edit Profile</span></a>
          <a href="settings.html?from=playnow.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings">Settings</span></a>
          <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout">Logout</span></a>
     </div>
-
-    <template id="template-fps">
-        <div class="form-section genre-options">
-            <label class="form-label" data-translate-key="playnowStep2FPS">Step 2: FPS Settings</label>
-            <div class="space-y-4">
-                <label class="form-label !text-sm !mb-2" data-translate-key="playnowRolePref">PREFERRED ROLE</label>
-                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-                    <label class="radio-option"><input type="radio" name="fps-role" value="entry"><span data-translate-key="playnowRoleEntry">Entry</span></label>
-                    <label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span data-translate-key="playnowRoleSniper">Sniper</span></label>
-                    <label class="radio-option"><input type="radio" name="fps-role" value="igl"><span data-translate-key="playnowRoleIGL">IGL</span></label>
-                    <label class="radio-option"><input type="radio" name="fps-role" value="flex"><span data-translate-key="playnowRoleFlex">Flex</span></label>
-                </div>
-            </div>
-        </div>
-    </template>
     
     <script src="translation.js"></script>
     <script>
     (() => {
         document.addEventListener('DOMContentLoaded', () => {
+            // Simplified script: No creator panel logic needed anymore
             const body = document.body;
             const savedTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
             body.className = ''; body.classList.add(savedTheme);
-
-            const showCreatorBtn = document.getElementById('show-creator-btn');
-            const playNowContent = document.getElementById('play-now-content'); 
-            const roomCreatorPanel = document.getElementById('room-creator-panel');
-            const gameSelect = document.getElementById('game-select');
-            const dynamicOptionsWrapper = document.getElementById('dynamic-options-wrapper');
-            const statusPanel = document.getElementById('status-panel');
-
-            const cancelCreatorBtn = document.getElementById('cancel-creator-btn');
-            const backToLobbiesBtn = document.getElementById('back-to-lobbies-btn');
-            const enableTimerToggle = document.getElementById('enable-timer-toggle');
-            const timerControlsWrapper = document.getElementById('timer-controls-wrapper');
-
-            const returnToLobbiesView = () => {
-                roomCreatorPanel.classList.add('hidden');
-                playNowContent.classList.remove('hidden');
-                gameSelect.value = "";
-                gameSelect.dispatchEvent(new Event('change'));
-            };
-
-            showCreatorBtn.addEventListener('click', () => {
-                playNowContent.classList.add('hidden');
-                roomCreatorPanel.classList.remove('hidden');
-            });
-            
-            backToLobbiesBtn.addEventListener('click', returnToLobbiesView);
-            cancelCreatorBtn.addEventListener('click', returnToLobbiesView);
-            
-            enableTimerToggle.addEventListener('change', () => {
-                timerControlsWrapper.classList.toggle('hidden', !enableTimerToggle.checked);
-            });
-            
-            const templates = {
-                moba: `<div class="form-section genre-options"><label class="form-label" data-translate-key="playnowMobaSettings">MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRole">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top"><span data-translate-key="playnowRoleTop">Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span data-translate-key="playnowRoleMid">Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span data-translate-key="playnowRoleJungle">Jungle</span></label><label class="radio-option"><input type="radio" name="mota-role" value="adc"><span data-translate-key="playnowRoleADC">ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span data-translate-key="playnowRoleSupport">Support</span></label></div></div></div>`,
-                fps: document.getElementById('template-fps').innerHTML,
-                party: `<div class="form-section genre-options"><label class="form-label" data-translate-key="playnowPartySettings">Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowVibe">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny"><span data-translate-key="playnowVibeFunny">Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span data-translate-key="playnowVibeCasual">Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span data-translate-key="playnowVibeTalkative">Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span data-translate-key="playnowVibeNoMic">No Mic</span></label></div></div></div>`
-            };
-
-            gameSelect.addEventListener('change', (e) => {
-                const selectedOption = e.target.selectedOptions[0];
-                const genre = selectedOption ? selectedOption.dataset.genre : null;
-                dynamicOptionsWrapper.innerHTML = '';
-                dynamicOptionsWrapper.classList.add('hidden');
-                statusPanel.classList.add('hidden');
-                if (genre && templates[genre]) {
-                    dynamicOptionsWrapper.innerHTML = templates[genre];
-                    dynamicOptionsWrapper.classList.remove('hidden');
-                    statusPanel.classList.remove('hidden');
-                    
-                    enableTimerToggle.checked = true;
-                    timerControlsWrapper.classList.remove('hidden');
-                    
-                    const currentLang = localStorage.getItem('gamicon_lang') || 'en';
-                    if(typeof setLanguage === 'function') {
-                        setLanguage(currentLang);
-                    }
-                }
-            });
 
             const dashboardMenu = document.getElementById('dashboard-menu');
             const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
@@ -329,6 +204,11 @@
             statusOptions.forEach(option => { option.addEventListener('click', (event) => { event.stopPropagation(); const newStatus = option.dataset.status; updateStatus(newStatus); statusPopup.classList.add('hidden'); }); });
             statusPopup.addEventListener('click', (event) => { event.stopPropagation(); });
             window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) { statusPopup.classList.add('hidden'); } });
+        
+             const initialLang = localStorage.getItem('gamicon_lang') || 'en';
+             if (typeof setLanguage === 'function') {
+                setLanguage(initialLang);
+             }
         });
     })();
     </script>
