@@ -9,73 +9,180 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Poppins', sans-serif; }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Press Start 2P', cursive; }
-        body.theme-default { background-color: #000; color: white; }
-        .theme-default aside { background-color: #111827; border-color: #374151;}
-        .theme-default main { background-color: #1f2937; }
-        .theme-default .nav-link { color: #9ca3af; }
-        .theme-default .nav-link:hover { background-color: #374151; color: white; }
-        .theme-default .nav-link.active { background-color: #3b82f6; color: white; }
-        .theme-default #profile-trigger:hover { background-color: #374151; }
-        .theme-default .status-dot { border-color: #111827; }
-        .theme-default header p { color: #9ca3af; }
-        .theme-default .main-card { background-color: #1f2937; border: 4px solid #4b5563; }
-        .theme-default .main-card:hover { border-color: #3b82f6; transform: translateY(-4px); }
-        .theme-default .main-card-icon { color: #6b7280; }
-        .theme-default .main-card:hover .main-card-icon { color: #3b82f6; }
-        .theme-default #status-popup { background-color: #111827; border-color: #4b5563; }
-        .theme-default .popup-status-text { color: #9ca3af; }
-        .theme-default .popup-separator { border-color: #374151; }
-        .theme-default .popup-option:hover { background-color: #3b82f6; }
-        body.theme-light-gray { background-color: #f4f4f5; color: #334155; }
-        .theme-light-gray aside { background-color: #ffffff; border-color: #e5e7eb; }
-        .theme-light-gray main { background-color: #f4f4f5; }
-        .theme-light-gray .nav-link { color: #475569; }
-        .theme-light-gray .nav-link:hover { background-color: #f3f4f6; color: #1e293b; }
-        .theme-light-gray .nav-link.active { background-color: #2563eb; color: white; }
-        .theme-light-gray #profile-trigger:hover { background-color: #f3f4f6; }
-        .theme-light-gray .status-dot { border-color: #ffffff; }
-        .theme-light-gray header p { color: #64748b; }
-        .theme-light-gray .main-card { background-color: #ffffff; border-color: #e5e7eb; }
-        .theme-light-gray #status-popup { background-color: #ffffff; border-color: #e5e7eb; color: #334155; }
-        .theme-light-gray .popup-status-text { color: #64748b; }
-        .theme-light-gray .popup-separator { border-color: #f3f4f6; }
-        .theme-light-gray .popup-option:hover { background-color: #3b82f6; color: white; }
-        body.theme-true-dark { background-color: #000; color: #fff; }
-        .theme-true-dark aside { background-color: #101010; border-color: #333; }
-        .theme-true-dark main { background-color: #000; }
-        .theme-true-dark .nav-link { color: #aaa; }
-        .theme-true-dark .nav-link:hover { background-color: #222; color: #fff; }
-        .theme-true-dark .nav-link.active { background-color: #fff; color: #000; }
-        .theme-true-dark #profile-trigger:hover { background-color: #222; }
-        .theme-true-dark .status-dot { border-color: #101010; }
-        .theme-true-dark header p { color: #aaa; }
-        .theme-true-dark .main-card { background-color: #181818; border-color: #333; }
-        .theme-true-dark .main-card:hover { border-color: #fff; }
-        .theme-true-dark #status-popup { background-color: #181818; border-color: #333; }
-        .theme-true-dark .popup-separator { border-color: #333; }
-        .theme-true-dark .popup-option:hover { background-color: #fff; color: #000; }
-        .main-card { transition: all 0.2s ease-in-out; cursor: pointer; border-radius: 8px; }
-        .main-card-icon { width: 4rem; height: 4rem; margin-bottom: 1rem; transition: color 0.2s ease-in-out; }
-        .nav-link { display: flex; align-items: center; padding: 0.75rem 0.5rem; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; border-radius: 4px; }
-        .nav-link > span { margin-left: 0.75rem; }
-        #profile-trigger { cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
-        .status-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0; }
-        .status-online { background-color: #22c55e; }
-        .status-idle { background-color: #f59e0b; }
-        .status-dnd { background-color: #ef4444; }
+        /* =================================================================
+           1. CSS Variables for Theming
+           - We define CSS variables for all colors.
+           - Each theme class just updates these variables.
+           - This eliminates code repetition and makes themes
+             much easier to manage.
+           ================================================================= */
+        :root, body.theme-default {
+            --bg-body: #000;
+            --text-color: white;
+            --text-subtle: #9ca3af;
+            --sidebar-bg: #111827;
+            --sidebar-border: #374151;
+            --main-bg: #1f2937;
+            --link-color: #9ca3af;
+            --link-hover-bg: #374151;
+            --link-hover-text: white;
+            --link-active-bg: #3b82f6;
+            --link-active-text: white;
+            --card-bg: #1f2937;
+            --card-border: #4b5563;
+            --card-border-hover: #3b82f6;
+            --card-icon: #6b7280;
+            --popup-bg: #111827;
+            --popup-border: #4b5563;
+            --popup-separator: #374151;
+            --popup-hover-bg: #3b82f6;
+            --popup-hover-text: white;
+        }
+
+        body.theme-light-gray {
+            --bg-body: #f4f4f5;
+            --text-color: #334155;
+            --text-subtle: #64748b;
+            --sidebar-bg: #ffffff;
+            --sidebar-border: #e5e7eb;
+            --main-bg: #f4f4f5;
+            --link-color: #475569;
+            --link-hover-bg: #f3f4f6;
+            --link-hover-text: #1e293b;
+            --link-active-bg: #2563eb;
+            --link-active-text: white;
+            --card-bg: #ffffff;
+            --card-border: #e5e7eb;
+            --popup-bg: #ffffff;
+            --popup-border: #e5e7eb;
+            --popup-separator: #f3f4f6;
+            --popup-hover-text: white;
+        }
+
+        body.theme-true-dark {
+            --bg-body: #000;
+            --text-color: #fff;
+            --text-subtle: #aaa;
+            --sidebar-bg: #101010;
+            --sidebar-border: #333;
+            --main-bg: #000;
+            --link-color: #aaa;
+            --link-hover-bg: #222;
+            --link-hover-text: #fff;
+            --link-active-bg: #fff;
+            --link-active-text: #000;
+            --card-bg: #181818;
+            --card-border: #333;
+            --card-border-hover: #fff;
+            --card-icon: #aaa;
+            --popup-bg: #181818;
+            --popup-border: #333;
+            --popup-separator: #333;
+            --popup-hover-bg: #fff;
+            --popup-hover-text: #000;
+        }
+
+        /* =================================================================
+           2. Base Component Styles
+           - Styles are defined once and use the CSS variables.
+           - This makes the code cleaner and more efficient.
+           ================================================================= */
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-color);
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Press Start 2P', cursive;
+        }
+        aside {
+            background-color: var(--sidebar-bg);
+            border-color: var(--sidebar-border);
+        }
+        main {
+            background-color: var(--main-bg);
+        }
+        header p {
+            color: var(--text-subtle);
+        }
+
+        /* Navigation & Profile */
+        .nav-link {
+            display: flex; align-items: center; padding: 0.75rem 0.5rem; font-size: 0.9rem; font-weight: 600;
+            transition: all 0.2s; border-radius: 4px; color: var(--link-color);
+        }
+        .nav-link:hover {
+            background-color: var(--link-hover-bg);
+            color: var(--link-hover-text);
+        }
+        .nav-link.active {
+            background-color: var(--link-active-bg);
+            color: var(--link-active-text);
+        }
+        .nav-link > span {
+            margin-left: 0.75rem;
+        }
+        #profile-trigger {
+            cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s;
+        }
+        #profile-trigger:hover {
+             background-color: var(--link-hover-bg);
+        }
+
+        /* Main Cards */
+        .main-card {
+            transition: all 0.2s ease-in-out; cursor: pointer; border-radius: 8px;
+            background-color: var(--card-bg);
+            border: 4px solid var(--card-border);
+        }
+        .main-card:hover {
+            border-color: var(--card-border-hover);
+            transform: translateY(-4px);
+        }
+        .main-card-icon {
+            width: 4rem; height: 4rem; margin-bottom: 1rem; transition: color 0.2s ease-in-out;
+            color: var(--card-icon);
+        }
+        .main-card:hover .main-card-icon {
+            color: var(--card-border-hover);
+        }
+
+        /* Status Dot */
+        .status-dot {
+            width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0;
+            border: 3px solid var(--sidebar-bg);
+        }
+        .status-online    { background-color: #22c55e; }
+        .status-idle      { background-color: #f59e0b; }
+        .status-dnd       { background-color: #ef4444; }
         .status-invisible { background-color: #6b7280; }
-        #status-popup { position: fixed; border-radius: 8px; width: 240px; padding: 0.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 50; }
-        .popup-header { padding: 0.75rem; }
-        .popup-username { font-size: 1rem; font-weight: 700; }
-        .popup-status-text { font-size: 0.8rem; }
-        .popup-separator { margin: 0.5rem 0; }
-        .popup-option { display: flex; align-items: center; padding: 0.75rem; border-radius: 4px; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
-        .popup-option .status-dot { position: static; border: none; margin-right: 0.75rem; }
+        
+        /* Status Popup */
+        #status-popup {
+            position: fixed; border-radius: 8px; width: 240px; padding: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4); z-index: 50;
+            background-color: var(--popup-bg);
+            border: 1px solid var(--popup-border);
+            color: var(--text-color);
+        }
+        .popup-header         { padding: 0.75rem; }
+        .popup-username       { font-size: 1rem; font-weight: 700; }
+        .popup-status-text    { font-size: 0.8rem; color: var(--text-subtle); }
+        .popup-separator      { margin: 0.5rem 0; border-color: var(--popup-separator); }
+        .popup-option {
+            display: flex; align-items: center; padding: 0.75rem; border-radius: 4px;
+            font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+        }
+        .popup-option .status-dot {
+            position: static; border: none; margin-right: 0.75rem;
+        }
+        .popup-option:hover {
+            background-color: var(--popup-hover-bg);
+            color: var(--popup-hover-text);
+        }
     </style>
 </head>
-<body class="theme-default">
+<body> <!-- The 'theme-default' class can be added here or dynamically via JS -->
     <div class="flex min-h-screen">
         <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
             <nav class="space-y-2">
@@ -87,99 +194,137 @@
                 <div><h3 id="sidebar-username" class="text-sm font-bold">PlayerOne</h3></div>
             </div>
         </aside>
+
         <main class="flex-1 p-6 md:p-10">
             <header class="mb-8"><h1 id="welcome-header" class="text-2xl md:text-3xl"></h1><p class="text-base mt-2" data-translate-key="dashSubtitle"></p></header>
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8"><a href="#" class="main-card p-8 text-center block"><svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197M15 12a4 4 0 110-8 4 4 0 010 8z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashLongTerm"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashLongTermDesc"></p><div class="inline-block bg-blue-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashStartSwiping"></div></a><a href="#" class="main-card p-8 text-center block"><svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashPlayNow"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashPlayNowDesc"></p><div class="inline-block bg-green-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashJoinRoom"></div></a></div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <a href="#" class="main-card p-8 text-center block"><svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197M15 12a4 4 0 110-8 4 4 0 010 8z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashLongTerm"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashLongTermDesc"></p><div class="inline-block bg-blue-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashStartSwiping"></div></a>
+                <a href="#" class="main-card p-8 text-center block"><svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashPlayNow"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashPlayNowDesc"></p><div class="inline-block bg-green-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashJoinRoom"></div></a>
+            </div>
         </main>
     </div>
+
     <div id="status-popup" class="hidden">
         <div class="popup-header"><h4 id="popup-username" class="popup-username">PlayerOne</h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
         <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline"></span></div>
         <div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span data-translate-key="statusIdle"></span></div>
         <div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd"></span></div>
         <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible"></span></div><hr class="popup-separator">
-        <!-- *** MODIFICATION HERE *** -->
         <a href="profiles.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"></path></svg><span data-translate-key="popupEditProfile"></span></a>
         <a href="settings.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-translate-key="popupSettings"></span></a>
         <hr class="popup-separator">
         <a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg><span data-translate-key="popupLogout"></span></a>
     </div>
 
+    <!-- The 'translation.js' file should be loaded before this script -->
     <script src="translation.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const body = document.body;
-            const lang = localStorage.getItem('gamicon_lang') || 'en';
-            
-            // Theme logic
-            const applyTheme = (theme) => {
-                body.className = body.className.replace(/theme-\S+/g, '').trim();
-                body.classList.add(theme);
-            };
-            const savedTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
-            applyTheme(savedTheme);
+        /*
+           Wait for the DOM to be fully loaded before running the script.
+           Wrapped in an IIFE to prevent polluting the global scope.
+        */
+        (() => {
+            document.addEventListener('DOMContentLoaded', () => {
 
-            // Username logic
-            const username = localStorage.getItem('gamicon_username');
-            const welcomeHeader = document.getElementById('welcome-header');
-            const sidebarUsername = document.getElementById('sidebar-username');
-            const popupUsername = document.getElementById('popup-username');
-            if (username) {
-                const sanitizedUsername = username.replace(/</g, "<").replace(/>/g, ">");
-                const welcomeText = translations.dashWelcome[lang];
-                if (welcomeHeader) welcomeHeader.textContent = `${welcomeText} ${sanitizedUsername}!`;
-                sidebarUsername.textContent = sanitizedUsername;
-                popupUsername.textContent = sanitizedUsername;
-            } else {
-                 if (welcomeHeader) {
-                    const welcomeText = translations.dashWelcome[lang];
-                    welcomeHeader.textContent = `${welcomeText} Player!`;
-                 }
-            }
+                // --- 1. CONFIGURATION AND DOM ELEMENTS ---
 
-            // Status logic
-            const profileTrigger = document.getElementById('profile-trigger');
-            const statusPopup = document.getElementById('status-popup');
-            const statusDot = document.getElementById('status-dot');
-            const popupStatusText = document.getElementById('popup-status-text');
-            const statusOptions = document.querySelectorAll('.popup-option[data-status]');
-
-            const setStatus = (status) => {
-                statusDot.className = 'status-dot';
-                let statusTextContentKey = 'statusOnline';
-                switch (status) {
-                    case 'idle': statusDot.classList.add('status-idle'); statusTextContentKey = 'statusIdle'; break;
-                    case 'dnd': statusDot.classList.add('status-dnd'); statusTextContentKey = 'statusDnd'; break;
-                    case 'invisible': statusDot.classList.add('status-invisible'); statusTextContentKey = 'statusInvisible'; break;
-                    default: statusDot.classList.add('status-online'); statusTextContentKey = 'statusOnline'; break;
+                // Mock translations object in case translation.js is missing
+                if (typeof translations === 'undefined') {
+                    window.translations = {
+                        dashWelcome: { en: 'Welcome back,' },
+                        statusOnline: { en: 'Online' },
+                        statusIdle: { en: 'Idle' },
+                        statusDnd: { en: 'Do Not Disturb' },
+                        statusInvisible: { en: 'Invisible' },
+                    };
+                    console.warn("translation.js not found. Using mock data.");
                 }
-                popupStatusText.textContent = translations[statusTextContentKey][lang];
-                localStorage.setItem('gamicon_status', status);
-                statusPopup.classList.add('hidden');
-            };
-            const savedStatus = localStorage.getItem('gamicon_status') || 'online';
-            setStatus(savedStatus);
 
-            profileTrigger.addEventListener('click', (event) => {
-                event.stopPropagation();
-                const rect = profileTrigger.getBoundingClientRect();
-                statusPopup.style.left = `${rect.left}px`;
-                statusPopup.style.bottom = `${window.innerHeight - rect.top}px`;
-                statusPopup.classList.toggle('hidden');
-            });
-            statusOptions.forEach(option => {
-                option.addEventListener('click', (event) => {
+                const statusConfig = {
+                    online:    { className: 'status-online',    langKey: 'statusOnline' },
+                    idle:      { className: 'status-idle',      langKey: 'statusIdle' },
+                    dnd:       { className: 'status-dnd',       langKey: 'statusDnd' },
+                    invisible: { className: 'status-invisible', langKey: 'statusInvisible' },
+                };
+
+                // DOM Elements
+                const body = document.body;
+                const welcomeHeader = document.getElementById('welcome-header');
+                const sidebarUsername = document.getElementById('sidebar-username');
+                const popupUsername = document.getElementById('popup-username');
+                const profileTrigger = document.getElementById('profile-trigger');
+                const statusPopup = document.getElementById('status-popup');
+                const statusDot = document.getElementById('status-dot');
+                const popupStatusText = document.getElementById('popup-status-text');
+                const statusOptions = document.querySelectorAll('.popup-option[data-status]');
+
+                // Initial State from Local Storage
+                const lang = localStorage.getItem('gamicon_lang') || 'en';
+                const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
+                const currentStatus = localStorage.getItem('gamicon_status') || 'online';
+                const username = localStorage.getItem('gamicon_username') || 'Player';
+
+
+                // --- 2. FUNCTIONS ---
+
+                /** Applies a theme class to the body element. */
+                const applyTheme = (theme) => {
+                    body.className = ''; // Clear existing theme classes
+                    body.classList.add(theme);
+                    localStorage.setItem('gamicon_theme', theme);
+                };
+
+                /** Updates user's status across the UI. */
+                const setStatus = (status) => {
+                    const config = statusConfig[status] || statusConfig.online;
+                    statusDot.className = `status-dot ${config.className}`; // Sets base class and status-specific class
+                    popupStatusText.textContent = translations[config.langKey]?.[lang] || config.langKey;
+                    localStorage.setItem('gamicon_status', status);
+                    statusPopup.classList.add('hidden');
+                };
+                
+                /** Populates username in the UI. */
+                const applyUsername = (name) => {
+                    const welcomeText = translations.dashWelcome[lang] || "Welcome,";
+                    welcomeHeader.textContent = `${welcomeText} ${name}!`;
+                    sidebarUsername.textContent = name;
+                    popupUsername.textContent = name;
+                };
+
+                
+                // --- 3. INITIALIZATION & EVENT LISTENERS ---
+                
+                applyTheme(currentTheme);
+                applyUsername(username);
+                setStatus(currentStatus);
+                // The translation.js file is now expected to handle its own DOM scan and text replacement.
+                
+                // Show/hide status popup
+                profileTrigger.addEventListener('click', (event) => {
                     event.stopPropagation();
-                    const newStatus = event.currentTarget.dataset.status;
-                    setStatus(newStatus);
+                    const rect = profileTrigger.getBoundingClientRect();
+                    statusPopup.style.left = `${rect.left}px`;
+                    statusPopup.style.bottom = `${window.innerHeight - rect.top}px`;
+                    statusPopup.classList.toggle('hidden');
+                });
+
+                // Set status when an option is clicked
+                statusOptions.forEach(option => {
+                    option.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        const newStatus = event.currentTarget.dataset.status;
+                        setStatus(newStatus);
+                    });
+                });
+
+                // Hide popup if clicking outside of it
+                window.addEventListener('click', () => {
+                    if (!statusPopup.classList.contains('hidden')) {
+                        statusPopup.classList.add('hidden');
+                    }
                 });
             });
-            window.addEventListener('click', () => {
-                if (!statusPopup.classList.contains('hidden')) {
-                    statusPopup.classList.add('hidden');
-                }
-            });
-        });
+        })();
     </script>
 </body>
 </html>
