@@ -55,6 +55,22 @@
         }
 
         .error-message { color: #ff5555; font-size: 0.8rem; font-weight: 600; }
+        
+        /* Style for inputs in edit mode */
+        .profile-input, .profile-select {
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 6px;
+            border-width: 2px;
+            background-color: transparent;
+            transition: border-color 0.2s;
+        }
+        .profile-input:focus, .profile-select:focus {
+            outline: none;
+            --tw-ring-color: #2563eb;
+            box-shadow: 0 0 0 2px var(--tw-ring-color);
+        }
 
         /* --- THEME STYLES --- */
         
@@ -80,6 +96,7 @@
         .theme-default .trait-tag.active-vibe { background-color: #22c55e; color: white; border-color: #86efac; }
         .theme-default .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .theme-default .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
+        .theme-default .profile-input, .theme-default .profile-select { border-color: #4b5563; color-scheme: dark; }
 
         /* LIGHT GRAY Theme */
         body.theme-light-gray { background-color: #f4f4f5; color: #334155; }
@@ -103,6 +120,7 @@
         .theme-light-gray .trait-tag.active-vibe { background-color: #22c55e; color: white; border-color: #86efac; }
         .theme-light-gray .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .theme-light-gray .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
+        .theme-light-gray .profile-input, .theme-light-gray .profile-select { border-color: #d1d5db; }
 
         /* TRUE DARK Theme */
         body.theme-true-dark { background-color: #000; color: #fff; }
@@ -124,6 +142,7 @@
         .theme-true-dark .trait-tag.active-vibe { background-color: #22c55e; color: white; border-color: #86efac; }
         .theme-true-dark .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .theme-true-dark .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
+        .theme-true-dark .profile-input, .theme-true-dark .profile-select { border-color: #555; color-scheme: dark; }
 
     </style>
 </head>
@@ -213,7 +232,7 @@
                     <div class="profile-card p-6 md:p-8 rounded-xl">
                         <!-- Header -->
                         <div class="text-center mb-8">
-                            <img src="https://i.pravatar.cc/120?u=${profile.username || 'default'}" alt="Avatar" class="w-28 h-28 rounded-full mx-auto border-4 border-gray-600 mb-4 ring-4 ring-gray-700">
+                            <img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-28 h-28 rounded-full mx-auto border-4 border-gray-600 mb-4 ring-4 ring-gray-700">
                             <h1 class="profile-username text-3xl">${profile.username || 'N/A'}</h1>
                             <p class="text-gray-400 text-sm">${profile.email || 'N/A'}</p>
                         </div>
@@ -223,10 +242,27 @@
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
                             <!-- Left Column -->
                             <div class="space-y-8">
+                                ${isEditMode ? `
+                                    <div>
+                                        <h3 class="section-title mb-2">Birthday</h3>
+                                        <input id="birthday-edit-input" type="date" value="${profile.birthday || ''}" class="profile-input">
+                                        <span id="birthday-error" class="error-message block h-4 mt-1"></span>
+                                    </div>
+                                    <div>
+                                        <h3 class="section-title mb-2">Gender</h3>
+                                        <select id="gender-edit-select" class="profile-select">
+                                            <option value="male" ${profile.gender === 'male' ? 'selected' : ''}>Male</option>
+                                            <option value="female" ${profile.gender === 'female' ? 'selected' : ''}>Female</option>
+                                            <option value="non-binary" ${profile.gender === 'non-binary' ? 'selected' : ''}>Non-binary</option>
+                                        </select>
+                                        <span id="gender-error" class="error-message block h-4 mt-1"></span>
+                                    </div>
+                                ` : `
                                 <div class="grid grid-cols-2 gap-4">
                                      <div><h3 class="section-title mb-2">Birthday</h3><p class="font-semibold text-lg">${profile.birthday || 'N/A'}</p></div>
                                      <div><h3 class="section-title mb-2">Gender</h3><p class="font-semibold text-lg capitalize">${profile.gender || 'N/A'}</p></div>
                                 </div>
+                                `}
                                 <hr class="md:hidden">
                                 ${renderDnaCategory('hours', profile.traits || {})}
                                 ${renderDnaCategory('comm', profile.traits || {})}
@@ -259,18 +295,44 @@
                     let isValid = true;
                     const lang = localStorage.getItem('gamicon_lang') || 'en';
 
+                    // --- NEW: Validate Birthday ---
+                    const birthdayInput = document.getElementById('birthday-edit-input');
+                    const birthdayError = document.getElementById('birthday-error');
+                    let isAgeValid = true;
+                    if (birthdayInput.value === '') {
+                        isAgeValid = false;
+                    } else {
+                        const today = new Date();
+                        const birthDate = new Date(birthdayInput.value);
+                        today.setHours(0, 0, 0, 0);
+                        let age = today.getFullYear() - birthDate.getFullYear();
+                        const m = today.getMonth() - birthDate.getMonth();
+                        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
+                        if (birthDate.getTime() > today.getTime() || age < 18) { isAgeValid = false; }
+                    }
+                    if (!isAgeValid) {
+                        isValid = false;
+                        birthdayError.textContent = translations.errorAge[lang] || "Must be 18 or older.";
+                    }
+                    // --- END NEW ---
+
                     for (const cat in CATEGORY_MAP) {
                         const count = document.querySelectorAll(`.trait-tag[data-category="${cat}"].active-${cat}`).length;
                         const errorEl = document.getElementById(`${cat}-error`);
                         
                         if (count === 0) {
-                            errorEl.textContent = (cat === 'comm') ? translations.errorPick1[lang] : translations.errorPickAtLeast1[lang];
+                            errorEl.textContent = (cat === 'comm') ? (translations.errorPick1 ? translations.errorPick1[lang] : "Pick 1") : (translations.errorPickAtLeast1 ? translations.errorPickAtLeast1[lang] : "Pick at least 1");
                             isValid = false;
                         }
                     }
 
                     if (isValid) {
                         let profile = JSON.parse(localStorage.getItem('userProfile'));
+                        
+                        // --- NEW: Update birthday and gender ---
+                        profile.birthday = document.getElementById('birthday-edit-input').value;
+                        profile.gender = document.getElementById('gender-edit-select').value;
+                        
                         profile.traits = { games: [], vibe: [], hours: [], comm: [] };
                         document.querySelectorAll('.trait-tag[class*="active-"]').forEach(tag => {
                             profile.traits[tag.dataset.category].push(tag.textContent);
