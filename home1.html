@@ -10,7 +10,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
         :root, body.theme-default {
-            --bg-body: #000; --text-color: white; --text-subtle: #9ca3af; --sidebar-bg: #111827; --sidebar-border: #374151; --main-bg: #1f2937; --link-color: #9ca3af; --link-hover-bg: #374151; --link-hover-text: white; --link-active-bg: #3b82f6; --link-active-text: white; --card-bg: #111827; --card-border: #4b5563; --card-border-hover: #3b82f6; --card-icon: #6b7280; --popup-bg: #111827; --popup-border: #4b5563; --popup-separator: #374151; --popup-hover-bg: #3b82f6; --popup-hover-text: white; --highlight-bg: #374151; --highlight-text: #e5e7eb;
+            --bg-body: #1f2937;
+            --text-color: white;
+            --text-subtle: #9ca3af;
+            --sidebar-bg: #111827;
+            --sidebar-border: #374151;
+            --main-bg: #1f2937;
+            --link-color: #9ca3af;
+            --link-hover-bg: #374151;
+            --link-hover-text: white;
+            --link-active-bg: #3b82f6;
+            --link-active-text: white;
+            --card-bg: #111827; 
+            --card-border: #4b5563;
+            --card-border-hover: #3b82f6;
+            --card-icon: #6b7280;
+            --popup-bg: #111827;
+            --popup-border: #4b5563;
+            --popup-separator: #374151;
+            --popup-hover-bg: #3b82f6;
+            --popup-hover-text: white;
+            --highlight-bg: #374151;
+            --highlight-text: #e5e7eb;
         }
         body.theme-light-gray {
             --bg-body: #f4f4f5; --text-color: #334155; --text-subtle: #64748b; --sidebar-bg: #ffffff; --sidebar-border: #e5e7eb; --main-bg: #f4f4f5; --link-color: #475569; --link-hover-bg: #f3f4f6; --link-hover-text: #1e293b; --link-active-bg: #2563eb; --link-active-text: white; --card-bg: #ffffff; --card-border: #e5e7eb; --popup-bg: #ffffff; --popup-border: #e5e7eb; --popup-separator: #f3f4f6; --popup-hover-text: white; --highlight-bg: #e5e7eb; --highlight-text: #374151;
@@ -18,8 +39,19 @@
         body.theme-true-dark {
             --bg-body: #000; --text-color: #fff; --text-subtle: #aaa; --sidebar-bg: #101010; --sidebar-border: #333; --main-bg: #000; --link-color: #aaa; --link-hover-bg: #222; --link-hover-text: #fff; --link-active-bg: #fff; --link-active-text: #000; --card-bg: #181818; --card-border: #333; --card-border-hover: #fff; --card-icon: #aaa; --popup-bg: #181818; --popup-border: #333; --popup-separator: #333; --popup-hover-bg: #fff; --popup-hover-text: #000; --highlight-bg: #222; --highlight-text: #eee;
         }
+        
+        /* MODIFIED: Set body font to Poppins and heading font to smaller 'Press Start 2P' */
         body { font-family: 'Poppins', sans-serif; background-color: var(--bg-body); color: var(--text-color); }
-        h1, h2, h3, h4, h5, h6 { font-family: 'Press Start 2P', cursive; }
+        h1, h2, h3, h4, h5, h6 { 
+            font-family: 'Press Start 2P', cursive;
+            letter-spacing: 0; /* The pixel font can have wide spacing, this tightens it up */
+        }
+        /* MODIFIED: "Half Pixel" - make the headings smaller */
+        header h1 { font-size: 1.2rem !important; }
+        .space-y-8 h3 { font-size: 0.8rem !important; }
+        #sidebar-username { font-size: 0.7rem !important; }
+        /* --- End of Modification --- */
+        
         aside { background-color: var(--sidebar-bg); border-color: var(--sidebar-border); }
         main { background-color: var(--main-bg); }
         header p { color: var(--text-subtle); }
@@ -74,8 +106,13 @@
                 <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M12 14a4 4 0 100-8 4 4 0 000 8z"></path></svg><span data-translate-key="dashFriends">Friends</span></a>
                 <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg><span data-translate-key="dashNotifications">Notifications</span></a>
             </nav>
+            <!-- MODIFIED: Reverted profile section back to compact, horizontal layout -->
             <div id="profile-trigger" class="flex items-center space-x-3">
-                 <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
+                 <div class="relative">
+                     <!-- MODIFIED: Reverted avatar to small size and restored object-cover for correct aspect ratio -->
+                     <img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full object-cover">
+                     <span id="status-dot" class="status-dot"></span>
+                 </div>
                  <div><h3 id="sidebar-username" class="text-sm font-bold">PlayerOne</h3></div>
             </div>
         </aside>
@@ -84,7 +121,7 @@
             <header class="mb-8">
                 <h1 class="text-2xl md:text-3xl">Welcome to GamiCon!</h1>
                 <p class="text-base mt-2">
-                    We're thrilled to have you, <span id="main-username" class="font-semibold" style="color: var(--link-active-bg);"></span>. Here's a quick guide to get you started.
+                    We're thrilled to have you, <span id="main-username" class="font-semibold" style="color: var(--link-active-bg);">PlayerOne</span>. Here's a quick guide to get you started.
                 </p>
             </header>
             
@@ -125,7 +162,7 @@
                 </div>
 
                 <div class="text-center mt-12">
-                     <a href="playnow.html" class="inline-block bg-green-600 text-white px-8 py-4 font-bold text-lg rounded-md hover:bg-green-700 transition-transform transform hover:scale-105">
+                     <a href="playnow.html" class="inline-block bg-green-500 text-white px-8 py-4 font-bold text-lg rounded-lg hover:bg-green-600 transition-transform transform hover:scale-105">
                         Find your Buddy now!
                     </a>
                 </div>
@@ -135,9 +172,8 @@
 
     <div id="status-popup" class="hidden">
          <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator"><div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline"></span></div><div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span data-translate-key="statusIdle"></span></div><div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd"></span></div><div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible"></span></div><hr class="popup-separator">
-         <!-- MODIFIED: Links now correctly reference home1.html -->
          <a href="profiles.html?from=home1.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"></path></svg><span data-translate-key="popupEditProfile"></span></a>
-         <a href="settings.html?from=home1.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-translate-key="popupSettings"></span></a>
+         <a href="settings.html?from=home1.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"></path><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg><span data-translate-key="popupSettings"></span></a>
          <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg><span data-translate-key="popupLogout"></span></a>
     </div>
 
@@ -145,10 +181,8 @@
     <script>
         (() => {
             document.addEventListener('DOMContentLoaded', () => {
-                // Mock translations if translation.js is not loaded
                 if (typeof translations === 'undefined') { window.translations = { dashHome: { en: 'Home' }, dashDashboard: { en: 'Dashboard' }, dashPlayNow: { en: 'Play Now'}, dashChat: { en: 'Chat'}, dashFriends: { en: 'Friends' }, dashNotifications: { en: 'Notifications' }, statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' }, popupEditProfile: {en: 'Edit Profile'}, popupSettings: {en: 'Settings'}, popupLogout: {en: 'Logout'} }; console.warn("translation.js not found. Using mock data."); }
                 
-                // --- All configuration and element selectors ---
                 const statusConfig = { online: { className: 'status-online', langKey: 'statusOnline' }, idle: { className: 'status-idle', langKey: 'statusIdle' }, dnd: { className: 'status-dnd', langKey: 'statusDnd' }, invisible: { className: 'status-invisible', langKey: 'statusInvisible' }, };
                 const body = document.body;
                 const sidebarUsername = document.getElementById('sidebar-username');
@@ -162,13 +196,11 @@
                 const dashboardMenu = document.getElementById('dashboard-menu');
                 const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
 
-                // --- Retrieve user settings from localStorage ---
                 const lang = localStorage.getItem('gamicon_lang') || 'en';
                 const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
                 const currentStatus = localStorage.getItem('gamicon_status') || 'online';
-                const username = localStorage.getItem('gamicon_username') || 'Player';
+                const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
 
-                // --- Logic Functions ---
                 const applyTheme = (theme) => { body.className = ''; body.classList.add(theme); localStorage.setItem('gamicon_theme', theme); };
                 const setStatus = (status) => { const config = statusConfig[status] || statusConfig.online; statusDot.className = `status-dot ${config.className}`; popupStatusText.textContent = translations[config.langKey]?.[lang] || config.langKey; localStorage.setItem('gamicon_status', status); statusPopup.classList.add('hidden'); };
                 const applyUsername = (name) => { 
@@ -187,13 +219,11 @@
                     });
                 }
 
-                // --- Initial Application ---
                 applyTheme(currentTheme);
                 applyUsername(username);
                 setStatus(currentStatus);
                 applyTranslations(lang);
 
-                // --- Event Listeners ---
                 profileTrigger.addEventListener('click', (event) => { event.stopPropagation(); const rect = profileTrigger.getBoundingClientRect(); statusPopup.style.left = `${rect.left}px`; statusPopup.style.bottom = `${window.innerHeight - rect.top}px`; statusPopup.classList.toggle('hidden'); });
                 statusOptions.forEach(option => { option.addEventListener('click', (event) => { event.stopPropagation(); const newStatus = event.currentTarget.dataset.status; setStatus(newStatus); }); });
                 window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) { statusPopup.classList.add('hidden'); } });
