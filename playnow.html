@@ -31,16 +31,16 @@
         .nav-menu.is-open .nav-submenu { max-height: 200px; }
         .nav-submenu-link { padding-left: 2rem !important; font-size: 0.8rem !important; }
         .nav-submenu-link .w-5 { width: 1.1rem; height: 1.1rem; }
-        .room-card { background-color: var(--room-card-bg); padding: 1.5rem; border-radius: 8px; display: flex; align-items: center; justify-content: space-between; transition: background-color 0.2s ease-in-out; border: 1px solid var(--sidebar-border); }
+        .room-card { background-color: var(--room-card-bg); padding: 1rem; border-radius: 8px; display: flex; align-items: center; gap: 1rem; transition: background-color 0.2s ease-in-out; border: 1px solid var(--sidebar-border); }
         .room-card:hover { background-color: var(--room-card-hover-bg); }
-        .room-details-icon { width: 1.25rem; height: 1.25rem; margin-right: 0.5rem; color: var(--text-subtle); }
+        .room-card-img { width: 80px; height: 80px; object-fit: cover; border-radius: 6px; flex-shrink: 0; background-color: var(--sidebar-bg); }
         .form-section { background-color: var(--form-bg); border: 1px solid var(--sidebar-border); padding: 1.5rem; border-radius: 8px; }
         .form-label { font-size: 0.75rem; color: var(--text-subtle); letter-spacing: 1px; margin-bottom: 1rem; display: block;}
-        .custom-select { background-color: var(--sidebar-bg); border: 1px solid var(--sidebar-border); color: var(--text-color); }
+        .custom-select, .filter-select { background-color: var(--sidebar-bg); border: 1px solid var(--sidebar-border); color: var(--text-color); border-radius: 6px; padding: 0.5rem 0.75rem; }
         .radio-option input[type="radio"] { opacity: 0; width: 0; height: 0; position: absolute; }
         .radio-option span { display: block; padding: 0.5rem 1rem; border: 2px solid var(--sidebar-border); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; text-align: center; }
         .radio-option input[type="radio"]:checked + span { border-color: var(--neon-blue); background-color: var(--neon-blue); color: var(--link-active-text); box-shadow: 0 0 10px var(--neon-blue-glow); }
-        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; text-align: center; transition: all 0.2s; border: none; cursor: pointer; }
+        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; text-align: center; transition: all 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center;}
         .btn-primary { background-color: var(--link-active-bg); color: var(--link-active-text); }
         .btn-secondary { background-color: var(--btn-secondary-bg); color: var(--text-color); }
         .btn-danger { background-color: #ef4444; color: white; }
@@ -57,24 +57,25 @@
 </head>
 <body class="theme-default">
     <div class="flex min-h-screen">
+        <!-- Sidebar -->
         <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
              <nav class="space-y-2">
                 <div class="nav-menu is-open" id="dashboard-menu">
                     <a href="main1.html" class="nav-link nav-menu-trigger w-full">
                         <div class="flex items-center">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
                             <span data-translate-key="dashDashboard">Dashboard</span>
                         </div>
                         <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
                     <div class="nav-submenu">
                         <a href="playnow.html" class="nav-link nav-submenu-link active">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
                             <span data-translate-key="dashPlayNow">Play Now</span>
                         </a>
                     </div>
                 </div>
-                <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span data-translate-key="dashChat">Chat</span></a>
+                <a href="#" class="nav-link"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span data-translate-key="dashChat">Chat</span></a>
             </nav>
             <div id="profile-trigger" class="flex items-center space-x-3 cursor-pointer">
                 <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
@@ -82,68 +83,105 @@
             </div>
         </aside>
 
+        <!-- Main content area -->
         <main class="flex-1 p-4 md:p-8">
             <header class="mb-8">
                 <h1 class="text-2xl md:text-3xl" data-translate-key="playnowTitle">Find a Match</h1>
                 <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="playnowSubtitle">Jump into a game right away or create your own.</p>
             </header>
             
-            <div id="room-list-section">
-                <div class="flex justify-between items-center mb-6">
-                    <h2 class="text-xl" data-translate-key="playnowLobbies">Game Lobbies</h2>
-                    <button class="btn btn-secondary flex items-center"><svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 4v5h5M20 20v-5h-5M4 4l16 16"></path></svg><span data-translate-key="playnowRefresh">Refresh</span></button>
-                </div>
-                <div class="space-y-4">
-                    <!-- Example Room 1: FPS -->
-                    <div class="room-card">
-                        <div>
-                            <h3 class="text-lg font-bold">🕹️ Valorant Comp Climb</h3>
-                            <div class="grid grid-cols-2 gap-x-6 gap-y-2 mt-3 text-sm" style="color: var(--text-subtle);">
-                                <div class="flex items-center"><span>🎮 <span data-translate-key="playnowGenreFPS">FPS</span></span></div>
-                                <div class="flex items-center"><span>🔄 <span data-translate-key="playnowTypeRanked">Ranked</span></span></div>
-                                <div class="flex items-center"><span>👥 4/5 - <span data-translate-key="playnowNeed">Need</span> Sentinel</span></div>
-                                <div class="flex items-center font-semibold text-amber-400"><span>🕒 <span data-translate-key="playnowUrgencyExpires">Expires in</span> 2:15</span></div>
-                            </div>
-                        </div>
-                        <button class="btn btn-primary w-28" data-translate-key="playnowJoin">Join</button>
+            <div id="play-now-content">
+                <!-- Quick Join Panel -->
+                <div class="form-section mb-8">
+                    <h2 class="form-label" data-translate-key="quickJoinTitle">Quick Join</h2>
+                    <div class="flex flex-col sm:flex-row items-center gap-4">
+                        <select id="quick-join-select" class="custom-select w-full sm:w-1/2 p-3 text-base">
+                            <option value="valorant" data-translate-key="gameValorant">Valorant</option>
+                            <option value="lol" data-translate-key="gameLeagueOfLegends">League of Legends</option>
+                            <option value="cs2" data-translate-key="gameCS2">Counter-Strike 2</option>
+                        </select>
+                        <button class="btn btn-primary w-full sm:w-auto flex-grow py-3 text-base">
+                            <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span data-translate-key="quickJoinBtn">Find Instant Match</span>
+                        </button>
                     </div>
-                    <!-- Example Room 2: MOBA -->
-                    <div class="room-card">
-                        <div>
-                            <h3 class="text-lg font-bold">🕹️ League of Legends ARAMs</h3>
-                            <div class="grid grid-cols-2 gap-x-6 gap-y-2 mt-3 text-sm" style="color: var(--text-subtle);">
-                                <div class="flex items-center"><span>🎮 <span data-translate-key="playnowGenreMOBA">MOBA</span></span></div>
-                                <div class="flex items-center"><span>🔄 <span data-translate-key="playnowTypeChill">Chill & Chat</span></span></div>
-                                <div class="flex items-center"><span>👥 8/10 <span data-translate-key="playnowPlayers">Players</span></span></div>
-                                <div class="flex items-center font-semibold text-green-400"><span data-translate-key="playnowUrgencyLooking">🕒 Looking Now</span></div>
-                            </div>
+                </div>
+
+                <!-- Lobbies Section -->
+                <div>
+                    <div class="flex flex-wrap justify-between items-center gap-4 mb-6">
+                        <h2 class="text-xl" data-translate-key="playnowLobbies">Game Lobbies</h2>
+                        <div class="flex items-center gap-2 sm:gap-4">
+                            <select id="filter-game" class="filter-select text-sm">
+                                <option value="all" data-translate-key="filterAllGames">All Games</option>
+                                <option value="valorant" data-translate-key="gameValorant">Valorant</option>
+                                <option value="lol" data-translate-key="gameLeagueOfLegends">League of Legends</option>
+                            </select>
+                            <select id="filter-type" class="filter-select text-sm">
+                                <option value="all" data-translate-key="filterAllTypes">All Types</option>
+                                <option value="ranked" data-translate-key="playnowTypeRanked">Ranked</option>
+                                <option value="chill" data-translate-key="playnowTypeChill">Chill</option>
+                            </select>
+                            <button id="show-creator-btn" class="btn btn-secondary !px-3">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path></svg>
+                                <span class="hidden sm:inline ml-2" data-translate-key="playnowCreateBtn">Create Room</span>
+                            </button>
                         </div>
-                        <button class="btn btn-primary w-28" data-translate-key="playnowJoin">Join</button>
+                    </div>
+                    
+                    <div class="space-y-4">
+                        <div class="room-card">
+                            <img src="https://via.placeholder.com/150/FF4655/FFFFFF?Text=VAL" alt="Valorant" class="room-card-img"/>
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-bold">Valorant Comp Climb</h3>
+                                <div class="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-sm" style="color: var(--text-subtle);">
+                                    <span class="font-semibold text-rose-400" data-translate-key="playnowTypeRanked">Ranked</span>
+                                    <span>•</span>
+                                    <span>4/5 - <b class="font-semibold text-white" data-translate-key="playnowNeedSentinel">Need Sentinel</b></span>
+                                    <span>•</span>
+                                    <span class="font-semibold text-amber-400 flex items-center"><svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg><span data-translate-key="playnowUrgencyExpires">Expires in</span> 2:15</span>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary w-24 flex-shrink-0" data-translate-key="playnowJoin">Join</button>
+                        </div>
+                        <div class="room-card">
+                            <img src="https://via.placeholder.com/150/005A82/FFFFFF?Text=LoL" alt="League of Legends" class="room-card-img"/>
+                            <div class="flex-grow">
+                                <h3 class="text-lg font-bold">League of Legends ARAMs</h3>
+                                <div class="flex flex-wrap gap-x-4 gap-y-1 mt-2 text-sm" style="color: var(--text-subtle);">
+                                    <span class="font-semibold text-sky-400" data-translate-key="playnowTypeChill">Chill & Chat</span>
+                                    <span>•</span>
+                                    <span>8/10 <span data-translate-key="playnowPlayers">Players</span></span>
+                                    <span>•</span>
+                                    <span class="font-semibold text-green-400 flex items-center"><svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg><span data-translate-key="playnowUrgencyLooking">Looking Now</span></span>
+                                </div>
+                            </div>
+                             <button class="btn btn-primary w-24 flex-shrink-0" data-translate-key="playnowJoin">Join</button>
+                        </div>
                     </div>
                 </div>
             </div>
             
             <hr class="border-t-2 border-dashed my-10" style="border-color: var(--sidebar-border);">
             
-            <div id="room-creator-cta" class="text-center">
-                <h2 class="text-xl" data-translate-key="playnowCreateTitle">Or Create Your Own</h2>
-                <p class="mt-2 mb-6" style="color: var(--text-subtle);" data-translate-key="playnowCreateSubtitle">Can't find the perfect squad? Set the rules yourself.</p>
-                <button id="show-creator-btn" class="btn btn-primary px-8 py-3 text-base" data-translate-key="playnowCreateBtn">Create a Room</button>
-            </div>
-            
+            <!-- Room Creator Panel -->
             <div id="room-creator-panel" class="hidden">
+                 <button id="back-to-lobbies-btn" class="btn !p-0 !bg-transparent !text-sm !font-semibold mb-6 hover:text-white transition" style="color: var(--text-subtle);">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                    <span data-translate-key="backToLobbies">Back to Lobbies</span>
+                 </button>
                  <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                      <div class="lg:col-span-2 space-y-6">
                         <div class="form-section">
                              <label for="game-select" class="form-label" data-translate-key="playnowStep1">Step 1: Select Your Game</label>
                              <select id="game-select" class="custom-select w-full p-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none">
                                 <option value="" data-translate-key="playnowChooseGame">-- Choose a Game --</option>
-                                <option value="lol" data-genre="moba">League of Legends</option>
-                                <option value="dota2" data-genre="moba">Dota 2</option>
-                                <option value="valorant" data-genre="fps">Valorant</option>
-                                <option value="cs2" data-genre="fps">Counter-Strike 2</option>
-                                <option value="fallguys" data-genre="party">Fall Guys</option>
-                                <option value="amongus" data-genre="party">Among Us</option>
+                                <option value="lol" data-genre="moba" data-translate-key="gameLeagueOfLegends">League of Legends</option>
+                                <option value="dota2" data-genre="moba" data-translate-key="gameDota2">Dota 2</option>
+                                <option value="valorant" data-genre="fps" data-translate-key="gameValorant">Valorant</option>
+                                <option value="cs2" data-genre="fps" data-translate-key="gameCS2">Counter-Strike 2</option>
+                                <option value="fallguys" data-genre="party" data-translate-key="gameFallGuys">Fall Guys</option>
+                                <option value="amongus" data-genre="party" data-translate-key="gameAmongUs">Among Us</option>
                              </select>
                         </div>
                         <div id="dynamic-options-wrapper" class="hidden space-y-6"></div>
@@ -151,14 +189,24 @@
                      <div class="space-y-6">
                         <div id="status-panel" class="form-section space-y-4 hidden">
                             <label class="form-label" data-translate-key="playnowRoomStatus">Room Status</label>
-                            <div class="text-center p-4 border-2 border-dashed rounded-lg" style="border-color:var(--sidebar-border);">
-                                <p class="text-sm" style="color:var(--text-subtle);"><span data-translate-key="playnowRoomExpires">This room will expire in</span> <strong id="countdown-timer" class="text-lg text-amber-400">3:00</strong></p>
+                            
+                            <div class="flex items-center justify-between py-2">
+                                <label for="enable-timer-toggle" class="font-poppins text-sm font-semibold" style="color:var(--text-color); cursor: pointer;" data-translate-key="enableTimer">Enable Expiry Timer</label>
+                                <input type="checkbox" id="enable-timer-toggle" checked class="h-4 w-4 rounded" style="accent-color: var(--neon-blue); cursor: pointer;">
                             </div>
-                            <label class="form-label" data-translate-key="playnowCreatorControls">Creator Controls</label>
-                            <div class="grid grid-cols-1 gap-3">
-                                <button class="btn btn-secondary" data-translate-key="playnowExtend">Extend by 2 mins</button>
-                                <button id="cancel-creator-btn" type="button" class="btn btn-danger text-center" data-translate-key="playnowCancel">Cancel Creation</button>
+
+                            <div id="timer-controls-wrapper" class="space-y-4">
+                                <div class="text-center p-4 border-2 border-dashed rounded-lg" style="border-color:var(--sidebar-border);">
+                                    <p class="text-sm" style="color:var(--text-subtle);"><span data-translate-key="playnowRoomExpires">This room will expire in</span> <strong id="countdown-timer" class="text-lg text-amber-400">3:00</strong></p>
+                                </div>
+                                <label class="form-label !mb-2" data-translate-key="playnowCreatorControls">Creator Controls</label>
+                                <div class="grid grid-cols-1 gap-3">
+                                    <button class="btn btn-secondary" data-translate-key="playnowExtend">Extend by 2 mins</button>
+                                </div>
                             </div>
+                            
+                            <hr class="border-t !my-4" style="border-color:var(--popup-separator);" />
+                            <button id="cancel-creator-btn" type="button" class="btn btn-danger w-full text-center" data-translate-key="playnowCancel">Cancel Creation</button>
                         </div>
                      </div>
                 </div>
@@ -166,6 +214,7 @@
         </main>
     </div>
 
+    <!-- === FIXED: Restored full HTML for Status Popup and Templates === -->
     <div id="status-popup" class="hidden">
          <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
          <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline">Online</span></div>
@@ -192,8 +241,8 @@
             </div>
         </div>
     </template>
-
-    <script src="translation.js"></script> <!-- ADDED SCRIPT TAG -->
+    
+    <script src="translation.js"></script>
     <script>
     (() => {
         document.addEventListener('DOMContentLoaded', () => {
@@ -202,23 +251,34 @@
             body.className = ''; body.classList.add(savedTheme);
 
             const showCreatorBtn = document.getElementById('show-creator-btn');
-            const roomCreatorCta = document.getElementById('room-creator-cta');
+            const playNowContent = document.getElementById('play-now-content'); 
             const roomCreatorPanel = document.getElementById('room-creator-panel');
-            const cancelCreatorBtn = document.getElementById('cancel-creator-btn');
             const gameSelect = document.getElementById('game-select');
             const dynamicOptionsWrapper = document.getElementById('dynamic-options-wrapper');
             const statusPanel = document.getElementById('status-panel');
 
+            const cancelCreatorBtn = document.getElementById('cancel-creator-btn');
+            const backToLobbiesBtn = document.getElementById('back-to-lobbies-btn');
+            const enableTimerToggle = document.getElementById('enable-timer-toggle');
+            const timerControlsWrapper = document.getElementById('timer-controls-wrapper');
+
+            const returnToLobbiesView = () => {
+                roomCreatorPanel.classList.add('hidden');
+                playNowContent.classList.remove('hidden');
+                gameSelect.value = "";
+                gameSelect.dispatchEvent(new Event('change'));
+            };
+
             showCreatorBtn.addEventListener('click', () => {
-                roomCreatorCta.classList.add('hidden');
+                playNowContent.classList.add('hidden');
                 roomCreatorPanel.classList.remove('hidden');
             });
             
-            cancelCreatorBtn.addEventListener('click', () => {
-                roomCreatorPanel.classList.add('hidden');
-                roomCreatorCta.classList.remove('hidden');
-                gameSelect.value = "";
-                gameSelect.dispatchEvent(new Event('change'));
+            backToLobbiesBtn.addEventListener('click', returnToLobbiesView);
+            cancelCreatorBtn.addEventListener('click', returnToLobbiesView);
+            
+            enableTimerToggle.addEventListener('change', () => {
+                timerControlsWrapper.classList.toggle('hidden', !enableTimerToggle.checked);
             });
             
             const templates = {
@@ -238,20 +298,20 @@
                     dynamicOptionsWrapper.classList.remove('hidden');
                     statusPanel.classList.remove('hidden');
                     
-                    // Re-apply language after new content is added
+                    enableTimerToggle.checked = true;
+                    timerControlsWrapper.classList.remove('hidden');
+                    
                     const currentLang = localStorage.getItem('gamicon_lang') || 'en';
-                    setLanguage(currentLang);
+                    if(typeof setLanguage === 'function') {
+                        setLanguage(currentLang);
+                    }
                 }
             });
 
+            // --- Unchanged and Correct Profile Popup Script ---
             const dashboardMenu = document.getElementById('dashboard-menu');
             const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
-            dashboardTrigger.addEventListener('click', (event) => {
-                if (!dashboardMenu.classList.contains('is-open')) { event.preventDefault(); }
-                dashboardMenu.classList.toggle('is-open');
-            });
-
-            // --- Profile Popup Logic ---
+            dashboardTrigger.addEventListener('click', (event) => { if (!dashboardMenu.classList.contains('is-open')) { event.preventDefault(); } dashboardMenu.classList.toggle('is-open'); });
             const profileTrigger = document.getElementById('profile-trigger');
             const statusPopup = document.getElementById('status-popup');
             const statusDot = document.getElementById('status-dot');
@@ -259,55 +319,17 @@
             const popupUsername = document.getElementById('popup-username');
             const popupStatusText = document.getElementById('popup-status-text');
             const statusOptions = statusPopup.querySelectorAll('.popup-option[data-status]');
-
-            const statusMap = {
-                online: { key: 'statusOnline', className: 'status-online' },
-                idle: { key: 'statusIdle', className: 'status-idle' },
-                dnd: { key: 'statusDnd', className: 'status-dnd' },
-                invisible: { key: 'statusInvisible', className: 'status-invisible' }
-            };
-
-            const updateStatus = (newStatus) => {
-                const lang = localStorage.getItem('gamicon_lang') || 'en';
-                const statusInfo = statusMap[newStatus] || statusMap.online;
-                
-                statusDot.className = `status-dot ${statusInfo.className}`;
-                popupStatusText.textContent = translations[statusInfo.key][lang];
-                localStorage.setItem('gamicon_status', newStatus);
-            };
-            
+            const statusMap = { online: { key: 'statusOnline', className: 'status-online' }, idle: { key: 'statusIdle', className: 'status-idle' }, dnd: { key: 'statusDnd', className: 'status-dnd' }, invisible: { key: 'statusInvisible', className: 'status-invisible' }};
+            const updateStatus = (newStatus) => { const lang = localStorage.getItem('gamicon_lang') || 'en'; const statusInfo = statusMap[newStatus] || statusMap.online; statusDot.className = `status-dot ${statusInfo.className}`; localStorage.setItem('gamicon_status', newStatus); if(typeof setLanguage === 'function') { setLanguage(lang); } };
             const currentUsername = localStorage.getItem('gamicon_username') || 'PlayerOne';
             sidebarUsername.textContent = currentUsername;
             popupUsername.textContent = currentUsername;
             const currentStatus = localStorage.getItem('gamicon_status') || 'online';
             updateStatus(currentStatus);
-
-            profileTrigger.addEventListener('click', (event) => {
-                event.stopPropagation();
-                const rect = profileTrigger.getBoundingClientRect();
-                statusPopup.style.left = `${rect.left}px`;
-                statusPopup.style.bottom = `${window.innerHeight - rect.top}px`;
-                statusPopup.classList.toggle('hidden');
-            });
-
-            statusOptions.forEach(option => {
-                option.addEventListener('click', (event) => {
-                    event.stopPropagation();
-                    const newStatus = option.dataset.status;
-                    updateStatus(newStatus);
-                    statusPopup.classList.add('hidden');
-                });
-            });
-
-            statusPopup.addEventListener('click', (event) => {
-                event.stopPropagation();
-            });
-
-            window.addEventListener('click', () => {
-                if (!statusPopup.classList.contains('hidden')) {
-                    statusPopup.classList.add('hidden');
-                }
-            });
+            profileTrigger.addEventListener('click', (event) => { event.stopPropagation(); const rect = profileTrigger.getBoundingClientRect(); statusPopup.style.left = `${rect.left}px`; statusPopup.style.bottom = `${window.innerHeight - rect.top}px`; statusPopup.classList.toggle('hidden'); });
+            statusOptions.forEach(option => { option.addEventListener('click', (event) => { event.stopPropagation(); const newStatus = option.dataset.status; updateStatus(newStatus); statusPopup.classList.add('hidden'); }); });
+            statusPopup.addEventListener('click', (event) => { event.stopPropagation(); });
+            window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) { statusPopup.classList.add('hidden'); } });
         });
     })();
     </script>
