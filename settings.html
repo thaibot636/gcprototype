@@ -56,6 +56,7 @@
     </style>
 </head>
 <body class="theme-default">
+    <!-- MODIFIED: The href will be set by JavaScript -->
     <a href="main1.html" class="close-button-esc">
         <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
         <span data-translate-key="esc"></span>
@@ -123,15 +124,22 @@
             // --- LANGUAGE LOGIC ---
             const langButtons = document.querySelectorAll('#lang-en, #lang-th');
             const applyLanguageSelection = (lang) => {
-                // The global setLanguage function comes from translation.js
-                // It will translate the whole page and save the choice.
                 setLanguage(lang); 
-                // This part just updates the visual "selected" state of the button.
                 langButtons.forEach(btn => btn.classList.toggle('selected', btn.id === `lang-${lang}`));
             };
             langButtons.forEach(button => button.addEventListener('click', () => applyLanguageSelection(button.id.split('-')[1])));
-            // Set the initial selected state when the page loads
             applyLanguageSelection(localStorage.getItem('gamicon_lang') || 'en');
+
+            // --- MODIFIED: DYNAMIC CLOSE BUTTON LOGIC ---
+            const closeButton = document.querySelector('.close-button-esc');
+            const urlParams = new URLSearchParams(window.location.search);
+            const returnPage = urlParams.get('from');
+
+            if (returnPage) {
+                closeButton.href = returnPage;
+            } else {
+                closeButton.href = 'main1.html'; // Fallback link
+            }
         });
     </script>
 </body>
