@@ -47,6 +47,7 @@
         <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
             <nav class="space-y-2">
                 <a href="main1.html" class="nav-link active"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span data-translate-key="dashDashboard"></span></a>
+                <a href="playnow.html" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><span data-translate-key="dashPlayNow"></span></a>
                 <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg><span data-translate-key="dashChat"></span></a>
             </nav>
             <div id="profile-trigger" class="flex items-center space-x-3">
@@ -58,15 +59,12 @@
             <header class="mb-8"><h1 id="welcome-header" class="text-2xl md:text-3xl"></h1><p class="text-base mt-2" data-translate-key="dashSubtitle"></p></header>
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <a href="#" class="main-card p-8 text-center block"><svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M15 21a6 6 0 00-9-5.197M15 12a4 4 0 110-8 4 4 0 010 8z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashLongTerm"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashLongTermDesc"></p><div class="inline-block bg-blue-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashStartSwiping"></div></a>
-                
-                <!-- *** MODIFICATION HERE: The link now points to playnow.html *** -->
-                <a href="playnow.html" class="main-card p-8 text-center block">
-                    <svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashPlayNow"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashPlayNowDesc"></p><div class="inline-block bg-green-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashJoinRoom"></div>
-                </a>
+                <a href="playnow.html" class="main-card p-8 text-center block"><svg class="main-card-icon mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><h2 class="text-xl font-bold mb-2" data-translate-key="dashPlayNow"></h2><p class="text-base leading-relaxed mb-6" data-translate-key="dashPlayNowDesc"></p><div class="inline-block bg-green-600 text-white px-6 py-3 font-bold text-sm" data-translate-key="dashJoinRoom"></div></a>
             </div>
         </main>
     </div>
 
+    <!-- *** MODIFICATION HERE: Restoring the full popup HTML *** -->
     <div id="status-popup" class="hidden">
         <div class="popup-header"><h4 id="popup-username" class="popup-username">PlayerOne</h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
         <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline"></span></div>
@@ -78,9 +76,9 @@
         <hr class="popup-separator">
         <a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path></svg><span data-translate-key="popupLogout"></span></a>
     </div>
-
-    <!-- The script is identical and does not need changes -->
+    
     <script src="translation.js"></script>
+    <!-- *** MODIFICATION HERE: Restoring the full script *** -->
     <script>
         (() => {
             document.addEventListener('DOMContentLoaded', () => {
