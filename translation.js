@@ -45,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
         bestValue: { en: '★BEST VALUE★', th: '★คุ้มที่สุด★' },
 
         // --- index2.html ---
-        joinHeader: { en: 'Join GamiCon', th: 'เข้าร่วม GamiCon' },
+        joinHeader: { en: 'Join GamiCon', th: 'Join GamiCon' },
         joinSubtitle: { en: 'Create your account to start', th: 'สร้างบัญชีเพื่อเริ่มต้น' },
         loginHeader: { en: 'Welcome Back', th: 'ยินดีต้อนรับกลับ' },
         loginSubtitle: { en: 'Log in to continue', th: 'เข้าสู่ระบบเพื่อไปต่อ' },
@@ -151,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
         dashPlayNowDesc: { en: 'Jump into the action immediately. Browse or create a room.', th: 'เข้าสู่การต่อสู้ทันที ค้นหาหรือสร้างห้อง' },
         dashJoinRoom: { en: 'JOIN A ROOM', th: 'เข้าร่วมห้อง' },
         
-        // --- Status Popup in main1.html ---
+        // --- Status Popup (Shared) ---
         statusOnline: { en: 'Online', th: 'ออนไลน์' },
         statusIdle: { en: 'Idle', th: 'ไม่ว่าง' },
         statusDnd: { en: 'Do Not Disturb', th: 'ห้ามรบกวน' },
@@ -174,6 +174,51 @@ document.addEventListener('DOMContentLoaded', () => {
         settingsLangEn: { en: 'English', th: 'อังกฤษ' },
         settingsLangTh: { en: 'Thai', th: 'ไทย' },
         esc: { en: 'ESC', th: 'ESC' },
+
+        // --- playnow.html ---
+        playnowTitle: { en: 'Find a Match', th: 'ค้นหาแมตช์' },
+        playnowSubtitle: { en: 'Jump into a game right away or create your own.', th: 'กระโดดเข้าสู่เกมทันทีหรือสร้างห้องของคุณเอง' },
+        playnowLobbies: { en: 'Game Lobbies', th: 'ล็อบบี้เกม' },
+        playnowRefresh: { en: 'Refresh', th: 'รีเฟรช' },
+        playnowJoin: { en: 'Join', th: 'เข้าร่วม' },
+        playnowGenreFPS: { en: 'FPS', th: 'FPS' },
+        playnowGenreMOBA: { en: 'MOBA', th: 'MOBA' },
+        playnowTypeRanked: { en: 'Ranked', th: 'จัดอันดับ' },
+        playnowTypeChill: { en: 'Chill & Chat', th: 'ชิลล์ & คุย' },
+        playnowPlayers: { en: 'Players', th: 'ผู้เล่น' },
+        playnowNeed: { en: 'Need', th: 'ต้องการ' },
+        playnowUrgencyExpires: { en: 'Expires in', th: 'หมดอายุใน' },
+        playnowUrgencyLooking: { en: 'Looking Now', th: 'กำลังหา' },
+        playnowUrgencyStarting: { en: 'Starting Soon!', th: 'เริ่มเร็วๆ นี้!' },
+        playnowCreateTitle: { en: 'Or Create Your Own', th: 'หรือสร้างห้องของคุณเอง' },
+        playnowCreateSubtitle: { en: "Can't find the perfect squad? Set the rules yourself.", th: 'หาทีมที่ไม่เจอใช่ไหม? สร้างห้องของคุณเองเลย' },
+        playnowCreateBtn: { en: 'Create a Room', th: 'สร้างห้อง' },
+        playnowStep1: { en: 'Step 1: Select Your Game', th: 'ขั้นตอนที่ 1: เลือกเกมของคุณ' },
+        playnowChooseGame: { en: '-- Choose a Game --', th: '-- เลือกเกม --' },
+        playnowStep2FPS: { en: 'Step 2: FPS Settings', th: 'ขั้นตอนที่ 2: ตั้งค่า FPS' },
+        playnowRolePref: { en: 'PREFERRED ROLE', th: 'บทบาทที่ต้องการ' },
+        playnowRole: { en: 'ROLE', th: 'บทบาท' },
+        playnowRoleEntry: { en: 'Entry', th: 'ตัวเข้า' },
+        playnowRoleSniper: { en: 'Sniper', th: 'สไนเปอร์' },
+        playnowRoleIGL: { en: 'IGL', th: 'IGL' },
+        playnowRoleFlex: { en: 'Flex', th: 'ตัวยืดหยุ่น' },
+        playnowMobaSettings: { en: 'MOBA Settings', th: 'ตั้งค่า MOBA' },
+        playnowRoleTop: { en: 'Top', th: 'บน' },
+        playnowRoleMid: { en: 'Mid', th: 'กลาง' },
+        playnowRoleJungle: { en: 'Jungle', th: 'ป่า' },
+        playnowRoleADC: { en: 'ADC', th: 'ADC' },
+        playnowRoleSupport: { en: 'Support', th: 'ซัพพอร์ต' },
+        playnowPartySettings: { en: 'Party Game Settings', th: 'ตั้งค่าปาร์ตี้เกม' },
+        playnowVibe: { en: 'VIBE', th: 'สไตล์' },
+        playnowVibeFunny: { en: 'Funny', th: 'ตลก' },
+        playnowVibeCasual: { en: 'Casual', th: 'สบายๆ' },
+        playnowVibeTalkative: { en: 'Talkative', th: 'ช่างคุย' },
+        playnowVibeNoMic: { en: 'No Mic', th: 'ไม่ใช้ไมค์' },
+        playnowRoomStatus: { en: 'Room Status', th: 'สถานะห้อง' },
+        playnowRoomExpires: { en: 'This room will expire in', th: 'ห้องนี้จะหมดอายุใน' },
+        playnowCreatorControls: { en: 'Creator Controls', th: 'ส่วนควบคุมผู้สร้าง' },
+        playnowExtend: { en: 'Extend by 2 mins', th: 'ขยายเวลา 2 นาที' },
+        playnowCancel: { en: 'Cancel Creation', th: 'ยกเลิกการสร้าง' },
     };
 
     // Define the main function in the global scope
@@ -182,10 +227,9 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.dataset.translateKey;
             const translation = translations[key]?.[lang];
             if (translation) {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+                // Handle different element types
+                if (el.dataset.translateTarget === 'placeholder' && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
                     el.placeholder = translation;
-                } else if (el.tagName === 'OPTION') {
-                    el.textContent = translation;
                 } else {
                     el.textContent = translation;
                 }
@@ -194,7 +238,6 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.lang = lang;
         localStorage.setItem('gamicon_lang', lang);
 
-        // This part is for the simple text-swap button on the landing pages, not used on settings page
         const toggleButtons = document.querySelectorAll('.lang-toggle');
         toggleButtons.forEach(button => {
             button.textContent = lang === 'en' ? 'ไทย' : 'EN';
