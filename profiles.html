@@ -9,72 +9,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
-        /* Base styles */
         body { font-family: 'Poppins', sans-serif; transition: background-color 0.3s, color 0.3s; }
         .profile-card { border-width: 4px; }
-
-        /* Typography Hierarchy with the retro font */
         .profile-username { font-family: 'Poppins', sans-serif; font-weight: 700; }
-        .section-title {
-            font-family: 'Press Start 2P', cursive;
-            font-size: 0.8rem;
-        }
-        
-        /* --- STANDARD: The "8-bit" Button Style --- */
-        .btn-8bit {
-            display: inline-block;
-            text-align: center;
-            font-weight: bold;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px; 
-            border-width: 4px;
-            text-transform: uppercase;
-            transition: all 0.15s ease-in-out;
-            cursor: pointer;
-        }
+        .section-title { font-family: 'Press Start 2P', cursive; font-size: 0.8rem; }
+        .btn-8bit { display: inline-block; text-align: center; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 8px; border-width: 4px; text-transform: uppercase; transition: all 0.15s ease-in-out; cursor: pointer; }
         .btn-8bit:hover { transform: translate(-3px, -3px); }
         .btn-8bit:active { transform: translate(0, 0); box-shadow: none; }
-        
-        /* --- UPDATED: Square Trait Pill/Tag styles --- */
-        .trait-pill { 
-            display: inline-block; 
-            padding: 0.4rem 0.9rem;
-            font-weight: 600; 
-            font-size: 0.8rem;
-            border-radius: 0;
-        }
-        .trait-tag {
-            display: inline-block; 
-            border: 2px solid;
-            padding: 0.5rem 1rem; 
-            font-size: 0.875rem;
-            cursor: pointer; 
-            transition: all 0.2s ease-in-out; 
-            user-select: none; 
-            border-radius: 0;
-        }
-
+        .trait-pill { display: inline-block; padding: 0.4rem 0.9rem; font-weight: 600; font-size: 0.8rem; border-radius: 0; }
+        .trait-tag { display: inline-block; border: 2px solid; padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; transition: all 0.2s ease-in-out; user-select: none; border-radius: 0; }
         .error-message { color: #ff5555; font-size: 0.8rem; font-weight: 600; }
-        
-        /* Style for inputs in edit mode */
-        .profile-input, .profile-select {
-            font-family: 'Poppins', sans-serif;
-            width: 100%;
-            padding: 0.75rem;
-            border-radius: 6px;
-            border-width: 2px;
-            background-color: transparent;
-            transition: border-color 0.2s;
-        }
-        .profile-input:focus, .profile-select:focus {
-            outline: none;
-            --tw-ring-color: #2563eb;
-            box-shadow: 0 0 0 2px var(--tw-ring-color);
-        }
-
-        /* --- THEME STYLES --- */
-        
-        /* DEFAULT (Dark Blue) Theme */
+        .profile-input, .profile-select { font-family: 'Poppins', sans-serif; width: 100%; padding: 0.75rem; border-radius: 6px; border-width: 2px; background-color: transparent; transition: border-color 0.2s; }
+        .profile-input:focus, .profile-select:focus { outline: none; --tw-ring-color: #2563eb; box-shadow: 0 0 0 2px var(--tw-ring-color); }
         body.theme-default { background-color: #111827; color: white; }
         .theme-default .profile-card { background-color: #1f2937; border-color: #4b5563; }
         .theme-default .section-title { color: #9ca3af; }
@@ -97,8 +43,6 @@
         .theme-default .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .theme-default .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
         .theme-default .profile-input, .theme-default .profile-select { border-color: #4b5563; color-scheme: dark; }
-
-        /* LIGHT GRAY Theme */
         body.theme-light-gray { background-color: #f4f4f5; color: #334155; }
         .theme-light-gray .profile-card { background-color: #ffffff; border-color: #e5e7eb; }
         .theme-light-gray .section-title { color: #64748b; }
@@ -121,8 +65,6 @@
         .theme-light-gray .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .theme-light-gray .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
         .theme-light-gray .profile-input, .theme-light-gray .profile-select { border-color: #d1d5db; }
-
-        /* TRUE DARK Theme */
         body.theme-true-dark { background-color: #000; color: #fff; }
         .theme-true-dark .profile-card { background-color: #101010; border-color: #333; }
         .theme-true-dark .section-title { color: #aaa; }
@@ -143,7 +85,6 @@
         .theme-true-dark .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .theme-true-dark .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
         .theme-true-dark .profile-input, .theme-true-dark .profile-select { border-color: #555; color-scheme: dark; }
-
     </style>
 </head>
 <body class="antialiased">
@@ -156,7 +97,6 @@
     <script src="translation.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- THEME LOGIC ---
             const body = document.body;
             const applyTheme = (theme) => {
                 body.className = body.className.replace(/theme-\S+/g, '').trim();
@@ -165,7 +105,6 @@
             const savedTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
             applyTheme(savedTheme);
             
-            // --- PROFILE LOGIC ---
             const profileContainer = document.getElementById('profile-container');
             let isEditMode = false;
 
@@ -186,7 +125,6 @@
             const renderDnaCategory = (category, userTraits) => {
                 const details = CATEGORY_MAP[category];
                 let dnaHTML = `<div class="space-y-3">`; 
-                
                 if (isEditMode) {
                     dnaHTML += `<h3 class="section-title">${details.title}</h3>`;
                     dnaHTML += `<div class="flex flex-wrap gap-2">`;
@@ -210,6 +148,10 @@
             };
 
             function renderProfile() {
+                // --- MODIFIED: Read the 'from' parameter from the URL ---
+                const urlParams = new URLSearchParams(window.location.search);
+                const returnUrl = urlParams.get('from') || 'main1.html'; // Default to main1.html if not provided
+
                 const profile = JSON.parse(localStorage.getItem('userProfile'));
                 const lang = localStorage.getItem('gamicon_lang') || 'en';
 
@@ -223,24 +165,21 @@
                         return `<a href="#" id="cancel-btn" class="btn-8bit btn-gray w-full md:w-auto">Cancel</a>
                                 <a href="#" id="save-btn" class="btn-8bit btn-green w-full md:w-auto">Save Changes</a>`;
                     } else {
-                        return `<a href="main1.html" class="btn-8bit btn-gray w-full md:w-auto">Back</a>
+                        // --- MODIFIED: Use the dynamic returnUrl for the "Back" button ---
+                        return `<a href="${returnUrl}" class="btn-8bit btn-gray w-full md:w-auto">Back</a>
                                 <a href="#" id="edit-btn" class="btn-8bit btn-blue w-full md:w-auto">Edit</a>`;
                     }
                 };
                 
                 const profileHTML = `
                     <div class="profile-card p-6 md:p-8 rounded-xl">
-                        <!-- Header -->
                         <div class="text-center mb-8">
                             <img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-28 h-28 rounded-full mx-auto border-4 border-gray-600 mb-4 ring-4 ring-gray-700">
                             <h1 class="profile-username text-3xl">${profile.username || 'N/A'}</h1>
                             <p class="text-gray-400 text-sm">${profile.email || 'N/A'}</p>
                         </div>
                         <hr class="my-6">
-
-                        <!-- Main Content Grid -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
-                            <!-- Left Column -->
                             <div class="space-y-8">
                                 ${isEditMode ? `
                                     <div>
@@ -267,16 +206,12 @@
                                 ${renderDnaCategory('hours', profile.traits || {})}
                                 ${renderDnaCategory('comm', profile.traits || {})}
                             </div>
-                            
-                            <!-- Right Column -->
                              <div class="space-y-8">
                                 ${renderDnaCategory('games', profile.traits || {})}
                                 ${renderDnaCategory('vibe', profile.traits || {})}
                              </div>
                         </div>
                     </div>
-                    
-                    <!-- Action Buttons -->
                     <div class="mt-6 flex flex-col-reverse md:flex-row gap-4 justify-end">${renderButtons()}</div>
                 `;
                 
@@ -285,17 +220,13 @@
 
             profileContainer.addEventListener('click', (event) => {
                 const target = event.target;
-                
                 if (target.matches('#edit-btn')) { event.preventDefault(); isEditMode = true; renderProfile(); }
                 if (target.matches('#cancel-btn')) { event.preventDefault(); isEditMode = false; renderProfile(); }
-                
                 if (target.matches('#save-btn')) {
                     event.preventDefault();
                     document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
                     let isValid = true;
                     const lang = localStorage.getItem('gamicon_lang') || 'en';
-
-                    // --- NEW: Validate Birthday ---
                     const birthdayInput = document.getElementById('birthday-edit-input');
                     const birthdayError = document.getElementById('birthday-error');
                     let isAgeValid = true;
@@ -314,42 +245,32 @@
                         isValid = false;
                         birthdayError.textContent = translations.errorAge[lang] || "Must be 18 or older.";
                     }
-                    // --- END NEW ---
-
                     for (const cat in CATEGORY_MAP) {
                         const count = document.querySelectorAll(`.trait-tag[data-category="${cat}"].active-${cat}`).length;
                         const errorEl = document.getElementById(`${cat}-error`);
-                        
                         if (count === 0) {
                             errorEl.textContent = (cat === 'comm') ? (translations.errorPick1 ? translations.errorPick1[lang] : "Pick 1") : (translations.errorPickAtLeast1 ? translations.errorPickAtLeast1[lang] : "Pick at least 1");
                             isValid = false;
                         }
                     }
-
                     if (isValid) {
                         let profile = JSON.parse(localStorage.getItem('userProfile'));
-                        
-                        // --- NEW: Update birthday and gender ---
                         profile.birthday = document.getElementById('birthday-edit-input').value;
                         profile.gender = document.getElementById('gender-edit-select').value;
-                        
                         profile.traits = { games: [], vibe: [], hours: [], comm: [] };
                         document.querySelectorAll('.trait-tag[class*="active-"]').forEach(tag => {
                             profile.traits[tag.dataset.category].push(tag.textContent);
                         });
                         localStorage.setItem('userProfile', JSON.stringify(profile));
-                        
                         isEditMode = false;
                         renderProfile();
                     }
                 }
-
                 if (isEditMode && target.classList.contains('trait-tag')) {
                     const category = target.dataset.category;
                     const activeClass = `active-${category}`;
                     const isActive = target.classList.contains(activeClass);
                     const getActiveCount = () => document.querySelectorAll(`.trait-tag[data-category="${category}"].${activeClass}`).length;
-
                     if (isActive) {
                         target.classList.remove(activeClass);
                     } else {
@@ -363,7 +284,6 @@
                 }
             });
 
-            // Initial render
             renderProfile();
         });
     </script>
