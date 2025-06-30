@@ -58,18 +58,23 @@
         <!-- Sidebar -->
         <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
             <nav class="space-y-2">
+                <!-- FIXED: Restored the "Home" button to the top of the navigation -->
+                <a href="home1.html" class="nav-link">
+                    <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                    <span data-translate-key="dashHome">Home</span>
+                </a>
                 <div class="nav-menu is-open" id="dashboard-menu">
                     <a href="main1.html" class="nav-link nav-menu-trigger w-full">
                         <div class="flex items-center">
-                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                            <span class="ml-3" data-translate-key="dashDashboard">Dashboard</span>
+                             <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                            <span data-translate-key="dashDashboard">Dashboard</span>
                         </div>
                         <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                     </a>
                     <div class="nav-submenu">
                         <a href="playnow.html" class="nav-link nav-submenu-link active">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            <span class="ml-3" data-translate-key="dashPlayNow">Play Now</span>
+                            <svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                            <span data-translate-key="dashPlayNow">Play Now</span>
                         </a>
                     </div>
                 </div>
@@ -154,12 +159,10 @@
     <script>
         (() => {
             document.addEventListener('DOMContentLoaded', () => {
-                // --- MODIFIED: Script logic updated for full consistency with the established shared pattern ---
-
-                // Mock translations are expanded to include all keys on this page for robust testing
+                // Mock translations are expanded for robust testing
                 if (typeof translations === 'undefined') { 
                     window.translations = { 
-                        dashDashboard: { en: 'Dashboard' }, dashPlayNow: { en: 'Play Now' }, dashChat: { en: 'Chat' }, dashFriends: { en: 'Friends' }, dashNotifications: { en: 'Notifications' },
+                        dashHome: { en: 'Home' }, dashDashboard: { en: 'Dashboard' }, dashPlayNow: { en: 'Play Now' }, dashChat: { en: 'Chat' }, dashFriends: { en: 'Friends' }, dashNotifications: { en: 'Notifications' },
                         statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' },
                         popupEditProfile: { en: 'Edit Profile' }, popupSettings: { en: 'Settings' }, popupLogout: { en: 'Logout' },
                         backToLobbies: { en: 'Back to Lobbies' }, playnowCreateTitle: { en: 'Create a Room' }, playnowCreateSubtitle: { en: 'Can\'t find the perfect squad? Set the rules yourself.' },
@@ -187,7 +190,6 @@
                 const applyTheme = (theme) => { body.className = ''; body.classList.add(theme); localStorage.setItem('gamicon_theme', theme); };
                 const setStatus = (status) => { const config = statusConfig[status] || statusConfig.online; statusDot.className = `status-dot ${config.className}`; popupStatusText.textContent = translations[config.langKey]?.[lang] || config.langKey; localStorage.setItem('gamicon_status', status); statusPopup.classList.add('hidden'); };
                 const applyUsername = (name) => { sidebarUsername.textContent = name; popupUsername.textContent = name; };
-                // Standardized translation function for robustness
                 function setLanguage(language) {
                     document.querySelectorAll('[data-translate-key]').forEach(el => {
                         const key = el.dataset.translateKey;
@@ -203,7 +205,6 @@
                 statusOptions.forEach(option => { option.addEventListener('click', (event) => { event.stopPropagation(); const newStatus = event.currentTarget.dataset.status; setStatus(newStatus); }); });
                 window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) { statusPopup.classList.add('hidden'); } });
                 
-                // Standardized menu toggle logic
                 const dashboardMenu = document.getElementById('dashboard-menu');
                 const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
                 dashboardTrigger.addEventListener('click', (event) => { event.preventDefault(); dashboardMenu.classList.toggle('is-open'); });
@@ -252,12 +253,10 @@
                         dynamicOptionsWrapper.classList.remove('hidden');
                         statusPanel.classList.remove('hidden');
                         
-                        // Re-apply translations for any new dynamic content
                         setLanguage(lang);
                     }
                 });
 
-                // Initial translation call for all static content on the page
                 setLanguage(lang);
             });
         })();
