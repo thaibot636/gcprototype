@@ -130,7 +130,8 @@
                 passwordInput.placeholder = translations.errorRequired[lang];
             }
             if (isLoginValid) {
-                window.location.href = 'main1.html';
+                // *** MODIFIED: Redirect to home1.html on successful login ***
+                window.location.href = 'home1.html';
             }
         });
 
@@ -190,7 +191,6 @@
           }
 
           if (isValid) {
-            // *** MODIFICATION START ***
             const userProfile = {
                 email: emailInput.value.trim(),
                 username: usernameInput.value.trim(),
@@ -198,7 +198,6 @@
                 gender: genderSelect.value
             };
             localStorage.setItem('userProfile', JSON.stringify(userProfile));
-            // *** MODIFICATION END ***
 
             localStorage.setItem('gamicon_username', usernameInput.value);
             window.location.href = actionButton.href; 
