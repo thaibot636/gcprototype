@@ -2,7 +2,7 @@
 
 // Make the dictionary and the main function globally accessible
 let translations = {};
-let setLanguage; 
+let setLanguage;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Fill the global object with the translations
@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         homeStep3Title: { en: 'Step 3: Connect With Friends', th: 'ขั้นตอนที่ 3: เชื่อมต่อกับเพื่อน' },
         homeStep3Desc: { en: 'Gaming is better together. Use the Friends and Chat links in the sidebar to add new friends, manage your friend list, and start conversations.', th: 'เล่นเกมกับเพื่อนสนุกกว่าเสมอ ใช้ลิงก์เพื่อนและแชทในแถบด้านข้างเพื่อเพิ่มเพื่อนใหม่ จัดการรายชื่อเพื่อน และเริ่มการสนทนา' },
         homeCtaButton: { en: 'Find Your Buddy Now!', th: 'ค้นหาเพื่อนซี้ของคุณเลย!' },
-        
+
         // --- Status Popup (Shared) ---
         statusOnline: { en: 'Online', th: 'ออนไลน์' },
         statusIdle: { en: 'Idle', th: 'ไม่ว่าง' },
@@ -260,8 +260,9 @@ document.addEventListener('DOMContentLoaded', () => {
         swipeBio: { en: 'Bio', th: 'เกี่ยวกับฉัน' },
         swipeSharedGames: { en: 'Shared Games', th: 'เกมที่เล่นเหมือนกัน' },
         swipeSharedTraits: { en: 'Shared Traits', th: 'ลักษณะที่เหมือนกัน' },
-        
-        // --- swipevibe.html (Premium Perks) --- ** ADDED SECTION **
+        swipeRank: { en: 'Rank', th: 'อันดับ' }, // <-- CORRECTED AND ADDED HERE
+
+        // --- swipevibe.html (Premium Perks) ---
         premiumTitle: { en: 'Unlock Premium Perks', th: 'ปลดล็อกสิทธิพิเศษพรีเมียม' },
         premiumSubtitle: { en: 'Enjoy an ad-free experience, unlimited actions, and get seen first!', th: 'เพลิดเพลินกับประสบการณ์ไร้โฆษณา, การกระทำไม่จำกัด, และโปรไฟล์ถูกมองเห็นก่อน!' },
         premiumUnlimitedRewinds: { en: 'Unlimited Rewinds', th: 'ย้อนกลับไม่จำกัด' },
@@ -270,7 +271,7 @@ document.addEventListener('DOMContentLoaded', () => {
         premiumAdFree: { en: 'Ad-Free', th: 'ไม่มีโฆษณา' },
         premiumUpgradeBtn: { en: 'Upgrade Now', th: 'อัปเกรดทันที' },
 
-        // --- profiles.html (Edit Profile Page) --- 
+        // --- profiles.html (Edit Profile Page) ---
         profilesTitle: { en: 'Edit Your Profile', th: 'แก้ไขโปรไฟล์ของคุณ' },
         profilesSubtitle: { en: 'This is how other players will see you.', th: 'ผู้เล่นคนอื่นจะเห็นคุณแบบนี้' },
         profilesAvatarSection: { en: 'Profile Picture', th: 'รูปโปรไฟล์' },
@@ -284,7 +285,7 @@ document.addEventListener('DOMContentLoaded', () => {
         profilesSave: { en: 'Save Changes', th: 'บันทึกการเปลี่ยนแปลง' },
         profilesCancel: { en: 'Cancel', th: 'ยกเลิก' },
 
-        // --- friends.html --- 
+        // --- friends.html ---
         friendsTitle: { en: 'Manage Friends', th: 'จัดการเพื่อน' },
         friendsTabsMyFriends: { en: 'My Friends', th: 'เพื่อนของฉัน' },
         friendsTabsRequests: { en: 'Requests', th: 'คำขอ' },
@@ -305,7 +306,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const key = el.dataset.translateKey;
             const target = el.dataset.translateTarget;
             let translation = translations[key]?.[lang];
-            
+
             // Handle dynamic content replacements for templates like {{username}}
             if (translation) {
                 // Generic replacement for any key that might have {{username}}
