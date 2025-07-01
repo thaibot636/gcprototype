@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
         week: { en: '/week', th: '/สัปดาห์' },
         bestValue: { en: '★BEST VALUE★', th: '★คุ้มที่สุด★' },
 
-        // --- index2.html ---
+        // --- index2.html (Sign Up / Log In) ---
         joinHeader: { en: 'Join GamiCon', th: 'Join GamiCon' },
         joinSubtitle: { en: 'Create your account to start', th: 'สร้างบัญชีเพื่อเริ่มต้น' },
         loginHeader: { en: 'Welcome Back', th: 'ยินดีต้อนรับกลับ' },
@@ -293,6 +293,7 @@ document.addEventListener('DOMContentLoaded', () => {
         profilesEditTraits: { en: 'Edit Traits', th: 'แก้ไขลักษณะ' },
         profilesSave: { en: 'Save Changes', th: 'บันทึกการเปลี่ยนแปลง' },
         profilesCancel: { en: 'Cancel', th: 'ยกเลิก' },
+        profilesEdit: { en: 'Edit', th: 'แก้ไข' }, // Added for the Edit button
 
         // --- friends.html ---
         friendsTitle: { en: 'Manage Friends', th: 'จัดการเพื่อน' },
@@ -316,47 +317,40 @@ document.addEventListener('DOMContentLoaded', () => {
             const target = el.dataset.translateTarget;
             let translation = translations[key]?.[lang];
 
-            // Handle dynamic content replacements for templates like {{username}}
             if (translation) {
                 if (translation.includes('{{username}}')) {
                     const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
                     translation = translation.replace(/\{\{username\}\}/g, username);
                 }
             } else {
-                // Fallback to English if translation for the current language is missing, then to the key itself
-                translation = translations[key]?.['en'] || key;
+                translation = translations[key]?.['en'] || `[${key}]`; // Fallback to key name for easy debugging
                 console.warn(`Translation key not found for lang '${lang}': ${key}`);
             }
 
-            // Apply the translation to the correct attribute (placeholder, title, etc.) or to innerHTML
             if (target && el.hasAttribute(target)) {
                  el.setAttribute(target, translation);
             } else {
-                el.innerHTML = translation; // Use innerHTML to support basic formatting
+                el.innerHTML = translation;
             }
         });
         document.documentElement.lang = lang;
         localStorage.setItem('gamicon_lang', lang);
 
-        // Update any language toggle buttons on the page
         document.querySelectorAll('.lang-toggle').forEach(button => {
             button.textContent = lang === 'en' ? 'ไทย' : 'EN';
         });
     };
 
-    // Handler for language toggle buttons
     const langToggleHandler = () => {
         const currentLang = localStorage.getItem('gamicon_lang') || 'en';
         const newLang = currentLang === 'en' ? 'th' : 'en';
         setLanguage(newLang);
     };
 
-    // Attach event listeners to all toggle buttons
     document.querySelectorAll('.lang-toggle').forEach(button => {
         button.addEventListener('click', langToggleHandler);
     });
 
-    // Set the initial language on page load
     const initialLang = localStorage.getItem('gamicon_lang') || 'en';
     setLanguage(initialLang);
 });
