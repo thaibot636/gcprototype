@@ -59,15 +59,24 @@
 </head>
 <body class="theme-true-dark">
     <div class="flex min-h-screen">
-        <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
-             <!-- Sidebar content remains the same... -->
-             <nav class="space-y-2">
-                <a href="home1.html" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span data-translate-key="dashHome">Home</span></a>
-                <div class="nav-menu is-open" id="dashboard-menu"><button class="nav-link nav-menu-trigger w-full"><div class="flex items-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span data-translate-key="dashDashboard">Dashboard</span></div><svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button><div class="nav-submenu"><a href="playnow.html" class="nav-link nav-submenu-link active"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><span data-translate-key="dashPlayNow">Play Now</span></a></div></div>
-                <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg><span data-translate-key="dashChat">Chat</span></a>
-                <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M12 14a4 4 0 100-8 4 4 0 000 8z"></path></svg><span data-translate-key="dashFriends">Friends</span></a>
-                <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg><span data-translate-key="dashNotifications">Notifications</span></a>
-             </nav>
+        <!-- MODIFICATION: Sidebar classes updated for mobile responsiveness -->
+        <aside id="sidebar" class="w-64 p-4 flex-col justify-between fixed inset-y-0 left-0 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex">
+             <div>
+                <!-- MODIFICATION: Added a header with a close button for mobile -->
+                <div class="flex items-center justify-between pb-4 md:hidden">
+                    <h2 class="text-xl font-bold font-['Press_Start_2P']">GamiCon</h2>
+                    <button id="sidebar-close-button" class="p-2 -mr-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
+                </div>
+                 <nav class="space-y-2">
+                    <a href="home1.html" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span data-translate-key="dashHome">Home</span></a>
+                    <div class="nav-menu is-open" id="dashboard-menu"><button class="nav-link nav-menu-trigger w-full"><div class="flex items-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span data-translate-key="dashDashboard">Dashboard</span></div><svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button><div class="nav-submenu"><a href="playnow.html" class="nav-link nav-submenu-link active"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><span data-translate-key="dashPlayNow">Play Now</span></a></div></div>
+                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg><span data-translate-key="dashChat">Chat</span></a>
+                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M12 14a4 4 0 100-8 4 4 0 000 8z"></path></svg><span data-translate-key="dashFriends">Friends</span></a>
+                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg><span data-translate-key="dashNotifications">Notifications</span></a>
+                 </nav>
+            </div>
             <div id="profile-trigger" class="flex items-center space-x-3">
                 <div class="relative"><img src="https://i.pravatar.cc/50?u=playerZERO444" alt="Avatar" class="w-10 h-10 rounded-full object-cover"><span id="status-dot" class="status-dot status-online"></span></div>
                 <div><h3 id="sidebar-username" class="text-sm font-bold">playerZERO444</h3></div>
@@ -75,9 +84,15 @@
         </aside>
 
         <main class="flex-1 p-4 md:p-8">
-            <header class="mb-8">
-                <h1 class="text-2xl md:text-3xl" data-translate-key="playnowTitle">Find a Match</h1>
-                <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="playnowSubtitle">Jump into a game right away or create your own.</p>
+            <!-- MODIFICATION: Header now includes a hamburger button for mobile -->
+            <header class="mb-8 flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl md:text-3xl" data-translate-key="playnowTitle">Find a Match</h1>
+                    <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="playnowSubtitle">Jump into a game right away or create your own.</p>
+                </div>
+                <button id="mobile-menu-button" class="p-2 -mr-2 md:hidden">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+               </button>
             </header>
             
             <div>
@@ -125,6 +140,9 @@
         </main>
     </div>
     
+    <!-- MODIFICATION: Added overlay for when mobile menu is open -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
+
     <script src="translation.js"></script>
     <script>
         (() => {
@@ -151,77 +169,57 @@
                         if (quickJoinBtn.disabled) return;
                         quickJoinBtn.disabled = true;
 
-                        const isSuccess = Math.random() >= 0.6;
+                        const isSuccess = Math.random() >= 0.5;
                 
-                        // 1. Fade out controls & lobbies, start loading animation
                         quickJoinControls.classList.add('opacity-0');
                         lobbiesWrapper.classList.add('opacity-0');
                         quickJoinSection.classList.add('is-loading');
                         
                         setTimeout(() => {
                             quickJoinControls.classList.add('hidden');
-                            lobbiesWrapper.classList.add('hidden'); // Hide lobbies after fade
+                            lobbiesWrapper.classList.add('hidden');
                             quickJoinStatus.classList.remove('hidden');
                             quickJoinStatus.classList.remove('opacity-0');
                             
-                            // State 1: Finding...
                             quickJoinStatus.classList.add('text-yellow-400');
-                            quickJoinStatus.innerHTML = `
-                                <svg class="animate-spin -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                                </svg>
-                                <span>Finding room for you...</span>
-                            `;
+                            quickJoinStatus.innerHTML = `<svg class="animate-spin -ml-1 mr-3 h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg><span>Finding room for you...</span>`;
                         }, 300);
                 
-                        // State 2: Please wait...
                         setTimeout(() => {
                             const span = quickJoinStatus.querySelector('span');
                             if (span) span.textContent = "Please wait...";
                         }, 2000);
                 
-                        // State 3: Show result (Success or Failure)
                         setTimeout(() => {
                             quickJoinSection.classList.remove('is-loading');
                             quickJoinStatus.classList.remove('text-yellow-400');
-                            lobbiesWrapper.classList.remove('hidden'); // Show wrapper for result
+                            lobbiesWrapper.classList.remove('hidden');
                             
                             if (isSuccess) {
                                 lobbiesListContainer.classList.remove('hidden');
                                 noLobbiesMessage.classList.add('hidden');
                                 quickJoinSection.classList.add('is-found');
-                                quickJoinStatus.innerHTML = `
-                                    <svg class="w-7 h-7 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
-                                    <span>FOUND IT!!!</span>
-                                `;
+                                quickJoinStatus.innerHTML = `<svg class="w-7 h-7 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg><span>FOUND IT!!!</span>`;
                             } else {
                                 lobbiesListContainer.classList.add('hidden');
                                 noLobbiesMessage.classList.remove('hidden');
                                 quickJoinSection.classList.add('is-failed');
-                                quickJoinStatus.innerHTML = `
-                                    <svg class="w-7 h-7 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
-                                    <span>NO LOBBIES FOUND :(</span>
-                                `;
+                                quickJoinStatus.innerHTML = `<svg class="w-7 h-7 mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg><span>NO LOBBIES FOUND :(</span>`;
                             }
-                            // Fade in the result (lobbies or message)
                             setTimeout(() => lobbiesWrapper.classList.remove('opacity-0'), 50);
                         }, 4000);
                 
-                        // State 4: Reset everything back to normal
                         setTimeout(() => {
                             quickJoinStatus.classList.add('opacity-0');
                             lobbiesWrapper.classList.add('opacity-0');
                             
                             setTimeout(() => {
-                                // Reset visuals
                                 quickJoinSection.classList.remove('is-found', 'is-failed');
                                 quickJoinStatus.classList.add('hidden');
                                 quickJoinStatus.innerHTML = '';
                                 quickJoinControls.classList.remove('hidden');
                                 quickJoinControls.classList.remove('opacity-0');
                                 
-                                // Reset content to default
                                 lobbiesListContainer.classList.remove('hidden');
                                 noLobbiesMessage.classList.add('hidden');
                                 lobbiesWrapper.classList.remove('hidden');
@@ -229,9 +227,32 @@
 
                                 quickJoinBtn.disabled = false;
                             }, 300);
-                        }, 7000); // Increased time to allow user to see the result
+                        }, 7000);
                     });
                 }
+
+                // MODIFICATION: Added mobile menu toggle script
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const sidebar = document.getElementById('sidebar');
+                const sidebarOverlay = document.getElementById('sidebar-overlay');
+                const sidebarCloseButton = document.getElementById('sidebar-close-button');
+
+                const openSidebar = () => {
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebar.classList.add('translate-x-0');
+                    sidebarOverlay.classList.remove('hidden');
+                };
+
+                const closeSidebar = () => {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebar.classList.remove('translate-x-0');
+                    sidebarOverlay.classList.add('hidden');
+                };
+                
+                if (mobileMenuButton) mobileMenuButton.addEventListener('click', (e) => { e.stopPropagation(); openSidebar(); });
+                if (sidebarCloseButton) sidebarCloseButton.addEventListener('click', (e) => { e.stopPropagation(); closeSidebar(); });
+                if (sidebarOverlay) sidebarOverlay.addEventListener('click', (e) => { e.stopPropagation(); closeSidebar(); });
+
             });
         })();
     </script>
