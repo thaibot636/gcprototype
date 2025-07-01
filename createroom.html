@@ -1,368 +1,269 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Room - GamiCon</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
-    <style>
-        /* --- UNIFIED STYLESHEET --- */
-        /* Universal Styles & Theming Variables */
-        :root, body.theme-default {
-            --bg-body: #1f2937; --text-color: white; --text-subtle: #9ca3af; --sidebar-bg: #111827; --sidebar-border: #374151; --main-bg: #1f2937; --link-color: #9ca3af; --link-hover-bg: #374151; --link-hover-text: white; --link-active-bg: #3b82f6; --link-active-text: white; --form-bg: #111827; --neon-blue: #3b82f6; --neon-blue-glow: rgba(59, 130, 246, 0.5); --btn-secondary-bg: #4b5563; --btn-secondary-hover-bg: #6b7280; --room-card-bg: #273344; --room-card-hover-bg: #324053; --popup-bg: #111827; --popup-border: #4b5563; --popup-separator: #374151; --popup-hover-bg: #3b82f6; --popup-hover-text: white; --highlight-bg: #374151; --highlight-text: #e5e7eb;
-        }
-        body.theme-light-gray {
-            --bg-body: #f4f4f5; --text-color: #334155; --text-subtle: #64748b; --sidebar-bg: #ffffff; --sidebar-border: #e5e7eb; --main-bg: #f4f4f5; --link-color: #475569; --link-hover-bg: #f3f4f6; --link-hover-text: #1e293b; --link-active-bg: #2563eb; --link-active-text: white; --form-bg: #ffffff; --neon-blue: #2563eb; --neon-blue-glow: rgba(37, 99, 235, 0.4); --btn-secondary-bg: #e5e7eb; --btn-secondary-hover-bg: #d1d5db; --room-card-bg: #ffffff; --room-card-hover-bg: #f9fafb; --popup-bg: #ffffff; --popup-border: #e5e7eb; --popup-separator: #f3f4f6; --popup-hover-text: white; --highlight-bg: #e5e7eb; --highlight-text: #374151;
-        }
-        body.theme-true-dark {
-            --bg-body: #000; --text-color: #fff; --text-subtle: #aaa; --sidebar-bg: #101010; --sidebar-border: #333; --main-bg: #000; --link-color: #aaa; --link-hover-bg: #222; --link-hover-text: #fff; --link-active-bg: #fff; --link-active-text: #000; --form-bg: #181818; --neon-blue: #fff; --neon-blue-glow: rgba(255, 255, 255, 0.5); --btn-secondary-bg: #333; --btn-secondary-hover-bg: #444; --room-card-bg: #181818; --room-card-hover-bg: #222; --popup-bg: #181818; --popup-border: #333; --popup-separator: #333; --popup-hover-bg: #fff; --popup-hover-text: #000; --highlight-bg: #222; --highlight-text: #eee;
-        }
-        /* Base & Typography */
-        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-body); color: var(--text-color); }
-        h1, h2, h3, h4, h5, h6, .form-label { font-family: 'Press Start 2P', cursive; }
-        /* Layout Components */
-        aside { background-color: var(--sidebar-bg); }
-        main { background-color: var(--main-bg); }
-        .form-section { background-color: var(--form-bg); border: 1px solid var(--sidebar-border); padding: 1.5rem; border-radius: 8px; }
-        /* Navigation & Links */
-        .nav-link { display: flex; align-items: center; padding: 0.75rem 0.5rem; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; border-radius: 4px; color: var(--link-color); }
-        .nav-link:hover { background-color: var(--link-hover-bg); color: var(--link-hover-text); }
-        .nav-link.active { background-color: var(--link-active-bg); color: var(--link-active-text); }
-        .nav-link > span { margin-left: 0.75rem; }
-        .nav-menu-trigger { justify-content: space-between; }
-        .nav-menu-trigger .chevron { transition: transform 0.2s ease-in-out; }
-        .nav-menu.is-open > .nav-menu-trigger .chevron { transform: rotate(180deg); }
-        .nav-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
-        .nav-menu.is-open .nav-submenu { max-height: 200px; }
-        .nav-submenu-link { padding-left: 2rem !important; font-size: 0.8rem !important; }
-        /* Buttons & Forms (including createroom.html styles) */
-        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; text-align: center; transition: all 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
-        .btn-primary { background-color: var(--link-active-bg); color: var(--link-active-text); }
-        .btn-secondary { background-color: var(--btn-secondary-bg); color: var(--text-color); }
-        .btn-danger { background-color: #ef4444; color: white; }
-        .form-label { font-size: 0.75rem; color: var(--text-subtle); letter-spacing: 1px; margin-bottom: 1rem; display: block; }
-        .custom-select, .text-input { background-color: var(--sidebar-bg); border: 1px solid var(--sidebar-border); color: var(--text-color); border-radius: 6px; padding: 0.5rem 0.75rem; width: 100%;}
-        .radio-option input[type="radio"] { opacity: 0; width: 0; height: 0; position: absolute; }
-        .radio-option span { display: block; padding: 0.5rem 1rem; border: 2px solid var(--sidebar-border); border-radius: 6px; cursor: pointer; transition: all 0.2s ease; text-align: center; font-family: 'Poppins', sans-serif; font-weight: 600;}
-        .radio-option input[type="radio"]:checked + span { border-color: var(--neon-blue); background-color: var(--neon-blue); color: var(--link-active-text); box-shadow: 0 0 10px var(--neon-blue-glow); }
-        /* Custom styling for the range slider */
-        input[type="range"]::-webkit-slider-thumb { accent-color: var(--neon-blue); }
-        input[type="range"]::-moz-range-thumb { background-color: var(--neon-blue); }
-        /* Profile & Status Popup */
-        #profile-trigger { cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
-        #profile-trigger:hover { background-color: var(--link-hover-bg); }
-        .status-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0; border: 3px solid var(--sidebar-bg); }
-        .status-online { background-color: #22c55e; }
-        .status-idle { background-color: #f59e0b; }
-        .status-dnd { background-color: #ef4444; }
-        .status-invisible { background-color: #6b7280; }
-        #status-popup { position: fixed; border-radius: 8px; width: 240px; padding: 0.5rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); z-index: 50; background-color: var(--popup-bg); border: 1px solid var(--popup-border); color: var(--text-color); }
-        .popup-header { padding: 0.75rem; }
-        .popup-username { font-size: 1rem; font-weight: 700; }
-        .popup-status-text { font-size: 0.8rem; color: var(--text-subtle); }
-        .popup-separator { margin: 0.5rem 0; border-color: var(--popup-separator); }
-        .popup-option { display: flex; align-items: center; padding: 0.75rem; border-radius: 4px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-        .popup-option .status-dot { position: static; border: none; margin-right: 0.75rem; }
-        .popup-option:hover { background-color: var(--popup-hover-bg); color: var(--popup-hover-text); }
-    </style>
-</head>
-<body class="theme-default">
-    <div class="flex min-h-screen">
-        <!-- Sidebar -->
-        <aside id="sidebar" class="w-64 p-4 flex-col justify-between fixed inset-y-0 left-0 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex">
-            <div>
-                <div class="flex items-center justify-between pb-4 md:hidden">
-                    <h2 class="text-xl font-bold font-['Press_Start_2P']">GamiCon</h2>
-                    <button id="sidebar-close-button" class="p-2 -mr-2">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
-                    </button>
-                </div>
-                <nav class="space-y-2">
-                    <a href="home1.html" class="nav-link">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                        <span data-translate-key="dashHome">Home</span>
-                    </a>
-                    <div class="nav-menu is-open" id="dashboard-menu">
-                        <button class="nav-link nav-menu-trigger w-full">
-                            <div class="flex items-center">
-                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                                <span data-translate-key="dashDashboard">Dashboard</span>
-                            </div>
-                            <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
-                        </button>
-                        <div class="nav-submenu">
-                            <a href="playnow.html" class="nav-link nav-submenu-link active">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-6.867 8.21 8.21 0 003 2.48z" />
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1.001A3.75 3.75 0 0012 18z" />
-                                </svg>
-                                <span data-translate-key="dashPlayNow">Play Now</span>
-                            </a>
-                            <a href="swipevibe.html" class="nav-link nav-submenu-link">
-                                <svg class="w-5 h-5" viewBox="0 0 24 24">
-                                    <path d="M6 3h12c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
-                                    <path d="M12 15.55L10.9 14.54C8.61 12.46 7 11.02 7 9.25C7 7.8 8.2 6.67 9.72 6.67C10.58 6.67 11.41 7.03 12 7.64C12.59 7.03 13.42 6.67 14.28 6.67C15.8 6.67 17 7.8 17 9.25C17 11.02 15.39 12.46 13.1 14.54L12 15.55z" fill="currentColor"/>
-                                </svg>
-                                <span data-translate-key="dashSwipeVipe">Swipe & Vipe</span>
-                            </a>
-                        </div>
-                    </div>
-                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span data-translate-key="dashChat">Chat</span></a>
-                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M12 14a4 4 0 100-8 4 4 0 000 8z"></path></svg><span data-translate-key="dashFriends">Friends</span></a>
-                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg><span data-translate-key="dashNotifications">Notifications</span></a>
-                </nav>
-            </div>
-            <div id="profile-trigger" class="flex items-center space-x-3">
-                 <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
-                 <div><h3 id="sidebar-username" class="text-sm font-bold"></h3></div>
-            </div>
-        </aside>
+// --- THIS IS THE FINAL MASTER DICTIONARY FOR THE ENTIRE WEBSITE ---
 
-        <!-- Main content area -->
-        <main class="flex-1 p-4 md:p-8">
-            <header class="mb-8 flex justify-between items-center">
-                <div>
-                    <a href="playnow.html" class="btn btn-secondary mb-6 text-sm">
-                        <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                        <span data-translate-key="backToLobbies">Back to Lobbies</span>
-                    </a>
-                    <h1 class="text-2xl md:text-3xl mt-4" data-translate-key="playnowCreateTitle">Create a Room</h1>
-                    <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="playnowCreateSubtitle">Can't find the perfect squad? Set the rules yourself.</p>
-                </div>
-                 <button id="mobile-menu-button" class="p-2 -mr-2 md:hidden self-start">
-                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
-                </button>
-            </header>
-            
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 space-y-6">
-                    <div class="form-section">
-                        <label for="game-select" class="form-label" data-translate-key="playnowStep1">Step 1: Select Your Game</label>
-                        <select id="game-select" class="custom-select w-full p-3"><option value="" data-translate-key="playnowChooseGame">-- Choose a Game --</option><option value="lol" data-genre="moba" data-translate-key="gameLeagueOfLegends">League of Legends</option><option value="valorant" data-genre="fps" data-translate-key="gameValorant">Valorant</option><option value="cs2" data-genre="fps" data-translate-key="gameCS2">Counter-Strike 2</option><option value="amongus" data-genre="party" data-translate-key="gameAmongUs">Among Us</option></select>
-                    </div>
+// Make the dictionary and the main function globally accessible
+let translations = {};
+let setLanguage; 
 
-                    <!-- NEW FEATURE: Privacy Section -->
-                    <div id="privacy-section" class="form-section hidden space-y-4">
-                        <label class="form-label" data-translate-key="playnowStep2">Step 2: Set Room Privacy</label>
-                        <div class="grid grid-cols-2 gap-3">
-                            <label class="radio-option">
-                                <input type="radio" name="room-privacy" value="public" checked>
-                                <span data-translate-key="privacyPublic">Public</span>
-                            </label>
-                            <label class="radio-option">
-                                <input type="radio" name="room-privacy" value="private">
-                                <span data-translate-key="privacyPrivate">Private</span>
-                            </label>
-                        </div>
-                        <p class="text-xs mt-2" style="color: var(--text-subtle);"><span data-translate-key="privacyPublicDesc"><b>Public:</b> Anyone can see and join this room.</span><br><span data-translate-key="privacyPrivateDesc"><b>Private:</b> Only users you invite can join.</span></p>
-                    </div>
-                    
-                    <div id="dynamic-options-wrapper" class="hidden space-y-6"></div>
-                </div>
+document.addEventListener('DOMContentLoaded', () => {
+    // Fill the global object with the translations
+    translations = {
+        // --- Shared (Navbar / Footer / Common Buttons) ---
+        navHome: { en: 'Home', th: 'หน้าหลัก' },
+        navProducts: { en: 'Products', th: 'ผลิตภัณฑ์' },
+        login: { en: 'Log In', th: 'เข้าสู่ระบบ' },
+        signup: { en: 'Sign Up', th: 'สมัครสมาชิก' },
+        menu: { en: 'MENU', th: 'เมนู' },
+        footer: { en: '© 2025 GamiCon. All rights reserved.', th: '© 2025 GamiCon สงวนลิขสิทธิ์' },
+        back: { en: 'BACK', th: 'กลับ' },
+        skip: { en: 'SKIP >>', th: 'ข้าม >>' },
+        backToHome: { en: '.. Back to Home', th: '.. กลับหน้าหลัก' },
+        select: { en: 'SELECT', th: 'เลือก' },
 
-                <div class="space-y-6">
-                    <div id="status-panel" class="form-section space-y-4 hidden">
-                        <div class="flex justify-between items-center"><label class="form-label !mb-0" data-translate-key="playnowRoomStatus">Room Status</label><button id="cancel-creation-btn" class="btn btn-danger btn-sm text-xs" data-translate-key="playnowCancel">Cancel</button></div>
-                        <hr class="border-t" style="border-color:var(--popup-separator);">
-                        <div class="flex items-center justify-between py-2"><label for="enable-timer-toggle" class="font-semibold" style="cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 0.9rem;" data-translate-key="enableTimer">Expiry Timer</label><input type="checkbox" id="enable-timer-toggle" checked class="h-4 w-4 rounded" style="accent-color: var(--neon-blue); cursor: pointer;"></div>
-                        
-                        <!-- NEW FEATURE: Timer Controls -->
-                        <div id="timer-controls-wrapper" class="space-y-2">
-                             <div class="text-sm text-center" style="color:var(--text-subtle);">
-                                <span data-translate-key="playnowRoomExpiresIn">Expires in:</span>
-                                <strong id="timer-value-display" class="text-lg text-amber-400">15</strong>
-                                <span data-translate-key="playnowMinutes">minutes</span>
-                            </div>
-                            <input type="range" id="timer-slider" min="5" max="60" step="5" value="15" class="w-full h-2 rounded-lg appearance-none cursor-pointer" style="background-color: var(--sidebar-border);">
-                        </div>
-                        
-                        <div class="mt-4"><button id="create-room-btn" type="button" class="btn btn-primary text-center w-full" data-translate-key="playnowFinalizeCreate">Create Room</button></div>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
+        // --- index.html ---
+        heroSubtitle: { en: 'Buddy Finder for Thai Gamers! Connect via traits, vibes, and games.', th: 'แอปหาเพื่อนเล่นเกมสำหรับคนไทย! เชื่อมต่อผ่านลักษณะนิสัย สไตล์ และเกมที่ใช่' },
+        getStarted: { en: 'Get Started Now', th: 'เริ่มเลยตอนนี้' },
+        howItWorks: { en: 'How It Works', th: 'วิธีการทำงาน' },
+        step1Title: { en: '1. SELECT TRAITS', th: '1. เลือกลักษณะนิสัย' },
+        step1Desc: { en: 'Choose your gaming style, vibe, and play times.', th: 'เลือกสไตล์การเล่นเกม สไตล์ส่วนตัว และเวลาที่เล่น' },
+        step2Title: { en: '2. MATCH & SWIPE', th: '2. จับคู่และปัด' },
+        step2Desc: { en: 'See a list of people who match your traits.', th: 'ดูรายชื่อคนที่ตรงกับลักษณะของคุณ' },
+        step3Title: { en: '3. CHAT & GAME', th: '3. แชทและเล่น' },
+        step3Desc: { en: 'Jump into games and build lasting squads.', th: 'เริ่มเล่นเกมและสร้างทีมที่ยั่งยืน' },
+        ctaTitle: { en: 'Ready to find your buddy?', th: 'พร้อมหาเพื่อนเล่นเกมหรือยัง?' },
+        ctaSubtitle: { en: 'Sign up for early access!', th: 'สมัครเพื่อเข้าใช้งานก่อนใคร!' },
 
-    <!-- Reusable components -->
-    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
-    <div id="status-popup" class="hidden">
-        <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
-        <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline"></span></div>
-        <div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span data-translate-key="statusIdle"></span></div>
-        <div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd"></span></div>
-        <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible"></span></div>
-        <hr class="popup-separator">
-        <a href="profiles.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></path></svg><span data-translate-key="popupEditProfile"></span></a>
-        <a href="settings.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066 2.573c-.94-1.543.826 3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings"></span></a>
-        <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout"></span></a>
-    </div>
+        // --- products.html ---
+        productsTitle: { en: 'SUBSCRIPTION PLANS', th: 'แพ็กเกจสมาชิก' },
+        productsSubtitle: { en: 'Unlock a premium experience with an ad-free environment, exclusive cosmetics, and special perks from our game partners.', th: 'ปลดล็อกประสบการณ์พรีเมียม ไร้โฆษณา รับของตกแต่งพิเศษ และสิทธิประโยชน์จากพาร์ทเนอร์เกมของเรา' },
+        planFortnight: { en: 'FORTNIGHT', th: 'สองสัปดาห์' },
+        plan1Month: { en: '1 MONTH', th: '1 เดือน' },
+        plan3Months: { en: '3 MONTHS', th: '3 เดือน' },
+        plan6Months: { en: '6 MONTHS', th: '6 เดือน' },
+        plan12Months: { en: '12 MONTHS', th: '12 เดือน' },
+        baht: { en: 'baht', th: 'บาท' },
+        week: { en: '/week', th: '/สัปดาห์' },
+        bestValue: { en: '★BEST VALUE★', th: '★คุ้มที่สุด★' },
 
-    <!-- Updated HTML Templates -->
-    <template id="template-fps"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep3FPS">Step 3: FPS Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRolePref">PREFERRED ROLE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="fps-role" value="entry" checked><span>Entry</span></label><label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span>Sniper</span></label><label class="radio-option"><input type="radio" name="fps-role" value="igl"><span>IGL</span></label><label class="radio-option"><input type="radio" name="fps-role" value="flex"><span>Flex</span></label></div></div></div></template>
-    <template id="template-moba"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep3Moba">Step 3: MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRole">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top" checked><span>Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span>Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span>Jungle</span></label><label class="radio-option"><input type="radio" name="moba-role" value="adc"><span>ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span>Support</span></label></div></div></div></template>
-    <template id="template-party"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep3Party">Step 3: Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowVibe">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny" checked><span>Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span>Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span>Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span>No Mic</span></label></div></div></div></template>
-    
-    <!-- It's assumed you have a translation.js file for localization -->
-    <script src="translation.js"></script>
+        // --- index2.html ---
+        joinHeader: { en: 'Join GamiCon', th: 'Join GamiCon' },
+        joinSubtitle: { en: 'Create your account to start', th: 'สร้างบัญชีเพื่อเริ่มต้น' },
+        loginHeader: { en: 'Welcome Back', th: 'ยินดีต้อนรับกลับ' },
+        loginSubtitle: { en: 'Log in to continue', th: 'เข้าสู่ระบบเพื่อไปต่อ' },
+        emailLabel: { en: 'Email', th: 'อีเมล' },
+        emailPlaceholder: { en: 'player@email.com', th: 'player@email.com' },
+        loginEmailLabel: { en: 'Email / Username', th: 'อีเมล / ชื่อผู้ใช้' },
+        loginEmailPlaceholder: { en: 'your_email / username', th: 'อีเมลของคุณ / ชื่อผู้ใช้' },
+        usernameLabel: { en: 'Username', th: 'ชื่อผู้ใช้' },
+        usernamePlaceholder: { en: 'PlayerOne', th: 'ผู้เล่นหนึ่ง' },
+        birthdayLabel: { en: 'Birthday', th: 'วันเกิด' },
+        genderLabel: { en: 'Gender', th: 'เพศ' },
+        genderPlaceholder: { en: 'Select your gender...', th: 'เลือกเพศของคุณ...' },
+        genderMale: { en: 'Male', th: 'ชาย' },
+        genderFemale: { en: 'Female', th: 'หญิง' },
+        genderNonBinary: { en: 'Non-binary', th: 'ไม่ระบุ' },
+        passwordLabel: { en: 'Password', th: 'รหัสผ่าน' },
+        passwordPlaceholder: { en: '********', th: '********' },
+        confirmPasswordLabel: { en: 'Confirm Password', th: 'ยืนยันรหัสผ่าน' },
+        confirmPasswordNote: { en: '*must match password*', th: '*ต้องเหมือนกับรหัสผ่าน*' },
+        showPasswordLabel: { en: 'Show Password', th: 'แสดงรหัสผ่าน' },
+        errorRequired: { en: '* This field is required *', th: '* กรุณากรอกข้อมูล *' },
+        errorEmailRequired: { en: '* Email is required *', th: '* กรุณากรอกอีเมล *' },
+        errorUsernameRequired: { en: '* Username is required *', th: '* กรุณากรอกชื่อผู้ใช้ *' },
+        errorPasswordMatch: { en: '* Passwords do not match *', th: '* รหัสผ่านไม่ตรงกัน *' },
+        errorAge: { en: '* Must be 18 or older *', th: '* ต้องมีอายุ 18 ปีขึ้นไป *' },
 
-    <script>
-        (() => {
-            document.addEventListener('DOMContentLoaded', () => {
-                // --- SHARED LAYOUT SCRIPT (NO CHANGES) ---
-                const body = document.body;
-                const mobileMenuButton = document.getElementById('mobile-menu-button');
-                const sidebar = document.getElementById('sidebar');
-                const sidebarOverlay = document.getElementById('sidebar-overlay');
-                const sidebarCloseButton = document.getElementById('sidebar-close-button');
-                const dashboardMenu = document.getElementById('dashboard-menu');
-                const profileTrigger = document.getElementById('profile-trigger');
-                const statusPopup = document.getElementById('status-popup');
-                // Use a mock translations object if the real one isn't loaded
-                if (typeof window.translations === 'undefined') { 
-                    console.warn("translation.js not found or failed to load. Using mock data for keys."); 
-                    window.translations = {}; 
+        // --- loading.html ---
+        loading: { en: 'LOADING...', th: 'กำลังโหลด...' },
+        complete: { en: 'COMPLETE!', th: 'เสร็จสิ้น!' },
+
+        // --- tos.html ---
+        welcomeTo: { en: 'Welcome to GamiCon', th: 'ยินดีต้อนรับสู่ GamiCon' },
+        welcomeUser: { en: 'Welcome,', th: 'ยินดีต้อนรับ,' },
+        communityRules: { en: 'COMMUNITY RULES', th: 'กฎของชุมชน' },
+        rule1Title: { en: 'BE YOURSELF.', th: 'แสดงตัวตนของคุณ' },
+        rule1Desc: { en: 'Make sure your profile, games, and bio are true to who you are.', th: 'ตรวจสอบให้แน่ใจว่าโปรไฟล์ เกม และข้อมูลของคุณเป็นความจริง' },
+        rule2Title: { en: 'STAY SAFE.', th: 'ปลอดภัยไว้ก่อน' },
+        rule2Desc: { en: "Don't be too quick to give out personal information. Play smart.", th: 'อย่ารีบให้ข้อมูลส่วนตัว เล่นอย่างชาญฉลาด' },
+        rule3Title: { en: 'PLAY IT COOL.', th: 'ใจเย็นๆ' },
+        rule3Desc: { en: 'Respect other players. No toxicity, rage-quitting, or spamming.', th: 'ให้เกียรติผู้เล่นอื่น ไม่ใช้คำพูดรุนแรง ไม่หัวร้อนออกจากเกม หรือสแปม' },
+        rule4Title: { en: 'BE PROACTIVE.', th: 'ช่วยกันสอดส่อง' },
+        rule4Desc: { en: 'Always report bad behaviour to keep the community fun.', th: 'รายงานพฤติกรรมที่ไม่เหมาะสมเสมอเพื่อรักษาชุมชนให้น่าอยู่' },
+        iAgree: { en: 'I AGREE', th: 'ฉันยอมรับ' },
+
+        // --- index3.html ---
+        linkStart: { en: 'LINK START!', th: 'เริ่มการเชื่อมต่อ!' },
+        linkSubtitle: { en: 'Link your profiles to find better matches.', th: 'เชื่อมต่อโปรไฟล์เพื่อการจับคู่ที่ดีกว่า' },
+        connectSteam: { en: 'Continue with Steam', th: 'เชื่อมต่อด้วย Steam' },
+        connectRiot: { en: 'Continue with Riot', th: 'เชื่อมต่อด้วย Riot' },
+        connectDiscord: { en: 'Continue with Discord', th: 'เชื่อมต่อด้วย Discord' },
+
+        // --- traits.html ---
+        traitsTitle: { en: 'SELECT YOUR TRAITS', th: 'เลือกลักษณะของคุณ' },
+        traitsSubtitle: { en: 'This helps us find your perfect squad.', th: 'สิ่งนี้จะช่วยให้เราหาทีมที่สมบูรณ์แบบให้คุณ' },
+        gamesHeader: { en: 'GAMES', th: 'เกม' },
+        gamesSubheader: { en: '(Select any)', th: '(เลือกกี่อย่างก็ได้)' },
+        vibeHeader: { en: 'VIBE', th: 'ฟีลในการเล่น' },
+        vibeSubheader: { en: '(Pick up to 2)', th: '(เลือกได้สูงสุด 2 อย่าง)' },
+        hoursHeader: { en: 'PLAY HOURS', th: 'เวลาเล่น' },
+        hoursSubheader: { en: '(Up to 2)', th: '(สูงสุด 2 อย่าง)' },
+        commHeader: { en: 'COMMUNICATION', th: 'การสื่อสาร' },
+        commSubheader: { en: '(Pick one)', th: '(เลือกวิธีสื่อสาร 1 อย่าง)' },
+        traitTagMoba: { en: 'MOBA', th: 'MOBA' },
+        traitTagFps: { en: 'FPS', th: 'FPS' },
+        traitTagRpg: { en: 'RPG', th: 'RPG' },
+        traitTagStrategy: { en: 'Strategy', th: 'วางแผน' },
+        traitTagSandbox: { en: 'Sandbox', th: 'Sandbox' },
+        traitTagHorror: { en: 'Horror', th: 'สยองขวัญ' },
+        traitTagCasual: { en: 'Casual', th: 'สบายๆ' },
+        traitTagCompetitive: { en: 'Competitive', th: 'แข่งขัน' },
+        traitTagTryhard: { en: 'Try-hard', th: 'เอาจริง' },
+        traitTagChill: { en: 'Chill', th: 'ชิลๆ' },
+        traitTagFunny: { en: 'Funny', th: 'ตลก' },
+        traitTagFocused: { en: 'Focused', th: 'มุ่งมั่น' },
+        traitTagWeekdays: { en: 'Weekdays', th: 'วันธรรมดา' },
+        traitTagWeekends: { en: 'Weekends', th: 'สุดสัปดาห์' },
+        traitTagLateNight: { en: 'Late Night', th: 'ดึกๆ' },
+        traitTagMornings: { en: 'Mornings', th: 'ตอนเช้า' },
+        traitTagAnytime: { en: 'Anytime', th: 'ได้ตลอด' },
+        traitTagVoice: { en: 'Voice Chat', th: 'คุยเสียง' },
+        traitTagPings: { en: 'Pings Only', th: 'ใช้ Pings' },
+        traitTagText: { en: 'Text Chat', th: 'พิมพ์แชท' },
+        traitTagQuiet: { en: 'Quiet', th: 'เงียบๆ' },
+        yourTraits: { en: 'YOUR TRAITS', th: 'ลักษณะของคุณ' },
+        noTraits: { en: 'No traits selected', th: 'ยังไม่ได้เลือกลักษณะ' },
+        finishSetup: { en: 'FINISH SETUP', th: 'ตั้งค่าเสร็จสิ้น' },
+        errorMax2: { en: 'MAX 2!', th: 'เลือกได้ 2 อย่าง!' },
+        errorPick1: { en: 'PICK 1', th: 'เลือก 1 อย่าง' },
+        errorPickAtLeast1: { en: 'PICK AT LEAST 1', th: 'เลือกอย่างน้อย 1 อย่าง' },
+        animProcessing: { en: "WE'RE PROCESSING . . .", th: "กำลังประมวลผล . . ." },
+        animCompleting: { en: "COMPLETING YOUR PROFILE . . .", th: "กำลังสร้างโปรไฟล์ . . ." },
+        animFusion: { en: 'FUSION!', th: 'รวมร่าง!' },
+
+        // --- main1.html (Dashboard) ---
+        dashDashboard: { en: 'Dashboard', th: 'แดชบอร์ด' },
+        dashChat: { en: 'Chat', th: 'แชท' },
+        dashWelcome: { en: 'CHOOSE YOUR MISSION,', th: 'เลือกภารกิจของคุณ,' },
+        dashSubtitle: { en: 'What are you looking for today?', th: 'วันนี้คุณมองหาอะไรอยู่?' },
+        dashLongTerm: { en: 'Find a Long-Term Buddy', th: 'หาเพื่อนเล่นระยะยาว' },
+        dashLongTermDesc: { en: 'Swipe through profiles to find your perfect gaming partner.', th: 'ปัดโปรไฟล์เพื่อค้นหาคู่หูเล่นเกมที่สมบูรณ์แบบของคุณ' },
+        dashStartSwiping: { en: 'START SWIPING', th: 'เริ่มปัดเลย' },
+        dashPlayNow: { en: 'Play Now', th: 'เล่นทันที' },
+        dashPlayNowDesc: { en: 'Jump into the action immediately. Browse or create a room.', th: 'เข้าสู่การต่อสู้ทันที ค้นหาหรือสร้างห้อง' },
+        dashJoinRoom: { en: 'JOIN A ROOM', th: 'เข้าร่วมห้อง' },
+        
+        // --- Status Popup (Shared) ---
+        statusOnline: { en: 'Online', th: 'ออนไลน์' },
+        statusIdle: { en: 'Idle', th: 'ไม่ว่าง' },
+        statusDnd: { en: 'Do Not Disturb', th: 'ห้ามรบกวน' },
+        statusInvisible: { en: 'Invisible', th: 'ซ่อนตัว' },
+        popupEditProfile: { en: 'Edit Profile', th: 'แก้ไขโปรไฟล์' },
+        popupSettings: { en: 'Settings', th: 'ตั้งค่า' },
+        popupLogout: { en: 'Log Out', th: 'ออกจากระบบ' },
+
+        // --- settings.html ---
+        settingsTitle: { en: 'SETTINGS', th: 'การตั้งค่า' },
+        settingsSubtitle: { en: 'Customize your experience.', th: 'ปรับแต่งประสบการณ์ของคุณ' },
+        settingsAppearance: { en: 'Appearance', th: 'ลักษณะ' },
+        settingsThemeLight: { en: 'Light', th: 'สว่าง' },
+        settingsThemeDefault: { en: 'Default', th: 'ค่าเริ่มต้น' },
+        settingsThemeDark: { en: 'Dark', th: 'มืด' },
+        settingsAccount: { en: 'Account', th: 'บัญชี' },
+        settingsPrivacy: { en: 'Privacy & Safety', th: 'ความเป็นส่วนตัวและความปลอดภัย' },
+        settingsComingSoon: { en: 'Coming Soon...', th: 'เร็วๆ นี้...' },
+        settingsLanguage: { en: 'Language', th: 'ภาษา' },
+        settingsLangEn: { en: 'English', th: 'อังกฤษ' },
+        settingsLangTh: { en: 'Thai', th: 'ไทย' },
+        esc: { en: 'ESC', th: 'ESC' },
+
+        // --- playnow.html ---
+        playnowTitle: { en: 'Find a Match', th: 'ค้นหาแมตช์' },
+        playnowSubtitle: { en: 'Jump into a game right away or create your own.', th: 'กระโดดเข้าสู่เกมทันทีหรือสร้างห้องของคุณเอง' },
+        quickJoinTitle: { en: 'Quick Join', th: 'เข้าร่วมด่วน' },
+        quickJoinBtn: { en: 'Find Instant Match', th: 'ค้นหาแมตช์ทันที' },
+        playnowLobbies: { en: 'Game Lobbies', th: 'ล็อบบี้เกม' },
+        filterAllGames: { en: 'All Games', th: 'ทุกเกม' },
+        filterAllTypes: { en: 'All Types', th: 'ทุกประเภท' },
+        playnowRefresh: { en: 'Refresh', th: 'รีเฟรช' },
+        playnowJoin: { en: 'Join', th: 'เข้าร่วม' },
+        playnowGenreFPS: { en: 'FPS', th: 'FPS' },
+        playnowGenreMOBA: { en: 'MOBA', th: 'MOBA' },
+        playnowTypeRanked: { en: 'Ranked', th: 'จัดอันดับ' },
+        playnowTypeChill: { en: 'Chill & Chat', th: 'ชิลล์ & คุย' },
+        playnowPlayers: { en: 'Players', th: 'ผู้เล่น' },
+        playnowNeedSentinel: { en: 'Need Sentinel', th: 'ต้องการ Sentinel' },
+        playnowUrgencyExpires: { en: 'Expires in', th: 'หมดอายุใน' },
+        playnowUrgencyLooking: { en: 'Looking Now', th: 'กำลังหา' },
+        playnowUrgencyStarting: { en: 'Starting Soon!', th: 'เริ่มเร็วๆ นี้!' },
+        playnowCreateBtn: { en: 'Create a Room', th: 'สร้างห้อง' },
+        backToLobbies: { en: 'Back to Lobbies', th: 'กลับไปที่ล็อบบี้'},
+        playnowStep1: { en: 'Step 1: Select Your Game', th: 'ขั้นตอนที่ 1: เลือกเกมของคุณ' },
+        playnowChooseGame: { en: '-- Choose a Game --', th: '-- เลือกเกม --' },
+        gameLeagueOfLegends: { en: 'League of Legends', th: 'League of Legends'},
+        gameDota2: { en: 'Dota 2', th: 'Dota 2' },
+        gameValorant: { en: 'Valorant', th: 'Valorant' },
+        gameCS2: { en: 'Counter-Strike 2', th: 'Counter-Strike 2' },
+        gameFallGuys: { en: 'Fall Guys', th: 'Fall Guys' },
+        gameAmongUs: { en: 'Among Us', th: 'Among Us' },
+        playnowStep2FPS: { en: 'Step 2: FPS Settings', th: 'ขั้นตอนที่ 2: ตั้งค่า FPS' },
+        playnowRolePref: { en: 'PREFERRED ROLE', th: 'บทบาทที่ต้องการ' },
+        playnowRole: { en: 'ROLE', th: 'บทบาท' },
+        playnowRoleEntry: { en: 'Entry', th: 'ตัวเข้า' },
+        playnowRoleSniper: { en: 'Sniper', th: 'สไนเปอร์' },
+        playnowRoleIGL: { en: 'IGL', th: 'IGL' },
+        playnowRoleFlex: { en: 'Flex', th: 'ตัวยืดหยุ่น' },
+        playnowMobaSettings: { en: 'MOBA Settings', th: 'ตั้งค่า MOBA' },
+        playnowRoleTop: { en: 'Top', th: 'บน' },
+        playnowRoleMid: { en: 'Mid', th: 'กลาง' },
+        playnowRoleJungle: { en: 'Jungle', th: 'ป่า' },
+        playnowRoleADC: { en: 'ADC', th: 'ADC' },
+        playnowRoleSupport: { en: 'Support', th: 'ซัพพอร์ต' },
+        playnowPartySettings: { en: 'Party Game Settings', th: 'ตั้งค่าปาร์ตี้เกม' },
+        playnowVibe: { en: 'VIBE', th: 'สไตล์' },
+        playnowVibeFunny: { en: 'Funny', th: 'ตลก' },
+        playnowVibeCasual: { en: 'Casual', th: 'สบายๆ' },
+        playnowVibeTalkative: { en: 'Talkative', th: 'ช่างคุย' },
+        playnowVibeNoMic: { en: 'No Mic', th: 'ไม่ใช้ไมค์' },
+        playnowRoomStatus: { en: 'Room Status', th: 'สถานะห้อง' },
+        enableTimer: { en: 'Enable Expiry Timer', th: 'เปิดใช้งานตัวจับเวลา' },
+        playnowRoomExpires: { en: 'This room will expire in', th: 'ห้องนี้จะหมดอายุใน' },
+        playnowCreatorControls: { en: 'Creator Controls', th: 'ส่วนควบคุมผู้สร้าง' },
+        playnowExtend: { en: 'Extend by 2 mins', th: 'ขยายเวลา 2 นาที' },
+        playnowCancel: { en: 'Cancel Creation', th: 'ยกเลิกการสร้าง' },
+    };
+
+    // Define the main function in the global scope
+    setLanguage = (lang) => {
+        document.querySelectorAll('[data-translate-key]').forEach(el => {
+            const key = el.dataset.translateKey;
+            const translation = translations[key]?.[lang];
+            if (translation) {
+                // Handle different element types
+                if (el.dataset.translateTarget === 'placeholder' && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
+                    el.placeholder = translation;
+                } else {
+                    el.textContent = translation;
                 }
-                const lang = localStorage.getItem('gamicon_lang') || 'en';
-                const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
-                const currentStatus = localStorage.getItem('gamicon_status') || 'online';
-                const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
-                const statusConfig = { 
-                    online: { className: 'status-online', langKey: 'statusOnline' }, 
-                    idle: { className: 'status-idle', langKey: 'statusIdle' }, 
-                    dnd: { className: 'status-dnd', langKey: 'statusDnd' }, 
-                    invisible: { className: 'status-invisible', langKey: 'statusInvisible' },
-                };
+            }
+        });
+        document.documentElement.lang = lang;
+        localStorage.setItem('gamicon_lang', lang);
 
-                const applyTheme = (theme) => { body.className = ''; body.classList.add(theme); localStorage.setItem('gamicon_theme', theme); };
-                const openSidebar = () => { if (sidebar && sidebarOverlay) { sidebar.classList.remove('-translate-x-full'); sidebar.classList.add('translate-x-0'); sidebarOverlay.classList.remove('hidden'); } };
-                const closeSidebar = () => { if (sidebar && sidebarOverlay) { sidebar.classList.add('-translate-x-full'); sidebar.classList.remove('translate-x-0'); sidebarOverlay.classList.add('hidden'); } };
-                
-                if (mobileMenuButton) mobileMenuButton.addEventListener('click', (e) => { e.stopPropagation(); openSidebar(); });
-                if (sidebarCloseButton) sidebarCloseButton.addEventListener('click', (e) => { e.stopPropagation(); closeSidebar(); });
-                if (sidebarOverlay) sidebarOverlay.addEventListener('click', (e) => { e.stopPropagation(); closeSidebar(); });
-                if (dashboardMenu) { const t = dashboardMenu.querySelector('.nav-menu-trigger'); if (t) t.addEventListener('click', (e) => { e.preventDefault(); dashboardMenu.classList.toggle('is-open'); }); }
-                if (profileTrigger && statusPopup) {
-                    const sd = document.getElementById('status-dot'), pst = document.getElementById('popup-status-text'), su = document.getElementById('sidebar-username'), pu = document.getElementById('popup-username');
-                    const setStatus = (s) => { 
-                        const c = statusConfig[s] || statusConfig.online; 
-                        if (sd) sd.className = `status-dot ${c.className}`; 
-                        if (pst) pst.textContent = window.translations?.[c.langKey]?.[lang] || s.charAt(0).toUpperCase() + s.slice(1); 
-                        localStorage.setItem('gamicon_status', s); 
-                        statusPopup.classList.add('hidden'); 
-                    };
-                    if (su) su.textContent = username; if (pu) pu.textContent = username;
-                    const cp = window.location.pathname.split('/').pop() || 'createroom.html', ep = statusPopup.querySelector('a[href^="profiles.html"]'), sp = statusPopup.querySelector('a[href^="settings.html"]');
-                    if(ep) ep.href = `profiles.html?from=${cp}`; if(sp) sp.href = `settings.html?from=${cp}`;
-                    profileTrigger.addEventListener('click', (e) => { e.stopPropagation(); const r = profileTrigger.getBoundingClientRect(); statusPopup.style.left = `${r.left}px`; statusPopup.style.bottom = `${window.innerHeight - r.top}px`; statusPopup.classList.toggle('hidden'); });
-                    document.querySelectorAll('.popup-option[data-status]').forEach(o => o.addEventListener('click', (e) => { e.stopPropagation(); setStatus(e.currentTarget.dataset.status); }));
-                    window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) statusPopup.classList.add('hidden'); });
-                    setStatus(currentStatus);
-                }
-                
-                function setLanguage(language) { 
-                    document.querySelectorAll('[data-translate-key]').forEach(el => { 
-                        const key = el.dataset.translateKey; 
-                        if (window.translations?.[key]?.[language]) {
-                            el.textContent = window.translations[key][language]; 
-                        } else {
-                            if (!el.dataset.defaultText) el.dataset.defaultText = el.textContent;
-                            el.textContent = el.dataset.defaultText;
-                        }
-                    });
-                }
-                
-                applyTheme(currentTheme);
-                setLanguage(lang);
+        const toggleButtons = document.querySelectorAll('.lang-toggle');
+        toggleButtons.forEach(button => {
+            button.textContent = lang === 'en' ? 'ไทย' : 'EN';
+        });
+    };
 
-                // --- PAGE-SPECIFIC SCRIPT: CREATEROOM.HTML ---
-                const gameSelect = document.getElementById('game-select');
-                const dynamicOptionsWrapper = document.getElementById('dynamic-options-wrapper');
-                const statusPanel = document.getElementById('status-panel');
-                const enableTimerToggle = document.getElementById('enable-timer-toggle');
-                const timerControlsWrapper = document.getElementById('timer-controls-wrapper');
-                const createRoomBtn = document.getElementById('create-room-btn');
-                const cancelCreationBtn = document.getElementById('cancel-creation-btn');
-                
-                const privacySection = document.getElementById('privacy-section');
-                const timerSlider = document.getElementById('timer-slider');
-                const timerValueDisplay = document.getElementById('timer-value-display');
-                
-                const templates = { 
-                    fps: document.getElementById('template-fps')?.innerHTML, 
-                    moba: document.getElementById('template-moba')?.innerHTML, 
-                    party: document.getElementById('template-party')?.innerHTML 
-                };
-                
-                const resetForm = () => {
-                    gameSelect.value = '';
-                    dynamicOptionsWrapper.innerHTML = '';
-                    dynamicOptionsWrapper.classList.add('hidden');
-                    statusPanel.classList.add('hidden');
-                    
-                    privacySection.classList.add('hidden');
-                    const publicRadio = document.querySelector('input[name="room-privacy"][value="public"]');
-                    if (publicRadio) publicRadio.checked = true;
-                    
-                    if(enableTimerToggle) enableTimerToggle.checked = true;
-                    if(timerControlsWrapper) timerControlsWrapper.classList.remove('hidden');
-                    if(timerSlider) timerSlider.value = 15;
-                    if(timerValueDisplay) timerValueDisplay.textContent = '15';
-                };
+    const langToggleHandler = () => {
+        const currentLang = localStorage.getItem('gamicon_lang') || 'en';
+        const newLang = currentLang === 'en' ? 'th' : 'en';
+        setLanguage(newLang);
+    };
 
-                if(createRoomBtn) createRoomBtn.addEventListener('click', () => {
-                    const settings = {
-                        game: gameSelect.value,
-                        privacy: document.querySelector('input[name="room-privacy"]:checked')?.value,
-                        genreSpecificOption: document.querySelector('.genre-options input:checked')?.value || 'N/A',
-                        timerEnabled: enableTimerToggle.checked,
-                        expiresInMinutes: enableTimerToggle.checked ? timerSlider.value : null
-                    };
-                    console.log('Room settings to be created:', settings);
-                    alert(`Room creation successful!\nPrivacy: ${settings.privacy}\nExpires in: ${settings.timerEnabled ? settings.expiresInMinutes + ' mins' : 'Never'}`);
-                    
-                    window.location.href = 'playnow.html';
-                });
+    document.querySelectorAll('.lang-toggle').forEach(button => {
+        button.addEventListener('click', langToggleHandler);
+    });
 
-                if(cancelCreationBtn) cancelCreationBtn.addEventListener('click', resetForm);
-                
-                if(enableTimerToggle) enableTimerToggle.addEventListener('change', () => { 
-                    if(timerControlsWrapper) timerControlsWrapper.classList.toggle('hidden', !enableTimerToggle.checked); 
-                });
-
-                if(timerSlider && timerValueDisplay) {
-                    timerSlider.addEventListener('input', (e) => {
-                        timerValueDisplay.textContent = e.target.value;
-                    });
-                }
-
-                // *** FIXED SCRIPT LOGIC ***
-                if(gameSelect) gameSelect.addEventListener('change', (e) => {
-                    const selectedOption = e.target.selectedOptions[0];
-                    const value = e.target.value;
-                    const genre = selectedOption ? selectedOption.dataset.genre : null;
-
-                    // First, perform a full reset. This handles the case where the user selects the default "-- Choose --" option.
-                    resetForm();
-
-                    // Now, if a valid game was selected, restore the selection and show the relevant sections.
-                    if (value && genre && templates[genre]) {
-                        gameSelect.value = value; // Restore the game selection in the dropdown
-
-                        // Populate the dynamic options and make the other sections visible
-                        dynamicOptionsWrapper.innerHTML = templates[genre];
-                        dynamicOptionsWrapper.classList.remove('hidden');
-                        if (privacySection) privacySection.classList.remove('hidden'); 
-                        if (statusPanel) statusPanel.classList.remove('hidden');
-                        
-                        // Re-apply translations for any newly added dynamic content
-                        setLanguage(lang); 
-                    }
-                });
-            });
-        })();
-    </script>
-</body>
-</html>
+    const initialLang = localStorage.getItem('gamicon_lang') || 'en';
+    setLanguage(initialLang);
+});
