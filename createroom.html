@@ -201,17 +201,16 @@
     </div>
 
     <!-- Updated HTML Templates -->
-    <template id="template-fps"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep3FPS">Step 3: FPS Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRolePref">PREFERRED ROLE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="fps-role" value="entry" checked><span>Entry</span></label><label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span>Sniper</span></label><label class="radio-option"><input type="radio" name="fps-role" value="igl"><span>IGL</span></label><label class="radio-option"><input type="radio" name="fps-role" value="flex"><span>Flex</span></label></div></div></div></template>
-    <template id="template-moba"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep3Moba">Step 3: MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRole">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top" checked><span>Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span>Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span>Jungle</span></label><label class="radio-option"><input type="radio" name="moba-role" value="adc"><span>ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span>Support</span></label></div></div></div></template>
-    <template id="template-party"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep3Party">Step 3: Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowVibe">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny" checked><span>Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span>Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span>Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span>No Mic</span></label></div></div></div></template>
+    <template id="template-fps"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep3FPS">Step 3: FPS Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRolePref">PREFERRED ROLE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="fps-role" value="entry" checked><span data-translate-key="playnowRoleEntry">Entry</span></label><label class="radio-option"><input type="radio" name="fps-role" value="sniper"><span data-translate-key="playnowRoleSniper">Sniper</span></label><label class="radio-option"><input type="radio" name="fps-role" value="igl"><span data-translate-key="playnowRoleIGL">IGL</span></label><label class="radio-option"><input type="radio" name="fps-role" value="flex"><span data-translate-key="playnowRoleFlex">Flex</span></label></div></div></div></template>
+    <template id="template-moba"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep3Moba">Step 3: MOBA Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowRole">ROLE</label><div class="grid grid-cols-2 sm:grid-cols-5 gap-3"><label class="radio-option"><input type="radio" name="moba-role" value="top" checked><span data-translate-key="playnowRoleTop">Top</span></label><label class="radio-option"><input type="radio" name="moba-role" value="mid"><span data-translate-key="playnowRoleMid">Mid</span></label><label class="radio-option"><input type="radio" name="moba-role" value="jungle"><span data-translate-key="playnowRoleJungle">Jungle</span></label><label class="radio-option"><input type="radio" name="moba-role" value="adc"><span data-translate-key="playnowRoleADC">ADC</span></label><label class="radio-option"><input type="radio" name="moba-role" value="support"><span data-translate-key="playnowRoleSupport">Support</span></label></div></div></div></template>
+    <template id="template-party"><div class="form-section genre-options"><label class="form-label" data-translate-key="playnowStep3Party">Step 3: Party Game Settings</label><div class="space-y-4"><label class="form-label !text-sm !mb-2" data-translate-key="playnowVibe">VIBE</label><div class="grid grid-cols-2 sm:grid-cols-4 gap-3"><label class="radio-option"><input type="radio" name="party-vibe" value="funny" checked><span data-translate-key="playnowVibeFunny">Funny</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="casual"><span data-translate-key="playnowVibeCasual">Casual</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="talkative"><span data-translate-key="playnowVibeTalkative">Talkative</span></label><label class="radio-option"><input type="radio" name="party-vibe" value="no-mic"><span data-translate-key="playnowVibeNoMic">No Mic</span></label></div></div></div></template>
     
-    <!-- It's assumed you have a translation.js file for localization -->
     <script src="translation.js"></script>
 
     <script>
         (() => {
             document.addEventListener('DOMContentLoaded', () => {
-                // --- SHARED LAYOUT SCRIPT (NO CHANGES) ---
+                // --- SHARED LAYOUT SCRIPT ---
                 const body = document.body;
                 const mobileMenuButton = document.getElementById('mobile-menu-button');
                 const sidebar = document.getElementById('sidebar');
@@ -220,11 +219,7 @@
                 const dashboardMenu = document.getElementById('dashboard-menu');
                 const profileTrigger = document.getElementById('profile-trigger');
                 const statusPopup = document.getElementById('status-popup');
-                // Use a mock translations object if the real one isn't loaded
-                if (typeof window.translations === 'undefined') { 
-                    console.warn("translation.js not found or failed to load. Using mock data for keys."); 
-                    window.translations = {}; 
-                }
+                
                 const lang = localStorage.getItem('gamicon_lang') || 'en';
                 const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
                 const currentStatus = localStorage.getItem('gamicon_status') || 'online';
@@ -249,33 +244,19 @@
                     const setStatus = (s) => { 
                         const c = statusConfig[s] || statusConfig.online; 
                         if (sd) sd.className = `status-dot ${c.className}`; 
-                        if (pst) pst.textContent = window.translations?.[c.langKey]?.[lang] || s.charAt(0).toUpperCase() + s.slice(1); 
+                        if (pst && window.translations) pst.textContent = window.translations?.[c.langKey]?.[lang] || s.charAt(0).toUpperCase() + s.slice(1); 
                         localStorage.setItem('gamicon_status', s); 
                         statusPopup.classList.add('hidden'); 
                     };
                     if (su) su.textContent = username; if (pu) pu.textContent = username;
-                    const cp = window.location.pathname.split('/').pop() || 'createroom.html', ep = statusPopup.querySelector('a[href^="profiles.html"]'), sp = statusPopup.querySelector('a[href^="settings.html"]');
-                    if(ep) ep.href = `profiles.html?from=${cp}`; if(sp) sp.href = `settings.html?from=${cp}`;
                     profileTrigger.addEventListener('click', (e) => { e.stopPropagation(); const r = profileTrigger.getBoundingClientRect(); statusPopup.style.left = `${r.left}px`; statusPopup.style.bottom = `${window.innerHeight - r.top}px`; statusPopup.classList.toggle('hidden'); });
                     document.querySelectorAll('.popup-option[data-status]').forEach(o => o.addEventListener('click', (e) => { e.stopPropagation(); setStatus(e.currentTarget.dataset.status); }));
                     window.addEventListener('click', () => { if (!statusPopup.classList.contains('hidden')) statusPopup.classList.add('hidden'); });
                     setStatus(currentStatus);
                 }
                 
-                function setLanguage(language) { 
-                    document.querySelectorAll('[data-translate-key]').forEach(el => { 
-                        const key = el.dataset.translateKey; 
-                        if (window.translations?.[key]?.[language]) {
-                            el.textContent = window.translations[key][language]; 
-                        } else {
-                            if (!el.dataset.defaultText) el.dataset.defaultText = el.textContent;
-                            el.textContent = el.dataset.defaultText;
-                        }
-                    });
-                }
-                
                 applyTheme(currentTheme);
-                setLanguage(lang);
+                // The global setLanguage function from translation.js will be called automatically on load.
 
                 // --- PAGE-SPECIFIC SCRIPT: CREATEROOM.HTML ---
                 const gameSelect = document.getElementById('game-select');
@@ -285,7 +266,6 @@
                 const timerControlsWrapper = document.getElementById('timer-controls-wrapper');
                 const createRoomBtn = document.getElementById('create-room-btn');
                 const cancelCreationBtn = document.getElementById('cancel-creation-btn');
-                
                 const privacySection = document.getElementById('privacy-section');
                 const timerSlider = document.getElementById('timer-slider');
                 const timerValueDisplay = document.getElementById('timer-value-display');
@@ -320,45 +300,39 @@
                         timerEnabled: enableTimerToggle.checked,
                         expiresInMinutes: enableTimerToggle.checked ? timerSlider.value : null
                     };
-                    console.log('Room settings to be created:', settings);
-                    alert(`Room creation successful!\nPrivacy: ${settings.privacy}\nExpires in: ${settings.timerEnabled ? settings.expiresInMinutes + ' mins' : 'Never'}`);
-                    
+                    alert(`Room created with settings:\n${JSON.stringify(settings, null, 2)}`);
                     window.location.href = 'playnow.html';
                 });
 
                 if(cancelCreationBtn) cancelCreationBtn.addEventListener('click', resetForm);
-                
-                if(enableTimerToggle) enableTimerToggle.addEventListener('change', () => { 
-                    if(timerControlsWrapper) timerControlsWrapper.classList.toggle('hidden', !enableTimerToggle.checked); 
-                });
+                if(enableTimerToggle) enableTimerToggle.addEventListener('change', () => { if(timerControlsWrapper) timerControlsWrapper.classList.toggle('hidden', !enableTimerToggle.checked); });
+                if(timerSlider && timerValueDisplay) timerSlider.addEventListener('input', (e) => { timerValueDisplay.textContent = e.target.value; });
 
-                if(timerSlider && timerValueDisplay) {
-                    timerSlider.addEventListener('input', (e) => {
-                        timerValueDisplay.textContent = e.target.value;
-                    });
-                }
-
-                // *** FIXED SCRIPT LOGIC ***
                 if(gameSelect) gameSelect.addEventListener('change', (e) => {
                     const selectedOption = e.target.selectedOptions[0];
                     const value = e.target.value;
                     const genre = selectedOption ? selectedOption.dataset.genre : null;
 
-                    // First, perform a full reset. This handles the case where the user selects the default "-- Choose --" option.
-                    resetForm();
+                    // Always clear the dynamic sections first
+                    dynamicOptionsWrapper.innerHTML = '';
+                    dynamicOptionsWrapper.classList.add('hidden');
+                    statusPanel.classList.add('hidden');
+                    privacySection.classList.add('hidden');
 
-                    // Now, if a valid game was selected, restore the selection and show the relevant sections.
                     if (value && genre && templates[genre]) {
-                        gameSelect.value = value; // Restore the game selection in the dropdown
-
-                        // Populate the dynamic options and make the other sections visible
+                        // A valid game was chosen, show and populate the sections
                         dynamicOptionsWrapper.innerHTML = templates[genre];
                         dynamicOptionsWrapper.classList.remove('hidden');
                         if (privacySection) privacySection.classList.remove('hidden'); 
                         if (statusPanel) statusPanel.classList.remove('hidden');
                         
-                        // Re-apply translations for any newly added dynamic content
-                        setLanguage(lang); 
+                        // Re-apply translations for the newly added dynamic content
+                        if (window.setLanguage) {
+                            setLanguage(lang); 
+                        }
+                    } else {
+                        // The "-- Choose a Game --" option was selected, so keep everything hidden
+                        gameSelect.value = '';
                     }
                 });
             });
