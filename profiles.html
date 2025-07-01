@@ -116,27 +116,33 @@
             };
             
             const CATEGORY_MAP = {
-                games: { title: "Game Genres", color: "bg-blue-500 text-white" },
-                vibe: { title: "Player Vibe", color: "bg-green-500 text-white" },
-                hours: { title: "Active Hours", color: "bg-amber-500 text-gray-900" },
-                comm: { title: "Communication", color: "bg-red-500 text-white" }
+                games: { titleKey: "gamesHeader", color: "bg-blue-500 text-white" },
+                vibe: { titleKey: "vibeHeader", color: "bg-green-500 text-white" },
+                hours: { titleKey: "hoursHeader", color: "bg-amber-500 text-gray-900" },
+                comm: { titleKey: "commHeader", color: "bg-red-500 text-white" }
             };
 
-            const renderDnaCategory = (category, userTraits) => {
+            const getTranslation = (key, lang, fallback) => {
+                return window.translations?.[key]?.[lang] || fallback || `[${key}]`;
+            };
+
+            const renderDnaCategory = (category, userTraits, lang) => {
                 const details = CATEGORY_MAP[category];
+                const titleText = getTranslation(details.titleKey, lang, details.titleKey);
                 let dnaHTML = `<div class="space-y-3">`; 
                 if (isEditMode) {
-                    dnaHTML += `<h3 class="section-title">${details.title}</h3>`;
+                    dnaHTML += `<h3 class="section-title">${titleText}</h3>`;
                     dnaHTML += `<div class="flex flex-wrap gap-2">`;
                     ALL_TRAITS[category].forEach(traitKey => {
-                        const traitText = translations[traitKey] ? (translations[traitKey][localStorage.getItem('gamicon_lang') || 'en']) : traitKey;
+                        const traitText = getTranslation(traitKey, lang);
                         const isActive = userTraits[category]?.includes(traitText);
-                        dnaHTML += `<div class="trait-tag ${isActive ? `active-${category}` : ''}" data-category="${category}">${traitText}</div>`;
+                        const activeClass = isActive ? `active-${category}` : '';
+                        dnaHTML += `<div class="trait-tag ${activeClass}" data-category="${category}" data-trait-key="${traitKey}">${traitText}</div>`;
                     });
                     dnaHTML += `</div><span id="${category}-error" class="error-message block h-4 mt-1"></span>`;
                 } else {
                     if (userTraits[category] && userTraits[category].length > 0) {
-                        dnaHTML += `<h3 class="section-title">${details.title}</h3><div class="flex flex-wrap gap-2">`;
+                        dnaHTML += `<h3 class="section-title">${titleText}</h3><div class="flex flex-wrap gap-2">`;
                         userTraits[category].forEach(trait => {
                             dnaHTML += `<span class="trait-pill ${details.color}">${trait}</span>`;
                         });
@@ -148,10 +154,8 @@
             };
 
             function renderProfile() {
-                // --- MODIFIED: Read the 'from' parameter from the URL ---
                 const urlParams = new URLSearchParams(window.location.search);
-                const returnUrl = urlParams.get('from') || 'main1.html'; // Default to main1.html if not provided
-
+                const returnUrl = urlParams.get('from') || 'home1.html';
                 const profile = JSON.parse(localStorage.getItem('userProfile'));
                 const lang = localStorage.getItem('gamicon_lang') || 'en';
 
@@ -160,21 +164,22 @@
                     return;
                 }
                 
+                // *** FIXED: Buttons are now translated ***
                 const renderButtons = () => {
                     if (isEditMode) {
-                        return `<a href="#" id="cancel-btn" class="btn-8bit btn-gray w-full md:w-auto">Cancel</a>
-                                <a href="#" id="save-btn" class="btn-8bit btn-green w-full md:w-auto">Save Changes</a>`;
+                        return `<a href="#" id="cancel-btn" class="btn-8bit btn-gray w-full md:w-auto">${getTranslation('profilesCancel', lang, 'Cancel')}</a>
+                                <a href="#" id="save-btn" class="btn-8bit btn-green w-full md:w-auto">${getTranslation('profilesSave', lang, 'Save Changes')}</a>`;
                     } else {
-                        // --- MODIFIED: Use the dynamic returnUrl for the "Back" button ---
-                        return `<a href="${returnUrl}" class="btn-8bit btn-gray w-full md:w-auto">Back</a>
-                                <a href="#" id="edit-btn" class="btn-8bit btn-blue w-full md:w-auto">Edit</a>`;
+                        return `<a href="${returnUrl}" class="btn-8bit btn-gray w-full md:w-auto">${getTranslation('back', lang, 'Back')}</a>
+                                <a href="#" id="edit-btn" class="btn-8bit btn-blue w-full md:w-auto">${getTranslation('profilesEdit', lang, 'Edit')}</a>`;
                     }
                 };
                 
+                // *** FIXED: All hardcoded text is replaced with calls to getTranslation() ***
                 const profileHTML = `
                     <div class="profile-card p-6 md:p-8 rounded-xl">
                         <div class="text-center mb-8">
-                            <img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-28 h-28 rounded-full mx-auto border-4 border-gray-600 mb-4 ring-4 ring-gray-700">
+                            <img src="${profile.avatar || 'https://i.pravatar.cc/50?u=player1'}" alt="Avatar" class="w-28 h-28 rounded-full mx-auto border-4 border-gray-600 mb-4 ring-4 ring-gray-700">
                             <h1 class="profile-username text-3xl">${profile.username || 'N/A'}</h1>
                             <p class="text-gray-400 text-sm">${profile.email || 'N/A'}</p>
                         </div>
@@ -183,32 +188,32 @@
                             <div class="space-y-8">
                                 ${isEditMode ? `
                                     <div>
-                                        <h3 class="section-title mb-2">Birthday</h3>
+                                        <h3 class="section-title mb-2">${getTranslation('birthdayLabel', lang, 'Birthday')}</h3>
                                         <input id="birthday-edit-input" type="date" value="${profile.birthday || ''}" class="profile-input">
                                         <span id="birthday-error" class="error-message block h-4 mt-1"></span>
                                     </div>
                                     <div>
-                                        <h3 class="section-title mb-2">Gender</h3>
+                                        <h3 class="section-title mb-2">${getTranslation('genderLabel', lang, 'Gender')}</h3>
                                         <select id="gender-edit-select" class="profile-select">
-                                            <option value="male" ${profile.gender === 'male' ? 'selected' : ''}>Male</option>
-                                            <option value="female" ${profile.gender === 'female' ? 'selected' : ''}>Female</option>
-                                            <option value="non-binary" ${profile.gender === 'non-binary' ? 'selected' : ''}>Non-binary</option>
+                                            <option value="male" ${profile.gender === 'male' ? 'selected' : ''}>${getTranslation('genderMale', lang, 'Male')}</option>
+                                            <option value="female" ${profile.gender === 'female' ? 'selected' : ''}>${getTranslation('genderFemale', lang, 'Female')}</option>
+                                            <option value="non-binary" ${profile.gender === 'non-binary' ? 'selected' : ''}>${getTranslation('genderNonBinary', lang, 'Non-binary')}</option>
                                         </select>
                                         <span id="gender-error" class="error-message block h-4 mt-1"></span>
                                     </div>
                                 ` : `
                                 <div class="grid grid-cols-2 gap-4">
-                                     <div><h3 class="section-title mb-2">Birthday</h3><p class="font-semibold text-lg">${profile.birthday || 'N/A'}</p></div>
-                                     <div><h3 class="section-title mb-2">Gender</h3><p class="font-semibold text-lg capitalize">${profile.gender || 'N/A'}</p></div>
+                                     <div><h3 class="section-title mb-2">${getTranslation('birthdayLabel', lang, 'Birthday')}</h3><p class="font-semibold text-lg">${profile.birthday || 'N/A'}</p></div>
+                                     <div><h3 class="section-title mb-2">${getTranslation('genderLabel', lang, 'Gender')}</h3><p class="font-semibold text-lg capitalize">${getTranslation('gender' + profile.gender.charAt(0).toUpperCase() + profile.gender.slice(1), lang, profile.gender) || 'N/A'}</p></div>
                                 </div>
                                 `}
                                 <hr class="md:hidden">
-                                ${renderDnaCategory('hours', profile.traits || {})}
-                                ${renderDnaCategory('comm', profile.traits || {})}
+                                ${renderDnaCategory('hours', profile.traits || {}, lang)}
+                                ${renderDnaCategory('comm', profile.traits || {}, lang)}
                             </div>
                              <div class="space-y-8">
-                                ${renderDnaCategory('games', profile.traits || {})}
-                                ${renderDnaCategory('vibe', profile.traits || {})}
+                                ${renderDnaCategory('games', profile.traits || {}, lang)}
+                                ${renderDnaCategory('vibe', profile.traits || {}, lang)}
                              </div>
                         </div>
                     </div>
@@ -218,6 +223,7 @@
                 profileContainer.innerHTML = profileHTML;
             }
 
+            // --- The rest of the event listener logic is mostly for validation and state management, and does not need changes ---
             profileContainer.addEventListener('click', (event) => {
                 const target = event.target;
                 if (target.matches('#edit-btn')) { event.preventDefault(); isEditMode = true; renderProfile(); }
@@ -243,13 +249,13 @@
                     }
                     if (!isAgeValid) {
                         isValid = false;
-                        birthdayError.textContent = translations.errorAge[lang] || "Must be 18 or older.";
+                        birthdayError.textContent = getTranslation('errorAge', lang, "Must be 18 or older.");
                     }
                     for (const cat in CATEGORY_MAP) {
                         const count = document.querySelectorAll(`.trait-tag[data-category="${cat}"].active-${cat}`).length;
                         const errorEl = document.getElementById(`${cat}-error`);
                         if (count === 0) {
-                            errorEl.textContent = (cat === 'comm') ? (translations.errorPick1 ? translations.errorPick1[lang] : "Pick 1") : (translations.errorPickAtLeast1 ? translations.errorPickAtLeast1[lang] : "Pick at least 1");
+                            errorEl.textContent = (cat === 'comm') ? getTranslation('errorPick1', lang) : getTranslation('errorPickAtLeast1', lang);
                             isValid = false;
                         }
                     }
@@ -271,13 +277,16 @@
                     const activeClass = `active-${category}`;
                     const isActive = target.classList.contains(activeClass);
                     const getActiveCount = () => document.querySelectorAll(`.trait-tag[data-category="${category}"].${activeClass}`).length;
+                    const maxAllowed = { vibe: 2, hours: 2, comm: 1 };
                     if (isActive) {
                         target.classList.remove(activeClass);
                     } else {
-                        if (category === 'vibe' && getActiveCount() >= 2) return;
-                        if (category === 'hours' && getActiveCount() >= 2) return;
-                        if (category === 'comm') {
-                            document.querySelectorAll(`.trait-tag[data-category="comm"]`).forEach(t => t.classList.remove('active-comm'));
+                        if (maxAllowed[category] && getActiveCount() >= maxAllowed[category]) {
+                            if (category === 'comm') { // For single-choice, just swap
+                                document.querySelector(`.trait-tag[data-category="comm"].${activeClass}`)?.classList.remove(activeClass);
+                                target.classList.add(activeClass);
+                            }
+                            return; // Don't add if max is reached for others
                         }
                         target.classList.add(activeClass);
                     }
