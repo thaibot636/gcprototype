@@ -142,6 +142,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // --- main.html / main1.html (Dashboard) ---
         dashHome: { en: 'Home', th: 'หน้าหลัก' },
         dashDashboard: { en: 'Dashboard', th: 'แดชบอร์ด' },
+        dashPlayNow: { en: 'Play Now', th: 'เล่นทันที' },
+        dashSwipeVipe: { en: 'Swipe & Vipe', th: 'ปัดและไวป์' },
         dashChat: { en: 'Chat', th: 'แชท' },
         dashFriends: { en: 'Friends', th: 'เพื่อน' },
         dashNotifications: { en: 'Notifications', th: 'การแจ้งเตือน' },
@@ -150,7 +152,6 @@ document.addEventListener('DOMContentLoaded', () => {
         dashLongTerm: { en: 'Find a Long-Term Buddy', th: 'หาเพื่อนเล่นระยะยาว' },
         dashLongTermDesc: { en: 'Swipe through profiles to find your perfect gaming partner.', th: 'ปัดโปรไฟล์เพื่อค้นหาคู่หูเล่นเกมที่สมบูรณ์แบบของคุณ' },
         dashStartSwiping: { en: 'START SWIPING', th: 'เริ่มปัดเลย' },
-        dashPlayNow: { en: 'Play Now', th: 'เล่นทันที' },
         dashPlayNowDesc: { en: 'Jump into the action immediately. Browse or create a room.', th: 'เข้าสู่การต่อสู้ทันที ค้นหาหรือสร้างห้อง' },
         dashJoinRoom: { en: 'JOIN A ROOM', th: 'เข้าร่วมห้อง' },
 
@@ -244,49 +245,109 @@ document.addEventListener('DOMContentLoaded', () => {
         playnowCreatorControls: { en: 'Creator Controls', th: 'ส่วนควบคุมผู้สร้าง' },
         playnowExtend: { en: 'Extend by 2 mins', th: 'ขยายเวลา 2 นาที' },
         playnowCancel: { en: 'Cancel Creation', th: 'ยกเลิกการสร้าง' },
+
+        // --- swipevibe.html (Finding a Buddy) ---
+        swipeTitle: { en: 'Find Your Buddy', th: 'ค้นหาเพื่อนซี้ของคุณ' },
+        swipeSubtitle: { en: 'Swipe right if it’s a vibe, left if it’s not.', th: 'ปัดขวาถ้าใช่ ปัดซ้ายถ้าไม่' },
+        swipeNoMoreProfiles: { en: 'No more profiles right now. Try expanding your filters!', th: 'ไม่มีโปรไฟล์ในขณะนี้ ลองขยายตัวกรองของคุณ!' },
+        swipeViewProfile: { en: 'View Full Profile', th: 'ดูโปรไฟล์ทั้งหมด' },
+        swipeReport: { en: 'Report', th: 'รายงาน' },
+        swipeBlock: { en: 'Block', th: 'บล็อก' },
+        swipeMatchTitle: { en: "It's a Vibe!", th: 'เคมีตรงกัน!' },
+        swipeMatchDesc: { en: "You and {{username}} have matched. Start a conversation!", th: 'คุณกับ {{username}} จับคู่กันแล้ว เริ่มบทสนทนาได้เลย!' },
+        swipeStartChat: { en: 'Start Chat', th: 'เริ่มแชท' },
+        swipeKeepSwiping: { en: 'Keep Swiping', th: 'ปัดต่อ' },
+        swipeBio: { en: 'Bio', th: 'เกี่ยวกับฉัน' },
+        swipeSharedGames: { en: 'Shared Games', th: 'เกมที่เล่นเหมือนกัน' },
+        swipeSharedTraits: { en: 'Shared Traits', th: 'ลักษณะที่เหมือนกัน' },
+        
+        // --- swipevibe.html (Premium Perks) --- ** ADDED SECTION **
+        premiumTitle: { en: 'Unlock Premium Perks', th: 'ปลดล็อกสิทธิพิเศษพรีเมียม' },
+        premiumSubtitle: { en: 'Enjoy an ad-free experience, unlimited actions, and get seen first!', th: 'เพลิดเพลินกับประสบการณ์ไร้โฆษณา, การกระทำไม่จำกัด, และโปรไฟล์ถูกมองเห็นก่อน!' },
+        premiumUnlimitedRewinds: { en: 'Unlimited Rewinds', th: 'ย้อนกลับไม่จำกัด' },
+        premiumUnlimitedSwipes: { en: 'Unlimited Swipes', th: 'ปัดได้ไม่จำกัด' },
+        premiumPriorityLikes: { en: 'Priority Likes', th: 'ไลค์ระดับพรีเมียม' },
+        premiumAdFree: { en: 'Ad-Free', th: 'ไม่มีโฆษณา' },
+        premiumUpgradeBtn: { en: 'Upgrade Now', th: 'อัปเกรดทันที' },
+
+        // --- profiles.html (Edit Profile Page) --- 
+        profilesTitle: { en: 'Edit Your Profile', th: 'แก้ไขโปรไฟล์ของคุณ' },
+        profilesSubtitle: { en: 'This is how other players will see you.', th: 'ผู้เล่นคนอื่นจะเห็นคุณแบบนี้' },
+        profilesAvatarSection: { en: 'Profile Picture', th: 'รูปโปรไฟล์' },
+        profilesChangeAvatar: { en: 'Change Avatar', th: 'เปลี่ยนรูปโปรไฟล์' },
+        profilesBioSection: { en: 'Your Bio', th: 'ประวัติของคุณ' },
+        profilesBioPlaceholder: { en: 'Tell others a little about yourself, your playstyle, and what you are looking for...', th: 'บอกเล่าเรื่องราวของคุณ สไตล์การเล่น และสิ่งที่คุณกำลังมองหาให้คนอื่นรู้...' },
+        profilesGamesSection: { en: 'Your Games', th: 'เกมของคุณ' },
+        profilesEditGames: { en: 'Edit Games', th: 'แก้ไขเกม' },
+        profilesTraitsSection: { en: 'Your Traits', th: 'ลักษณะของคุณ' },
+        profilesEditTraits: { en: 'Edit Traits', th: 'แก้ไขลักษณะ' },
+        profilesSave: { en: 'Save Changes', th: 'บันทึกการเปลี่ยนแปลง' },
+        profilesCancel: { en: 'Cancel', th: 'ยกเลิก' },
+
+        // --- friends.html --- 
+        friendsTitle: { en: 'Manage Friends', th: 'จัดการเพื่อน' },
+        friendsTabsMyFriends: { en: 'My Friends', th: 'เพื่อนของฉัน' },
+        friendsTabsRequests: { en: 'Requests', th: 'คำขอ' },
+        friendsTabsAdd: { en: 'Add Friend', th: 'เพิ่มเพื่อน' },
+        friendsSearchPlaceholder: { en: 'Enter a username...', th: 'ใส่ชื่อผู้ใช้...' },
+        friendsSearchBtn: { en: 'Search', th: 'ค้นหา' },
+        friendsAccept: { en: 'Accept', th: 'ยอมรับ' },
+        friendsDecline: { en: 'Decline', th: 'ปฏิเสธ' },
     };
 
     // Define the main function in the global scope
     setLanguage = (lang) => {
+        if (!lang || (lang !== 'en' && lang !== 'th')) {
+            lang = 'en'; // Default to English
+        }
+
         document.querySelectorAll('[data-translate-key]').forEach(el => {
             const key = el.dataset.translateKey;
-            const translation = translations[key]?.[lang];
+            const target = el.dataset.translateTarget;
+            let translation = translations[key]?.[lang];
             
-            // Special handling for dynamic content like the welcome message
-            if (key === 'homeWelcomeSub' && translation) {
-                const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
-                el.textContent = translation.replace('{{username}}', username);
-                return; // Skip to the next element
+            // Handle dynamic content replacements for templates like {{username}}
+            if (translation) {
+                // Generic replacement for any key that might have {{username}}
+                if (translation.includes('{{username}}')) {
+                    const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
+                    translation = translation.replace(/\{\{username\}\}/g, username);
+                }
+            } else {
+                // Fallback to English if translation for the current language is missing, then to the key itself
+                translation = translations[key]?.['en'] || key;
+                console.warn(`Translation key not found for lang '${lang}': ${key}`);
             }
 
-            if (translation) {
-                // Handle different element types
-                if (el.dataset.translateTarget === 'placeholder' && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA')) {
-                    el.placeholder = translation;
-                } else {
-                    el.textContent = translation;
-                }
+            // Apply the translation to the correct attribute (placeholder, title, etc.) or to textContent
+            if (target && el.hasAttribute(target)) {
+                 el.setAttribute(target, translation);
+            } else {
+                el.textContent = translation;
             }
         });
         document.documentElement.lang = lang;
         localStorage.setItem('gamicon_lang', lang);
 
-        const toggleButtons = document.querySelectorAll('.lang-toggle');
-        toggleButtons.forEach(button => {
+        // Update any language toggle buttons on the page
+        document.querySelectorAll('.lang-toggle').forEach(button => {
             button.textContent = lang === 'en' ? 'ไทย' : 'EN';
         });
     };
 
+    // Handler for language toggle buttons
     const langToggleHandler = () => {
         const currentLang = localStorage.getItem('gamicon_lang') || 'en';
         const newLang = currentLang === 'en' ? 'th' : 'en';
         setLanguage(newLang);
     };
 
+    // Attach event listeners to all toggle buttons
     document.querySelectorAll('.lang-toggle').forEach(button => {
         button.addEventListener('click', langToggleHandler);
     });
 
+    // Set the initial language on page load
     const initialLang = localStorage.getItem('gamicon_lang') || 'en';
     setLanguage(initialLang);
 });
