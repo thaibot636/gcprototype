@@ -265,11 +265,10 @@
                 function setLanguage(language) { 
                     document.querySelectorAll('[data-translate-key]').forEach(el => { 
                         const key = el.dataset.translateKey; 
-                        // Provide a sensible fallback if a key isn't found
                         if (window.translations?.[key]?.[language]) {
                             el.textContent = window.translations[key][language]; 
                         } else {
-                            if (!el.dataset.defaultText) el.dataset.defaultText = el.textContent; // Store original on first run
+                            if (!el.dataset.defaultText) el.dataset.defaultText = el.textContent;
                             el.textContent = el.dataset.defaultText;
                         }
                     });
@@ -287,7 +286,6 @@
                 const createRoomBtn = document.getElementById('create-room-btn');
                 const cancelCreationBtn = document.getElementById('cancel-creation-btn');
                 
-                // Get new elements from the DOM
                 const privacySection = document.getElementById('privacy-section');
                 const timerSlider = document.getElementById('timer-slider');
                 const timerValueDisplay = document.getElementById('timer-value-display');
@@ -304,12 +302,10 @@
                     dynamicOptionsWrapper.classList.add('hidden');
                     statusPanel.classList.add('hidden');
                     
-                    // Hide privacy section and reset its values
                     privacySection.classList.add('hidden');
                     const publicRadio = document.querySelector('input[name="room-privacy"][value="public"]');
                     if (publicRadio) publicRadio.checked = true;
                     
-                    // Reset timer to default state
                     if(enableTimerToggle) enableTimerToggle.checked = true;
                     if(timerControlsWrapper) timerControlsWrapper.classList.remove('hidden');
                     if(timerSlider) timerSlider.value = 15;
@@ -317,7 +313,6 @@
                 };
 
                 if(createRoomBtn) createRoomBtn.addEventListener('click', () => {
-                    // Collect all form data for submission
                     const settings = {
                         game: gameSelect.value,
                         privacy: document.querySelector('input[name="room-privacy"]:checked')?.value,
@@ -325,8 +320,6 @@
                         timerEnabled: enableTimerToggle.checked,
                         expiresInMinutes: enableTimerToggle.checked ? timerSlider.value : null
                     };
-
-                    // For demonstration, we'll log and alert. In a real app, this would send to a server.
                     console.log('Room settings to be created:', settings);
                     alert(`Room creation successful!\nPrivacy: ${settings.privacy}\nExpires in: ${settings.timerEnabled ? settings.expiresInMinutes + ' mins' : 'Never'}`);
                     
@@ -345,22 +338,27 @@
                     });
                 }
 
+                // *** FIXED SCRIPT LOGIC ***
                 if(gameSelect) gameSelect.addEventListener('change', (e) => {
                     const selectedOption = e.target.selectedOptions[0];
+                    const value = e.target.value;
                     const genre = selectedOption ? selectedOption.dataset.genre : null;
 
-                    // Reset dynamic parts first
+                    // First, perform a full reset. This handles the case where the user selects the default "-- Choose --" option.
                     resetForm();
-                    gameSelect.value = e.target.value; // Keep the game selected
 
-                    if (genre && templates[genre]) {
-                        // Show relevant sections
+                    // Now, if a valid game was selected, restore the selection and show the relevant sections.
+                    if (value && genre && templates[genre]) {
+                        gameSelect.value = value; // Restore the game selection in the dropdown
+
+                        // Populate the dynamic options and make the other sections visible
                         dynamicOptionsWrapper.innerHTML = templates[genre];
                         dynamicOptionsWrapper.classList.remove('hidden');
                         if (privacySection) privacySection.classList.remove('hidden'); 
                         if (statusPanel) statusPanel.classList.remove('hidden');
                         
-                        setLanguage(lang); // Re-apply translations for any new dynamic content
+                        // Re-apply translations for any newly added dynamic content
+                        setLanguage(lang); 
                     }
                 });
             });
