@@ -59,40 +59,50 @@
 <body class="theme-default">
     <div class="flex min-h-screen">
         <!-- Sidebar -->
-        <aside class="w-64 p-4 flex-col justify-between hidden md:flex">
-            <nav class="space-y-2">
-                <a href="home1.html" class="nav-link active">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
-                    <span data-translate-key="dashHome">Home</span>
-                </a>
-                <div class="nav-menu" id="dashboard-menu">
-                    <button class="nav-link nav-menu-trigger w-full">
-                        <div class="flex items-center">
-                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
-                            <span data-translate-key="dashDashboard">Dashboard</span>
-                        </div>
-                        <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+        <!-- MODIFICATION: Added classes for mobile slide-in behavior and an ID -->
+        <aside id="sidebar" class="w-64 p-4 flex-col justify-between fixed inset-y-0 left-0 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex">
+            <div>
+                <!-- MODIFICATION: Added a header with a close button for mobile -->
+                <div class="flex items-center justify-between pb-4 md:hidden">
+                    <h2 class="text-xl font-bold font-['Press_Start_2P']">GamiCon</h2>
+                    <button id="sidebar-close-button" class="p-2 -mr-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
                     </button>
-                    <div class="nav-submenu">
-                        <a href="playnow.html" class="nav-link nav-submenu-link">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                            <span data-translate-key="dashPlayNow">Play Now</span>
-                        </a>
-                    </div>
                 </div>
-                <a href="#" class="nav-link">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                    <span data-translate-key="dashChat">Chat</span>
-                </a>
-                <a href="#" class="nav-link">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M12 14a4 4 0 100-8 4 4 0 000 8z"></path></svg>
-                    <span data-translate-key="dashFriends">Friends</span>
-                </a>
-                <a href="#" class="nav-link">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                    <span data-translate-key="dashNotifications">Notifications</span>
-                </a>
-            </nav>
+                <nav class="space-y-2">
+                    <a href="home1.html" class="nav-link active">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <span data-translate-key="dashHome">Home</span>
+                    </a>
+                    <div class="nav-menu" id="dashboard-menu">
+                        <button class="nav-link nav-menu-trigger w-full">
+                            <div class="flex items-center">
+                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                                <span data-translate-key="dashDashboard">Dashboard</span>
+                            </div>
+                            <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="nav-submenu">
+                            <a href="playnow.html" class="nav-link nav-submenu-link">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                <span data-translate-key="dashPlayNow">Play Now</span>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-link">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+                        <span data-translate-key="dashChat">Chat</span>
+                    </a>
+                    <a href="#" class="nav-link">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M12 14a4 4 0 100-8 4 4 0 000 8z"></path></svg>
+                        <span data-translate-key="dashFriends">Friends</span>
+                    </a>
+                    <a href="#" class="nav-link">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+                        <span data-translate-key="dashNotifications">Notifications</span>
+                    </a>
+                </nav>
+            </div>
             <div id="profile-trigger" class="flex items-center space-x-3">
                  <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
                  <div><h3 id="sidebar-username" class="text-sm font-bold">PlayerOne</h3></div>
@@ -101,11 +111,17 @@
 
         <!-- Main content area -->
         <main class="flex-1 p-4 md:p-8">
-            <header class="mb-8">
-                <h1 class="text-2xl md:text-3xl" data-translate-key="homeWelcomeTitle">Welcome to GamiCon!</h1>
-                <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="homeWelcomeSub">
-                    We're thrilled to have you, <span id="main-username" class="font-semibold" style="color: var(--link-active-bg);">PlayerOne</span>. Here's a quick guide to get you started.
-                </p>
+            <!-- MODIFICATION: Header now includes a hamburger button for mobile -->
+            <header class="mb-8 flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl md:text-3xl" data-translate-key="homeWelcomeTitle">Welcome to GamiCon!</h1>
+                    <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="homeWelcomeSub">
+                        We're thrilled to have you, <span id="main-username" class="font-semibold" style="color: var(--link-active-bg);">PlayerOne</span>. Here's a quick guide to get you started.
+                    </p>
+                </div>
+                <button id="mobile-menu-button" class="p-2 -mr-2 md:hidden">
+                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
             </header>
             
             <div class="form-section">
@@ -145,6 +161,9 @@
         </main>
     </div>
 
+    <!-- MODIFICATION: Added overlay for when mobile menu is open -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
+
     <!-- Popup Menu -->
     <div id="status-popup" class="hidden">
         <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
@@ -154,18 +173,18 @@
         <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible"></span></div>
         <hr class="popup-separator">
         <a href="profiles.html?from=home1.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></path></svg><span data-translate-key="popupEditProfile"></span></a>
-        <a href="settings.html?from=home1.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings"></span></a>
+        <a href="settings.html?from=home1.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066 2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings"></span></a>
         <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout"></span></a>
     </div>
 
     <script src="translation.js"></script>
     <script>
+        // MODIFICATION: Wrapped existing script in an IIFE and added DOMContentLoaded listener
         (() => {
             document.addEventListener('DOMContentLoaded', () => {
+                // Existing script
                 if (typeof translations === 'undefined') { window.translations = { dashHome: { en: 'Home' }, dashDashboard: { en: 'Dashboard' }, dashPlayNow: { en: 'Play Now'}, dashChat: { en: 'Chat'}, dashFriends: { en: 'Friends' }, dashNotifications: { en: 'Notifications' }, statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' }, popupEditProfile: {en: 'Edit Profile'}, popupSettings: {en: 'Settings'}, popupLogout: {en: 'Logout'} }; console.warn("translation.js not found. Using mock data."); }
-                
                 const statusConfig = { online: { className: 'status-online', langKey: 'statusOnline' }, idle: { className: 'status-idle', langKey: 'statusIdle' }, dnd: { className: 'status-dnd', langKey: 'statusDnd' }, invisible: { className: 'status-invisible', langKey: 'statusInvisible' }, };
-                
                 const body = document.body;
                 const sidebarUsername = document.getElementById('sidebar-username');
                 const mainUsernameEl = document.getElementById('main-username');
@@ -175,14 +194,12 @@
                 const statusDot = document.getElementById('status-dot');
                 const popupStatusText = document.getElementById('popup-status-text');
                 const statusOptions = document.querySelectorAll('.popup-option[data-status]');
-                
                 const lang = localStorage.getItem('gamicon_lang') || 'en';
                 const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
                 const currentStatus = localStorage.getItem('gamicon_status') || 'online';
                 const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
 
                 const applyTheme = (theme) => { body.className = ''; body.classList.add(theme); localStorage.setItem('gamicon_theme', theme); };
-                
                 const setStatus = (status) => { 
                     const config = statusConfig[status] || statusConfig.online; 
                     statusDot.className = `status-dot ${config.className}`; 
@@ -192,7 +209,6 @@
                     localStorage.setItem('gamicon_status', status); 
                     statusPopup.classList.add('hidden'); 
                 };
-
                 const applyUsername = (name) => { 
                     if (sidebarUsername) sidebarUsername.textContent = name; 
                     if (popupUsername) popupUsername.textContent = name; 
@@ -216,6 +232,40 @@
                     const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
                     dashboardTrigger.addEventListener('click', (event) => { event.preventDefault(); dashboardMenu.classList.toggle('is-open'); });
                 }
+
+                // MODIFICATION: Added mobile menu toggle script
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const sidebar = document.getElementById('sidebar');
+                const sidebarOverlay = document.getElementById('sidebar-overlay');
+                const sidebarCloseButton = document.getElementById('sidebar-close-button');
+
+                const openSidebar = () => {
+                    sidebar.classList.remove('-translate-x-full');
+                    sidebar.classList.add('translate-x-0');
+                    sidebarOverlay.classList.remove('hidden');
+                };
+
+                const closeSidebar = () => {
+                    sidebar.classList.add('-translate-x-full');
+                    sidebar.classList.remove('translate-x-0');
+                    sidebarOverlay.classList.add('hidden');
+                };
+
+                mobileMenuButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openSidebar();
+                });
+                
+                sidebarCloseButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeSidebar();
+                });
+
+                sidebarOverlay.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    closeSidebar();
+                });
+
             });
         })();
     </script>
