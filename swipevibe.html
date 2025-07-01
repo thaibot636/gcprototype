@@ -93,8 +93,8 @@
         <main class="flex-1 p-4 md:p-8 flex flex-col items-center">
              <header class="w-full max-w-4xl mb-6 text-center flex justify-between items-center">
                 <div>
-                    <h1 class="text-2xl md:text-3xl">Discover Other Gamers</h1>
-                    <p class="text-base mt-2" style="color: var(--text-subtle);">Swipe to find your next favorite teammate.</p>
+                    <h1 class="text-2xl md:text-3xl" data-translate-key="swipeTitle">Find Your Buddy</h1>
+                    <p class="text-base mt-2" style="color: var(--text-subtle);" data-translate-key="swipeSubtitle">Swipe right if it’s a vibe, left if it’s not.</p>
                 </div>
                 <button id="mobile-menu-button" class="p-2 -mr-2 md:hidden">
                      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
@@ -113,9 +113,9 @@
                             <div class="absolute bottom-0 left-0 p-4"><h2 class="text-3xl font-bold text-white" style="font-family: 'Poppins', sans-serif;">Jenna, 24</h2></div>
                         </div>
                         <div class="p-4 space-y-4">
-                            <div><h3 class="text-xs uppercase font-bold tracking-wider" style="color: var(--text-subtle);">Traits</h3><div class="flex flex-wrap gap-2 mt-2"><span class="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Chill</span><span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Talkative</span><span class="border border-green-400 text-green-400 text-xs font-semibold px-2 py-1 rounded-full">Team Player</span></div></div>
-                            <div><h3 class="text-xs uppercase font-bold tracking-wider" style="color: var(--text-subtle);">Plays Together</h3><p class="font-semibold mt-1">Valorant, League of Legends</p></div>
-                             <div><h3 class="text-xs uppercase font-bold tracking-wider" style="color: var(--text-subtle);">Rank</h3><p class="font-semibold mt-1">Valorant: Diamond II</p></div>
+                            <div><h3 class="text-xs uppercase font-bold tracking-wider" style="color: var(--text-subtle);" data-translate-key="swipeBio">Bio</h3><p class="font-semibold mt-1">Chill gamer looking for a regular squad for Valorant ranked. Team player, loves good comms. Diamond II.</p></div>
+                            <div><h3 class="text-xs uppercase font-bold tracking-wider" style="color: var(--text-subtle);" data-translate-key="swipeSharedTraits">Shared Traits</h3><div class="flex flex-wrap gap-2 mt-2"><span class="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Chill</span><span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Talkative</span><span class="border border-green-400 text-green-400 text-xs font-semibold px-2 py-1 rounded-full">Competitive</span></div></div>
+                            <div><h3 class="text-xs uppercase font-bold tracking-wider" style="color: var(--text-subtle);" data-translate-key="swipeSharedGames">Shared Games</h3><p class="font-semibold mt-1">Valorant, League of Legends</p></div>
                         </div>
                     </div>
                 </div>
@@ -124,19 +124,22 @@
             </div>
             <!-- Premium Perks Section -->
             <div class="w-full max-w-4xl mt-12 p-6 rounded-xl premium-section-enhanced border border-amber-500/50 bg-gradient-to-br from-gray-900 to-black text-white">
-                <div class="text-center"><h2 class="text-xl md:text-2xl font-bold premium-title-glow text-amber-400">Unlock Premium Perks</h2><p class="mt-2 text-gray-300">Enjoy an ad-free experience, unlimited actions, and get seen first!</p></div>
+                <div class="text-center">
+                    <h2 class="text-xl md:text-2xl font-bold premium-title-glow text-amber-400" data-translate-key="premiumTitle">Unlock Premium Perks</h2>
+                    <p class="mt-2 text-gray-300" data-translate-key="premiumSubtitle">Enjoy an ad-free experience, unlimited actions, and get seen first!</p>
+                </div>
                 <ul class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
                     <li class="flex flex-col items-center p-2">
                         <div class="rounded-full bg-yellow-500/20 w-12 h-12 flex items-center justify-center mb-2">
                             <span class="text-3xl text-yellow-400 font-bold">∞</span>
                         </div>
-                        <span class="font-semibold text-sm text-gray-200">Unlimited Rewinds</span>
+                        <span class="font-semibold text-sm text-gray-200" data-translate-key="premiumUnlimitedRewinds">Unlimited Rewinds</span>
                     </li>
-                    <li class="flex flex-col items-center p-2"><div class="rounded-full bg-green-500/20 w-12 h-12 flex items-center justify-center mb-2"><svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33"></path></svg></div><span class="font-semibold text-sm text-gray-200">Unlimited Swipes</span></li>
-                    <li class="flex flex-col items-center p-2"><div class="rounded-full bg-purple-500/20 w-12 h-12 flex items-center justify-center mb-2"><svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg></div><span class="font-semibold text-sm text-gray-200">Priority Likes</span></li>
-                    <li class="flex flex-col items-center p-2"><div class="rounded-full bg-red-500/20 w-12 h-12 flex items-center justify-center mb-2"><svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg></div><span class="font-semibold text-sm text-gray-200">Ad-Free</span></li>
+                    <li class="flex flex-col items-center p-2"><div class="rounded-full bg-green-500/20 w-12 h-12 flex items-center justify-center mb-2"><svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33"></path></svg></div><span class="font-semibold text-sm text-gray-200" data-translate-key="premiumUnlimitedSwipes">Unlimited Swipes</span></li>
+                    <li class="flex flex-col items-center p-2"><div class="rounded-full bg-purple-500/20 w-12 h-12 flex items-center justify-center mb-2"><svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg></div><span class="font-semibold text-sm text-gray-200" data-translate-key="premiumPriorityLikes">Priority Likes</span></li>
+                    <li class="flex flex-col items-center p-2"><div class="rounded-full bg-red-500/20 w-12 h-12 flex items-center justify-center mb-2"><svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg></div><span class="font-semibold text-sm text-gray-200" data-translate-key="premiumAdFree">Ad-Free</span></li>
                 </ul>
-                 <div class="mt-8 text-center"><button class="bg-amber-400 text-black px-10 py-3 font-bold rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-amber-400/50 premium-button-pulse">Upgrade Now</button></div>
+                 <div class="mt-8 text-center"><button class="bg-amber-400 text-black px-10 py-3 font-bold rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-amber-400/50 premium-button-pulse" data-translate-key="premiumUpgradeBtn">Upgrade Now</button></div>
             </div>
         </main>
     </div>
@@ -145,14 +148,14 @@
     <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
     <div id="status-popup" class="hidden">
         <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
-        <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline"></span></div>
-        <div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span data-translate-key="statusIdle"></span></div>
-        <div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd"></span></div>
-        <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible"></span></div>
+        <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline">Online</span></div>
+        <div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span data-translate-key="statusIdle">Idle</span></div>
+        <div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd">Do Not Disturb</span></div>
+        <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible">Invisible</span></div>
         <hr class="popup-separator">
-        <a href="profiles.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></path></svg><span data-translate-key="popupEditProfile"></span></a>
-        <a href="settings.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066 2.573c-.94-1.543.826 3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings"></span></a>
-        <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout"></span></a>
+        <a href="profiles.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></path></svg><span data-translate-key="popupEditProfile">Edit Profile</span></a>
+        <a href="settings.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066 2.573c-.94-1.543.826 3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings">Settings</span></a>
+        <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout">Log Out</span></a>
     </div>
 
     <script src="translation.js"></script>
@@ -170,25 +173,28 @@
                 const dashboardMenu = document.getElementById('dashboard-menu');
                 const profileTrigger = document.getElementById('profile-trigger');
                 const statusPopup = document.getElementById('status-popup');
-                
-                // --- Mock translations if translation.js is missing ---
-                if (typeof window.translations === 'undefined') {
-                    console.warn("translation.js not found. Using mock data.");
-                    window.translations = {
-                        statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' },
-                    };
-                }
+
+                // --- This function handles applying language from translation.js ---
+                const applyTranslations = () => {
+                    // This check is important! Make sure the global 'setLanguage' function exists
+                    if (typeof window.setLanguage === 'function') {
+                        const lang = localStorage.getItem('gamicon_lang') || 'en';
+                        window.setLanguage(lang);
+                    } else {
+                        // Fallback or warning if translation.js is missing or failed to load
+                        console.warn("translation.js or the setLanguage function is not available.");
+                    }
+                };
 
                 // --- Shared state and configs from localStorage ---
-                const lang = localStorage.getItem('gamicon_lang') || 'en';
                 const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
                 const currentStatus = localStorage.getItem('gamicon_status') || 'online';
                 const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
                 const statusConfig = {
-                    online: { className: 'status-online', langKey: 'statusOnline' },
-                    idle: { className: 'status-idle', langKey: 'statusIdle' },
-                    dnd: { className: 'status-dnd', langKey: 'statusDnd' },
-                    invisible: { className: 'status-invisible', langKey: 'statusInvisible' },
+                    online: { className: 'status-online' },
+                    idle: { className: 'status-idle' },
+                    dnd: { className: 'status-dnd' },
+                    invisible: { className: 'status-invisible' },
                 };
                 
                 // --- Theme Manager ---
@@ -216,24 +222,27 @@
                 // --- User Profile & Status Popup ---
                 if (profileTrigger && statusPopup) {
                     const statusDot = document.getElementById('status-dot');
-                    const popupStatusText = document.getElementById('popup-status-text');
                     const sidebarUsername = document.getElementById('sidebar-username');
-                    const mainUsernameEl = document.getElementById('main-username'); 
                     const popupUsername = document.getElementById('popup-username');
+                    const popupStatusText = document.getElementById('popup-status-text');
 
                     const setStatus = (status) => {
                         const config = statusConfig[status] || statusConfig.online;
                         if (statusDot) statusDot.className = `status-dot ${config.className}`;
-                        if (popupStatusText && window.translations[config.langKey]) {
-                            popupStatusText.textContent = window.translations[config.langKey][lang] || config.langKey;
-                        }
                         localStorage.setItem('gamicon_status', status);
                         statusPopup.classList.add('hidden');
+                        
+                        // Set the status text for the popup header
+                        if (popupStatusText) {
+                           const statusKey = 'status' + status.charAt(0).toUpperCase() + status.slice(1); // e.g., 'online' -> 'statusOnline'
+                           popupStatusText.setAttribute('data-translate-key', statusKey);
+                        }
+
+                        applyTranslations(); // Re-apply translations to update all text elements
                     };
 
                     if (sidebarUsername) sidebarUsername.textContent = username;
                     if (popupUsername) popupUsername.textContent = username;
-                    if (mainUsernameEl) mainUsernameEl.textContent = username;
 
                     const currentPage = window.location.pathname.split('/').pop() || 'swipevibe.html';
                     const editProfileLink = statusPopup.querySelector('a[href^="profiles.html"]');
@@ -248,25 +257,27 @@
                         statusPopup.style.bottom = `${window.innerHeight - rect.top}px`;
                         statusPopup.classList.toggle('hidden');
                     });
+
                     document.querySelectorAll('.popup-option[data-status]').forEach(option => {
                         option.addEventListener('click', (event) => {
                             event.stopPropagation();
                             setStatus(event.currentTarget.dataset.status);
                         });
                     });
+
                     window.addEventListener('click', () => {
                         if (!statusPopup.classList.contains('hidden')) {
                             statusPopup.classList.add('hidden');
                         }
                     });
+                    
+                    // Initialize status on load
                     setStatus(currentStatus);
                 }
 
-                // --- Apply initial settings ---
+                // --- Apply initial settings on page load ---
                 applyTheme(currentTheme);
-                if (window.setLanguage) {
-                     window.setLanguage(lang);
-                }
+                applyTranslations(); // This single call will set the language for the whole page
             });
         })();
     </script>
