@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Swipe & Vipe - GamiCon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
+    <style>
+        /* --- UNIFIED STYLESHEET --- */
+        :root, body.theme-default {
+            --bg-body: #1f2937; --text-color: white; --text-subtle: #9ca3af; --sidebar-bg: #111827; --sidebar-border: #374151; --main-bg: #1f2937; --link-color: #9ca3af; --link-hover-bg: #374151; --link-hover-text: white; --link-active-bg: #3b82f6; --link-active-text: white; --form-bg: #111827; --neon-blue: #3b82f6; --neon-blue-glow: rgba(59, 130, 246, 0.5); --btn-secondary-bg: #4b5563; --btn-secondary-hover-bg: #6b7280; --popup-bg: #111827; --popup-border: #4b5563; --popup-separator: #374151; --popup-hover-bg: #3b82f6; --popup-hover-text: white; --premium-bg: linear-gradient(145deg, #273344, #1f2937);
+        }
+        body.theme-light-gray {
+            --bg-body: #f4f4f5; --text-color: #334155; --text-subtle: #64748b; --sidebar-bg: #ffffff; --sidebar-border: #e5e7eb; --main-bg: #f4f4f5; --link-color: #475569; --link-hover-bg: #f3f4f6; --link-hover-text: #1e293b; --link-active-bg: #2563eb; --link-active-text: white; --form-bg: #ffffff; --neon-blue: #2563eb; --neon-blue-glow: rgba(37, 99, 235, 0.4); --btn-secondary-bg: #e5e7eb; --btn-secondary-hover-bg: #d1d5db; --popup-bg: #ffffff; --popup-border: #e5e7eb; --popup-separator: #f3f4f6; --popup-hover-text: white; --premium-bg: #ffffff;
+        }
+        body.theme-true-dark {
+            --bg-body: #000; --text-color: #fff; --text-subtle: #aaa; --sidebar-bg: #101010; --sidebar-border: #333; --main-bg: #000; --link-color: #aaa; --link-hover-bg: #222; --link-hover-text: #fff; --link-active-bg: #fff; --link-active-text: #000; --form-bg: #181818; --neon-blue: #fff; --neon-blue-glow: rgba(255, 255, 255, 0.5); --btn-secondary-bg: #333; --btn-secondary-hover-bg: #444; --popup-bg: #181818; --popup-border: #333; --popup-separator: #333; --popup-hover-bg: #fff; --popup-hover-text: #000; --premium-bg: #181818;
+        }
+        body { font-family: 'Poppins', sans-serif; background-color: var(--bg-body); color: var(--text-color); }
+        h1, h2, h3, h4, h5, h6, .form-label { font-family: 'Press Start 2P', cursive; }
+        aside { background-color: var(--sidebar-bg); }
+        main { background-color: var(--main-bg); }
+        .nav-link { display: flex; align-items: center; padding: 0.75rem 0.5rem; font-size: 0.9rem; font-weight: 600; transition: all 0.2s; border-radius: 4px; color: var(--link-color); }
+        .nav-link:hover { background-color: var(--link-hover-bg); color: var(--link-hover-text); }
+        .nav-link.active { background-color: var(--link-active-bg); color: var(--link-active-text); }
+        .nav-link > span { margin-left: 0.75rem; }
+        #profile-trigger { cursor: pointer; padding: 0.5rem; border-radius: 4px; transition: background-color 0.2s; }
+        #profile-trigger:hover { background-color: var(--link-hover-bg); }
+        .nav-menu.is-open > .nav-menu-trigger .chevron { transform: rotate(180deg); }
+        .nav-submenu { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-in-out; }
+        .nav-menu.is-open .nav-submenu { max-height: 200px; }
+        .nav-submenu-link { padding-left: 2rem !important; font-size: 0.8rem !important; }
+        .status-dot { width: 12px; height: 12px; border-radius: 50%; position: absolute; bottom: 0; right: 0; border: 3px solid var(--sidebar-bg); }
+        .status-online { background-color: #22c55e; }
+        .status-idle { background-color: #f59e0b; }
+        .status-dnd { background-color: #ef4444; }
+        .status-invisible { background-color: #6b7280; }
+        #status-popup { position: fixed; border-radius: 8px; width: 240px; padding: 0.5rem; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4); z-index: 50; background-color: var(--popup-bg); border: 1px solid var(--popup-border); color: var(--text-color); }
+        .popup-header { padding: 0.75rem; }
+        .popup-username { font-size: 1rem; font-weight: 700; }
+        .popup-status-text { font-size: 0.8rem; color: var(--text-subtle); }
+        .popup-separator { margin: 0.5rem 0; border-color: var(--popup-separator); }
+        .popup-option { display: flex; align-items: center; padding: 0.75rem; border-radius: 4px; font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+        .popup-option .status-dot { position: static; border: none; margin-right: 0.75rem; }
+        .popup-option:hover { background-color: var(--popup-hover-bg); color: var(--popup-hover-text); }
+        .btn { padding: 0.5rem 1rem; border-radius: 6px; font-weight: 700; text-align: center; transition: all 0.2s; border: none; cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+        .btn-primary { background-color: var(--link-active-bg); color: var(--link-active-text); }
+        .swipe-card { background-color: var(--sidebar-bg); border-radius: 1.5rem; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.3); border: 1px solid var(--sidebar-border); display: flex; flex-direction: column; }
+        .action-button { background-color: var(--sidebar-bg); border: 1px solid var(--sidebar-border); color: var(--text-subtle); transition: all 0.2s ease-in-out; display: flex; align-items: center; justify-content: center; }
+        .action-button:hover { transform: scale(1.1); box-shadow: 0 0 20px var(--neon-blue-glow); }
+        .action-button.rewind:hover { color: #ffa200; border-color: #ffa201; }
+        .action-button.nope:hover { color: #fc0606; border-color: #ff0000; }
+        .action-button.like:hover { color: #0bf607; border-color: #07f132; }
+        .action-button.superlike:hover { color: #3b82f6; border-color: #3b82f6; }
+        .premium-section { background: var(--premium-bg); border: 1px solid var(--sidebar-border); }
+        @keyframes premium-glow-effect { 0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3), 0 0 30px rgba(251, 191, 36, 0.2); } 50% { box-shadow: 0 0 30px rgba(251, 191, 36, 0.5), 0 0 45px rgba(251, 191, 36, 0.4); } }
+        .premium-section-enhanced { animation: premium-glow-effect 5s ease-in-out infinite; }
+        .premium-title-glow { text-shadow: 0 0 10px rgba(251, 191, 36, 0.7); }
+        @keyframes button-pulse-effect { 50% { transform: scale(1.05); } }
+        .premium-button-pulse { animation: button-pulse-effect 2.5s ease-in-out infinite; }
+    </style>
+</head>
+<body class="theme-default">
+    <div class="flex min-h-screen">
+        <!-- Sidebar -->
+        <aside id="sidebar" class="w-64 p-4 flex-col justify-between fixed inset-y-0 left-0 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex">
+             <div>
+                <div class="flex items-center justify-between pb-4 md:hidden"><h2 class="text-xl font-bold">GamiCon</h2><button id="sidebar-close-button" class="p-2 -mr-2"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button></div>
+                <nav class="space-y-2">
+                    <a href="home1.html" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span data-translate-key="dashHome">Home</span></a>
+                    <div class="nav-menu is-open" id="dashboard-menu">
+                        <button class="nav-link nav-menu-trigger w-full"><div class="flex items-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span data-translate-key="dashDashboard">Dashboard</span></div><svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button>
+                        <div class="nav-submenu">
+                            <a href="playnow.html" class="nav-link nav-submenu-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-6.867 8.21 8.21 0 003 2.48z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1.001A3.75 3.75 0 0012 18z"/></svg><span data-translate-key="dashPlayNow">Play Now</span></a>
+                            <a href="swipevibe.html" class="nav-link nav-submenu-link active"><svg class="w-5 h-5" viewBox="0 0 24 24"><path d="M6 3h12c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 15.55L10.9 14.54C8.61 12.46 7 11.02 7 9.25C7 7.8 8.2 6.67 9.72 6.67C10.58 6.67 11.41 7.03 12 7.64C12.59 7.03 13.42 6.67 14.28 6.67C15.8 6.67 17 7.8 17 9.25C17 11.02 15.39 12.46 13.1 14.54L12 15.55z" fill="currentColor"/></svg><span data-translate-key="dashSwipeVipe">Swipe & Vipe</span></a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span data-translate-key="dashChat">Chat</span></a>
+                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M12 14a4 4 0 100-8 4 4 0 000 8z"></path></svg><span data-translate-key="dashFriends">Friends</span></a>
+                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg><span data-translate-key="dashNotifications">Notifications</span></a>
+                </nav>
+            </div>
+            <div id="profile-trigger" class="flex items-center space-x-3 p-1">
+                 <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
+                 <div><h3 id="sidebar-username" class="text-sm font-bold"></h3></div>
+            </div>
+        </aside>
+
+        <!-- Main content area -->
+        <main class="flex-1 p-4 md:p-8 flex flex-col items-center">
+             <header class="w-full max-w-4xl mb-6 text-center flex justify-between items-center">
+                <div>
+                    <h1 class="text-2xl md:text-3xl">Discover Other Gamers</h1>
+                    <p class="text-base mt-2" style="color: var(--text-subtle);">Swipe to find your next favorite teammate.</p>
+                </div>
+                <button id="mobile-menu-button" class="p-2 -mr-2 md:hidden">
+                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path></svg>
+                </button>
+            </header>
+            
+            <div class="flex-grow flex flex-col justify-center items-center w-full">
+                <!-- Swipe Cards Stack -->
+                <div class="relative w-full max-w-sm h-[500px] mb-6">
+                    <div class="swipe-card absolute inset-0 transform -rotate-6"><div class="relative h-3/5 w-full"><img class="h-full w-full object-cover" src="https://i.pravatar.cc/400?u=player3" alt="Gamer Avatar"><div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div></div></div>
+                    <div class="swipe-card absolute inset-0 transform rotate-3"><div class="relative h-3/5 w-full"><img class="h-full w-full object-cover" src="https://i.pravatar.cc/400?u=player4" alt="Gamer Avatar"><div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div></div></div>
+                    <div class="swipe-card absolute inset-0">
+                        <div class="relative h-3/5 w-full">
+                            <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1521146764736-56c929d59c83?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=400&q=80" alt="Gamer Avatar">
+                            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
+                            <div class="absolute bottom-0 left-0 p-4"><h2 class="text-3xl font-bold text-white" style="font-family: 'Poppins', sans-serif;">Jenna, 24</h2></div>
+                        </div>
+                        <div class="p-4 space-y-4">
+                            <div><h3 class="text-xs uppercase font-bold tracking-wider" style="color: var(--text-subtle);">Traits</h3><div class="flex flex-wrap gap-2 mt-2"><span class="bg-blue-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Chill</span><span class="bg-purple-500 text-white text-xs font-semibold px-2 py-1 rounded-full">Talkative</span><span class="border border-green-400 text-green-400 text-xs font-semibold px-2 py-1 rounded-full">Team Player</span></div></div>
+                            <div><h3 class="text-xs uppercase font-bold tracking-wider" style="color: var(--text-subtle);">Plays Together</h3><p class="font-semibold mt-1">Valorant, League of Legends</p></div>
+                             <div><h3 class="text-xs uppercase font-bold tracking-wider" style="color: var(--text-subtle);">Rank</h3><p class="font-semibold mt-1">Valorant: Diamond II</p></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Action Buttons -->
+                <div class="flex items-center justify-around w-full max-w-sm"><button class="action-button rewind rounded-full w-16 h-16 text-3xl font-bold">↺</button><button class="action-button nope rounded-full w-20 h-20 text-4xl font-light">x</button><button class="action-button like rounded-full w-20 h-20 text-4xl">♡</button><button class="action-button superlike rounded-full w-16 h-16 text-3xl">☆</button></div>
+            </div>
+            <!-- Premium Perks Section -->
+            <div class="w-full max-w-4xl mt-12 p-6 rounded-xl premium-section-enhanced border border-amber-500/50 bg-gradient-to-br from-gray-900 to-black text-white">
+                <div class="text-center"><h2 class="text-xl md:text-2xl font-bold premium-title-glow text-amber-400">Unlock Premium Perks</h2><p class="mt-2 text-gray-300">Enjoy an ad-free experience, unlimited actions, and get seen first!</p></div>
+                <ul class="mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 text-center">
+                    <li class="flex flex-col items-center p-2">
+                        <div class="rounded-full bg-yellow-500/20 w-12 h-12 flex items-center justify-center mb-2">
+                            <span class="text-3xl text-yellow-400 font-bold">∞</span>
+                        </div>
+                        <span class="font-semibold text-sm text-gray-200">Unlimited Rewinds</span>
+                    </li>
+                    <li class="flex flex-col items-center p-2"><div class="rounded-full bg-green-500/20 w-12 h-12 flex items-center justify-center mb-2"><svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33"></path></svg></div><span class="font-semibold text-sm text-gray-200">Unlimited Swipes</span></li>
+                    <li class="flex flex-col items-center p-2"><div class="rounded-full bg-purple-500/20 w-12 h-12 flex items-center justify-center mb-2"><svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg></div><span class="font-semibold text-sm text-gray-200">Priority Likes</span></li>
+                    <li class="flex flex-col items-center p-2"><div class="rounded-full bg-red-500/20 w-12 h-12 flex items-center justify-center mb-2"><svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M18.364 18.364A9 9 0 005.636 5.636m12.728 12.728A9 9 0 015.636 5.636m12.728 12.728L5.636 5.636"></path></svg></div><span class="font-semibold text-sm text-gray-200">Ad-Free</span></li>
+                </ul>
+                 <div class="mt-8 text-center"><button class="bg-amber-400 text-black px-10 py-3 font-bold rounded-lg transition-all duration-300 transform hover:scale-110 hover:shadow-lg hover:shadow-amber-400/50 premium-button-pulse">Upgrade Now</button></div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- ADDED REUSABLE COMPONENTS AND SCRIPTS -->
+    <div id="sidebar-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden md:hidden"></div>
+    <div id="status-popup" class="hidden">
+        <div class="popup-header"><h4 id="popup-username" class="popup-username"></h4><p id="popup-status-text" class="popup-status-text"></p></div><hr class="popup-separator">
+        <div class="popup-option" data-status="online"><span class="status-dot status-online"></span><span data-translate-key="statusOnline"></span></div>
+        <div class="popup-option" data-status="idle"><span class="status-dot status-idle"></span><span data-translate-key="statusIdle"></span></div>
+        <div class="popup-option" data-status="dnd"><span class="status-dot status-dnd"></span><span data-translate-key="statusDnd"></span></div>
+        <div class="popup-option" data-status="invisible"><span class="status-dot status-invisible"></span><span data-translate-key="statusInvisible"></span></div>
+        <hr class="popup-separator">
+        <a href="profiles.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.5L14.732 3.732z"/></path></svg><span data-translate-key="popupEditProfile"></span></a>
+        <a href="settings.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0 3.35a1.724 1.724 0 001.066 2.573c-.94-1.543.826 3.31 2.37-2.37.996.608 2.296.096 2.572-1.065z"/><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg><span data-translate-key="popupSettings"></span></a>
+        <hr class="popup-separator"><a href="index.html" class="popup-option"><svg class="w-5 h-5 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg><span data-translate-key="popupLogout"></span></a>
+    </div>
+
+    <script src="translation.js"></script>
+    <script>
+        // IIFE to avoid polluting the global namespace
+        (() => {
+            // Wait for the DOM to be fully loaded before running scripts
+            document.addEventListener('DOMContentLoaded', () => {
+                // --- Get all required elements from the DOM ---
+                const body = document.body;
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const sidebar = document.getElementById('sidebar');
+                const sidebarOverlay = document.getElementById('sidebar-overlay');
+                const sidebarCloseButton = document.getElementById('sidebar-close-button');
+                const dashboardMenu = document.getElementById('dashboard-menu');
+                const profileTrigger = document.getElementById('profile-trigger');
+                const statusPopup = document.getElementById('status-popup');
+                
+                // --- Mock translations if translation.js is missing ---
+                if (typeof window.translations === 'undefined') {
+                    console.warn("translation.js not found. Using mock data.");
+                    window.translations = {
+                        statusOnline: { en: 'Online' }, statusIdle: { en: 'Idle' }, statusDnd: { en: 'Do Not Disturb' }, statusInvisible: { en: 'Invisible' },
+                    };
+                }
+
+                // --- Shared state and configs from localStorage ---
+                const lang = localStorage.getItem('gamicon_lang') || 'en';
+                const currentTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
+                const currentStatus = localStorage.getItem('gamicon_status') || 'online';
+                const username = localStorage.getItem('gamicon_username') || 'PlayerOne';
+                const statusConfig = {
+                    online: { className: 'status-online', langKey: 'statusOnline' },
+                    idle: { className: 'status-idle', langKey: 'statusIdle' },
+                    dnd: { className: 'status-dnd', langKey: 'statusDnd' },
+                    invisible: { className: 'status-invisible', langKey: 'statusInvisible' },
+                };
+                
+                // --- Theme Manager ---
+                const applyTheme = (theme) => {
+                    body.className = ''; // Clear existing theme classes
+                    body.classList.add(theme);
+                    localStorage.setItem('gamicon_theme', theme);
+                };
+
+                // --- Mobile Sidebar Functionality ---
+                const openSidebar = () => { if (!sidebar || !sidebarOverlay) return; sidebar.classList.remove('-translate-x-full'); sidebar.classList.add('translate-x-0'); sidebarOverlay.classList.remove('hidden'); };
+                const closeSidebar = () => { if (!sidebar || !sidebarOverlay) return; sidebar.classList.add('-translate-x-full'); sidebar.classList.remove('translate-x-0'); sidebarOverlay.classList.add('hidden'); };
+                if (mobileMenuButton) mobileMenuButton.addEventListener('click', (e) => { e.stopPropagation(); openSidebar(); });
+                if (sidebarCloseButton) sidebarCloseButton.addEventListener('click', (e) => { e.stopPropagation(); closeSidebar(); });
+                if (sidebarOverlay) sidebarOverlay.addEventListener('click', (e) => { e.stopPropagation(); closeSidebar(); });
+
+                // --- Dashboard Submenu Accordion ---
+                if (dashboardMenu) {
+                    const dashboardTrigger = dashboardMenu.querySelector('.nav-menu-trigger');
+                    if (dashboardTrigger) {
+                        dashboardTrigger.addEventListener('click', (event) => { event.preventDefault(); dashboardMenu.classList.toggle('is-open'); });
+                    }
+                }
+
+                // --- User Profile & Status Popup ---
+                if (profileTrigger && statusPopup) {
+                    const statusDot = document.getElementById('status-dot');
+                    const popupStatusText = document.getElementById('popup-status-text');
+                    const sidebarUsername = document.getElementById('sidebar-username');
+                    const mainUsernameEl = document.getElementById('main-username'); 
+                    const popupUsername = document.getElementById('popup-username');
+
+                    const setStatus = (status) => {
+                        const config = statusConfig[status] || statusConfig.online;
+                        if (statusDot) statusDot.className = `status-dot ${config.className}`;
+                        if (popupStatusText && window.translations[config.langKey]) {
+                            popupStatusText.textContent = window.translations[config.langKey][lang] || config.langKey;
+                        }
+                        localStorage.setItem('gamicon_status', status);
+                        statusPopup.classList.add('hidden');
+                    };
+
+                    if (sidebarUsername) sidebarUsername.textContent = username;
+                    if (popupUsername) popupUsername.textContent = username;
+                    if (mainUsernameEl) mainUsernameEl.textContent = username;
+
+                    const currentPage = window.location.pathname.split('/').pop() || 'swipevibe.html';
+                    const editProfileLink = statusPopup.querySelector('a[href^="profiles.html"]');
+                    const settingsLink = statusPopup.querySelector('a[href^="settings.html"]');
+                    if(editProfileLink) editProfileLink.href = `profiles.html?from=${currentPage}`;
+                    if(settingsLink) settingsLink.href = `settings.html?from=${currentPage}`;
+                    
+                    profileTrigger.addEventListener('click', (event) => {
+                        event.stopPropagation();
+                        const rect = profileTrigger.getBoundingClientRect();
+                        statusPopup.style.left = `${rect.left}px`;
+                        statusPopup.style.bottom = `${window.innerHeight - rect.top}px`;
+                        statusPopup.classList.toggle('hidden');
+                    });
+                    document.querySelectorAll('.popup-option[data-status]').forEach(option => {
+                        option.addEventListener('click', (event) => {
+                            event.stopPropagation();
+                            setStatus(event.currentTarget.dataset.status);
+                        });
+                    });
+                    window.addEventListener('click', () => {
+                        if (!statusPopup.classList.contains('hidden')) {
+                            statusPopup.classList.add('hidden');
+                        }
+                    });
+                    setStatus(currentStatus);
+                }
+
+                // --- Apply initial settings ---
+                applyTheme(currentTheme);
+                if (window.setLanguage) {
+                     window.setLanguage(lang);
+                }
+            });
+        })();
+    </script>
+</body>
+</html>
