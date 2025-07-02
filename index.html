@@ -35,180 +35,156 @@
     }
     .hover-underline:hover::after { transform: scaleX(1); }
 
-    .feature-card { transition: border-color 0.2s ease-in-out; }
-    .feature-card h3 { transition: color 0.2s ease-in-out; }
-    .feature-card img { transition: transform 0.2s ease-in-out; }
-    .feature-card:hover { border-color: #3b82f6; }
+    .feature-card { transition: all 0.2s ease-in-out; }
+    .feature-card:hover { 
+      border-color: #3b82f6; 
+      transform: translateY(-5px); 
+      box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.2);
+    }
     .feature-card:hover h3 { color: #3b82f6; }
-    .feature-card:hover img { transform: scale(1.05); }
 
     /************************************************************/
     /*  START OF ENHANCED SIGNUP SECTION CSS                    */
     /************************************************************/
 
     :root {
-        /* NEW: Added a contrasting "critical" color for high-impact alerts. */
-        --critical-glow-color: hsl(325, 100%, 55%); /* Hot Pink/Magenta */
+        --critical-glow-color: hsl(325, 100%, 55%);
     }
 
-    /* REPLACED: Original #signup styles */
     #signup {
         background: #0a0a1a;
         position: relative;
-        overflow: hidden; /* Important to contain glitch effects and planets */
-        
-        /* NEW: Animate the box-shadow for a glowing border, replacing the static one. */
-        animation: 
-          critical-border-glow 2s infinite, 
-          glitch-container 7s infinite step-end;
+        overflow: hidden;
     }
-
-    /* REMOVED: #signup::before, which is now a dedicated div */
-
+    
     /************************************************************/
     /*  START: CSS for Cinematic Space Background               */
     /************************************************************/
     
-    /* A shared class for parallax layers to respond to JS */
+    /* REFINED: The parallax layer now uses CSS variables for mouse position. */
     .parallax-layer {
         position: absolute;
         inset: 0;
-        z-index: 0; /* Positioned behind the grid and scanlines */
-        transition: transform 0.2s ease-out; /* Smooths the mouse movement */
-        will-change: transform; /* Performance optimization */
+        z-index: 0;
+        will-change: transform;
+        transition: transform 0.1s linear; /* Use a linear, fast transition for direct response */
+        
+        /* The transform is now a combination of mouse position (from JS) and CSS animation */
+        transform: translate(var(--mouse-x, 0px), var(--mouse-y, 0px));
     }
-
-    /* Distant, large, glowing gas giant */
     #planet-1 {
         --planet-size: 400px;
-        width: var(--planet-size);
-        height: var(--planet-size);
-        top: -15%;
-        right: -20%;
+        width: var(--planet-size); height: var(--planet-size); top: -15%; right: -20%;
         background: radial-gradient(circle at 30% 30%, #5a6a9a, #1a2a4a 70%);
         border-radius: 50%;
         box-shadow: inset 0 0 50px rgba(0,0,0,0.5), 0 0 30px rgba(78, 102, 175, 0.3);
-        animation: slow-float 25s infinite ease-in-out;
     }
-
-    /* Closer, smaller planet with rings */
     #planet-2 {
         --planet-size: 100px;
-        width: var(--planet-size);
-        height: var(--planet-size);
-        bottom: 15%;
-        left: 10%;
+        width: var(--planet-size); height: var(--planet-size); bottom: 15%; left: 10%;
         background: radial-gradient(circle at 70% 20%, #e0cda9, #b8860b 80%);
         border-radius: 50%;
         box-shadow: inset -20px -10px 40px rgba(0,0,0,0.7);
-        animation: slow-float 20s infinite ease-in-out 2s;
     }
-    
-    /* Creating the rings for Planet 2 with a pseudo-element */
     #planet-2::after {
-        content: '';
-        position: absolute;
-        left: -40%; top: 40%;
-        width: 180%;
-        height: 25%;
+        content: ''; position: absolute; left: -40%; top: 40%;
+        width: 180%; height: 25%;
         border: 3px solid rgba(255, 255, 255, 0.4);
-        border-radius: 50%;
-        transform: rotate(-30deg) skewX(60deg);
+        border-radius: 50%; transform: rotate(-30deg) skewX(60deg);
         box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
     }
-    
     @keyframes slow-float {
         0%, 100% { transform: translateY(0px); }
         50% { transform: translateY(-20px); }
     }
-
-    /* Simple twinkling starfield background using box-shadows */
     #starfield-bg {
         background: transparent;
-        /* A few "layers" of stars using multiple box-shadows */
-        box-shadow: 
-          /* Small stars */
-          10vw 20vh 1px 1px rgba(255,255,255,0.7),
-          80vw 30vh 1px 1px rgba(255,255,255,0.8),
-          50vw 90vh 1px 1px rgba(255,255,255,0.6),
-          25vw 75vh 0px 0px rgba(255,255,255,0.9),
-          90vw 60vh 1px 1px rgba(255,255,255,0.7),
-          /* Bigger stars */
-          40vw 10vh 2px 2px rgba(255,255,255,0.9),
-          70vw 80vh 2px 2px rgba(255,255,255,1);
+        box-shadow: 10vw 20vh 1px 1px rgba(255,255,255,0.7), 80vw 30vh 1px 1px rgba(255,255,255,0.8), 50vw 90vh 1px 1px rgba(255,255,255,0.6), 25vw 75vh 0px 0px rgba(255,255,255,0.9), 90vw 60vh 1px 1px rgba(255,255,255,0.7), 40vw 10vh 2px 2px rgba(255,255,255,0.9), 70vw 80vh 2px 2px rgba(255,255,255,1);
+    }
+
+    /************************************************************/
+    /*  START: Animation and Effects block                      */
+    /************************************************************/
+
+    /* NEW: All heavy animations are wrapped in this media query */
+    @media (prefers-reduced-motion: no-preference) {
+        /* Planets now get their floating animation here */
+        #planet-1 { animation: slow-float 25s infinite ease-in-out; }
+        #planet-2 { animation: slow-float 20s infinite ease-in-out 2s; }
         
-        animation: twinkle 5s infinite alternate;
+        #starfield-bg { animation: twinkle 5s infinite alternate; }
+        
+        #signup {
+          animation: 
+            critical-border-glow 2s infinite, 
+            glitch-container 7s infinite step-end;
+        }
+
+        #signup-grid {
+            animation: move-grid-fast 1s linear infinite;
+        }
+        #signup-scanline {
+            animation: scan-fast 4s linear infinite;
+        }
+
+        #signup h2 { 
+            animation: critical-alert 1.5s infinite; 
+        }
+
+        .hud-corner::before, .hud-corner::after {
+            animation: glitch-corners 2s infinite alternate;
+        }
+
+        #signup .final-cta:hover {
+            transform: translate(0, -5px) scale(1.05);
+        }
+
+        .spaceship.fighter { animation: fly-by-ltr 8s linear infinite 1s; }
+        .spaceship.cruiser { animation: fly-by-rtl 14s linear infinite 5s; }
+
+        @keyframes scan-fast { from { background-position-y: 0px; } to { background-position-y: -100px; } }
+        @keyframes move-grid-fast { from { background-position: 0 0; } to { background-position: 30px 30px; } }
+        @keyframes twinkle { from { opacity: 0.7; } to { opacity: 1; } }
+        @keyframes critical-border-glow {
+            0%   { box-shadow: inset 0 0 15px rgba(6, 182, 212, 0.5), 0 0 15px rgba(6, 182, 212, 0.5); }
+            50%  { box-shadow: inset 0 0 25px var(--critical-glow-color), 0 0 25px var(--critical-glow-color); }
+            100% { box-shadow: inset 0 0 15px rgba(6, 182, 212, 0.5), 0 0 15px rgba(6, 182, 212, 0.5); }
+        }
+        @keyframes glitch-container {
+            0%, 94%, 100% { transform: translate(0); clip-path: inset(0); } 95% { transform: translate(10px, -5px); clip-path: inset(0 0 50% 0); } 96% { transform: translate(-10px, 5px); clip-path: inset(50% 0 0 0); } 97% { transform: translate(5px, -3px); clip-path: inset(0 50% 0 0); } 98% { transform: translate(-5px, 3px); clip-path: inset(0 0 0 50%); } 99% { transform: translate(2px, -2px); clip-path: inset(25% 25% 25% 25%); }
+        }
+        @keyframes critical-alert {
+            0%, 100% { color: white; text-shadow: none; }
+            50% { color: var(--critical-glow-color); text-shadow: 0 0 10px var(--critical-glow-color), 0 0 20px var(--critical-glow-color); }
+        }
+        @keyframes glitch-corners { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+        @keyframes fly-by-ltr { from { left: -10%; } to { left: 110%; } }
+        @keyframes fly-by-rtl { from { right: -10%; } to { right: 110%; } }
     }
 
-    @keyframes twinkle {
-        from { opacity: 0.7; }
-        to { opacity: 1; }
-    }
-
-    /************************************************************/
-    /*  END: CSS for Cinematic Space Background                 */
-    /************************************************************/
-
-    /* NEW: Dedicated elements for cleaner layering of background effects */
     #signup-grid {
         position: absolute; top: 0; left: 0; width: 100%; height: 100%;
         background-image: linear-gradient(rgba(6, 182, 212, 0.15) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
-        background-size: 30px 30px;
-        animation: move-grid-fast 1s linear infinite;
-        z-index: 0;
+        background-size: 30px 30px; z-index: 0;
     }
     #signup-scanline {
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        pointer-events: none;
+        position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;
         background: linear-gradient(to bottom, transparent 50%, rgba(0, 0, 0, 0.5) 51%);
-        background-size: 100% 4px;
-        animation: scan-fast 4s linear infinite;
-        z-index: 2; /* Position scanline above the grid */
+        background-size: 100% 4px; z-index: 2;
     }
-    @keyframes scan-fast { from { background-position-y: 0px; } to { background-position-y: -100px; } }
-
-
-    /* The original gradient overlay for depth is kept */
     #signup::after {
-        content: '';
-        position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-        background: linear-gradient(180deg, transparent, #0a0a1a 90%);
-        z-index: 1;
-    }
-    @keyframes move-grid-fast { from { background-position: 0 0; } to { background-position: 30px 30px; } }
-
-    /* NEW ANIMATIONS FOR A "STANDOUT" EFFECT */
-    @keyframes critical-border-glow {
-        0%   { box-shadow: inset 0 0 15px rgba(6, 182, 212, 0.5), 0 0 15px rgba(6, 182, 212, 0.5); }
-        50%  { box-shadow: inset 0 0 25px var(--critical-glow-color), 0 0 25px var(--critical-glow-color); }
-        100% { box-shadow: inset 0 0 15px rgba(6, 182, 212, 0.5), 0 0 15px rgba(6, 182, 212, 0.5); }
-    }
-    @keyframes glitch-container {
-        0%, 94%, 100% { transform: translate(0); clip-path: inset(0); }
-        95% { transform: translate(10px, -5px); clip-path: inset(0 0 50% 0); }
-        96% { transform: translate(-10px, 5px); clip-path: inset(50% 0 0 0); }
-        97% { transform: translate(5px, -3px); clip-path: inset(0 50% 0 0); }
-        98% { transform: translate(-5px, 3px); clip-path: inset(0 0 0 50%); }
-        99% { transform: translate(2px, -2px); clip-path: inset(25% 25% 25% 25%); }
+        content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+        background: linear-gradient(180deg, transparent, #0a0a1a 90%); z-index: 1;
     }
     
-    /* MODIFIED: Animation for the heading now uses the critical color. */
-    @keyframes critical-alert {
-        0%, 100% { color: white; text-shadow: none; }
-        50% { color: var(--critical-glow-color); text-shadow: 0 0 10px var(--critical-glow-color), 0 0 20px var(--critical-glow-color); }
-    }
-    #signup h2 { animation: critical-alert 1.5s infinite; }
-    
-    /* These original styles are still effective and are kept. */
     .hud-corner::before, .hud-corner::after {
         content: ''; position: absolute; width: 25px; height: 25px;
-        border: 3px solid #06b6d4; animation: glitch-corners 2s infinite alternate;
+        border: 3px solid #06b6d4;
     }
     .hud-corner:nth-of-type(1)::before { top: 10px; left: 10px; border-right: none; border-bottom: none; }
     .hud-corner:nth-of-type(1)::after { top: 10px; right: 10px; border-left: none; border-bottom: none; }
     .hud-corner:nth-of-type(2)::before { bottom: 10px; left: 10px; border-right: none; border-top: none; }
     .hud-corner:nth-of-type(2)::after { bottom: 10px; right: 10px; border-left: none; border-top: none; }
-    @keyframes glitch-corners { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
 
     #signup .final-cta {
         background-color: transparent; color: #22d3ee; border: 2px solid #06b6d4;
@@ -217,58 +193,160 @@
     }
     #signup .final-cta:hover {
         background: #06b6d4; color: #0a0a1a;
-        transform: translate(0, -5px) scale(1.05);
         box-shadow: 0 0 20px #06b6d4, 0 0 30px #06b6d4;
     }
     .spaceship {
         position: absolute; width: 40px; height: 20px;
         background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAxMiI+PHBhdGggZmlsbD0iIzIyZDNlZSIgZD0iTTAgNCAyNCAwIDE4IDYgMjQgMTIgMCA4eiIvPjxwYXRoIGZpbGw9IiNmZmYiIGQ9Ik00IDVsNi0xIDYgMSA0IDItMjAgMHoiLz48L3N2Zz4=");
         background-size: contain; background-repeat: no-repeat;
-        image-rendering: pixelated; z-index: 5;
+        image-rendering: pixelated; z-index: 5; opacity: 0.7;
     }
-    .spaceship.fighter { top: 20%; animation: fly-by-ltr 8s linear infinite 1s; }
-    @keyframes fly-by-ltr { from { left: -10%; } to { left: 110%; } }
-    .spaceship.cruiser {
-        width: 60px; height: 30px; bottom: 25%;
-        transform: scaleX(-1); animation: fly-by-rtl 14s linear infinite 5s; opacity: 0.7;
-    }
-    @keyframes fly-by-rtl { from { right: -10%; } to { right: 110%; } }
-    
-    /************************************************************/
-    /*  END OF ENHANCED SIGNUP SECTION CSS                      */
-    /************************************************************/
+    .spaceship.cruiser { width: 60px; height: 30px; bottom: 25%; transform: scaleX(-1); }
+
+    /*
+    NEW STYLES FOR THE REDESIGNED "HOW IT WORKS" SECTION
+*/
+.how-it-works-section {
+  position: relative;
+  overflow: hidden; /* Contains the ::before pseudo-element */
+  background-color: #000;
+  border-top: 4px solid #1f2937; /* border-gray-800 */
+}
+
+/* Adds a subtle, scrolling grid background for thematic consistency */
+.how-it-works-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image:
+    linear-gradient(rgba(6, 182, 212, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(6, 182, 212, 0.07) 1px, transparent 1px);
+  background-size: 35px 35px;
+  /* Re-use the move-grid-fast animation from your signup section */
+  animation: move-grid-fast 1s linear infinite;
+  /* Reduced motion accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    animation: none;
+  }
+}
+
+/* The main card container styling */
+.step-card {
+  position: relative;
+  z-index: 1; /* Sits above the grid background */
+  background-color: rgba(17, 24, 39, 0.85); /* bg-gray-900 with backdrop blur possibility */
+  backdrop-filter: blur(2px); /* Glassmorphism effect */
+  border: 2px solid #374151; /* border-gray-700 */
+  padding: 2rem;
+  transition: all 0.25s ease-out;
+}
+
+/* Card hover effects for an interactive feel */
+.step-card:hover {
+  transform: translateY(-8px);
+  border-color: #06b6d4; /* cyan-500 */
+  box-shadow: 0 0 20px rgba(6, 182, 212, 0.4);
+}
+
+/* The cyan HUD-style corner brackets */
+.step-card-hud::before,
+.step-card-hud::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-color: #06b6d4;
+  border-style: solid;
+  transition: all 0.25s ease-out;
+}
+.step-card:hover .step-card-hud::before,
+.step-card:hover .step-card-hud::after {
+  border-color: #22d3ee; /* A brighter cyan for the glow */
+}
+
+/* Position top-left and top-right corners */
+.step-card-hud::before { top: -2px; left: -2px; border-width: 3px 0 0 3px; }
+.step-card-hud::after { top: -2px; right: -2px; border-width: 3px 3px 0 0; }
+
+/* The div inside the hud is used to create the bottom corners */
+.step-card-hud > div::before, 
+.step-card-hud > div::after {
+  content: '';
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  border-color: #06b6d4;
+  border-style: solid;
+  transition: all 0.25s ease-out;
+}
+.step-card:hover .step-card-hud > div::before,
+.step-card:hover .step-card-hud > div::after {
+  border-color: #22d3ee;
+}
+/* Position bottom-left and bottom-right corners */
+.step-card-hud > div::before { bottom: -2px; left: -2px; border-width: 0 0 3px 3px; }
+.step-card-hud > div::after { bottom: -2px; right: -2px; border-width: 0 3px 3px 0; }
+
+/* Connector arrows between cards (for desktop view) */
+.step-connector {
+  position: relative; /* Anchor point for the arrow */
+}
+.step-connector::after {
+  content: '>';
+  display: none; /* Hidden on mobile */
+  font-family: 'Press Start 2P', cursive;
+  color: #374151; /* gray-700 */
+  position: absolute;
+  top: 50%;
+  /* Position it perfectly in the gap between cards */
+  right: calc(-0.5 * (4rem)); /* gap-16 -> 4rem */
+  transform: translate(50%, -50%);
+  font-size: 2.5rem; /* Large 8-bit arrow */
+  text-shadow: none;
+  transition: color 0.2s ease-out;
+}
+@media (min-width: 768px) { /* Corresponds to Tailwind's 'md' breakpoint */
+  .step-connector::after { display: block; }
+}
+
+/* Make connector glow when hovering its parent card */
+.step-connector:hover::after {
+  color: #06b6d4; /* cyan-500 */
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.7);
+}
   </style>
 </head>
 <body class="bg-black text-white antialiased">
 
   <header class="fixed top-0 left-0 w-full z-50 bg-black">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex items-center justify-between h-16">
-        <div class="flex items-center space-x-8">
-          <a href="index.html" class="flex items-center"><img src="logo/logo1.png" alt="GamiCon Logo" class="h-8 mr-2"><span class="text-xl font-bold text-white brand-logo">GamiCon</span></a>
-          <div class="hidden md:flex items-center space-x-8">
-            <a href="index.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors hover-underline" data-translate-key="navHome">Home</a>
-            <a href="products.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors hover-underline" data-translate-key="navProducts">Products</a>
-          </div>
+        <div class="flex items-center justify-between h-16">
+            <div class="flex items-center space-x-8">
+                <a href="index.html" class="flex items-center"><img src="logo/logo1.png" alt="GamiCon Logo" class="h-8 mr-2"><span class="text-xl font-bold text-white brand-logo">GamiCon</span></a>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors hover-underline" data-translate-key="navHome">Home</a>
+                    <a href="products.html" class="text-sm font-semibold text-gray-300 hover:text-white transition-colors hover-underline" data-translate-key="navProducts">Products</a>
+                </div>
+            </div>
+            <div class="flex items-center">
+                <div class="hidden md:flex items-center space-x-2">
+                    <button class="lang-toggle text-sm font-semibold text-gray-400 hover:text-white px-3 py-2 transition-colors">ไทย</button>
+                    <a href="loading.html?action=login" class="text-sm font-semibold text-gray-300 hover:text-white px-3 py-2 transition-colors" data-translate-key="login">Log In</a>
+                    <a href="loading.html?action=signup" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 transition-colors rounded-md" data-translate-key="signup">Sign Up</a>
+                </div>
+                <div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-gray-400 hover:text-white font-8bit" data-translate-key="menu">MENU</button></div>
+            </div>
         </div>
-        <div class="flex items-center">
-          <div class="hidden md:flex items-center space-x-2">
-            <button class="lang-toggle text-sm font-semibold text-gray-400 hover:text-white px-3 py-2 transition-colors">ไทย</button>
-            <a href="loading.html?action=login" class="text-sm font-semibold text-gray-300 hover:text-white px-3 py-2 transition-colors" data-translate-key="login">Log In</a>
-            <a href="loading.html?action=signup" class="bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold px-4 py-2 transition-colors rounded-md" data-translate-key="signup">Sign Up</a>
-          </div>
-          <div class="md:hidden"><button id="mobile-menu-button" class="p-2 text-gray-400 hover:text-white font-8bit" data-translate-key="menu">MENU</button></div>
-        </div>
-      </div>
     </div>
     <div id="mobile-menu" class="md:hidden hidden bg-black border-t-2 border-gray-800">
-      <div class="p-4 space-y-4">
-        <a href="index.html" class="block text-base text-gray-300" data-translate-key="navHome">Home</a>
-        <a href="products.html" class="block text-base text-gray-300" data-translate-key="navProducts">Products</a>
-        <a href="loading.html?action=login" class="block text-base text-gray-300" data-translate-key="login">Log In</a>
-        <a href="loading.html?action=signup" class="block text-base text-gray-300" data-translate-key="signup">Sign Up</a>
-        <a href="#" class="lang-toggle block text-base text-blue-400">ไทย</a>
-      </div>
+        <div class="p-4 space-y-4">
+            <a href="index.html" class="block text-base text-gray-300" data-translate-key="navHome">Home</a>
+            <a href="products.html" class="block text-base text-gray-300" data-translate-key="navProducts">Products</a>
+            <a href="loading.html?action=login" class="block text-base text-gray-300" data-translate-key="login">Log In</a>
+            <a href="loading.html?action=signup" class="block text-base text-gray-300" data-translate-key="signup">Sign Up</a>
+            <a href="#" class="lang-toggle block text-base text-blue-400">ไทย</a>
+        </div>
     </div>
   </header>
 
@@ -282,34 +360,74 @@
       </div>
     </section>
 
-    <section class="bg-black py-20 px-6 border-t-4 border-t-gray-800">
-      <h2 class="text-3xl font-bold text-center mb-16" data-translate-key="howItWorks">How It Works</h2>
-      <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto text-center">
-        <div class="bg-gray-800 p-8 border-4 border-gray-700 feature-card">
-          <div class="mx-auto mb-6 w-24 h-24 border-4 border-gray-600 bg-black overflow-hidden"><img src="https://images.pexels.com/photos/5775854/pexels-photo-5775854.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Select Traits" class="w-full h-full object-cover"></div>
-          <h3 class="text-lg font-semibold mb-3" data-translate-key="step1Title">1. SELECT TRAITS</h3><p class="text-sm text-gray-400 leading-relaxed" data-translate-key="step1Desc">Choose your gaming style, vibe, and play times.</p>
-        </div>
-        <div class="bg-gray-800 p-8 border-4 border-gray-700 feature-card">
-          <div class="mx-auto mb-6 w-24 h-24 border-4 border-gray-600 bg-black overflow-hidden"><img src="https://images.pexels.com/photos/6964099/pexels-photo-6964099.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Match & Swipe" class="w-full h-full object-cover"></div>
-          <h3 class="text-lg font-semibold mb-3" data-translate-key="step2Title">2. MATCH & SWIPE</h3><p class="text-sm text-gray-400 leading-relaxed" data-translate-key="step2Desc">See a list of people who match your traits.</p>
-        </div>
-        <div class="bg-gray-800 p-8 border-4 border-gray-700 feature-card">
-          <div class="mx-auto mb-6 w-24 h-24 border-4 border-gray-600 bg-black overflow-hidden"><img src="https://images.pexels.com/photos/7915222/pexels-photo-7915222.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Chat & Game" class="w-full h-full object-cover"></div>
-          <h3 class="text-lg font-semibold mb-3" data-translate-key="step3Title">3. CHAT & GAME</h3><p class="text-sm text-gray-400 leading-relaxed" data-translate-key="step3Desc">Jump into games and build lasting squads.</p>
-        </div>
-      </div>
-    </section>
+   <!--
+  START OF UPDATED "HOW IT WORKS" SECTION
+-->
+<section class="how-it-works-section py-20 px-6">
+  
+  <h2 class="font-8bit text-3xl text-center text-white mb-20 relative z-10" data-translate-key="howItWorks">
+    How It Works
+  </h2>
 
-    <!--
-      START OF MODIFIED SIGNUP HTML
-    -->
+  <div class="grid md:grid-cols-3 gap-y-12 md:gap-x-16 max-w-6xl mx-auto text-center">
+    
+    <!-- ======================= -->
+    <!-- === STEP 1: SELECT  === -->
+    <!-- ======================= -->
+    <div class="step-card step-connector">
+      <div class="step-card-hud"><div></div></div>
+      
+      <!-- REPLACED ICON: The "🖱️" mouse concept, rendered as a theme-consistent SVG. -->
+      <div class="mx-auto mb-6 w-20 h-20 text-cyan-400">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+          <path d="M12 2C8.13 2 5 5.13 5 9v6c0 3.87 3.13 7 7 7s7-3.13 7-7V9c0-3.87-3.13-7-7-7zm5 13c0 2.76-2.24 5-5 5s-5-2.24-5-5V9c0-2.76 2.24-5 5-5s5 2.24 5 5v6z"></path>
+          <path d="M11 4h2v6h-2z"></path>
+        </svg>
+      </div>
+      
+      <h3 class="font-8bit text-lg text-white mb-3" data-translate-key="step1Title">1. SELECT TRAITS</h3>
+      <p class="text-sm text-gray-400 leading-relaxed" data-translate-key="step1Desc">Choose your gaming style, vibe, and play times.</p>
+    </div>
+
+    <!-- ======================= -->
+    <!-- === STEP 2: MATCH   === -->
+    <!-- ======================= -->
+    <div class="step-card step-connector">
+      <div class="step-card-hud"><div></div></div>
+      <div class="mx-auto mb-6 w-20 h-20 text-cyan-400">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M6 3h12c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+          <path d="M12 15.55L10.9 14.54C8.61 12.46 7 11.02 7 9.25C7 7.8 8.2 6.67 9.72 6.67C10.58 6.67 11.41 7.03 12 7.64C12.59 7.03 13.42 6.67 14.28 6.67C15.8 6.67 17 7.8 17 9.25C17 11.02 15.39 12.46 13.1 14.54L12 15.55z" fill="currentColor"/>
+        </svg>
+      </div>
+      <h3 class="font-8bit text-lg text-white mb-3" data-translate-key="step2Title">2. MATCH & SWIPE</h3>
+      <p class="text-sm text-gray-400 leading-relaxed" data-translate-key="step2Desc">See a list of people who match your traits.</p>
+    </div>
+
+    <!-- ======================= -->
+    <!-- === STEP 3: CHAT    === -->
+    <!-- ======================= -->
+    <div class="step-card">
+      <div class="step-card-hud"><div></div></div>
+      <div class="mx-auto mb-6 w-20 h-20 text-cyan-400">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" stroke-width="1.5" fill="none"></path>
+        </svg>
+      </div>
+      <h3 class="font-8bit text-lg text-white mb-3" data-translate-key="step3Title">3. CHAT & GAME</h3>
+      <p class="text-sm text-gray-400 leading-relaxed" data-translate-key="step3Desc">Jump into games and build lasting squads.</p>
+    </div>
+
+  </div>
+</section>
+<!--
+  END OF UPDATED "HOW IT WORKS" SECTION
+-->
+
     <section class="py-20 text-center" id="signup">
-        <!-- NEW: Add celestial bodies and a starfield for a cinematic backdrop -->
         <div id="starfield-bg" class="parallax-layer" data-depth="0.1"></div>
         <div id="planet-1" class="parallax-layer" data-depth="0.2"></div>
         <div id="planet-2" class="parallax-layer" data-depth="0.4"></div>
-
-        <!-- Existing effect elements -->
         <div id="signup-grid"></div>
         <div id="signup-scanline"></div>
         <div class="hud-corner"></div>
@@ -322,9 +440,6 @@
             <a href="loading.html?action=signup" class="inline-block px-10 py-4 font-bold text-xl font-8bit final-cta" data-translate-key="signup">Sign Up</a>
         </div>
     </section>
-    <!-- 
-      END OF MODIFIED SIGNUP HTML
-    -->
         
   </main>
   
@@ -335,16 +450,13 @@
     const mobileMenu = document.getElementById('mobile-menu');
     mobileMenuButton.addEventListener('click', () => { mobileMenu.classList.toggle('hidden'); });
   </script>
-  <script src="translation.js"></script>
 
-  <!-- NEW: SCRIPT FOR CINEMATIC PARALLAX EFFECT -->
+  <!-- REFINED: SCRIPT FOR CINEMATIC PARALLAX EFFECT -->
   <script>
-    // Parallax mouse movement for the cinematic signup section
     document.addEventListener('mousemove', function(e) {
       const signupSection = document.getElementById('signup');
       if (!signupSection) return;
 
-      // Calculate mouse position relative to the center of the viewport
       const x = (e.clientX - window.innerWidth / 2);
       const y = (e.clientY - window.innerHeight / 2);
 
@@ -352,16 +464,17 @@
       
       layers.forEach(layer => {
         const depth = layer.getAttribute('data-depth');
-        const moveX = -(x * depth) / 10; // Divide to make the effect more subtle
-        const moveY = -(y * depth) / 10;
+        const moveX = -(x * depth);
+        const moveY = -(y * depth);
         
-        // This sets the transform based on mouse position. Note that the CSS `slow-float`
-        // animation also uses transform, so this JS movement will override the y-axis
-        // part of that animation. For this effect, the interactive parallax is prioritized.
-        layer.style.transform = `translate(${moveX}px, ${moveY}px)`;
+        // REFINED LOGIC: Set CSS variables instead of the transform property directly.
+        // This allows CSS to combine our JS-driven position with other transforms, like animations.
+        layer.style.setProperty('--mouse-x', `${moveX / 10}px`);
+        layer.style.setProperty('--mouse-y', `${moveY / 10}px`);
       });
     });
   </script>
+  <!-- CLEANUP: Removed the duplicate script tag that was here. -->
   <script src="translation.js"></script>
 </body>
 </html>
