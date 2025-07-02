@@ -9,18 +9,92 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&family=Press+Start+2P&display=swap" rel="stylesheet">
     <style>
+        /* Base styles */
+        body { font-family: 'Poppins', sans-serif; background-color: #111827; }
+        .profile-card {
+            background-color: #1f2937;
+            border: 4px solid #4b5563;
+        }
         body { font-family: 'Poppins', sans-serif; transition: background-color 0.3s, color 0.3s; }
         .profile-card { border-width: 4px; }
+
+        /* Typography Hierarchy with the retro font */
         .profile-username { font-family: 'Poppins', sans-serif; font-weight: 700; }
-        .section-title { font-family: 'Press Start 2P', cursive; font-size: 0.8rem; }
-        .btn-8bit { display: inline-block; text-align: center; font-weight: bold; padding: 0.75rem 1.5rem; border-radius: 8px; border-width: 4px; text-transform: uppercase; transition: all 0.15s ease-in-out; cursor: pointer; }
+        .section-title {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 0.8rem;
+            color: #9ca3af;
+        }
+
+        /* --- STANDARD: The "8-bit" Button Style --- */
+        .btn-8bit {
+            display: inline-block;
+            text-align: center;
+            font-weight: bold;
+            padding: 0.75rem 1.5rem;
+            border-radius: 8px; 
+            border: 4px solid #111827;
+            border-width: 4px;
+            text-transform: uppercase;
+            transition: all 0.15s ease-in-out;
+            cursor: pointer;
+        }
+        .btn-8bit:hover {
+            transform: translate(-3px, -3px);
+            box-shadow: 4px 4px 0px #111827;
+        }
+        .btn-8bit:active {
+            transform: translate(0, 0);
+            box-shadow: none;
+        }
+        
+        /* Button color variations */
+        .btn-blue { background-color: #2563eb; color: white; }
+        .btn-green { background-color: #16a34a; color: white; }
+        .btn-gray { background-color: #4b5563; color: white; }
+        .btn-blue:hover { box-shadow: 4px 4px 0px #1d4ed8; }
+        .btn-green:hover { box-shadow: 4px 4px 0px #15803d; }
+        .btn-gray:hover { box-shadow: 4px 4px 0px #374151; }
         .btn-8bit:hover { transform: translate(-3px, -3px); }
         .btn-8bit:active { transform: translate(0, 0); box-shadow: none; }
-        .trait-pill { display: inline-block; padding: 0.4rem 0.9rem; font-weight: 600; font-size: 0.8rem; border-radius: 0; }
-        .trait-tag { display: inline-block; border: 2px solid; padding: 0.5rem 1rem; font-size: 0.875rem; cursor: pointer; transition: all 0.2s ease-in-out; user-select: none; border-radius: 0; }
+
+        /* --- UPDATED: Square Trait Pill/Tag styles --- */
+        .trait-pill { 
+            display: inline-block; 
+            padding: 0.4rem 0.9rem; /* Slightly adjusted padding for square look */
+            padding: 0.4rem 0.9rem;
+            font-weight: 600; 
+            font-size: 0.8rem;
+            border-radius: 0; /* Changed from 9999px to 0 for a square box */
+            border-radius: 0;
+        }
+        .trait-tag {
+            display: inline-block; 
+            background-color: #1f2937; 
+            border: 2px solid #4b5563;
+            color: #d1d5db; 
+            border: 2px solid;
+            padding: 0.5rem 1rem; 
+            font-size: 0.875rem;
+            cursor: pointer; 
+            transition: all 0.2s ease-in-out; 
+            user-select: none; 
+            border-radius: 0; /* Changed from 6px to 0 for a square box */
+            border-radius: 0;
+        }
+        .trait-tag:hover { border-color: #6b7280; background-color: #4b5563; color: white; }
+
+        /* Active states now also use the square box style */
+        .trait-tag.active-games { background-color: #3b82f6; color: white; border-color: #93c5fd; }
+        .trait-tag.active-vibe { background-color: #22c55e; color: white; border-color: #86efac; }
+        .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
+        .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
+
         .error-message { color: #ff5555; font-size: 0.8rem; font-weight: 600; }
-        .profile-input, .profile-select { font-family: 'Poppins', sans-serif; width: 100%; padding: 0.75rem; border-radius: 6px; border-width: 2px; background-color: transparent; transition: border-color 0.2s; }
-        .profile-input:focus, .profile-select:focus { outline: none; --tw-ring-color: #2563eb; box-shadow: 0 0 0 2px var(--tw-ring-color); }
+
+        /* --- THEME STYLES --- */
+        
+        /* DEFAULT (Dark Blue) Theme */
         body.theme-default { background-color: #111827; color: white; }
         .theme-default .profile-card { background-color: #1f2937; border-color: #4b5563; }
         .theme-default .section-title { color: #9ca3af; }
@@ -42,7 +116,8 @@
         .theme-default .trait-tag.active-vibe { background-color: #22c55e; color: white; border-color: #86efac; }
         .theme-default .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .theme-default .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
-        .theme-default .profile-input, .theme-default .profile-select { border-color: #4b5563; color-scheme: dark; }
+
+        /* LIGHT GRAY Theme */
         body.theme-light-gray { background-color: #f4f4f5; color: #334155; }
         .theme-light-gray .profile-card { background-color: #ffffff; border-color: #e5e7eb; }
         .theme-light-gray .section-title { color: #64748b; }
@@ -64,7 +139,8 @@
         .theme-light-gray .trait-tag.active-vibe { background-color: #22c55e; color: white; border-color: #86efac; }
         .theme-light-gray .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .theme-light-gray .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
-        .theme-light-gray .profile-input, .theme-light-gray .profile-select { border-color: #d1d5db; }
+
+        /* TRUE DARK Theme */
         body.theme-true-dark { background-color: #000; color: #fff; }
         .theme-true-dark .profile-card { background-color: #101010; border-color: #333; }
         .theme-true-dark .section-title { color: #aaa; }
@@ -84,7 +160,7 @@
         .theme-true-dark .trait-tag.active-vibe { background-color: #22c55e; color: white; border-color: #86efac; }
         .theme-true-dark .trait-tag.active-hours { background-color: #f59e0b; color: #111827; border-color: #fcd34d; }
         .theme-true-dark .trait-tag.active-comm { background-color: #ef4444; color: white; border-color: #fca5a5; }
-        .theme-true-dark .profile-input, .theme-true-dark .profile-select { border-color: #555; color-scheme: dark; }
+
     </style>
 </head>
 <body class="antialiased">
@@ -94,9 +170,11 @@
         </div>
     </div>
 
+    <!-- translation.js and your main script remains the same -->
     <script src="translation.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- THEME LOGIC ---
             const body = document.body;
             const applyTheme = (theme) => {
                 body.className = body.className.replace(/theme-\S+/g, '').trim();
@@ -104,6 +182,14 @@
             };
             const savedTheme = localStorage.getItem('gamicon_theme') || 'theme-default';
             applyTheme(savedTheme);
+            
+            // --- PROFILE LOGIC ---
+
+            // Get the destination URL from the 'from' parameter
+            const urlParams = new URLSearchParams(window.location.search);
+            const returnPage = urlParams.get('from');
+            // Use 'main1.html' (or another default) as a safe fallback
+            const destination = returnPage || 'main1.html';
             
             const profileContainer = document.getElementById('profile-container');
             let isEditMode = false;
@@ -114,35 +200,30 @@
                 hours: ["traitTagWeekdays", "traitTagWeekends", "traitTagLateNight", "traitTagMornings", "traitTagAnytime"],
                 comm: ["traitTagVoice", "traitTagPings", "traitTagText", "traitTagQuiet"]
             };
-            
+
             const CATEGORY_MAP = {
-                games: { titleKey: "gamesHeader", color: "bg-blue-500 text-white" },
-                vibe: { titleKey: "vibeHeader", color: "bg-green-500 text-white" },
-                hours: { titleKey: "hoursHeader", color: "bg-amber-500 text-gray-900" },
-                comm: { titleKey: "commHeader", color: "bg-red-500 text-white" }
+                games: { title: "Game Genres", color: "bg-blue-500 text-white" },
+                vibe: { title: "Player Vibe", color: "bg-green-500 text-white" },
+                hours: { title: "Active Hours", color: "bg-amber-500 text-gray-900" },
+                comm: { title: "Communication", color: "bg-red-500 text-white" }
             };
 
-            const getTranslation = (key, lang, fallback) => {
-                return window.translations?.[key]?.[lang] || fallback || `[${key}]`;
-            };
-
-            const renderDnaCategory = (category, userTraits, lang) => {
+            const renderDnaCategory = (category, userTraits) => {
                 const details = CATEGORY_MAP[category];
-                const titleText = getTranslation(details.titleKey, lang, details.titleKey);
                 let dnaHTML = `<div class="space-y-3">`; 
+
                 if (isEditMode) {
-                    dnaHTML += `<h3 class="section-title">${titleText}</h3>`;
+                    dnaHTML += `<h3 class="section-title">${details.title}</h3>`;
                     dnaHTML += `<div class="flex flex-wrap gap-2">`;
                     ALL_TRAITS[category].forEach(traitKey => {
-                        const traitText = getTranslation(traitKey, lang);
+                        const traitText = translations[traitKey] ? (translations[traitKey][localStorage.getItem('gamicon_lang') || 'en']) : traitKey;
                         const isActive = userTraits[category]?.includes(traitText);
-                        const activeClass = isActive ? `active-${category}` : '';
-                        dnaHTML += `<div class="trait-tag ${activeClass}" data-category="${category}" data-trait-key="${traitKey}">${traitText}</div>`;
+                        dnaHTML += `<div class="trait-tag ${isActive ? `active-${category}` : ''}" data-category="${category}">${traitText}</div>`;
                     });
                     dnaHTML += `</div><span id="${category}-error" class="error-message block h-4 mt-1"></span>`;
                 } else {
                     if (userTraits[category] && userTraits[category].length > 0) {
-                        dnaHTML += `<h3 class="section-title">${titleText}</h3><div class="flex flex-wrap gap-2">`;
+                        dnaHTML += `<h3 class="section-title">${details.title}</h3><div class="flex flex-wrap gap-2">`;
                         userTraits[category].forEach(trait => {
                             dnaHTML += `<span class="trait-pill ${details.color}">${trait}</span>`;
                         });
@@ -154,8 +235,6 @@
             };
 
             function renderProfile() {
-                const urlParams = new URLSearchParams(window.location.search);
-                const returnUrl = urlParams.get('from') || 'home1.html';
                 const profile = JSON.parse(localStorage.getItem('userProfile'));
                 const lang = localStorage.getItem('gamicon_lang') || 'en';
 
@@ -163,136 +242,111 @@
                     profileContainer.innerHTML = `<div class="profile-card p-8 text-center rounded-lg"><h1 class="text-2xl mb-4">Profile Not Found</h1><p class="text-gray-400 mb-8">You haven't created a profile yet.</p><a href="index2.html?action=signup" class="btn-8bit btn-blue">Create Profile</a></div>`;
                     return;
                 }
-                
-                // *** FIXED: Buttons are now translated ***
+
+                // This function now uses the 'destination' variable for its href attributes
                 const renderButtons = () => {
                     if (isEditMode) {
-                        return `<a href="#" id="cancel-btn" class="btn-8bit btn-gray w-full md:w-auto">${getTranslation('profilesCancel', lang, 'Cancel')}</a>
-                                <a href="#" id="save-btn" class="btn-8bit btn-green w-full md:w-auto">${getTranslation('profilesSave', lang, 'Save Changes')}</a>`;
+                        return `<a href="${destination}" class="btn-8bit btn-gray w-full md:w-auto">Cancel</a>
+                                <a href="#" id="save-btn" class="btn-8bit btn-green w-full md:w-auto">Save Changes</a>`;
                     } else {
-                        return `<a href="${returnUrl}" class="btn-8bit btn-gray w-full md:w-auto">${getTranslation('back', lang, 'Back')}</a>
-                                <a href="#" id="edit-btn" class="btn-8bit btn-blue w-full md:w-auto">${getTranslation('profilesEdit', lang, 'Edit')}</a>`;
+                        return `<a href="${destination}" class="btn-8bit btn-gray w-full md:w-auto">Back</a>
+                                <a href="#" id="edit-btn" class="btn-8bit btn-blue w-full md:w-auto">Edit</a>`;
                     }
                 };
-                
-                // *** FIXED: All hardcoded text is replaced with calls to getTranslation() ***
+
                 const profileHTML = `
                     <div class="profile-card p-6 md:p-8 rounded-xl">
+                        <!-- Header -->
                         <div class="text-center mb-8">
-                            <img src="${profile.avatar || 'https://i.pravatar.cc/50?u=player1'}" alt="Avatar" class="w-28 h-28 rounded-full mx-auto border-4 border-gray-600 mb-4 ring-4 ring-gray-700">
+                            <img src="https://i.pravatar.cc/120?u=${profile.username || 'default'}" alt="Avatar" class="w-28 h-28 rounded-full mx-auto border-4 border-gray-600 mb-4 ring-4 ring-gray-700">
                             <h1 class="profile-username text-3xl">${profile.username || 'N/A'}</h1>
                             <p class="text-gray-400 text-sm">${profile.email || 'N/A'}</p>
                         </div>
                         <hr class="my-6">
+
+                        <!-- Main Content Grid -->
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-8">
+                            <!-- Left Column -->
                             <div class="space-y-8">
-                                ${isEditMode ? `
-                                    <div>
-                                        <h3 class="section-title mb-2">${getTranslation('birthdayLabel', lang, 'Birthday')}</h3>
-                                        <input id="birthday-edit-input" type="date" value="${profile.birthday || ''}" class="profile-input">
-                                        <span id="birthday-error" class="error-message block h-4 mt-1"></span>
-                                    </div>
-                                    <div>
-                                        <h3 class="section-title mb-2">${getTranslation('genderLabel', lang, 'Gender')}</h3>
-                                        <select id="gender-edit-select" class="profile-select">
-                                            <option value="male" ${profile.gender === 'male' ? 'selected' : ''}>${getTranslation('genderMale', lang, 'Male')}</option>
-                                            <option value="female" ${profile.gender === 'female' ? 'selected' : ''}>${getTranslation('genderFemale', lang, 'Female')}</option>
-                                            <option value="non-binary" ${profile.gender === 'non-binary' ? 'selected' : ''}>${getTranslation('genderNonBinary', lang, 'Non-binary')}</option>
-                                        </select>
-                                        <span id="gender-error" class="error-message block h-4 mt-1"></span>
-                                    </div>
-                                ` : `
                                 <div class="grid grid-cols-2 gap-4">
-                                     <div><h3 class="section-title mb-2">${getTranslation('birthdayLabel', lang, 'Birthday')}</h3><p class="font-semibold text-lg">${profile.birthday || 'N/A'}</p></div>
-                                     <div><h3 class="section-title mb-2">${getTranslation('genderLabel', lang, 'Gender')}</h3><p class="font-semibold text-lg capitalize">${getTranslation('gender' + profile.gender.charAt(0).toUpperCase() + profile.gender.slice(1), lang, profile.gender) || 'N/A'}</p></div>
+                                     <div><h3 class="section-title mb-2">Birthday</h3><p class="font-semibold text-lg">${profile.birthday || 'N/A'}</p></div>
+                                     <div><h3 class="section-title mb-2">Gender</h3><p class="font-semibold text-lg capitalize">${profile.gender || 'N/A'}</p></div>
                                 </div>
-                                `}
                                 <hr class="md:hidden">
-                                ${renderDnaCategory('hours', profile.traits || {}, lang)}
-                                ${renderDnaCategory('comm', profile.traits || {}, lang)}
+                                ${renderDnaCategory('hours', profile.traits || {})}
+                                ${renderDnaCategory('comm', profile.traits || {})}
                             </div>
+                            
+                            <!-- Right Column -->
                              <div class="space-y-8">
-                                ${renderDnaCategory('games', profile.traits || {}, lang)}
-                                ${renderDnaCategory('vibe', profile.traits || {}, lang)}
+                                ${renderDnaCategory('games', profile.traits || {})}
+                                ${renderDnaCategory('vibe', profile.traits || {})}
                              </div>
                         </div>
                     </div>
+                    
+                    <!-- Action Buttons -->
                     <div class="mt-6 flex flex-col-reverse md:flex-row gap-4 justify-end">${renderButtons()}</div>
                 `;
-                
+
                 profileContainer.innerHTML = profileHTML;
             }
 
-            // --- The rest of the event listener logic is mostly for validation and state management, and does not need changes ---
             profileContainer.addEventListener('click', (event) => {
                 const target = event.target;
+
                 if (target.matches('#edit-btn')) { event.preventDefault(); isEditMode = true; renderProfile(); }
-                if (target.matches('#cancel-btn')) { event.preventDefault(); isEditMode = false; renderProfile(); }
+                // No cancel handler needed, it is a direct link now.
+
                 if (target.matches('#save-btn')) {
                     event.preventDefault();
                     document.querySelectorAll('.error-message').forEach(el => el.textContent = '');
                     let isValid = true;
                     const lang = localStorage.getItem('gamicon_lang') || 'en';
-                    const birthdayInput = document.getElementById('birthday-edit-input');
-                    const birthdayError = document.getElementById('birthday-error');
-                    let isAgeValid = true;
-                    if (birthdayInput.value === '') {
-                        isAgeValid = false;
-                    } else {
-                        const today = new Date();
-                        const birthDate = new Date(birthdayInput.value);
-                        today.setHours(0, 0, 0, 0);
-                        let age = today.getFullYear() - birthDate.getFullYear();
-                        const m = today.getMonth() - birthDate.getMonth();
-                        if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) { age--; }
-                        if (birthDate.getTime() > today.getTime() || age < 18) { isAgeValid = false; }
-                    }
-                    if (!isAgeValid) {
-                        isValid = false;
-                        birthdayError.textContent = getTranslation('errorAge', lang, "Must be 18 or older.");
-                    }
+
                     for (const cat in CATEGORY_MAP) {
                         const count = document.querySelectorAll(`.trait-tag[data-category="${cat}"].active-${cat}`).length;
                         const errorEl = document.getElementById(`${cat}-error`);
+
                         if (count === 0) {
-                            errorEl.textContent = (cat === 'comm') ? getTranslation('errorPick1', lang) : getTranslation('errorPickAtLeast1', lang);
+                            errorEl.textContent = (cat === 'comm') ? translations.errorPick1[lang] : translations.errorPickAtLeast1[lang];
                             isValid = false;
                         }
                     }
+
                     if (isValid) {
                         let profile = JSON.parse(localStorage.getItem('userProfile'));
-                        profile.birthday = document.getElementById('birthday-edit-input').value;
-                        profile.gender = document.getElementById('gender-edit-select').value;
                         profile.traits = { games: [], vibe: [], hours: [], comm: [] };
                         document.querySelectorAll('.trait-tag[class*="active-"]').forEach(tag => {
                             profile.traits[tag.dataset.category].push(tag.textContent);
                         });
                         localStorage.setItem('userProfile', JSON.stringify(profile));
-                        isEditMode = false;
-                        renderProfile();
+                        
+                        // On successful save, redirect to the previous page
+                        window.location.href = destination;
                     }
                 }
+
                 if (isEditMode && target.classList.contains('trait-tag')) {
                     const category = target.dataset.category;
                     const activeClass = `active-${category}`;
                     const isActive = target.classList.contains(activeClass);
                     const getActiveCount = () => document.querySelectorAll(`.trait-tag[data-category="${category}"].${activeClass}`).length;
-                    const maxAllowed = { vibe: 2, hours: 2, comm: 1 };
+
                     if (isActive) {
                         target.classList.remove(activeClass);
                     } else {
-                        if (maxAllowed[category] && getActiveCount() >= maxAllowed[category]) {
-                            if (category === 'comm') { // For single-choice, just swap
-                                document.querySelector(`.trait-tag[data-category="comm"].${activeClass}`)?.classList.remove(activeClass);
-                                target.classList.add(activeClass);
-                            }
-                            return; // Don't add if max is reached for others
+                        if (category === 'vibe' && getActiveCount() >= 2) return;
+                        if (category === 'hours' && getActiveCount() >= 2) return;
+                        if (category === 'comm') {
+                            document.querySelectorAll(`.trait-tag[data-category="comm"]`).forEach(t => t.classList.remove('active-comm'));
                         }
                         target.classList.add(activeClass);
                     }
                 }
             });
 
+            // Initial render
             renderProfile();
         });
     </script>
