@@ -77,20 +77,52 @@
     <div class="flex min-h-screen">
         <!-- Sidebar -->
         <aside id="sidebar" class="w-64 p-4 flex-col justify-between fixed inset-y-0 left-0 z-40 transform -translate-x-full transition-transform duration-300 ease-in-out md:relative md:translate-x-0 md:flex">
-             <div>
+            <div>
                 <div class="flex items-center justify-between pb-4 md:hidden">
                     <h2 class="text-xl font-bold font-['Press_Start_2P']">GamiCon</h2>
-                    <button id="sidebar-close-button" class="p-2 -mr-2"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg></button>
+                    <button id="sidebar-close-button" class="p-2 -mr-2">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                    </button>
                 </div>
-                 <nav class="space-y-2">
-                    <a href="home1.html" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg><span data-translate-key="dashHome">Home</span></a>
-                    <div class="nav-menu is-open" id="dashboard-menu"><button class="nav-link nav-menu-trigger w-full"><div class="flex items-center"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg><span data-translate-key="dashDashboard">Dashboard</span></div><svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg></button><div class="nav-submenu"><a href="playnow.html" class="nav-link nav-submenu-link active"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg><span data-translate-key="dashPlayNow">Play Now</span></a></div></div>
-                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg><span data-translate-key="dashChat">Chat</span></a>
+                <nav class="space-y-2">
+                    <a href="home1.html" class="nav-link">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
+                        <span data-translate-key="dashHome">Home</span>
+                    </a>
+                    <div class="nav-menu is-open" id="dashboard-menu">
+                        <button class="nav-link nav-menu-trigger w-full">
+                            <div class="flex items-center">
+                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
+                                <span data-translate-key="dashDashboard">Dashboard</span>
+                            </div>
+                            <svg class="w-4 h-4 chevron" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                        </button>
+                        <div class="nav-submenu">
+                            <a href="playnow.html" class="nav-link nav-submenu-link active">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.362 5.214A8.252 8.252 0 0112 21 8.25 8.25 0 016.038 7.048 8.287 8.287 0 009 9.6a8.983 8.983 0 013.362-6.867 8.21 8.21 0 003 2.48z" />
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18a3.75 3.75 0 00.495-7.467 5.99 5.99 0 00-1.925 3.546 5.974 5.974 0 01-2.133-1.001A3.75 3.75 0 0012 18z" />
+                                </svg>
+                                <span data-translate-key="dashPlayNow">Play Now</span>
+                            </a>
+                            <a href="swipevibe.html" class="nav-link nav-submenu-link">
+                                <svg class="w-5 h-5" viewBox="0 0 24 24">
+                                    <path d="M6 3h12c1.1 0 2 .9 2 2v14c0 1.1-.9 2-2 2H6c-1.1 0-2-.9-2-2V5c0-1.1.9-2 2-2z" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                                    <path d="M12 15.55L10.9 14.54C8.61 12.46 7 11.02 7 9.25C7 7.8 8.2 6.67 9.72 6.67C10.58 6.67 11.41 7.03 12 7.64C12.59 7.03 13.42 6.67 14.28 6.67C15.8 6.67 17 7.8 17 9.25C17 11.02 15.39 12.46 13.1 14.54L12 15.55z" fill="currentColor"/>
+                                </svg>
+                                <span data-translate-key="dashSwipeVipe">Swipe & Vipe</span>
+                            </a>
+                        </div>
+                    </div>
+                    <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg><span data-translate-key="dashChat">Chat</span></a>
                     <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.653-.122-1.28-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.653.122-1.28.356-1.857m0 0a5.002 5.002 0 019.288 0M12 14a4 4 0 100-8 4 4 0 000 8z"></path></svg><span data-translate-key="dashFriends">Friends</span></a>
                     <a href="#" class="nav-link"><svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg><span data-translate-key="dashNotifications">Notifications</span></a>
-                 </nav>
+                </nav>
             </div>
-            <div id="profile-trigger" class="flex items-center space-x-3"><div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full object-cover"><span id="status-dot" class="status-dot"></span></div><div><h3 id="sidebar-username" class="text-sm font-bold"></h3></div></div>
+            <div id="profile-trigger" class="flex items-center space-x-3">
+                 <div class="relative"><img src="https://i.pravatar.cc/50?u=player1" alt="Avatar" class="w-10 h-10 rounded-full"><span id="status-dot" class="status-dot"></span></div>
+                 <div><h3 id="sidebar-username" class="text-sm font-bold"></h3></div>
+            </div>
         </aside>
 
         <!-- Main Content -->
