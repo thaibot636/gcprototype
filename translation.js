@@ -15,9 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
         menu: { en: 'MENU', th: 'เมนู' },
         footer: { en: '© 2025 GamiCon. All rights reserved.', th: '© 2025 GamiCon สงวนลิขสิทธิ์' },
         back: { en: 'BACK', th: 'กลับ' },
-        skip: { en: 'SKIP >>', th: 'ข้าม >>' },
+        skip: { en: 'SKIP ', th: 'ข้าม' },
         backToHome: { en: '.. Back to Home', th: '.. กลับหน้าหลัก' },
         select: { en: 'SELECT', th: 'เลือก' },
+        navResources: { en: 'Resources', th: 'คลังข้อมูล'},
+        navContactus: { en: 'Contact us', th: 'ติดต่อเรา'},
 
         // --- index.html ---
         heroSubtitle: { en: 'Buddy Finder for Thai Gamers! Connect via traits, vibes, and games.', th: 'แอปหาเพื่อนเล่นเกมสำหรับคนไทย! เชื่อมต่อผ่านลักษณะนิสัย สไตล์ และเกมที่ใช่' },
@@ -31,6 +33,23 @@ document.addEventListener('DOMContentLoaded', () => {
         step3Desc: { en: 'Jump into games and build lasting squads.', th: 'เริ่มเล่นเกมและสร้างทีมที่ยั่งยืน' },
         ctaTitle: { en: 'Ready to find your buddy?', th: 'พร้อมหาเพื่อนเล่นเกมหรือยัง?' },
         ctaSubtitle: { en: 'Sign up for early access!', th: 'สมัครเพื่อเข้าใช้งานก่อนใคร!' },
+
+        // --- ADDED FOR CONTACT-US.HTML ---
+        contactH1: { en: 'Contact HQ', th: 'ติดต่อแอดมิน' },
+        contactSubtitle: { en: 'Have a question, feedback, or a partnership idea? Open a comms channel.', th: 'มีคำถาม, ข้อเสนอแนะ, หรือไอเดียสำหรับความร่วมมือ? เปิดช่องทางการสื่อสารได้เลย' },
+        contactFormTitle: { en: 'TRANSMISSION FORM', th: 'แบบฟอร์มส่งข้อความ' },
+        formPlayerTag: { en: 'PLAYER_TAG:', th: 'ชื่อผู้เล่น:' },
+        formEmail: { en: 'EMAIL_ADDRESS:', th: 'อีเมล:' },
+        formSubject: { en: 'SUBJECT:', th: 'หัวข้อ:' },
+        formMessage: { en: 'MESSAGE:', th: 'ข้อความ:' },
+        formSubmit: { en: 'SEND MESSAGE', th: 'ส่งข้อความ' },
+        contactDirectLinks: { en: 'DIRECT LINKS', th: 'ลิงก์โดยตรง' },
+        contactSupportTitle: { en: 'SUPPORT', th: 'ฝ่ายสนับสนุน' },
+        contactSupportDesc: { en: 'For technical issues & support.', th: 'สำหรับปัญหาทางเทคนิคและการสนับสนุน' },
+        contactPartnershipsTitle: { en: 'PARTNERSHIPS', th: 'พันธมิตรทางธุรกิจ' },
+        contactPartnershipsDesc: { en: 'For business & collaboration.', th: 'สำหรับธุรกิจและความร่วมมือ' },
+        contactSocialsTitle: { en: 'SOCIALS', th: 'โซเชียลมีเดีย' },
+        contactSocialsDesc: { en: 'Find us on the network.', th: 'พบกับเราบนโซเชียลเน็ตเวิร์ค' },
 
         // --- products.html ---
         productsTitle: { en: 'SUBSCRIPTION PLANS', th: 'แพ็กเกจสมาชิก' },
@@ -50,17 +69,17 @@ document.addEventListener('DOMContentLoaded', () => {
         loginHeader: { en: 'Welcome Back', th: 'ยินดีต้อนรับกลับ' },
         loginSubtitle: { en: 'Log in to continue', th: 'เข้าสู่ระบบเพื่อไปต่อ' },
         emailLabel: { en: 'Email', th: 'อีเมล' },
-        emailPlaceholder: { en: 'player@email.com', th: 'player@email.com' },
+        emailPlaceholder: { en: 'player@email.com', th: 'กรอกอีเมลของผู้ใช้' },
         loginEmailLabel: { en: 'Email / Username', th: 'อีเมล / ชื่อผู้ใช้' },
         loginEmailPlaceholder: { en: 'your_email / username', th: 'อีเมลของคุณ / ชื่อผู้ใช้' },
-        usernameLabel: { en: 'Username', th: 'ชื่อผู้ใช้' },
-        usernamePlaceholder: { en: 'PlayerOne', th: 'ผู้เล่นหนึ่ง' },
-        birthdayLabel: { en: 'Birthday', th: 'วันเกิด' },
+        usernameLabel: { en: 'Username', th: 'กรอกชื่อผู้ใช้' },
+        usernamePlaceholder: { en: 'PlayerOne', th: 'กรอกusername' },
+        birthdayLabel: { en: 'Birthday', th: 'วันเกิด (ว/ด/ป)' },
         genderLabel: { en: 'Gender', th: 'เพศ' },
         genderPlaceholder: { en: 'Select your gender...', th: 'เลือกเพศของคุณ...' },
         genderMale: { en: 'Male', th: 'ชาย' },
         genderFemale: { en: 'Female', th: 'หญิง' },
-        genderNonBinary: { en: 'Non-binary', th: 'ไม่ระบุ' },
+        genderOthers: { en: 'Others', th: 'อื่นๆ' },
         passwordLabel: { en: 'Password', th: 'รหัสผ่าน' },
         passwordPlaceholder: { en: '********', th: '********' },
         confirmPasswordLabel: { en: 'Confirm Password', th: 'ยืนยันรหัสผ่าน' },
@@ -138,6 +157,47 @@ document.addEventListener('DOMContentLoaded', () => {
         animProcessing: { en: "WE'RE PROCESSING . . .", th: "กำลังประมวลผล . . ." },
         animCompleting: { en: "COMPLETING YOUR PROFILE . . .", th: "กำลังสร้างโปรไฟล์ . . ." },
         animFusion: { en: 'FUSION!', th: 'รวมร่าง!' },
+
+       // --- game-dna.html (Welcome Traits Part 2) ---
+        gameDnaTitle: { en: 'Your Game DNA', th: 'Game DNA ของคุณ' },
+        gameDnaSubtitle: { en: "Let’s get to know how, what, and when you play.", th: "มาทำความรู้จักกับสไตล์, เกม, และเวลาที่คุณเล่นกันเถอะ" },
+        gameDnaQ_Games: { en: 'What games do you play?', th: 'คุณเล่นเกมอะไรบ้าง?' },
+        gameDnaQ_Genres: { en: 'Genres/Categories?', th: 'แนวเกม/หมวดหมู่?' },
+        gameDnaQ_MobaRoles: { en: 'MOBA Roles', th: 'ตำแหน่งในเกมส์ MOBA'},
+        gameDnaQ_FpsRoles: {en: 'FPS Roles' , th: 'ตำแหน่งในเกมส์ FPS'},
+        gameDnaQ_Platform: { en: 'What platform(s) do you play on?', th: 'คุณเล่นบนแพลตฟอร์มอะไร?' },
+        platformTip: { en: "Tip: Pick more than one if you're cross-platform", th: 'เคล็ดลับ: เลือกได้มากกว่าหนึ่งถ้าคุณเล่นหลายแพลตฟอร์ม' },
+        genresTip: { en: "Tip: Selecting a genre may reveal new options below. If you select all roles for a genre, the system will automatically choose \"All-rounder\" for you.",th: 'เคล็ดลับ: เมื่อเลือกประเภทเกม อาจมีตัวเลือกเพิ่มเติมแสดงขึ้นด้านล่าง หากคุณเลือกทุกบทบาทในหมวดนั้น ระบบจะเลือก \"เล่นได้ทุกตำแหน่ง\" ให้โดยอัตโนมัติ'},
+        optionOther: { en: 'Others', th: 'อื่นๆ' },
+        gameDnaQ_When: { en: 'When do you usually play?', th: 'คุณมักจะเล่นช่วงไหน?' },
+        gameDnaTimeMorning: { en: 'Morning', th: 'ช่วงเช้า' },
+        gameDnaTimeAfternoon: { en: 'Afternoon', th: 'ช่วงบ่าย' },
+        gameDnaTimeEvening: { en: 'Evening', th: 'ช่วงเย็น' },
+        gameDnaActivityAfterWork: { en: 'After work', th: 'หลังเลิกงาน' },
+        gameDnaTimeNoFixed: { en: 'No fixed time', th: 'เวลาไม่แน่นอน' },
+        gameDnaTime247: { en: '24/7 Gamer', th: 'เล่นตลอด 24/7' },
+          // --- Game-DNA Page (Validation Error Messages) ---
+        errorGameDnaGames: {
+            en: 'Please select 1 to 5 games.',
+            th: 'กรุณาเลือกเกม 1 ถึง 5 เกม'
+        },
+        errorGameDnaGenres: {
+            en: 'Please select 1 to 3 genres.',
+            th: 'กรุณาเลือกแนวเกม 1 ถึง 3 แนว'
+        },
+        errorGameDnaRoles: {
+            en: "Please select 1-5 roles, or choose 'All-rounder' / 'Not sure'.",
+            th: "กรุณาเลือก 1-5 บทบาท, หรือเลือก 'All-rounder' / 'Not sure'"
+        },
+        errorGameDnaPlatform: {
+            en: 'Please select at least 1 platform.',
+            th: 'กรุณาเลือกอย่างน้อย 1 แพลตฟอร์ม'
+        },
+        errorGameDnaActiveTime: {
+            en: 'Please select 1 to 4 time slots.',
+            th: 'กรุณาเลือก 1 ถึง 4 ช่วงเวลา'
+        },
+
 
         // --- main.html / main1.html (Dashboard) ---
         dashHome: { en: 'Home', th: 'หน้าหลัก' },
@@ -280,20 +340,17 @@ document.addEventListener('DOMContentLoaded', () => {
         premiumAdFree: { en: 'Ad-Free', th: 'ไม่มีโฆษณา' },
         premiumUpgradeBtn: { en: 'Upgrade Now', th: 'อัปเกรดทันที' },
 
-        // --- profiles.html (Edit Profile Page) ---
-        profilesTitle: { en: 'Edit Your Profile', th: 'แก้ไขโปรไฟล์ของคุณ' },
-        profilesSubtitle: { en: 'This is how other players will see you.', th: 'ผู้เล่นคนอื่นจะเห็นคุณแบบนี้' },
-        profilesAvatarSection: { en: 'Profile Picture', th: 'รูปโปรไฟล์' },
-        profilesChangeAvatar: { en: 'Change Avatar', th: 'เปลี่ยนรูปโปรไฟล์' },
-        profilesBioSection: { en: 'Your Bio', th: 'ประวัติของคุณ' },
-        profilesBioPlaceholder: { en: 'Tell others a little about yourself, your playstyle, and what you are looking for...', th: 'บอกเล่าเรื่องราวของคุณ สไตล์การเล่น และสิ่งที่คุณกำลังมองหาให้คนอื่นรู้...' },
-        profilesGamesSection: { en: 'Your Games', th: 'เกมของคุณ' },
-        profilesEditGames: { en: 'Edit Games', th: 'แก้ไขเกม' },
-        profilesTraitsSection: { en: 'Your Traits', th: 'ลักษณะของคุณ' },
-        profilesEditTraits: { en: 'Edit Traits', th: 'แก้ไขลักษณะ' },
-        profilesSave: { en: 'Save Changes', th: 'บันทึกการเปลี่ยนแปลง' },
-        profilesCancel: { en: 'Cancel', th: 'ยกเลิก' },
-        profilesEdit: { en: 'Edit', th: 'แก้ไข' }, // Added for the Edit button
+       editProfileTitle: { en: "GamiCon – Edit Your Profile", th: "GamiCon – แก้ไขโปรไฟล์ของคุณ" },
+editProfileHeader: { en: "Edit Profile", th: "แก้ไขโปรไฟล์" },
+editProfileSubtitle: { 
+  en: "Make changes to your profile below. Click 'Edit' on any section to begin.", 
+  th: "ปรับเปลี่ยนโปรไฟล์ของคุณด้านล่าง คลิก 'แก้ไข' ในแต่ละส่วนเพื่อเริ่มต้น"
+},
+backToHome: { en: "Back to Home", th: "กลับไปหน้าหลัก" },
+saveProfileButton: { en: "Save and Go Home", th: "บันทึกและกลับหน้าหลัก" },
+profilesEdit: { en: "Edit", th: "แก้ไข" },
+profilesCancel: {en: "Cancel", th:"ยกเลิก"},
+
 
         // --- friends.html ---
         friendsTitle: { en: 'Manage Friends', th: 'จัดการเพื่อน' },
@@ -304,6 +361,331 @@ document.addEventListener('DOMContentLoaded', () => {
         friendsSearchBtn: { en: 'Search', th: 'ค้นหา' },
         friendsAccept: { en: 'Accept', th: 'ยอมรับ' },
         friendsDecline: { en: 'Decline', th: 'ปฏิเสธ' },
+
+        // --- welcome-traits.html ---
+        welcomeTraitsTitle: { en: 'YOUR MISSION BRIEFING', th: 'สรุปภารกิจของคุณ' },
+        welcomeTraitsDesc1: { en: 'Greetings, Player. To unlock better matches and find your perfect squad, we need to calibrate your core traits.', th: 'สวัสดีผู้เล่น เพื่อปลดล็อกการจับคู่ที่ดีขึ้นและค้นหาทีมที่สมบูรณ์แบบของคุณ เราต้องปรับเทียบลักษณะหลักของคุณ' },
+        welcomeTraitsDesc2: { en: 'This is a quick mission—a speedrun that will take under 5 minutes!', th: 'นี่คือภารกิจด่วน—ที่จะใช้เวลาไม่ถึง 5 นาที!' },
+        welcomeTraitsBegin: { en: 'BEGIN MISSION', th: 'เริ่มภารกิจ' },
+        welcomeTraitsLearnMore: { en: 'Learn more about Personalities and more here', th: 'เรียนรู้เพิ่มเติมเกี่ยวกับบุคลิกภาพและอื่นๆ ที่นี่' },
+
+        // --- user-intentions.html (NEWLY ADDED) ---
+        userIntentionBack: { en: 'Back', th: 'กลับ' },
+        userIntentionSkip: { en: 'Skip', th: 'ข้าม' },
+        userIntentionTitle: { en: 'What are you looking for?', th: 'คุณกำลังมองหาอะไรอยู่?' },
+        userIntentionSubtitle: { en: "All good if it changes. There's something for everyone.", th: 'ไม่เป็นไรถ้าเปลี่ยนใจ เรามีบางอย่างสำหรับทุกคน' },
+        intentionLongTerm: { en: 'Long term Buddy', th: 'เพื่อนเล่นระยะยาว' },
+        intentionPlayNow: { en: 'Play Now, Chill Later', th: 'เล่นตอนนี้ ชิลล์ทีหลัง' },
+        intentionRanking: { en: 'Climb the Ranks', th: 'ไต่อันดับ' },
+        intentionOneMatch: { en: 'One Match Wonder', th: 'หาเพื่อนเล่นแค่นัดเดียว' },
+        intentionFormTeam: { en: 'Form a Team', th: 'สร้างทีม' },
+        intentionFiguringOut: { en: 'Still figuring it out', th: 'ยังไม่แน่ใจ' },
+        userIntentionNext: { en: 'Next', th: 'ต่อไป' },
+    
+        // --- game-dna-2.html (Language & Personality) ---
+        langPersonalityTitle: { en: 'Language & Personality', th: 'ภาษาและบุคลิก' },
+        langPersonalitySubtitle: { en: "Tell us how you vibe and communicate.", th: "บอกเราหน่อยว่าคุณมีสไตล์และสื่อสารอย่างไร" },
+        q_language: { en: 'What language(s) do you use while gaming?', th: 'คุณใช้ภาษาอะไรบ้างตอนเล่นเกม?' },
+        lang_th: { en: 'Thai', th: 'ภาษาไทย' },
+        lang_en: { en: 'English', th: 'ภาษาอังกฤษ' },
+        lang_bu: { en: 'Burmese', th: 'ภาษาพม่า' },
+        lang_cn: { en: 'Chinese', th: 'ภาษาจีน' },
+        lang_kh: { en: 'Khmer', th: 'ภาษาเขมร' },
+        q_vibe: { en: 'What’s your in-game vibe like?', th: 'สไตล์การเล่นเกมของคุณเป็นอย่างไร?' },
+        vibe_talkative: { en: 'Talkative', th: 'ช่างคุย' },
+        vibe_quiet: { en: 'Quiet', th: 'เงียบๆ' },
+        vibe_funny: { en: 'Funny', th: 'ตลก' },
+        vibe_supportive: { en: 'Supportive', th: 'คอยสนับสนุน' },
+        vibe_thinker: { en: 'Thinker', th: 'นักคิด' },
+        vibe_planner: { en: 'Planner', th: 'นักวางแผน' },
+        vibe_calm: { en: 'Calm', th: 'ใจเย็น' },
+        vibe_spontaneous: { en: 'Spontaneous', th: 'ด้นสด' },
+        q_mbti_select: { en: "Select your MBTI (Optional)", th: "เลือก MBTI ของคุณ (ไม่บังคับ)" },
+        mbti_group_analysts: { en: '🟣 Analysts', th: '🟣 นักวิเคราะห์' },
+        mbti_group_diplomats: { en: '🟢 Diplomats', th: '🟢 นักการทูต' },
+        mbti_group_sentinels: { en: '🔵 Sentinels', th: '🔵 ผู้เฝ้ายาม' },
+        mbti_group_explorers: { en: '🟡 Explorers', th: '🟡 นักสำรวจ' },
+        mbti_intj: { en: 'INTJ', th: 'INTJ' },
+        mbti_intp: { en: 'INTP', th: 'INTP' },
+        mbti_entj: { en: 'ENTJ', th: 'ENTJ' },
+        mbti_entp: { en: 'ENTP', th: 'ENTP' },
+        mbti_infj: { en: 'INFJ', th: 'INFJ' },
+        mbti_infp: { en: 'INFP', th: 'INFP' },
+        mbti_enfj: { en: 'ENFJ', th: 'ENFJ' },
+        mbti_enfp: { en: 'ENFP', th: 'ENFP' },
+        mbti_istj: { en: 'ISTJ', th: 'ISTJ' },
+        mbti_isfj: { en: 'ISFJ', th: 'ISFJ' },
+        mbti_estj: { en: 'ESTJ', th: 'ESTJ' },
+        mbti_esfj: { en: 'ESFJ', th: 'ESFJ' },
+        mbti_istp: { en: 'ISTP', th: 'ISTP' },
+        mbti_isfp: { en: 'ISFP', th: 'ISFP' },
+        mbti_estp: { en: 'ESTP', th: 'ESTP' },
+        mbti_esfp: { en: 'ESFP', th: 'ESFP' },
+
+         // --- Game-DNA 2 Page (Validation Error Messages) ---
+        errorSelectLanguage: {
+            en: 'Please select at least one language.',
+            th: 'กรุณาเลือกอย่างน้อยหนึ่งภาษา'
+        },
+        errorSelectVibe: {
+            en: 'Please select at least one vibe.',
+            th: 'กรุณาเลือกอย่างน้อยหนึ่งสไตล์'
+        },
+        
+        // =============================================
+        // UPDATED: Added keys for new tooltips and tips
+        // =============================================
+        vibe_tooltip: { en: 'Pick 1–3 traits that reflect how you behave or feel while playing. This helps others understand your communication style.', th: 'เลือก 1–3 อย่างที่สะท้อนพฤติกรรมหรือความรู้สึกของคุณตอนเล่นเกม สิ่งนี้จะช่วยให้คนอื่นเข้าใจสไตล์การสื่อสารของคุณ' },
+        mbti_tip_text: { en: 'You can skip this or choose one that fits you best. It helps us match based on vibe compatibility!', th: 'คุณสามารถข้ามส่วนนี้หรือเลือกข้อที่ตรงกับคุณที่สุดได้ การเลือกจะช่วยให้เราจับคู่ตามความเข้ากันได้ของสไตล์!' },
+        mbti_tooltip_intro: { en: 'Not sure? ', th: 'ไม่แน่ใจ? ' },
+        mbti_tooltip_link: { en: 'Take this quick quiz', th: 'ทำแบบทดสอบสั้นๆ นี้' },
+        mbti_tooltip_outro: { en: ' to find your type.', th: ' เพื่อค้นหาประเภทของคุณ' },
+
+        // --- game-dna-3.html (Identity & Communication) ---
+        identityTitle: { en: 'Your Identity', th: 'ตัวตนของคุณ' },
+        identitySubtitle: { en: "Just a few things to match you better (optional, but helpful).", th: "ข้อมูลเล็กน้อยเพื่อการจับคู่ที่ดีขึ้น (ไม่บังคับ แต่มีประโยชน์)" },
+        q_education: { en: 'What’s your education level? (Optional)', th: 'ระดับการศึกษาของคุณ? (ไม่บังคับ)' },
+        edu_highschool: { en: 'High School', th: 'มัธยมปลาย' },
+        edu_bachelor: { en: "Bachelor's", th: 'ปริญญาตรี' },
+        edu_trade: { en: 'Trade School', th: 'สายอาชีพ' },
+        edu_master: { en: "Master's", th: 'ปริญญาโท' },
+        edu_phd: { en: 'PhD', th: 'ปริญญาเอก' },
+        q_zodiac: { en: 'What’s your zodiac sign? (Optional)', th: 'ราศีของคุณคืออะไร? (ไม่บังคับ)' },
+        zodiac_aries: { en: 'Aries', th: 'ราศีเมษ' },
+        zodiac_taurus: { en: 'Taurus', th: 'ราศีพฤษภ' },
+        zodiac_gemini: { en: 'Gemini', th: 'ราศีเมถุน' },
+        zodiac_cancer: { en: 'Cancer', th: 'ราศีกรกฎ' },
+        zodiac_leo: { en: 'Leo', th: 'ราศีสิงห์' },
+        zodiac_virgo: { en: 'Virgo', th: 'ราศีกันย์' },
+        zodiac_libra: { en: 'Libra', th: 'ราศีตุลย์' },
+        zodiac_scorpio: { en: 'Scorpio', th: 'ราศีพิจิก' },
+        zodiac_sagittarius: { en: 'Sagittarius', th: 'ราศีธนู' },
+        zodiac_capricorn: { en: 'Capricorn', th: 'ราศีมังกร' },
+        zodiac_aquarius: { en: 'Aquarius', th: 'ราศีกุมภ์' },
+        zodiac_pisces: { en: 'Pisces', th: 'ราศีมีน' },
+        commTitle: { en: 'In-Game Communication', th: 'การสื่อสารในเกม' },
+        q_ingame_comm: { en: 'How do you usually communicate in-game?', th: 'คุณสื่อสารในเกมอย่างไร?' },
+        comm_method_title: { en: 'Primary communication method', th: 'ช่องทางการสื่อสารหลัก' },
+        commMethod_text: { en: 'Text chat (in-game or external)', th: 'แชทข้อความ (ในเกมหรือนอกเกม)' },
+        commMethod_voice_external: { en: 'Voice chat (Discord, party voice, etc.)', th: 'วอยซ์แชท (Discord, ปาร์ตี้วอยซ์ ฯลฯ)' },
+        commMethod_voice_internal: { en: 'In-game voice (built-in)', th: 'วอยซ์ในเกม (ที่มากับเกม)' },
+        commMethod_none: { en: "I don't communicate at all", th: 'ฉันไม่สื่อสารเลย' },
+        comm_style_title: { en: 'Communication style', th: 'สไตล์การสื่อสาร' },
+        commStyle_strategic: { en: 'Talkative & strategic (loves shot-calling, planning)', th: 'ช่างคุย & วางแผน (ชอบนำทีม, วางแผน)' },
+        commStyle_quiet: { en: 'Quiet but responsive (only talks when needed)', th: 'เงียบแต่ตอบสนอง (พูดเมื่อจำเป็น)' },
+        commStyle_types: { en: 'Mostly types, avoids voice', th: 'พิมพ์เป็นหลัก, เลี่ยงการใช้เสียง' },
+        commStyle_mute: { en: 'Mute all / solo experience preferred', th: 'ปิดไมค์ทุกคน / ชอบเล่นคนเดียว' },
+        commStyle_open: { en: 'Open to anything / depends on team', th: 'แล้วแต่สถานการณ์ / ขึ้นอยู่กับทีม' },
+        // In your translation.js, add these keys inside the `translations` object:
+
+errorCommMethod: {
+    en: 'Please select a primary communication method.',
+    th: 'กรุณาเลือกช่องทางการสื่อสารหลัก'
+},
+errorCommStyle: {
+    en: 'Please select 1 or 2 communication styles.',
+    th: 'กรุณาเลือกสไตล์การสื่อสาร 1 หรือ 2 อย่าง'
+},
+errorMax2Styles: {
+    en: 'You can select a maximum of 2 styles.',
+    th: 'คุณสามารถเลือกได้สูงสุด 2 สไตล์'
+},
+
+        // --- game-dna-4.html (Interests & Hobbies) ---
+        interestsTitle: { en: 'Interests & Hobbies', th: 'ความสนใจและงานอดิเรก' },
+        interestsSubtitle: { en: 'Let others know what you’re into — it’s fun to connect beyond the game.', th: 'ให้คนอื่นรู้ว่าคุณสนใจอะไร — การเชื่อมต่อนอกเหนือจากเกมก็สนุกนะ' },
+        interestCat_music: { en: '🎵 Music & Pop Culture', th: '🎵 ดนตรีและวัฒนธรรมป๊อป' },
+        hobby_asianPop: { en: 'K-pop / J-pop / Thai Pop', th: 'เคป๊อป / เจป๊อป / ไทยป๊อป' },
+        hobby_westernPop: { en: 'Western Pop / Hip-hop / Indie', th: 'เพลงสากล / ฮิปฮอป / อินดี้' },
+        hobby_dj: { en: 'Making music / DJ-ing', th: 'ทำเพลง / เป็นดีเจ' },
+        hobby_instruments: { en: 'Playing instruments', th: 'เล่นดนตรี' },
+        hobby_concerts: { en: 'Concerts / Music festivals', th: 'คอนเสิร์ต / เทศกาลดนตรี' },
+        hobby_karaoke: { en: 'Karaoke', th: 'คาราโอเกะ' },
+        interestCat_movies: { en: '🎬 Movies, TV & Animation', th: '🎬 ภาพยนตร์, ทีวี และแอนิเมชัน' },
+        hobby_streaming: { en: 'Netflix / Streaming shows', th: 'ดู Netflix / รายการสตรีมมิ่ง' },
+        hobby_anime: { en: 'Anime / Manga', th: 'อนิเมะ / มังงะ' },
+        hobby_cartoons: { en: 'Cartoons / Animated series', th: 'การ์ตูน / ซีรีส์แอนิเมชัน' },
+        hobby_genreMovies: { en: 'Horror / Sci-fi / Action', th: 'หนังสยองขวัญ / Sci-fi / แอ็คชั่น' },
+        hobby_romcom: { en: 'Romcoms / Slice of life', th: 'รอมคอม / Slice of Life' },
+        hobby_filmAnalysis: { en: 'Film analysis / Editing', th: 'วิเคราะห์หนัง / ตัดต่อ' },
+        interestCat_reading: { en: '📚 Reading & Writing', th: '📚 การอ่านและการเขียน' },
+        hobby_books: { en: 'Fiction / Non-fiction', th: 'นิยาย / สารคดี' },
+        hobby_webtoons: { en: 'Light novels / Webtoons / Comics', th: 'ไลท์โนเวล / เว็บตูน / การ์ตูน' },
+        hobby_poetry: { en: 'Poetry / Journaling', th: 'บทกวี / การเขียนบันทึก' },
+        hobby_fanfic: { en: 'Fanfiction writing', th: 'เขียนแฟนฟิค' },
+        hobby_philosophy: { en: 'Philosophy / Psychology', th: 'ปรัชญา / จิตวิทยา' },
+        interestCat_gaming: { en: '🎮 Tech & Gaming Culture', th: '🎮 เทคโนโลยีและวัฒนธรรมเกม' },
+        hobby_gamedev: { en: 'Game development', th: 'พัฒนาเกม' },
+        hobby_modding: { en: 'Modding / Map creation', th: 'ม็อดเกม / สร้างแผนที่' },
+        hobby_speedrun: { en: 'Speedrunning', th: 'Speedrunning' },
+        hobby_esports: { en: 'Competitive eSports viewer', th: 'ดูการแข่งขันอีสปอร์ต' },
+        hobby_vr: { en: 'VR/AR gaming', th: 'เกม VR/AR' },
+        hobby_gamelore: { en: 'Game lore & theory', th: 'เนื้อเรื่องและทฤษฎีเกม' },
+        interestCat_phys_activities: { en: '💪 Physical Activities', th: '💪 กิจกรรมทางกาย' },
+        hobby_gym: { en: 'Gym / Weight training', th: 'ยิม / เวทเทรนนิ่ง' },
+        hobby_cardio: { en: 'Running / Biking / Hiking', th: 'วิ่ง / ปั่นจักรยาน / เดินป่า' },
+        hobby_teamSports: { en: 'Team sports', th: 'กีฬาประเภททีม' },
+        hobby_dance: { en: 'Dance / Choreography', th: 'เต้น / ออกแบบท่าเต้น' },
+        hobby_martialArts: { en: 'Martial arts / Boxing', th: 'ศิลปะการต่อสู้ / ชกมวย' },
+        interestCat_social: { en: '✈️ Exploration & Social Life', th: '✈️ การสำรวจและชีวิตสังคม' },
+        hobby_travel: { en: 'Travel & Adventure', th: 'ท่องเที่ยวและผจญภัย' },
+        hobby_urbanex: { en: 'Urban exploring', th: 'สำรวจเมือง' },
+        hobby_friends: { en: 'Hanging with friends', th: 'สังสรรค์กับเพื่อน' },
+        hobby_cafe: { en: 'Trying new cafes / Bars', th: 'ลองคาเฟ่ / บาร์ใหม่ๆ' },
+        hobby_events: { en: 'Events / Conventions', th: 'ไปอีเวนต์ / งานประชุม' },
+        interestCat_creative: { en: '🎨 Creative Arts', th: '🎨 ศิลปะสร้างสรรค์' },
+        hobby_drawing: { en: 'Drawing / Illustration', th: 'วาดภาพ / ภาพประกอบ' },
+        hobby_design: { en: 'Graphic design / UI/UX', th: 'กราฟิกดีไซน์ / UI/UX' },
+        hobby_cosplay: { en: 'Cosplay / Costume design', th: 'คอสเพลย์ / ออกแบบชุด' },
+        hobby_digitalArt: { en: 'Digital art / NFTs', th: 'ศิลปะดิจิทัล / NFTs' },
+        hobby_crafts: { en: 'Painting / Crafts / DIY', th: 'ระบายสี / งานฝีมือ / DIY' },
+        interestCat_home: { en: '🍳 Food & Home Life', th: '🍳 อาหารและชีวิตที่บ้าน' },
+        hobby_cooking: { en: 'Cooking / Baking', th: 'ทำอาหาร / ทำขนม' },
+        hobby_foodie: { en: 'Foodie / Restaurant hunter', th: 'นักชิม / ตามล่าร้านอาหาร' },
+        hobby_beverages: { en: 'Coffee / Tea enthusiast', th: 'หลงใหลกาแฟ / ชา' },
+        hobby_interior: { en: 'Interior design / Home setup', th: 'ออกแบบภายใน / จัดบ้าน' },
+        hobby_pets: { en: 'Pet care / Animal lover', th: 'ดูแลสัตว์เลี้ยง / รักสัตว์' },
+        interestCat_niche: { en: '🧩 Niche & Nerdy', th: '🧩 ความสนใจเฉพาะกลุ่ม' },
+        hobby_boardGames: { en: 'Board games / Chess / DnD', th: 'บอร์ดเกม / หมากรุก / DnD' },
+        hobby_puzzles: { en: 'Puzzles / Rubik’s cube', th: 'พัซเซิล / รูบิค' },
+        hobby_collecting: { en: 'Collecting (cards, figures, etc.)', th: 'สะสมของ (การ์ด, ฟิกเกอร์, ฯลฯ)' },
+        hobby_memes: { en: 'Memes / Internet culture', th: 'มีม / วัฒนธรรมอินเทอร์เน็ต' },
+        hobby_astrology: { en: 'Astrology / MBTI / Typology', th: 'โหราศาสตร์ / MBTI / Typology' },
+        userIntentionFinish: { en: 'Finish', th: 'เสร็จสิ้น' },
+        interestsInstruction: { en: 'Please select up to 10 interests that best define you!' , th: 'เลือก 10 ความชอบ หรือ ความสนใจที่บงบอกตัวตนมากที่สุด '},
+           // --- ADD THIS NEW KEY ---
+        interestsWarning_atLeastOne: {
+            en: 'Please pick at least one of the options.',
+            th: 'กรุณาเลือกอย่างน้อยหนึ่งตัวเลือก'
+        },
+        placeholder_addChoice: {
+  en: 'Add a choice...',
+  th: 'เพิ่มตัวเลือก...'
+},
+placeholder_selectOption: {
+  en: 'Select an option...',
+  th: 'เลือกตัวเลือก...'
+},
+limit: {
+  en: 'limit',
+  th: 'จำกัด'
+},
+none: {
+  en: 'none',
+  th: 'ไม่มี'
+},
+
+        reviewTitle: { en: 'GamiCon – Review Your Profile', th: 'GamiCon – ตรวจสอบโปรไฟล์ของคุณ' },
+        reviewFinalCheck: { en: 'Final Check', th: 'ตรวจสอบครั้งสุดท้าย' },
+        reviewSubtitle: { en: "Review your profile. Click 'Edit' on any section to make changes.", th: 'ตรวจสอบโปรไฟล์ของคุณ คลิก "แก้ไข" ในส่วนที่ต้องการเปลี่ยนแปลง' },
+        reviewSectionPhotos: { en: '📸 Photos', th: '📸 รูปภาพ' },
+        reviewPhotosTip: { en: 'You must add at least 2 photos. The first photo is your main one.', th: 'คุณต้องเพิ่มรูปภาพอย่างน้อย 2 รูป รูปแรกคือรูปโปรไฟล์หลักของคุณ' },
+        reviewSectionUserInfo: { en: '👤 User Info', th: '👤 ข้อมูลผู้ใช้' },
+        reviewUsername: { en: 'Username:', th: 'ชื่อผู้ใช้:' },
+        reviewEmail: { en: 'Email:', th: 'อีเมล:' },
+        reviewBirthday: { en: 'Birthday:', th: 'วันเกิด:' },
+        reviewGender: { en: 'Gender:', th: 'เพศ:' },
+        reviewGenderNonBinary: { en: 'Non-binary', th: 'ไม่ระบุเพศ' },
+        reviewSectionBio: { en: '📝 Bio', th: '📝 เกี่ยวกับฉัน' },
+        reviewBioPlaceholder: { en: 'Tell us about yourself... (min 20 characters)', th: 'บอกเล่าเกี่ยวกับตัวคุณ... (ขั้นต่ำ 20 ตัวอักษร)' },
+        reviewSectionIntent: { en: '🎯 Intent', th: '🎯 ความตั้งใจ' },
+        reviewSectionInterests: { en: '💖 Interests & Hobbies', th: '💖 ความสนใจและงานอดิเรก' },
+        reviewYourInterests: { en: 'Your Interests:', th: 'ความสนใจของคุณ:' },
+        reviewHobbiesLabel: { en: 'Hobbies (select at least 1):', th: 'งานอดิเรก (เลือกอย่างน้อย 1):' },
+        reviewSectionIdentity: { en: '✨ Identity', th: '✨ ตัวตน' },
+        reviewCommMethod: { en: 'Communication Method:', th: 'วิธีการสื่อสาร:' },
+        reviewCommStyle: { en: 'Communication Style:', th: 'สไตล์การสื่อสาร:' },
+        reviewEducation: { en: 'Education:', th: 'การศึกษา:' },
+        reviewZodiac: { en: 'Zodiac:', th: 'ราศี:' },
+        reviewLabelCommMethod: { en: 'Comm. Method:', th: 'วิธีสื่อสาร:' },
+        reviewLabelCommStyle: { en: 'Comm. Style:', th: 'สไตล์สื่อสาร:' },
+        reviewLabelEducation: { en: 'Education:', th: 'การศึกษา:' },
+        reviewLabelZodiac: { en: 'Zodiac:', th: 'ราศี:' },
+        reviewSectionLangPers: { en: '💬 Languages & Personality', th: '💬 ภาษาและบุคลิกภาพ' },
+        reviewLanguages: { en: 'Languages:', th: 'ภาษา:' },
+        reviewInGameVibe: { en: 'In-Game Vibe:', th: 'บรรยากาศในเกม:' },
+        reviewMbtiType: { en: 'MBTI Type:', th: 'ประเภท MBTI:' },
+        reviewSectionGameDna: { en: '🧬 Game DNA & Playstyle', th: '🧬 DNA เกมและสไตล์การเล่น' },
+        reviewGames: { en: 'Games:', th: 'เกม:' },
+        reviewGenres: { en: 'Genres:', th: 'แนวเกม:' },
+        reviewRoles: { en: 'Roles:', th: 'ตำแหน่ง:' },
+        reviewPlatforms: { en: 'Platforms:', th: 'แพลตฟอร์ม:' },
+        reviewPlaytime: { en: 'Playtime:', th: 'เวลาเล่น:' },
+        reviewGamesLabel: { en: 'Games (select at least 1):', th: 'เกม (เลือกอย่างน้อย 1):' },
+        reviewGenresLabel: { en: 'Genres:', th: 'แนวเกม:' },
+        reviewPlatformsLabel: { en: 'Platforms:', th: 'แพลตฟอร์ม:' },
+        reviewPlaytimeLabel: { en: 'Playtime:', th: 'เวลาเล่น:' },
+        reviewGameDnaTip: { en: 'Tip: Add a "Genre" like MOBA or FPS to edit the available roles for it.', th: 'เคล็ดลับ: เพิ่ม "แนวเกม" เช่น MOBA หรือ FPS เพื่อแก้ไขตำแหน่งที่สามารถเลือกได้' },
+        reviewConfirmButton: { en: ' Confirm & Proceed ', th: ' ยืนยันและไปต่อ ' },
+        notSpecified: { en: "Not specified", th: "ไม่ระบุ" },
+        validationWarningHeader: {en:"Please complete the highlighted sections:" , th: 'กรุณากรอกข้อมูลในส่วนที่เน้นไว้ให้สมบูรณ์:'},
+         notSpecifiedPhotos: {
+        "en": "No photos uploaded.",
+        "th": "ไม่มีการอัพโหลดรูปภาพ"
+    },
+
+    // ... all your existing keys ...
+
+    "alert_profileComplete": {
+        "en": "Profile complete! Proceeding to dashboard...",
+        "th": "โปรไฟล์เสร็จสมบูรณ์! กำลังไปที่แดชบอร์ด..."
+    },
+    
+    "validation_min_2_photos": {
+        "en": "You must upload at least 2 photos.",
+        "th": "คุณต้องอัปโหลดรูปภาพอย่างน้อย 2 รูป"
+    },
+    "validation_bio_min_20_chars": {
+        "en": "Your bio must be at least 20 characters long.",
+        "th": "ประวัติของคุณต้องมีความยาวอย่างน้อย 20 ตัวอักษร"
+    },
+    "validation_select_intent": {
+        "en": "Please select your intent.",
+        "th": "โปรดเลือกความตั้งใจของคุณ"
+    },
+    "validation_min_1_hobby": {
+        "en": "Please select at least 1 interest or hobby.",
+        "th": "โปรดเลือกความสนใจหรืองานอดิเรกอย่างน้อย 1 อย่าง"
+    },
+    "validation_select_comm_method": {
+        "en": "Please select a communication method.",
+        "th": "โปรดเลือกวิธีการสื่อสาร"
+    },
+    "validation_min_1_comm_style": {
+        "en": "Please select at least 1 communication style.",
+        "th": "โปรดเลือกสไตล์การสื่อสารอย่างน้อย 1 อย่าง"
+    },
+    "validation_min_1_language": {
+        "en": "Please select at least 1 language.",
+        "th": "โปรดเลือกอย่างน้อย 1 ภาษา"
+    },
+    "validation_min_1_vibe": {
+        "en": "Please select at least 1 in-game vibe.",
+        "th": "โปรดเลือก Vibe ในเกมของคุณอย่างน้อย 1 อย่าง"
+    },
+    "validation_min_1_game": {
+        "en": "Please add at least 1 game to your profile.",
+        "th": "โปรดเพิ่มเกมในโปรไฟล์ของคุณอย่างน้อย 1 เกม"
+    },
+    "validation_min_1_genre": {
+        "en": "Please select at least 1 game genre.",
+        "th": "โปรดเลือกแนวเกมอย่างน้อย 1 แนว"
+    },
+
+        // --- write-bios.html (Bio Page) ---
+writeBioTitle: { en: 'Your Bio', th: 'ไบโอของคุณ' },
+writeBioSubtitle: { en: 'Craft your legend. Tell the world who you are.', th: 'สร้างตำนานของคุณ บอกให้โลกรู้ว่าคุณเป็นใคร' },
+writeBioPlaceholder: { en: 'Type your status here...', th: 'พิมพ์สถานะของคุณที่นี่...' },
+writeBioClickToEdit: { en: 'Click to edit', th: 'คลิกเพื่อแก้ไข' },
+save: { en: 'SAVE', th: 'บันทึก' },
+submit: { en: 'SUBMIT', th: 'ส่ง' },
+
+
+ // --- add-pictures.html ---
+        addPhotosSubtitle: { en: "Show 'em what you got! Add up to 6 photos.", th: "โชว์ของที่คุณมี! เพิ่มรูปภาพได้สูงสุด 6 รูป" },
+        photo_tip_text: { en: "Add at least 2 photos to continue. Clear face pics get more views!", th: "เพิ่มอย่างน้อย 2 รูปเพื่อไปต่อ รูปที่เห็นใบหน้าชัดเจนจะได้รับความสนใจมากกว่า!" },
+        errorAddPhotos: { en: "Please add at least 2 photos", th: "กรุณาเพิ่มรูปภาพอย่างน้อย 2 รูป" },
+        userIntentionSubmit: { en: "SUBMIT", th: "ส่งข้อมูล" }
     };
 
     // Define the main function in the global scope
